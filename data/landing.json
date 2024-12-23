@@ -1,0 +1,30 @@
+{
+  "projects": [
+    {
+      "title": "Game Design & Development",
+      "abstract": "Explore the creative and technical aspects of game design, from concept to implementation, including interactive gameplay and user experience.",
+      "siteLink": "NAN",
+      "model": "/files/landing/controller.glb"
+    },
+    {
+      "title": "Business Intelligence & Analytics",
+      "abstract": "Learn the fundamental principles of business intelligence, including data visualization, analysis, and decision support using real-world datasets.",
+      "siteLink": "NAN",
+      "model": "/files/landing/briefcase.glb"
+    },
+    {
+      "title": "Miscellaneous",
+      "abstract": "A collection of diverse projects spanning different fields, showcasing a range of skills and creative solutions.",
+      "siteLink": "NAN",
+      "model": "/files/landing/miscellaneous.glb"
+    },
+    {
+      "title": "Dissertation",
+      "abstract": "A deep dive into advanced research and analysis topics, featuring cutting-edge methodologies and results from the academic dissertation work.",
+      "siteLink": "NAN",
+      "model": "/files/landing/cap.glb"
+    }
+    
+    
+  ]
+}

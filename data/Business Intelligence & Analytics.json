@@ -1,0 +1,23 @@
+{
+    "projects": [
+      {
+        "title": "NIKE's Journey",
+        "abstract": "This report examines Nike's branding strategy and its successful transition into the e-business domain. Employing the brand equity model and the customer decision journey framework, the study dissects Nike’s marketing efforts, including sports sponsorships and ambassadorships. It evaluates Nike's ability to create positive brand perceptions, fostering customer loyalty and increasing market share. The analysis highlights potential pitfalls, such as over-dependence on ambassadors and brand diversification risks, while offering recommendations for bolstering brand equity and exploring untapped markets.",
+        "siteLink": "projects/BIA/nike/nike.html",
+        "model": "/files/bia/nike.glb"
+      },
+      {
+        "title": "Uber's Machine Learning",
+        "abstract": "The paper explores Uber's application of machine learning to enhance its customer experience, focusing on improving the pickup process. It introduces an improved pickup quality metric that incorporates active, passive, and third-party signals to minimize delays and enhance user satisfaction. Additionally, the study examines strategies to refine time estimation accuracy, reduce driver loops, and optimize user interaction. The integration of advanced AI platforms, such as Horovod and Michelangelo, demonstrates Uber’s commitment to leveraging data for operational efficiency and user-centric innovations.",
+        "siteLink": "projects/BIA/uber/uber.html",
+        "model": "/files/bia/uber.glb"
+      },
+      {
+        "title": "Amazon Usability",
+        "abstract": "This evaluation analyzes Amazon.com's usability through heuristic evaluations and user journey assessments. Highlighting its strengths in navigation, search efficiency, and aesthetics, the paper also identifies areas for improvement, such as limited accessibility options and insufficient error diagnostics. Proposed redesigns incorporate better visual hierarchy, enhanced color contrast, and streamlined accessibility features to improve customer experience. The study concludes that while Amazon excels in creating a user-friendly platform, addressing minor usability flaws could further optimize the e-commerce giant’s performance.",
+        "siteLink": "projects/BIA/amazon/amazon.html",
+        "model": "/files/bia/amazon.glb"
+      }
+    ]
+  }
+  
