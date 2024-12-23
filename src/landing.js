@@ -9,7 +9,8 @@ import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRe
 
 
 let interactionNotAllowed = false;
-
+let leftMove;
+let rightMove;
 
 // Scene, Camera, Renderer
 const scene = new THREE.Scene();
@@ -179,14 +180,18 @@ for (let i = 0; i < rows; i++) {
 
 });
 
+let currentSecIndex = -1;
 
 
-function loadSectors() {
-    
+function updateCurrentSecIndex(direction) {
+    let indexToGo;
+    if(direction === "left") {indexToGo = currentSecIndex === 0? 3 : currentSecIndex-1;}
+    if(direction === "right") {indexToGo = currentSecIndex === 3? 0 : currentSecIndex+1;}
+    goToSector(indexToGo);
+    return
 }
 
 
-let currentSecIndex = -1;
 
 
 function goToSector(index) {
@@ -195,6 +200,7 @@ function goToSector(index) {
 
     movementAnimationDone = false;
     currentSecIndex = index;
+
 
     setTimeout(() => animateCamera(sectors[index].position), 1000);
     currentSec = sectors[index].object;
@@ -288,15 +294,14 @@ let ra;
 
 // Animate Camera to Point Downward
 async function animateCamera(targLook) {
-    let leftMove = currentSecIndex === 0? 3 : currentSecIndex-1;
-    let rightMove = currentSecIndex === 3? 0 : currentSecIndex+1;
+
 
     console.log(`Current ID is: ${currentSecIndex}, The LEFT is: ${leftMove}, The RIGHT is: ${rightMove}`)
 
 
 
     if (!arrowsMade){
-        const {leftArrow, rightArrow} = await OverlayHelper.createArrowButtons(cssRenderer, () => goToSector(leftMove), () => goToSector(rightMove));
+        const {leftArrow, rightArrow} = await OverlayHelper.createArrowButtons(cssRenderer, () => updateCurrentSecIndex("left"), () => updateCurrentSecIndex("right"));
         arrowsMade = true;
 
         leftArrow.style.display = "none";
@@ -559,7 +564,7 @@ function handleClick(intersects) {
 
     //console.dir()
 
-        goToSector(objOfInterest.index);
+        goToSector(objOfInterest.placeToGo);
 
 
     } else {
@@ -644,7 +649,7 @@ function setLandingObjects (objectInfoArray) {
             
 
             //const obj = project.object;
-            const cubeToReplace = cubes.find(cube => cube.index === project.index);
+            const cubeToReplace = cubes.find(cube => cube.index === project.place);
 
 
     const box = new THREE.Box3().setFromObject(project.object);
@@ -703,6 +708,8 @@ box.getCenter(project.object.position);
     cubeToReplace.cuboid.visible = false;
     //console.log("success");
 
+    project.placeToGo = sectors.find(sec => sec.name === project.title).num;
+
     landingSector.add(project.object);
     landingSector.remove(cubeToReplace);
     ////console.log(`Model position: x = ${mx}, y = ${my}, z = ${mz}`);
@@ -752,6 +759,7 @@ async function setSectorObjects (objectInfoArray, sector) {
 
 
     objectInfoArray.forEach(project => {
+        console.dir(project)
    
 const box = new THREE.Box3().setFromObject(project.object);
 const size = new THREE.Vector3();
@@ -788,10 +796,12 @@ const nx = newCenter.x; const ny = newCenter.y; const nz = newCenter.z;
 const possiblePositions = sectorToAddTo.grid;
 console.dir(possiblePositions);
 
-console.log(project.index)
+console.log("THE PLACE IS ")
+console.log(project.place)
 
-    const row = Math.floor(project.index / 3);  // Determine row (floor division)
-    const col = project.index % 3;             // Determine column (modulo operation)
+
+    const row = Math.floor(project.place / 3);  // Determine row (floor division)
+    const col = project.place % 3;             // Determine column (modulo operation)
 
     // Get the grid position based on the index
     const position = possiblePositions[row][col];
@@ -929,7 +939,11 @@ function animate() {
 
 
 async function loadOtherSectors(sectorName) {
-    SectorHelper.displayProjects(sectorName, (p, s) => setSectorObjects(p, s));
+    const index = sectors.find(sect => sect.name === sectorName).num;
+
+    //console.dir(sectors.find(sect => sect.name === sectorName))
+    //console.log(`The index found is ${index}`)
+    SectorHelper.displayProjects(sectorName, (p, s) => setSectorObjects(p, s), index);
 }
 
 

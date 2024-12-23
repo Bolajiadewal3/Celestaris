@@ -16,9 +16,12 @@ async function loadSectorData(sector) {
 
 
 
-export async function displayProjects(sector, callback) {
-    let num;
-    if(sector === "landing") {num = -1;}
+export async function displayProjects(sector, callback, num = -1) {
+    //let num;
+    //if(sector === "landing") {num = -1;}
+
+
+    
     const sectorData = await loadSectorData(sector);
     const projects = sectorData.projects;
 
@@ -44,12 +47,17 @@ export async function displayProjects(sector, callback) {
     loader.load(project.model, (gltf) => {
         const modelObj = gltf.scene;
         //scene.add(modelObj);
-        //console.log(`${project.model} loaded`);
+
+
+
 
 
         project.object = modelObj;
         project.place = modelsLoaded;
         project.index = num;
+
+
+        console.log(`${project.model} loaded with a place of ${project.place} and an index of ${project.index}`);
 
         //console.dir(project);
         modelsLoaded++;
