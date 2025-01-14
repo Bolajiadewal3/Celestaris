@@ -394,19 +394,10 @@ function animateOverlay(objectsToRotate) {
     drop-shadow(-1px 1px 0 #000)
     drop-shadow(1px 1px 0 #000)
 `;
-
-
-
-text.style.display = 'flex';
-text.style.justifyContent = 'center'; // Horizontally center
-text.style.alignItems = 'center'; // Vertically center
-text.style.height = '100%';
-
-/*
 text.style.top = fromTop+'%';
 text.style.left = '50%';
 text.style.transform = `translate(-50%, -50%) translateX(50%)`;
-*/
+
 
 
     return text;
