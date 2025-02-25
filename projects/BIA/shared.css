@@ -1,0 +1,373 @@
+:root {
+    --mainColour: #000000;
+    --secondaryColour: #ffffff;
+
+    --bannerText: #ffffff;
+    --bannerBackground: #000000;
+  }
+
+html, body { 
+    height: 100% !important; 
+    width: 100%;
+    line-height: 190%;
+    scroll-behavior: smooth;
+    /*overflow-y:auto;*/
+
+}
+
+
+body {
+    cursor: url(/files/cursors/arrowhead-rounded-outline.svg), auto;
+}
+
+#logo {
+    font-family: "lena";
+}
+
+
+#page {
+    width: 100vw;
+    height: 100%;
+    position:relative;
+    overflow-y:auto;
+    z-index: 1;
+    box-shadow: inset 0 0 15px 15px #cdcdcd;
+    scroll-behavior: smooth;
+
+}
+
+#buttons {
+
+    position:fixed;
+    z-index: 5;
+}
+
+#buttons>div {
+    position: inherit;
+}
+
+
+
+
+#back{top:0;left:0;}
+#logo{top:0;right:0;}
+#links{bottom:0;left:0;}
+#nav{bottom:0;right:0;}
+
+
+
+
+
+#banner {
+    height: 100vh;
+    width: 100%;
+    color: var(--bannerText);
+    background-color: var(--bannerBackground);
+
+}
+
+#article {
+    width: 100%;
+    height: 100%;
+}
+
+
+.titleObject {
+    position:absolute;
+    width: 30%;
+    height: 50%;
+    top: 50%;
+
+    -webkit-transform: translate(0%, -50%);
+    -moz-transform: translate(0%, -50%);
+    -ms-transform: translate(0%, -50%);
+    -o-transform: translate(0%, -50%);
+    transform: translate(0%, -50%);
+}
+
+#titleImage>img {
+    width:auto; 
+    height:100%;
+}
+
+#titleImage {
+    left: 20%;
+}
+
+#titleText {
+    right: 20%;
+    font-family: 'Helvetica';
+
+}
+
+.titleTextObject {
+    height: 50%;
+    display:block;
+    width:100%;
+}
+
+#title {
+    font-weight: bolder;
+    font-size: 4.5em;
+}
+
+#subtitle {
+    font-weight: normal;
+    font-size: 2.1em;
+}
+
+
+#articleHolder {
+    position:absolute;
+    width: 66%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0%);
+    -moz-transform: translate(-50%, 0%);
+    -ms-transform: translate(-50%, 0%);
+    -o-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+    padding: 1%;
+    /*height: 100%;*/
+
+}
+
+
+.sectionHolder {
+    border-left: .1px solid #d2d2d2;
+    border-right: .1px solid #d2d2d2;
+    border-bottom: .1px solid #d2d2d2;
+    padding: 5%;
+}
+
+@font-face {
+    font-family: Lena;
+    src: url(/Lena.ttf);
+ }
+
+
+ h1, h2, h3 {
+    color: var(--mainColour)
+ }
+
+
+h2 {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-family: 'Lena';
+    font-size:2em;
+
+}
+
+.sectionText {
+    margin-bottom: 5%;
+    font-family: 'Roboto';
+    font-size:0.9em;
+
+}
+
+
+.sectionFigure {
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+    height: 400px;
+    /*background-color: aqua;*/
+    position:relative
+}
+
+.sectionFigure>img {
+    position:absolute;
+    width: auto;
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    overflow:hidden;
+    /*background-color: aquamarine;*/
+    box-shadow: 0 0 15px 15px #cdcdcd;
+    z-index: 41;
+    transition: filter 2.5s ease;
+}
+
+.sectionFigure>.overlay {
+    position:absolute;
+    width: 60%;
+    bottom: 0;
+    height: 15%;
+    padding-left: 150px;
+    padding-right: 35px;
+    left: 75%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 20px;
+    border: .2px dashed white ;
+    text-align: center;
+    box-shadow: 0 0 5px 5px #cdcdcd;
+    display: flex;
+    opacity: 0;
+    justify-content:right;
+    align-items: center;
+    z-index: 40;
+
+    /*mix-blend-mode: multiply;*/
+
+
+}
+
+
+.noEffects>img {
+    border-radius: 10px !important;
+    box-shadow: 0 0 0px 0px white !important;
+
+
+}
+
+
+
+.buttonBefore {
+    height: auto;
+    /*background-color: aqua;*/
+    padding-left: 5px;
+    padding-right: 5px;
+    width: auto;
+    position:absolute;
+    display: flex;
+
+    margin: 3px;
+
+}
+
+.buttonBefore > div {
+    text-align: center;
+    margin: auto;
+    vertical-align: middle;
+
+
+}
+
+
+
+.buttonBefore > .afterHover {
+    white-space: nowrap;
+    padding-left: 5px;
+    padding-right: 5px;
+
+
+
+}
+
+
+.buttonBefore > .beforeHover > i {
+
+   /* border-radius: 50%;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    background-color: #ffffff;    */
+
+}
+
+
+.beforeHover>i, .afterHover>i {
+    mix-blend-mode: color-burn;
+
+}
+
+.differentHover {
+    width: auto !important;
+}
+
+
+.scroll-circle {
+    width: 70px;
+    height: 70px;
+    margin: 5px;
+    border-radius: 50%;
+    background-color: #ffffff;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--mainColour);
+    font-size: 20px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    /*box-shadow: 0 5px 5px #cdcdcd;*/
+
+    border-style: solid;
+    border-color: var(--mainColour);
+    border-width: 2px;
+    padding: 2px;
+
+  }
+
+  .scrollPercentage {
+    font-family: "Lena";
+    font-size: 2em;
+    /*mix-blend-mode: exclusion;*/
+  }
+  
+      /* Spokes container (for line representation) */
+      .spokes {
+        display: none;
+        width: 100%;
+        height: 100%;
+        /*top: 0;*/
+        /*left: 50%;
+        transform: translate(-50%, -50%);*/
+        /*background-color: #4CAF50;*/
+        position: absolute;
+
+        justify-content: center;
+        align-items: center;
+
+
+      }
+  
+      .spokes> .spoke {
+        position: absolute;
+        transform-origin: center;
+        transition: transform 0.3s ease-in-out;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-family: "Lena";
+        font-size: 0.5em;
+        line-height: normal;
+
+      }
+  
+      /* Show spokes when hovered */
+      .scroll-circle:hover + .spokes {
+        display: inline-flex;
+      }
+  
+   i{
+    color: var(--mainColour)
+   }
+
+      .sectionNote {
+        color: var(--secondaryColour);
+        background-color: var(--mainColour);
+        border-radius: 20px;
+        padding: 10px;
+    }
+
+      .sectionQuotation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .fa-quote-left{
+        padding-right: 10px;
+      }
+
+      .fa-quote-right{
+        padding-left: 10px;
+      }
+
+
