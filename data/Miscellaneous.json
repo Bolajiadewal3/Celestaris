@@ -1,0 +1,17 @@
+{
+    "projects": [
+      {
+        "title": "Music",
+        "abstract": "Music released under the artist name: AREMU",
+        "siteLink": "projects/MISC/poetry/section0.html",
+        "model": "/files/misc/vinyl.glb"
+      },
+      {
+        "title": "Poetry",
+        "abstract": "Poetry and other writings",
+        "siteLink": "projects/MISC/music/music.html",
+        "model": "/files/misc/books.glb"
+      }
+    ]
+  }
+  

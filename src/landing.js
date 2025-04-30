@@ -8,6 +8,10 @@ import * as OverlayHelper from '/src/overlays.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 
 
+console.log('Landing page JS is running');
+
+
+
 let interactionNotAllowed = false;
 let leftMove;
 let rightMove;
@@ -15,11 +19,12 @@ let rightMove;
 // Scene, Camera, Renderer
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({antialias: true});
 
 
 
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio( window.devicePixelRatio );
 renderer.domElement.style.zIndex = '0';
 renderer.domElement.style.position = 'absolute';
 
@@ -46,12 +51,16 @@ canvas.width = window.innerWidth;  // Use the full width of the window
 canvas.height = window.innerHeight;  // Use the full height of the window
 
 
-const cssRenderer = new CSS2DRenderer();
+const cssRenderer = new CSS2DRenderer({antialias: true});
+//cssRenderer.setPixelRatio( window.devicePixelRatio );
 cssRenderer.setSize(window.innerWidth, window.innerHeight);
 cssRenderer.domElement.style.top = '0';  // Ensure it aligns with the WebGL renderer
 cssRenderer.domElement.style.left = '0';
 cssRenderer.domElement.style.position = 'absolute';
 cssRenderer.domElement.style.zIndex = '5';
+cssRenderer.domElement.style.height = '100%';
+cssRenderer.domElement.style.width = '100%';
+
 cssRenderer.domElement.style.pointerEvents = 'none'; // Ensures it doesn't block 3D interactions
 document.body.appendChild(cssRenderer.domElement);
 document.body.appendChild(renderer.domElement);
@@ -867,7 +876,7 @@ allDynamicText.push(  TextHelper.addDynamicText(scene, project.title, "top right
 
    // plane.visible = false;
    //allText.push(TextHelper.addText(scene, "By Mobolaji Adewale", "top left", 0));
-    allStaticText.push(TextHelper.addStaticText(scene, "Memory Card: ", "top left", 20, 20,  50, cssRenderer.domElement));
+    allStaticText.push(TextHelper.addStaticText(scene, "Memory Card: ", "top left", 2, 2,  50, cssRenderer.domElement));
 
 
 
@@ -877,14 +886,14 @@ allDynamicText.push(  TextHelper.addDynamicText(scene, project.title, "top right
         //const totalJSHeapSize = performance.memory.totalJSHeapSize;
         const jsHeapSizeLimit = performance.memory.jsHeapSizeLimit;
         
-        allStaticText.push(TextHelper.addStaticText(scene, `${(usedJSHeapSize/ 1024 / 1024).toFixed(2) }MB used / ${(jsHeapSizeLimit / 1024 / 1024).toFixed(2) }MB available`, "top left", 20, 100, 25,  cssRenderer.domElement));
+        allStaticText.push(TextHelper.addStaticText(scene, `${(usedJSHeapSize/ 1024 / 1024).toFixed(2) }MB used / ${(jsHeapSizeLimit / 1024 / 1024).toFixed(2) }MB available`, "top left", 2, 8, 25,  cssRenderer.domElement));
 
     } else {
         console.log("The performance.memory API is not supported in this browser.");
-        allStaticText.push(TextHelper.addStaticText(scene, `In Use ${getBrowserName()}`, "top left", 20, 100, 25,  cssRenderer.domElement));
+        allStaticText.push(TextHelper.addStaticText(scene, `In Use ${getBrowserName()}`, "top left", 2, 8, 25,  cssRenderer.domElement));
     }
 
-    allStaticText.push(TextHelper.addStaticText(scene, "By Mobolaji Adewale", "top right", 20, 20, 40, cssRenderer.domElement));
+    allStaticText.push(TextHelper.addStaticText(scene, "By Mobolaji Adewale", "top right", 2, 2, 40, cssRenderer.domElement));
 
     SectorHelper.displayProjects("landing", (p) => setLandingObjects(p));
 
@@ -1007,3 +1016,20 @@ function garbage(obj) {
         obj.remove(obj.children[0]);
     }
 }
+
+
+
+
+/*
+
+
+const landingDiv = document.createElement('div');
+landingDiv.style.width = '1024px';
+landingDiv.style.height = '768px';
+landingDiv.style.overflow = 'hidden';
+landingDiv.style.background = 'black';
+
+// Move existing content here instead of `document.body`
+landingDiv.appendChild(renderer.domElement); 
+
+export const landingScreen = new CSS3DObject(landingDiv);*/

@@ -14,8 +14,10 @@ let currentOverlayRenderer = null;
 let currentOverlayCSS = null;
 
 window.addEventListener('resize', () => {
-    if(currentOverlayRenderer != null) currentOverlayRenderer.setSize(window.innerWidth, window.innerHeight);
-    if(currentOverlayCSS != null) currentOverlayCSS.setSize(window.innerWidth, window.innerHeight);
+    if(currentOverlayRenderer != null) currentOverlayRenderer.setSize(window.innerWidth, window.innerHeight); 
+    if(currentOverlayCSS != null) currentOverlayCSS.setSize(window.innerWidth, window.innerHeight); 
+
+
     if(currentOverlayCamera != null) currentOverlayCamera.aspect = window.innerWidth / window.innerHeight;
     if(currentOverlayCamera != null) currentOverlayCamera.updateProjectionMatrix();
 });
@@ -35,6 +37,8 @@ export function createOverlay(scene) {
 
     overlayCamera.position.z = 5;
     overlayRenderer.setSize(window.innerWidth, window.innerHeight);
+    overlayRenderer.setPixelRatio(window.devicePixelRatio );
+
     overlayRenderer.setClearColor(0x000000, 0);  // Transparent background for overlay
     document.body.appendChild(overlayRenderer.domElement);  // Append to overlay container
     overlayRenderer.domElement.style.zIndex = "8";
@@ -243,7 +247,7 @@ console.dir(plane);
     overlayPanel.style.position = 'flex';
     overlayPanel.style.id = 'overlayPanel';
     overlayPanel.style.width = '100%';
-    overlayPanel.style.height = '100vh';
+    overlayPanel.style.height = '100%';
     //overlayPanel.style.pointerEvents = 'none'; // Ensures it doesn't block 3D interactions
     overlayPanel.style.position = 'relative';
 
@@ -264,26 +268,31 @@ console.dir(plane);
     textElement.style.overflowWrap = 'break-word';
     textElement.style.pointerEvents = 'none'; // Ensures it doesn't block 3D interactions
     setStyle(textElement, 35);
-    textElement.style.fontSize = 15+'px';
+    //textElement.style.fontSize = 15+'px';
     textObjects.push(textElement);
     textElement.innerText = info.overlayText; // Example text
     textElement.style.marginRight = '5%'; // Adjust the value as needed
 
 
+
+
+
+
+
     const forwardButton = document.createElement('button');
-    forwardButton.style.position = 'absolute';
+    forwardButton.style.position = 'flex';
     //forwardButton.style.pointerEvents = 'none'; // Ensures it doesn't block 3D interactions
     setButton(forwardButton, 55);
     forwardButton.addEventListener('click', () => {
         console.log('Forward button clicked!');
         window.location.href = info.overlayLink;
     });
-    textObjects.push(forwardButton);
+    //textObjects.push(forwardButton);
     
     forwardButton.innerText = "Go To";
 
     const backButton = document.createElement('button');
-    backButton.style.position = 'absolute';
+    backButton.style.position = 'flex';
     //backButton.style.pointerEvents = 'none'; // Ensures it doesn't block 3D interactions
     setButton(backButton, 75);
     backButton.addEventListener('click', () => {
@@ -292,11 +301,68 @@ console.dir(plane);
 
 
     });
-    textObjects.push(backButton);
+    //textObjects.push(backButton);
     backButton.innerText = "Back";
 
 
 
+    const buttons = document.createElement('div');
+    buttons.style.position = 'absolute';
+    buttons.style.bottom = '2vh';
+
+    buttons.style.display = 'flex';
+    buttons.style.left = '50%';
+    buttons.style.transform = 'translate(-50%, -50%) translateX(70%)';
+
+
+
+
+    buttons.style.flexDirection = window.matchMedia('(max-width: 768px)').matches? "row" : "column";
+    buttons.style.gap = "2vw";
+
+    buttons.appendChild(forwardButton)
+    buttons.appendChild(backButton)
+    textObjects.push(buttons);
+
+
+
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    if (mediaQuery.matches) {
+        titleElement.style.fontSize = "0.5rem";
+        titleElement.style.fontSize = "0.5rem";
+        titleElement.style.webkitTextStroke = `0.02em black`; 
+    
+    
+        textElement.style.fontSize = "0.2rem";
+        textElement.style.webkitTextStroke = `0.01em black`;  // For webkit-based browsers
+        textElement.style.textStroke = `0.01em black`; 
+
+        forwardButton.style.fontSize = "0.6rem";
+        forwardButton.style.webkitTextStroke = `0.01em black`;  // For webkit-based browsers
+        forwardButton.style.textStroke = `0.01em black`; 
+
+        backButton.style.fontSize = "0.6rem";
+        backButton.style.webkitTextStroke = `0.01em black`;  // For webkit-based browsers
+        backButton.style.textStroke = `0.01em black`; 
+    } else {
+        titleElement.style.fontSize = "2.5rem";
+        titleElement.style.webkitTextStroke = `0.04em black`;  // For webkit-based browsers
+        titleElement.style.textStroke = `0.04em black`;
+    
+    
+        textElement.style.fontSize = "1rem";
+        textElement.style.webkitTextStroke = `0.04em black`;  // For webkit-based browsers
+        textElement.style.textStroke = `0.04em black`; 
+
+        forwardButton.style.fontSize = "3rem";
+        forwardButton.style.webkitTextStroke = `0.04em black`;  // For webkit-based browsers
+        forwardButton.style.textStroke = `0.04em black`;
+
+        backButton.style.fontSize = "3rem";
+        backButton.style.webkitTextStroke = `0.04em black`;  // For webkit-based browsers
+        backButton.style.textStroke = `0.04em black`;
+    
+    }
 
 
     //textElement.style.height = '100%';
@@ -385,15 +451,20 @@ function animateOverlay(objectsToRotate) {
   function setStyle(text, fromTop) {
 
     text.style.color = 'white';
-    text.style.fontSize = 40+'px';
+
+
+    //text.style.fontSize = 40+'px';
+   // text.style.fontSize = "calc(9px + 0.8vw)";
+
+
     text.style.zIndex = '5'; // Ensure the text appears above other elements
     text.style.fontFamily = '"Orbitron", sans-serif';
-    text.style.filter = `
+   /* text.style.filter = `
     drop-shadow(-1px -1px 0 #000)
     drop-shadow(1px -1px 0 #000)
     drop-shadow(-1px 1px 0 #000)
     drop-shadow(1px 1px 0 #000)
-`;
+`;*/
 text.style.top = fromTop+'%';
 text.style.left = '50%';
 text.style.transform = `translate(-50%, -50%) translateX(50%)`;
@@ -406,12 +477,15 @@ text.style.transform = `translate(-50%, -50%) translateX(50%)`;
   function setButton(text, fromTop) {
     // Set default styles for the button
     text.style.color = 'white';
-    text.style.fontSize = '40px';
+
+
+    
+    //text.style.fontSize = '40px';
     text.style.zIndex = '5'; // Ensure the text appears above other elements
     text.style.fontFamily = '"Orbitron", sans-serif';
-    text.style.border = '2px solid black'; // Black outline
+    text.style.border = '0.1vw solid black'; // Black outline
     text.style.backgroundColor = 'transparent'; // Transparent background
-    text.style.padding = '10px 20px';
+    text.style.padding = '3% 5%';
     text.style.transition = 'all 0.3s ease'; // Smooth transition for hover effects
     text.style.cursor = 'pointer'; // Pointer cursor for buttons
     text.style.boxShadow = '0px 4px 6px rgba(0, 0, 0, 0.4)'; // Slight shadow around the outline
@@ -420,7 +494,7 @@ text.style.transform = `translate(-50%, -50%) translateX(50%)`;
     text.style.top = `${fromTop}%`;
     text.style.left = '50%';
     text.style.transform = 'translate(-50%, -50%) translateX(70%)';
-    text.style.borderRadius = '10px'; // Rounded corners
+    text.style.borderRadius = '5px'; // Rounded corners
 
     // Add hover effect using an event listener
     text.addEventListener('mouseover', () => {
@@ -459,10 +533,10 @@ export async function createArrowButtons(renderer, leftArrowFunction, rightArrow
 
     leftArrow.style.position = 'absolute';
     leftArrow.style.top = '50%';
-    leftArrow.style.left = '20px';
+    leftArrow.style.left = '5vw';
     leftArrow.style.transform = 'translateY(-10%)';
-    leftArrow.style.width = '60px'; // Set size for the image
-    leftArrow.style.height = '40px';
+    leftArrow.style.width = '5vw'; // Set size for the image
+    leftArrow.style.height = '5vh';
     leftArrow.style.backgroundImage = 'url(files/arrows/leftArrow.png)'; // Path to your left arrow image
     leftArrow.style.backgroundSize = 'contain';
     leftArrow.style.backgroundRepeat = 'no-repeat';
@@ -488,10 +562,10 @@ export async function createArrowButtons(renderer, leftArrowFunction, rightArrow
 
     rightArrow.style.position = 'absolute';
     rightArrow.style.top = '50%';
-    rightArrow.style.right = '20px';
+    rightArrow.style.right = '5vw';
     rightArrow.style.transform = 'translateY(-10%)';
-    rightArrow.style.width = '60px';
-    rightArrow.style.height = '40px';
+    rightArrow.style.width = '5vw';
+    rightArrow.style.height = '5vh';
     rightArrow.style.backgroundImage = 'url(files/arrows/rightArrow.png)'; // Path to your right arrow image
     rightArrow.style.backgroundSize = 'contain';
     rightArrow.style.backgroundRepeat = 'no-repeat';

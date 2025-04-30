@@ -6,6 +6,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 
 async function loadSectorData(sector) {
+    console.log(`trying!!`);
+
     console.log(`data/${sector}.json`);
 
     const response = await fetch(`data/${sector}.json`);

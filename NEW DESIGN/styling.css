@@ -1,0 +1,101 @@
+html {
+   cursor: url("/files/cursors/arrowhead.svg");
+
+}
+
+
+div {
+    font-family: 'Orbitron', sans-serif;
+}
+
+h3 {
+    font-size: 1em  !important;
+    align-items: 'center';
+
+}
+
+
+div > h2 {
+    font-size: 3em  !important;
+    align-items: 'center';
+
+}
+
+div > p {
+    font-size: 1.5em  !important;
+}
+ a {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    border: 0.1vw solid black !important; 
+    background-color : transparent !important; 
+    padding : 3% 5% !important;
+    transition : all 0.3s ease !important; 
+    cursor : pointer;
+    box-shadow : 0px 4px 6px rgba(0, 0, 0, 0.4) !important;
+    border-radius: 12px;
+    font: inherit;
+    color: white;
+
+}
+
+a:hover {
+    background-color : white !important; 
+    color: black;
+
+
+}
+
+#startButton {
+
+    color: black !important;
+    cursor: pointer !important;
+    background: white !important;
+    border-color: black !important;
+    border-style: dashed !important;
+    transition : all 0.3s ease !important; 
+
+}
+
+#startButton:hover {
+
+    color: white !important;
+    cursor: pointer !important;
+    background: black !important;
+    border-color: white !important;
+    border-style:solid !important;
+
+
+
+}
+
+.smallTextBanner {
+    opacity: 0.5;
+
+}
+
+.smallTextButton {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3em;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    color: black !important;
+    cursor: pointer !important;
+    background: white !important;
+    border-color: black !important;
+    border-style: dashed !important;
+    transition : all 0.3s ease !important; 
+    z-index: 30;
+}
+
+.smallTextButton:hover {
+
+    color: white !important;
+    cursor: pointer !important;
+    background: black !important;
+    border-color: white !important;
+    border-style:solid !important;
+    z-index: 30;
+}
