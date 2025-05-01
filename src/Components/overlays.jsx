@@ -114,7 +114,12 @@ function Overlay({ isActive, onClose, items = [] }) {
           <h2 style={{ fontSize: "20px", marginBottom: "10px" }}>
             {items[index].title}
           </h2>
-          <a href={`${import.meta.env.BASE_URL}${items[index].siteLink}`}>Go To</a>
+          <a href={
+                items[index].website
+                ? items[index].website // External website
+                : `${import.meta.env.BASE_URL}${items[index].siteLink}` // Internal page
+            
+            }>Go To</a>
           <p>{items[index].abstract}</p>
         </animated.div>
       ))}

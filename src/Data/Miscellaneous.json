@@ -3,13 +3,13 @@
       {
         "title": "Music",
         "abstract": "Music released under the artist name: AREMU",
-        "siteLink": "projects/MISC/poetry/section0.html",
+        "website": "https://linktr.ee/ar3mu",
         "model": "/files/misc/vinyl.glb"
       },
       {
-        "title": "Poetry",
-        "abstract": "Poetry and other writings",
-        "siteLink": "projects/MISC/music/music.html",
+        "title": "Profile",
+        "abstract": "Profile page with useful links",
+        "website": "https://linktr.ee/bolajiadewale",
         "model": "/files/misc/books.glb"
       }
     ]
