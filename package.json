@@ -3,15 +3,12 @@
   "version": "1.0.0",
   "description": "Website Portfolio",
   "main": "main.js",
-  "homepage": "https://bolajiadewal3.github.io/Celestaris",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite --force",
     "build": "vite build",
-    "serve": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
-    },
+    "serve": "vite preview"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,16 +16,16 @@
     "vite": "^6.0.4"
   },
   "dependencies": {
-    "@react-spring/three": "^10.0.0-beta.0",
-    "@react-spring/web": "^10.0.0-beta.0",
-    "@react-three/drei": "^10.0.7",
-    "@react-three/fiber": "^9.1.2 ",
-    "@react-three/postprocessing": "^3.0.4 ",
-    "@vitejs/plugin-react": "^4.0.3",
-    "gh-pages": "^6.3.0",
     "react": "^ 19.1.0",
-    "react-dom": "^ 19.1.0",
-    "three": "latest",
-    "three-stdlib": "^2.20.9"
+  "react-dom": "^ 19.1.0",
+  "@vitejs/plugin-react": "^4.0.3",
+  "three": "latest",
+  "@react-three/fiber": "^9.1.2 ",
+  "@react-three/drei": "^10.0.7",
+  "@react-spring/web": "^10.0.0-beta.0",
+  "@react-spring/three": "^10.0.0-beta.0",
+
+  "three-stdlib": "^2.20.9",
+  "@react-three/postprocessing": "^3.0.4 "
   }
 }
