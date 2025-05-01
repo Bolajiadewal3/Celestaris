@@ -11,11 +11,11 @@ html, body {
 
 
 body {
-    cursor: url(../../Cursors/arrowhead-normal.svg), auto ;
+    cursor: url(../../Cursors/arrowhead-normal.svg) 16 16, auto ;
 }
 
 body:hover {
-    cursor: url(../../Cursors/arrowhead-normal.svg), auto ;
+    cursor: url(../../Cursors/arrowhead-normal.svg) 16 16, auto ;
 }
 
 #logo {

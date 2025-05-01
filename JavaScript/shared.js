@@ -3,10 +3,10 @@ $( document ).ready(function() {
     console.log( "ready!" );
 
     $("body").mousedown(function() {
-        $(this).css("cursor", `url(/Celestaris/Cursors/arrowhead-mousedown.svg), auto`);    });
+        $(this).css("cursor", `url(/Celestaris/Cursors/arrowhead-mousedown.svg) 16 16, auto`);    });
 
     $("body").mouseup(function() {
-        $(this).css("cursor", `url(/Celestaris/Cursors/arrowhead-normal.svg), auto`);
+        $(this).css("cursor", `url(/Celestaris/Cursors/arrowhead-normal.svg) 16 16, auto`);
     });
 
 
