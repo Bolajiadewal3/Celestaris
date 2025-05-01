@@ -1,15 +1,14 @@
-import { color } from "three/tsl";
 
 $( document ).ready(function() {
     console.log( "ready!" );
 
 
     $("body").mousedown(function() {
-        $(this).css("cursor", "url(/files/cursors/arrowhead.svg), auto")
+        $(this).css("cursor", "url(./Cursors/arrowhead-hover.svg), auto")
     });
 
     $("body").mouseup(function() {
-        $(this).css("cursor", "url(/files/cursors/arrowhead-rounded-outline.svg), auto")
+        $(this).css("cursor", "url(./Cursors/arrowhead-mousedown.svg), auto")
     });
 
 
