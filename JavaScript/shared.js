@@ -1,14 +1,14 @@
 
 $( document ).ready(function() {
     console.log( "ready!" );
+    const baseUrl = import.meta.env.BASE_URL;
 
 
     $("body").mousedown(function() {
-        $(this).css("cursor", "url(../Cursors/arrowhead-hover.svg), auto")
-    });
+        $(this).css("cursor", `url(${baseUrl}Cursors/arrowhead-hover.svg), auto`);    });
 
     $("body").mouseup(function() {
-        $(this).css("cursor", "url(../Cursors/arrowhead-mousedown.svg), auto")
+        $(this).css("cursor", `url(${baseUrl}Cursors/arrowhead-mousedown.svg), auto`);
     });
 
 
