@@ -22,10 +22,10 @@ import {
 //import { useTrail, animated, useSpring } from '@react-spring/web';
 //import { a } from '@react-spring/three';
 
-import projectData from "/data/Business Intelligence & Analytics.json";
-import poetryData from "/data/Poetry.json";
-import dissertationData from "/data/Dissertation.json";
-import miscData from "/data/Miscellaneous.json";
+import projectData from "./Data/Business Intelligence & Analytics.json";
+import poetryData from "./Data/Poetry.json";
+import dissertationData from "./Data/Dissertation.json";
+import miscData from "./Data/Miscellaneous.json";
 import { cameraViewMatrix } from "three/tsl";
 
 import { StartScreen, Overlay } from "./Components/overlays.jsx";
