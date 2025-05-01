@@ -1,7 +1,62 @@
 html {
-   cursor: url("/files/cursors/arrowhead.svg");
-
+    cursor: url("cursors/arrowhead-normal.svg") 16 16, auto;
 }
+
+
+
+
+#startButton {
+    cursor: url("cursors/arrowhead-normal.svg") 16 16, auto !important;
+}
+#startButton:hover {
+    cursor: url("cursors/arrowhead-hover.svg") 16 16, auto !important;
+}
+#startButton:active {
+    cursor: url("cursors/arrowhead-mousedown.svg") 16 16, auto !important;
+}
+
+
+a:hover {
+    cursor: url("cursors/lightning-normal.svg") 16 16, auto !important;
+}
+a:active {
+    cursor: url("cursors/lightning-purple.svg") 16 16, auto !important;
+}
+
+
+button:hover {
+    cursor: url("cursors/arrowhead-hover.svg") 16 16, auto !important;
+}
+button:active {
+    cursor: url("cursors/arrowhead-mousedown.svg") 16 16, auto !important;
+}
+
+
+
+
+
+.smallTextButton, .normalExitButton {
+    cursor: url("cursors/close-normal.svg") 16 16, auto !important;
+}
+.smallTextButton:hover, .normalExitButton:hover {
+    cursor: url("cursors/close-normal.svg") 16 16, auto !important;
+}
+.smallTextButton:active, .normalExitButton:active {
+    cursor: url("cursors/close-purple.svg") 16 16, auto !important;
+}
+
+
+
+
+
+canvas {
+    cursor: url("cursors/move-normal.svg") 16 16, auto !important;
+}
+canvas:active {
+    cursor: url("cursors/move-purple.svg") 16 16, auto !important;
+}
+
+
 
 
 div {
@@ -61,7 +116,6 @@ a:hover {
 #startButton:hover {
 
     color: white !important;
-    cursor: pointer !important;
     background: black !important;
     border-color: white !important;
     border-style:solid !important;
@@ -82,7 +136,6 @@ a:hover {
     top: 30px;
     left: 30px;
     color: black !important;
-    cursor: pointer !important;
     background: white !important;
     border-color: black !important;
     border-style: dashed !important;
@@ -93,7 +146,6 @@ a:hover {
 .smallTextButton:hover {
 
     color: white !important;
-    cursor: pointer !important;
     background: black !important;
     border-color: white !important;
     border-style:solid !important;

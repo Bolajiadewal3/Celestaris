@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { Reflector } from 'three/examples/jsm/objects/Reflector.js';
 import MarkdownIt from 'markdown-it';
@@ -13,13 +12,10 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.domElement.style.zIndex = '0';
 renderer.domElement.style.position = 'absolute';
 
-const controls = new OrbitControls(camera, renderer.domElement);
 camera.position.set(0, 0, 7); // Slightly above the ground looking forward
 camera.lookAt(0, 0, 0);
 
-controls.target.set(0, 0, 0);
 let currentLookAt = {x: 0, y: 0, z: 0};
-controls.update();
 scene.add( camera );
 
 const cssRenderer = new CSS2DRenderer();
@@ -379,8 +375,7 @@ scene.add(sphere);
     
     
     function animate() {
-        controls.update(); 
-        //checkRaycast();
+         //checkRaycast();
 
         material.uniforms.time.value += 0.07;
 

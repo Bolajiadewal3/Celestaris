@@ -13,13 +13,10 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.domElement.style.zIndex = '0';
 renderer.domElement.style.position = 'absolute';
 
-const controls = new OrbitControls(camera, renderer.domElement);
 camera.position.set(0, 0, 7); // Slightly above the ground looking forward
 camera.lookAt(0, 0, 0);
 
-controls.target.set(0, 0, 0);
 let currentLookAt = {x: 0, y: 0, z: 0};
-controls.update();
 scene.add( camera );
 
 const cssRenderer = new CSS2DRenderer();
@@ -500,7 +497,6 @@ const sphere = new THREE.Mesh(geometry, material);
     
     
     function animate() {
-        controls.update(); 
         //checkRaycast();
 
         material.uniforms.time.value += 0.07;
