@@ -3,7 +3,7 @@ $( document ).ready(function() {
     console.log( "ready!" );
 
     $("body").mousedown(function() {
-        $(this).css("cursor", `url(/Celestaris/Cursors/arrowhead-hover.svg), auto`);    });
+        $(this).css("cursor", `url(/Celestaris/Cursors/arrowhead-mousedown.svg), auto`);    });
 
     $("body").mouseup(function() {
         $(this).css("cursor", `url(/Celestaris/Cursors/arrowhead-normal.svg), auto`);
