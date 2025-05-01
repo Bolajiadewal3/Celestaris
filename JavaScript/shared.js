@@ -6,7 +6,7 @@ $( document ).ready(function() {
         $(this).css("cursor", `url(/Celestaris/Cursors/arrowhead-hover.svg), auto`);    });
 
     $("body").mouseup(function() {
-        $(this).css("cursor", `url(/Celestaris/Cursors/arrowhead-mousedown.svg), auto`);
+        $(this).css("cursor", `url(/Celestaris/Cursors/arrowhead-normal.svg), auto`);
     });
 
 
