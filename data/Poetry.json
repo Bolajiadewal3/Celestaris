@@ -3,22 +3,22 @@
       {
         "title": "Gothic",
         "abstract": "Gothic poems inspired by Victorian Romantics and Gothic writers",
-        "siteLink": "/NEW DESIGN/Poetry/Gothic/Gothic.html"
+        "siteLink": "Pages/Poetry/Gothic/Gothic.html"
       },
       {
         "title": "Existential",
         "abstract": "An assortment of existential poems - aimed at the contemplative and inward-thinkers",
-        "siteLink": "/NEW DESIGN/Poetry/Existential/Existential.html"
+        "siteLink": "Pages/Poetry/Existential/Existential.html"
       },
       {
         "title": "Poetry Anthology: Canto I",
         "abstract": "Serentiy, Silence and Salutation",
-        "siteLink": "/NEW DESIGN/Poetry/Lux/section0.html"
+        "siteLink": "Pages/Poetry/Lux/section0/section0.html"
       },
       {
         "title": "Poetry Anthology: Canto II",
         "abstract": "Tabula Lux",
-        "siteLink": "/NEW DESIGN/Poetry/Lux/section1.html"
+        "siteLink": "Pages/Poetry/Lux/section1/section1.html"
       }
     ]
   }
