@@ -14,6 +14,10 @@ body {
     cursor: url(../../Cursors/arrowhead-normal.svg), auto ;
 }
 
+body:hover {
+    cursor: url(../../Cursors/arrowhead-normal.svg), auto ;
+}
+
 #logo {
     font-family: "lena";
 }
