@@ -1,6 +1,8 @@
 
 $( document ).ready(function() {
     console.log( "ready!" );
+    console.log(import.meta.env.BASE_URL);
+
     const baseUrl = import.meta.env.BASE_URL;
 
 
