@@ -1,4 +1,3 @@
-import { color } from "three/tsl";
 
 $( document ).ready(function() {
     console.log( "ready!" );
