@@ -42,11 +42,12 @@ function StartScreen({ onStart, visible }) {
       <div
         id="hintText"
         style={{
+          position: "absolute",
           bottom: "2%",
           padding: "20px 40px",
           fontSize: "15px",
           borderRadius: "1px",
-
+          color: "white",
           fontFamily: "Orbitron, sans-serif",
         }}
       >
@@ -128,12 +129,15 @@ function Overlay({ isActive, onClose, items = [] }) {
           <h2 style={{ fontSize: "20px", marginBottom: "10px" }}>
             {items[index].title}
           </h2>
-          <a href={
-                items[index].website
+          <a
+            href={
+              items[index].website
                 ? items[index].website // External website
                 : `${import.meta.env.BASE_URL}${items[index].siteLink}` // Internal page
-            
-            }>Go To</a>
+            }
+          >
+            Go To
+          </a>
           <p>{items[index].abstract}</p>
         </animated.div>
       ))}
