@@ -1,7 +1,6 @@
 # Celestaris
+
 Website Portfolio
-
-
 
 Three.js Portfolio Website Documentation
 Project Overview
@@ -17,11 +16,6 @@ Overlay panels for project details with a blurred background effect
 Custom animations for 3D text banners
 
 Responsive layout that adapts to different screen sizes
-
-
-
-
-
 
 # Project Structure
 
@@ -76,11 +70,13 @@ This file defines two camera animation components for controlling the camera's m
 ### Important Functions/Parameters:
 
 ### `InitialCameraAnimation`
-- **Props**: 
+
+- **Props**:
   - `onComplete`: Callback function triggered when the camera finishes its movement to the target position.
 - **Description**: This component animates the camera's movement to a target position and notifies the parent component once the animation is complete.
 
 ### `SmallTextCameraAnimation`
+
 - **Props**:
   - `anchor`: Target position for the camera ([x, y, z]).
   - `lookat`: Target point for the camera to look at ([x, y, z]).
@@ -95,7 +91,8 @@ This file defines two interactive 3D text banner components: `GlowingTextBanner`
 ### Important Functions/Parameters:
 
 ### `GlowingTextBanner`
-- **Props**: 
+
+- **Props**:
   - `text`: The text displayed on the banner.
   - `position`: The position of the banner in 3D space.
   - `rotation`: The rotation of the banner.
@@ -103,6 +100,7 @@ This file defines two interactive 3D text banner components: `GlowingTextBanner`
 - **Description**: Displays glowing text with a border that changes color on hover. The text is clickable and triggers the `onClick` function when clicked.
 
 ### `SmallTextBanner`
+
 - **Props**:
   - `title`: The title text displayed on the banner.
   - `text`: The secondary text displayed on the banner.
@@ -114,29 +112,7 @@ This file defines two interactive 3D text banner components: `GlowingTextBanner`
   - `onOpen`: Callback function triggered when the banner is opened.
 - **Description**: Displays an expandable 3D banner with title and content text. The banner expands when clicked and triggers animations.
 
-
-
-
-
-
-
-
-
-
-
-
 Folder Structure
-
-
-
-
-
-
-
-
-
-
-
 
 How It Works
 3D City Model
