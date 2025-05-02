@@ -38,9 +38,12 @@ import {
   SmallTextCameraAnimation,
 } from "./Components/cameraAnimations.jsx";
 
+
+
+
 const degreesToRadians = (deg) => (deg * Math.PI) / 180;
 
-function CityModel() {
+function CityModel( {onLoad} ) {
   const group = useRef();
   const { scene } = useThree();
 
@@ -76,6 +79,7 @@ function CityModel() {
           }
         });
         group.current.add(obj);
+        onLoad();
       });
     });
 
@@ -129,6 +133,7 @@ export default function App() {
   const [started, setStarted] = useState(false);
   const [openBannerId, setOpenBannerId] = useState(null);
   const [cameraAnimationDone, setcameraAnimationDone] = useState(null);
+  const [cityLoaded, setCityLoaded] = useState(false);
 
   const controlsRef = useRef();
 
@@ -209,7 +214,7 @@ export default function App() {
           startAudio();
           setStarted(true);
         }}
-        visible={!started}
+        visible={!started || !cityLoaded}
       />
 
       <Overlay
@@ -369,7 +374,7 @@ export default function App() {
             azimuth={0.25}
           />
 
-          <CityModel />
+<CityModel onLoad={() => setCityLoaded(true)} />
           <EffectComposer enabled={!isOverlayActive}>
             <HueSaturation hue={0.1} saturation={0.2} />{" "}
             {/* Slightly more vivid colors */}

@@ -11,7 +11,11 @@ html, body {
 
 
 body {
-    cursor: url(/../../Cursors/arrowhead-normal.svg), auto;
+    cursor: url(../../Cursors/arrowhead-normal.svg) 16 16, auto ;
+}
+
+body:hover {
+    cursor: url(../../Cursors/arrowhead-normal.svg) 16 16, auto ;
 }
 
 #logo {
@@ -158,7 +162,7 @@ body {
 
 @font-face {
     font-family: Lena;
-    src: url(/Fonts/Lena/Lena.ttf);
+    src: url(/Celestaris/Fonts/Lena/Lena.ttf);
  }
 
 

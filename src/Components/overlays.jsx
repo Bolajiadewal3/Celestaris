@@ -38,6 +38,20 @@ function StartScreen({ onStart, visible }) {
       >
         By MOBOLAJI ADEWALE
       </button>
+
+      <div
+        id="hintText"
+        style={{
+          bottom: "2%",
+          padding: "20px 40px",
+          fontSize: "15px",
+          borderRadius: "1px",
+
+          fontFamily: "Orbitron, sans-serif",
+        }}
+      >
+        HINT: Find the glowing orbs and press them to learn more about me
+      </div>
     </animated.div>
   );
 }

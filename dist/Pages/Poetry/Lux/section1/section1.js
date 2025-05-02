@@ -1,8 +1,3 @@
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
-import { Reflector } from 'three/examples/jsm/objects/Reflector.js';
-import MarkdownIt from 'markdown-it';
 
 
 const scene = new THREE.Scene();
@@ -74,15 +69,15 @@ const overlayPanel = document.createElement('div');
 
 
     const poemLinks = []
-poemLinks.push('/documents/poetry/lux/section1/I - Rasa.md')
-poemLinks.push('/documents/poetry/lux/section1/II - Nouveau.md')
-poemLinks.push(`/documents/poetry/lux/section1/III - 'Ceive.md`) 
-poemLinks.push('/documents/poetry/lux/section1/IV - Unholy.md')
-poemLinks.push('/documents/poetry/lux/section1/V - Aside I.md')
-poemLinks.push('/documents/poetry/lux/section1/VI - Aside II.md')
-poemLinks.push('/documents/poetry/lux/section1/VII - Essence Relativity.md')
-//poemLinks.push('/documents/poetry/lux/section1/VIII - Coin.md')
-//poemLinks.push('/documents/poetry/lux/section1/IX - Florence.md')
+poemLinks.push('../../../../Documents/Poetry/lux/section1/I - Rasa.md')
+poemLinks.push('../../../../Documents/Poetry/lux/section1/II - Nouveau.md')
+poemLinks.push(`../../../../Documents/Poetry/lux/section1/III - 'Ceive.md`) 
+poemLinks.push('../../../../Documents/Poetry/lux/section1/IV - Unholy.md')
+poemLinks.push('../../../../Documents/Poetry/lux/section1/V - Aside I.md')
+poemLinks.push('../../../../Documents/Poetry/lux/section1/VI - Aside II.md')
+poemLinks.push('../../../../Documents/Poetry/lux/section1/VII - Essence Relativity.md')
+//PoemLinks.push('../../../../Documents/Poetry/lux/section1/VIII - Coin.md')
+//PoemLinks.push('../../../../Documents/Poetry/lux/section1/IX - Florence.md')
 
 
 
@@ -366,8 +361,8 @@ function updateParticles() {
         const link = document.createElement('div');
         link.innerText = `${toRoman(index)}`;
         link.style.pointerEvents = "auto";
-        link.style.marginLeft = `${(100/poemLinks.length)*0.33}%`
-        link.style.marginRight = `${(100/poemLinks.length)*0.33}%`
+        link.style.marginLeft = `${(100/PoemLinks.length)*0.33}%`
+        link.style.marginRight = `${(100/PoemLinks.length)*0.33}%`
         link.style.padding = '1%';              // Smooth transition
 
         
