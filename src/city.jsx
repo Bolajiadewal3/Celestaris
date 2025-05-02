@@ -249,7 +249,7 @@ export default function App() {
         items={overlayContent}
       />
 
-      {started && (
+      {started && cityLoaded && (
         <Canvas
           shadows
           camera={{ position: [0, 70, 500], fov: 50 }}
