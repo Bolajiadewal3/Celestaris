@@ -14,13 +14,13 @@ This portfolio website uses Three.js to showcase various software engineering an
 
 # Project Structure
 
-### Dependencies
+## Dependencies
 
 ![Dependency Graph](output2.png)
 
-### Components
+## Components
 
-## ROOT.JSX
+### ROOT.JSX
 
 This file initializes and renders the `App` component into the DOM element with the id `root`, while logging a confirmation message. It imports necessary React and routing modules.
 
@@ -31,11 +31,11 @@ This file initializes and renders the `App` component into the DOM element with 
 - **`render(<App />)`**: Renders the `App` component into the selected DOM element.
 - **`console.log("HAPPENED !!")`**: Logs a message indicating that the app has been rendered.
 
-## CITY.JSX
+### CITY.JSX
 
 This file renders a 3D city scene using Three.js in a React app, incorporating various interactive features like overlays, camera animations, and UI banners. It loads a city model (OBJ and MTL files), handles audio playback, and provides visual post-processing effects like bloom and depth of field.
 
-### Important Functions/Parameters:
+#### Important Functions/Parameters:
 
 - **`CityModel({ onLoad })`**: Loads and displays a 3D city model using `OBJLoader` and `MTLLoader`, applying materials and scaling the model. It triggers the `onLoad` callback once the model is fully loaded.
 - **`CameraLight`**: A spotlight follows the camera's position to simulate a dynamic light source in the scene. The light’s intensity, distance, and decay are adjustable.
@@ -45,36 +45,36 @@ This file renders a 3D city scene using Three.js in a React app, incorporating v
 - **`startAudio()`**: Starts background audio (city ambiance) when the user first interacts with the scene.
 - **`EffectComposer`**: Applies post-processing effects like `HueSaturation`, `BrightnessContrast`, `Bloom`, `DepthOfField`, and `Vignette` to the scene for enhanced visual aesthetics.
 
-## UTILS.JSX
+### UTILS.JSX
 
 This file contains utility functions for commonly used operations in a Three.js React project, such as converting angles between degrees and radians.
 
-### Important Functions/Parameters:
+#### Important Functions/Parameters:
 
 - **`degreesToRadians(degrees)`**: Converts an angle in degrees to its equivalent in radians. This function is essential for mathematical operations in 3D transformations.
 
-## OVERLAYS.JSX
+### OVERLAYS.JSX
 
 This file contains two components: `StartScreen` and `Overlay`. The `StartScreen` component displays an introductory screen with a fade-in effect, and the `Overlay` component renders a full-screen overlay with animated items, including a close button and an optional list of items.
 
-### Important Functions/Parameters:
+#### Important Functions/Parameters:
 
 - **`StartScreen({ onStart, visible })`**: Displays an initial start screen with a button and hint text. The screen fades in based on the `visible` prop, and the `onStart` callback is triggered when the button is clicked.
 - **`Overlay({ isActive, onClose, items = [] })`**: Renders a full-screen overlay with a list of items that animate into view. The visibility is controlled by the `isActive` prop, and `onClose` is triggered by the close button. Each item in the `items` array can contain a `title`, `website`, `siteLink`, and `abstract`.
 
-## CAMERAANIMATIONS.JSX
+### CAMERAANIMATIONS.JSX
 
 This file defines two camera animation components for controlling the camera's movement and orientation in a 3D scene. They animate the camera's position and rotation smoothly towards target positions while optionally disabling controls during the animation.
 
-### Important Functions/Parameters:
+#### Important Functions/Parameters:
 
-### `InitialCameraAnimation`
+#### `InitialCameraAnimation`
 
 - **Props**:
   - `onComplete`: Callback function triggered when the camera finishes its movement to the target position.
 - **Description**: This component animates the camera's movement to a target position and notifies the parent component once the animation is complete.
 
-### `SmallTextCameraAnimation`
+#### `SmallTextCameraAnimation`
 
 - **Props**:
   - `anchor`: Target position for the camera ([x, y, z]).
@@ -83,13 +83,13 @@ This file defines two camera animation components for controlling the camera's m
   - `controlsRef`: A reference to the OrbitControls instance to disable controls during the animation.
 - **Description**: This component animates the camera to a specific position and orientation while disabling the OrbitControls and notifying the parent component upon completion.
 
-## TEXTS.JSX
+### TEXTS.JSX
 
 This file defines two interactive 3D text banner components: `GlowingTextBanner` and `SmallTextBanner`. Both components provide animated and customizable text elements in a 3D space, with different interactivity features such as hover effects and expandable content.
 
-### Important Functions/Parameters:
+#### Important Functions/Parameters:
 
-### `GlowingTextBanner`
+#### `GlowingTextBanner`
 
 - **Props**:
   - `text`: The text displayed on the banner.
@@ -98,7 +98,7 @@ This file defines two interactive 3D text banner components: `GlowingTextBanner`
   - `onClick`: Callback function triggered on click.
 - **Description**: Displays glowing text with a border that changes color on hover. The text is clickable and triggers the `onClick` function when clicked.
 
-### `SmallTextBanner`
+#### `SmallTextBanner`
 
 - **Props**:
   - `title`: The title text displayed on the banner.
@@ -111,7 +111,7 @@ This file defines two interactive 3D text banner components: `GlowingTextBanner`
   - `onOpen`: Callback function triggered when the banner is opened.
 - **Description**: Displays an expandable 3D banner with title and content text. The banner expands when clicked and triggers animations.
 
-Folder Structure
+# Folder Structure
 
 ```mermaid
 graph LR
