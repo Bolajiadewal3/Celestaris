@@ -1,0 +1,65 @@
+strict digraph "dependency-cruiser output"{
+    rankdir="LR" splines="true" overlap="false" nodesep="0.16" ranksep="0.18" fontname="Helvetica-bold" fontsize="9" style="rounded,bold,filled" fillcolor="#ffffff" compound="true"
+    node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Helvetica" fontsize="9"]
+    edge [arrowhead="normal" arrowsize="0.6" penwidth="2.0" color="#00000033" fontname="Helvetica" fontsize="9"]
+
+    subgraph "cluster_node_modules" {label="node_modules" subgraph "cluster_node_modules/@react-spring" {label="@react-spring" "node_modules/@react-spring/three" [label=<three> tooltip="three" URL="https://www.npmjs.com/package/@react-spring/three" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
+    subgraph "cluster_node_modules" {label="node_modules" subgraph "cluster_node_modules/@react-spring" {label="@react-spring" "node_modules/@react-spring/web" [label=<web> tooltip="web" URL="https://www.npmjs.com/package/@react-spring/web" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
+    subgraph "cluster_node_modules" {label="node_modules" subgraph "cluster_node_modules/@react-three" {label="@react-three" "node_modules/@react-three/drei" [label=<drei> tooltip="drei" URL="https://www.npmjs.com/package/@react-three/drei" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
+    subgraph "cluster_node_modules" {label="node_modules" subgraph "cluster_node_modules/@react-three" {label="@react-three" "node_modules/@react-three/fiber" [label=<fiber> tooltip="fiber" URL="https://www.npmjs.com/package/@react-three/fiber" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
+    subgraph "cluster_node_modules" {label="node_modules" subgraph "cluster_node_modules/@react-three" {label="@react-three" "node_modules/@react-three/postprocessing" [label=<postprocessing> tooltip="postprocessing" URL="https://www.npmjs.com/package/@react-three/postprocessing" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/markdown-it" [label=<markdown-it> tooltip="markdown-it" URL="https://www.npmjs.com/package/markdown-it" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/react" [label=<react> tooltip="react" URL="https://www.npmjs.com/package/react" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/react-dom" [label=<react-dom> tooltip="react-dom" URL="https://www.npmjs.com/package/react-dom" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/react-router-dom" [label=<react-router-dom> tooltip="react-router-dom" URL="https://www.npmjs.com/package/react-router-dom" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/three" [label=<three> tooltip="three" URL="https://www.npmjs.com/package/three" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/three-stdlib" [label=<three-stdlib> tooltip="three-stdlib" URL="https://www.npmjs.com/package/three-stdlib" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_public" {label="public" subgraph "cluster_public/JavaScript" {label="JavaScript" "public/JavaScript/jquery.js" [label=<jquery.js> tooltip="no-orphans" URL="public/JavaScript/jquery.js" fillcolor="#ccffcc" fontcolor="orange" color="orange"] } }
+    subgraph "cluster_public" {label="public" subgraph "cluster_public/JavaScript" {label="JavaScript" "public/JavaScript/shared.js" [label=<shared.js> tooltip="no-orphans" URL="public/JavaScript/shared.js" fillcolor="#ccffcc" fontcolor="orange" color="orange"] } }
+    subgraph "cluster_public" {label="public" subgraph "cluster_public/Pages" {label="Pages" subgraph "cluster_public/Pages/BIA" {label="BIA" subgraph "cluster_public/Pages/BIA/amazon" {label="amazon" "public/Pages/BIA/amazon/amazon.js" [label=<amazon.js> tooltip="no-orphans" URL="public/Pages/BIA/amazon/amazon.js" fillcolor="#ccffcc" fontcolor="orange" color="orange"] } } } }
+    subgraph "cluster_public" {label="public" subgraph "cluster_public/Pages" {label="Pages" subgraph "cluster_public/Pages/BIA" {label="BIA" subgraph "cluster_public/Pages/BIA/nike" {label="nike" "public/Pages/BIA/nike/nike.js" [label=<nike.js> tooltip="no-orphans" URL="public/Pages/BIA/nike/nike.js" fillcolor="#ccffcc" fontcolor="orange" color="orange"] } } } }
+    subgraph "cluster_public" {label="public" subgraph "cluster_public/Pages" {label="Pages" subgraph "cluster_public/Pages/BIA" {label="BIA" subgraph "cluster_public/Pages/BIA/uber" {label="uber" "public/Pages/BIA/uber/uber.js" [label=<uber.js> tooltip="uber.js" URL="public/Pages/BIA/uber/uber.js" ] } } } }
+    "public/Pages/BIA/uber/uber.js" -> "node_modules/three" [penwidth="1.0"]
+    subgraph "cluster_public" {label="public" subgraph "cluster_public/Pages" {label="Pages" subgraph "cluster_public/Pages/Poetry" {label="Poetry" subgraph "cluster_public/Pages/Poetry/Lux" {label="Lux" subgraph "cluster_public/Pages/Poetry/Lux/section0" {label="section0" "public/Pages/Poetry/Lux/section0/section0.js" [label=<section0.js> tooltip="section0.js" URL="public/Pages/Poetry/Lux/section0/section0.js" ] } } } } }
+    "public/Pages/Poetry/Lux/section0/section0.js" -> "node_modules/markdown-it" [xlabel="no-non-package-json" tooltip="no-non-package-json" penwidth="1.0" fontcolor="red" color="red"]
+    "public/Pages/Poetry/Lux/section0/section0.js" -> "node_modules/three" [penwidth="1.0"]
+    subgraph "cluster_public" {label="public" subgraph "cluster_public/Pages" {label="Pages" subgraph "cluster_public/Pages/Poetry" {label="Poetry" subgraph "cluster_public/Pages/Poetry/Lux" {label="Lux" subgraph "cluster_public/Pages/Poetry/Lux/section1" {label="section1" "public/Pages/Poetry/Lux/section1/section1.js" [label=<section1.js> tooltip="section1.js" URL="public/Pages/Poetry/Lux/section1/section1.js" ] } } } } }
+    "public/Pages/Poetry/Lux/section1/section1.js" -> "node_modules/three" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/Components" {label="Components" "src/Components/cameraAnimations.jsx" [label=<cameraAnimations.jsx> tooltip="cameraAnimations.jsx" URL="src/Components/cameraAnimations.jsx" fillcolor="#ffff77"] } }
+    "src/Components/cameraAnimations.jsx" -> "node_modules/@react-three/fiber" [penwidth="1.0"]
+    "src/Components/cameraAnimations.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "src/Components/cameraAnimations.jsx" -> "node_modules/three" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/Components" {label="Components" "src/Components/overlays.jsx" [label=<overlays.jsx> tooltip="overlays.jsx" URL="src/Components/overlays.jsx" fillcolor="#ffff77"] } }
+    "src/Components/overlays.jsx" -> "node_modules/@react-spring/web" [penwidth="1.0"]
+    "src/Components/overlays.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/Components" {label="Components" "src/Components/texts.jsx" [label=<texts.jsx> tooltip="texts.jsx" URL="src/Components/texts.jsx" fillcolor="#ffff77"] } }
+    "src/Components/texts.jsx" -> "node_modules/@react-spring/three" [penwidth="1.0"]
+    "src/Components/texts.jsx" -> "node_modules/@react-spring/web" [penwidth="1.0"]
+    "src/Components/texts.jsx" -> "node_modules/@react-three/drei" [penwidth="1.0"]
+    "src/Components/texts.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/Data" {label="Data" "src/Data/Business Intelligence & Analytics.json" [label=<Business Intelligence & Analytics.json> tooltip="Business Intelligence & Analytics.json" URL="src/Data/Business Intelligence & Analytics.json" fillcolor="#ffee44"] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/Data" {label="Data" "src/Data/Dissertation.json" [label=<Dissertation.json> tooltip="Dissertation.json" URL="src/Data/Dissertation.json" fillcolor="#ffee44"] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/Data" {label="Data" "src/Data/Miscellaneous.json" [label=<Miscellaneous.json> tooltip="Miscellaneous.json" URL="src/Data/Miscellaneous.json" fillcolor="#ffee44"] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/Data" {label="Data" "src/Data/Poetry.json" [label=<Poetry.json> tooltip="Poetry.json" URL="src/Data/Poetry.json" fillcolor="#ffee44"] } }
+    subgraph "cluster_src" {label="src" "src/city.jsx" [label=<city.jsx> tooltip="city.jsx" URL="src/city.jsx" fillcolor="#ffff77"] }
+    "src/city.jsx" -> "src/Components/cameraAnimations.jsx"
+    "src/city.jsx" -> "src/Components/overlays.jsx"
+    "src/city.jsx" -> "src/Components/texts.jsx"
+    "src/city.jsx" -> "src/Data/Business Intelligence & Analytics.json"
+    "src/city.jsx" -> "src/Data/Dissertation.json"
+    "src/city.jsx" -> "src/Data/Miscellaneous.json"
+    "src/city.jsx" -> "src/Data/Poetry.json"
+    "src/city.jsx" -> "src/utils.jsx"
+    "src/city.jsx" -> "node_modules/@react-three/drei" [penwidth="1.0"]
+    "src/city.jsx" -> "node_modules/@react-three/fiber" [penwidth="1.0"]
+    "src/city.jsx" -> "node_modules/@react-three/postprocessing" [penwidth="1.0"]
+    "src/city.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "src/city.jsx" -> "node_modules/three" [penwidth="1.0"]
+    "src/city.jsx" -> "node_modules/three-stdlib" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src/root.jsx" [label=<root.jsx> tooltip="root.jsx" URL="src/root.jsx" fillcolor="#ffff77"] }
+    "src/root.jsx" -> "src/city.jsx"
+    "src/root.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "src/root.jsx" -> "node_modules/react-dom" [penwidth="1.0"]
+    "src/root.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src/utils.jsx" [label=<utils.jsx> tooltip="utils.jsx" URL="src/utils.jsx" fillcolor="#ffff77"] }
+}

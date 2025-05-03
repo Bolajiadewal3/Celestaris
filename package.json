@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "dependency-cruiser": "^16.10.1",
     "vite": "^6.0.4"
   },
   "dependencies": {
