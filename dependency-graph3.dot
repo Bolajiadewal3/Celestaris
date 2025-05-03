@@ -1,5 +1,5 @@
 strict digraph "dependency-cruiser output"{
-    rankdir="LR" splines="true" overlap="false" nodesep=".5" ranksep="0.5" fontname="Arial-bold" fontsize="9" style="rounded,bold,filled" fillcolor="transparent" compound="true"
+    rankdir="LR" splines="true" overlap="false" nodesep=".5" ranksep="0.5" fontname="Arial-bold" fontsize="9" style="rounded,bold,filled" fillcolor="#ffffff" compound="true"
     node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Arial" fontsize="20"]
     edge [arrowhead="" arrowsize="1" penwidth="3.0" color="black" fontname="Arial" fontsize="9" ]
 
@@ -49,10 +49,10 @@ strict digraph "dependency-cruiser output"{
     "src/Components/texts.jsx" -> "node_modules/@react-spring/web" [penwidth="1.0"]
     "src/Components/texts.jsx" -> "node_modules/@react-three/drei" [penwidth="1.0"]
     "src/Components/texts.jsx" -> "node_modules/react" [penwidth="1.0"]
-    subgraph "cluster_src" {label="src" subgraph "cluster_src/Data" {label="Data" "src/Data/Business Intelligence & Analytics.json" [label=<Business Intelligence & Analytics.json> tooltip="Business Intelligence & Analytics.json" URL="src/Data/Business Intelligence & Analytics.json" fillcolor="#f7a49e", fontcolor="white", color="black"] } }
-    subgraph "cluster_src" {label="src" subgraph "cluster_src/Data" {label="Data" "src/Data/Dissertation.json" [label=<Dissertation.json> tooltip="Dissertation.json" URL="src/Data/Dissertation.json" fillcolor="#f7a49e", fontcolor="white", color="black"] } }
-    subgraph "cluster_src" {label="src" subgraph "cluster_src/Data" {label="Data" "src/Data/Miscellaneous.json" [label=<Miscellaneous.json> tooltip="Miscellaneous.json" URL="src/Data/Miscellaneous.json" fillcolor="#f7a49e", fontcolor="white", color="black"] } }
-    subgraph "cluster_src" {label="src" subgraph "cluster_src/Data" {label="Data" "src/Data/Poetry.json" [label=<Poetry.json> tooltip="Poetry.json" URL="src/Data/Poetry.json" fillcolor="#f7a49e", fontcolor="white", color="black"] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/Data" {label="Data" "src/Data/Business Intelligence & Analytics.json" [label=<Business Intelligence & Analytics.json> tooltip="Business Intelligence & Analytics.json" URL="src/Data/Business Intelligence & Analytics.json" fillcolor="#f7a49e" fontcolor="white" color="black"] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/Data" {label="Data" "src/Data/Dissertation.json" [label=<Dissertation.json> tooltip="Dissertation.json" URL="src/Data/Dissertation.json" fillcolor="#f7a49e" fontcolor="white" color="black"] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/Data" {label="Data" "src/Data/Miscellaneous.json" [label=<Miscellaneous.json> tooltip="Miscellaneous.json" URL="src/Data/Miscellaneous.json" fillcolor="#f7a49e" fontcolor="white" color="black"] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/Data" {label="Data" "src/Data/Poetry.json" [label=<Poetry.json> tooltip="Poetry.json" URL="src/Data/Poetry.json" fillcolor="#f7a49e" fontcolor="white" color="black"] } }
     subgraph "cluster_src" {label="src" "src/city.jsx" [label=<city.jsx> tooltip="city.jsx" URL="src/city.jsx" fillcolor="#c266a7" fontcolor="white" color="black"] }
     "src/city.jsx" -> "src/Components/cameraAnimations.jsx"
     "src/city.jsx" -> "src/Components/overlays.jsx"

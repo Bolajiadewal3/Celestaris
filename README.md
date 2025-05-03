@@ -119,7 +119,7 @@ This file defines two interactive 3D text banner components: `GlowingTextBanner`
 Folder Structure
 
 ```mermaid
-graph TD
+graph LR
   node_0__["."]
   node_1_Landing_html["Landing.html"]
   node_2_README_md["README.md"]
