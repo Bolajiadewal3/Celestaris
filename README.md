@@ -467,23 +467,24 @@ classDef fileStyleJson fill:#d6e8c6,stroke:#000,stroke-width:2px,color:#000;
   node_176_34_directories_141_files["34 directories, 141 files"]
 ```
 
-How It Works
-3D City Model
+# How It Works
+
+## 3D City Model
 The website renders a 3D city model using Three.js. The user can interact with the model using the mouse, and each part of the city links to a different project or content section.
 
-UI Panels and Interactions
+## UI Panels and Interactions
 The UI panels slide in from the left and right when triggered by clicking on the 3D text banners.
 
 The background is blurred to focus attention on the overlay content.
 
 The user can close the overlay, returning to the main city view.
 
-Camera Animations
+## Camera Animations
 When the page loads, an initial camera animation positions the viewer in front of the city.
 
 Smaller animations trigger when interacting with specific text banners, smoothly guiding the user through different sections of the website.
 
-Future Improvements
+## Future Improvements
 Implement dynamic loading of 3D models to optimize performance.
 
 Add more interactivity with animated 3D objects or characters.
