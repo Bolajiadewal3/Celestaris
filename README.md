@@ -19,6 +19,10 @@ Responsive layout that adapts to different screen sizes
 
 # Project Structure
 
+### Dependencies
+
+
+
 ### Components
 
 ## ROOT.JSX
@@ -113,6 +117,13 @@ This file defines two interactive 3D text banner components: `GlowingTextBanner`
 - **Description**: Displays an expandable 3D banner with title and content text. The banner expands when clicked and triggers animations.
 
 Folder Structure
+
+
+
+
+
+
+
 
 How It Works
 3D City Model
