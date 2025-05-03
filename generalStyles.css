@@ -1,11 +1,14 @@
 @keyframes typeIn {
-    from { width: 0% }
-    to { width: 100% }
+  from {
+    width: 0%;
   }
+  to {
+    width: 100%;
+  }
+}
 
-
-  html {
-    cursor: url("cursors/arrowhead-normal.svg") 8 8, auto;
+html {
+  cursor: url("cursors/arrowhead-normal.svg") 8 8, auto;
 }
 
 div:hover {
