@@ -1,0 +1,177 @@
+.
+├── Landing.html
+├── README.md
+├── dependency-graph.png
+├── dependency-graph3.dot
+├── folder-structure.mmd
+├── folder-structure.txt
+├── generalStyles.css
+├── index.html
+├── package-lock.json
+├── package.json
+├── public
+│   ├── City
+│   │   ├── city.obj
+│   │   ├── cityAMBIENCE.mp3
+│   │   ├── cityMAT.mtl
+│   │   ├── cityPAL.jpg
+│   │   └── cityTEX.zip
+│   ├── Cursors
+│   │   ├── arrowhead-hover.svg
+│   │   ├── arrowhead-mousedown.svg
+│   │   ├── arrowhead-normal.svg
+│   │   ├── close-normal.svg
+│   │   ├── close-purple.svg
+│   │   ├── lightning-normal.svg
+│   │   ├── lightning-purple.svg
+│   │   ├── move-normal.svg
+│   │   └── move-purple.svg
+│   ├── Documents
+│   │   ├── Amazon's Usability .pdf
+│   │   ├── E-Business Final.pdf
+│   │   ├── Poetry
+│   │   │   └── lux
+│   │   │       ├── section0
+│   │   │       │   ├── I - Musings.md
+│   │   │       │   ├── II - Mirrors.md
+│   │   │       │   ├── III- Ex Nihilo.md
+│   │   │       │   ├── IV - The Black.md
+│   │   │       │   ├── IX - Florence.md
+│   │   │       │   ├── V - Infinitum.md
+│   │   │       │   ├── VI - Polar.md
+│   │   │       │   ├── VII - Fleeting.md
+│   │   │       │   └── VIII - Coin.md
+│   │   │       └── section1
+│   │   │           ├── I - Rasa.md
+│   │   │           ├── II - Nouveau.md
+│   │   │           ├── III - 'Ceive.md
+│   │   │           ├── IV - Unholy.md
+│   │   │           ├── V - Aside I.md
+│   │   │           ├── VI - Aside II.md
+│   │   │           └── VII - Essence Relativity.md
+│   │   └── uber.pdf
+│   ├── Files
+│   │   ├── arrows
+│   │   │   ├── leftArrow.png
+│   │   │   └── rightArrow.png
+│   │   ├── bia
+│   │   │   ├── amazon
+│   │   │   ├── amazon.glb
+│   │   │   ├── nike
+│   │   │   │   ├── 1_dSQNoDS35yKndSXJKcAdKw.webp
+│   │   │   │   ├── 2063.webp
+│   │   │   │   ├── FFLkbsNXEAIexKu.jpg
+│   │   │   │   ├── Nike E-Business V2.docx
+│   │   │   │   ├── Nike_0.png
+│   │   │   │   ├── Nike_1.png
+│   │   │   │   ├── Nike_10.png
+│   │   │   │   ├── Nike_11.png
+│   │   │   │   ├── Nike_12.png
+│   │   │   │   ├── Nike_13.png
+│   │   │   │   ├── Nike_14.pdf
+│   │   │   │   ├── Nike_15.png
+│   │   │   │   ├── Nike_16.png
+│   │   │   │   ├── Nike_17.png
+│   │   │   │   ├── Nike_18.png
+│   │   │   │   ├── Nike_2.png
+│   │   │   │   ├── Nike_3.png
+│   │   │   │   ├── Nike_3_2.png
+│   │   │   │   ├── Nike_4.png
+│   │   │   │   ├── Nike_5.pdf
+│   │   │   │   ├── Nike_6.png
+│   │   │   │   ├── Nike_7.png
+│   │   │   │   ├── Nike_8.png
+│   │   │   │   ├── Nike_9.png
+│   │   │   │   ├── The_brand_analysis_of_Nike_based_on_its_emotional_.pdf
+│   │   │   │   ├── Untitled Diagram.drawio
+│   │   │   │   ├── d5c72cb18497d1ea65f29f0857a8c760.png
+│   │   │   │   ├── e0fa6c7f1acede72686fc96f5b532a4db2-pharrell-williams.1x.rsquare.w1400.webp
+│   │   │   │   ├── lebron-james-dec-6-2022.jpg
+│   │   │   │   └── map.drawio
+│   │   │   ├── nike.glb
+│   │   │   └── uber.glb
+│   │   ├── landing
+│   │   │   ├── briefcase.glb
+│   │   │   ├── cap.glb
+│   │   │   ├── controller.glb
+│   │   │   └── miscellaneous.glb
+│   │   ├── misc
+│   │   │   ├── books.glb
+│   │   │   ├── headphones.glb
+│   │   │   ├── mic.glb
+│   │   │   ├── speaker.glb
+│   │   │   └── vinyl.glb
+│   │   └── uber
+│   │       ├── iphone.glb
+│   │       └── phone.glb
+│   ├── Fonts
+│   │   ├── Lena
+│   │   │   └── Lena.ttf
+│   │   └── Orbitron
+│   │       ├── Orbitron-Black.ttf
+│   │       ├── Orbitron-Bold.ttf
+│   │       ├── Orbitron-ExtraBold.ttf
+│   │       ├── Orbitron-Medium.ttf
+│   │       ├── Orbitron-Regular.ttf
+│   │       └── Orbitron-SemiBold.ttf
+│   ├── Icon.JPG
+│   ├── JavaScript
+│   │   ├── jquery.js
+│   │   └── shared.js
+│   ├── Lena_Regular.json
+│   ├── Pages
+│   │   ├── BIA
+│   │   │   ├── amazon
+│   │   │   │   ├── amazon.css
+│   │   │   │   ├── amazon.html
+│   │   │   │   └── amazon.js
+│   │   │   ├── nike
+│   │   │   │   ├── nike.css
+│   │   │   │   ├── nike.html
+│   │   │   │   └── nike.js
+│   │   │   ├── shared.css
+│   │   │   └── uber
+│   │   │       ├── uber.css
+│   │   │       ├── uber.html
+│   │   │       └── uber.js
+│   │   └── Poetry
+│   │       └── Lux
+│   │           ├── section0
+│   │           │   ├── section0.html
+│   │           │   └── section0.js
+│   │           └── section1
+│   │               ├── section1.html
+│   │               └── section1.js
+│   ├── favicon
+│   │   ├── apple-touch-icon.png
+│   │   ├── favicon-96x96.png
+│   │   ├── favicon.ico
+│   │   ├── favicon.svg
+│   │   ├── site.webmanifest
+│   │   ├── web-app-manifest-192x192.png
+│   │   └── web-app-manifest-512x512.png
+│   ├── fonts.css
+│   ├── generalStyles.css
+│   └── styling.css
+├── root.css
+├── root.html
+├── root.jsx
+├── src
+│   ├── Components
+│   │   ├── cameraAnimations.jsx
+│   │   ├── overlays.jsx
+│   │   └── texts.jsx
+│   ├── Data
+│   │   ├── Business Intelligence & Analytics.json
+│   │   ├── Dissertation.json
+│   │   ├── Game Design & Development.json
+│   │   ├── Miscellaneous.json
+│   │   ├── Poetry.json
+│   │   └── landing.json
+│   ├── city.jsx
+│   ├── root.jsx
+│   └── utils.jsx
+├── tree-to-mermaid.js
+└── vite.config.js
+
+34 directories, 141 files
