@@ -2,10 +2,10 @@
 
 React / Three.js Portfolio Website Documentatiom
 
-#Project Overview
+## Project Overview
 This portfolio website uses Three.js to showcase various software engineering and design projects. The website features interactive 3D elements, including a city model, dynamic overlays, and camera animations, providing a visually engaging user experience.
 
-#Features
+## Features
 - Interactive 3D city with clickable UI panels
 - Smooth camera animations for transitions
 - Overlay panels for project details with a blurred background effect
