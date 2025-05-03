@@ -1,21 +1,16 @@
 # Celestaris
 
-Website Portfolio
+React / Three.js Portfolio Website Documentatiom
 
-Three.js Portfolio Website Documentation
-Project Overview
+#Project Overview
 This portfolio website uses Three.js to showcase various software engineering and design projects. The website features interactive 3D elements, including a city model, dynamic overlays, and camera animations, providing a visually engaging user experience.
 
-Features
-Interactive 3D city with clickable UI panels
-
-Smooth camera animations for transitions
-
-Overlay panels for project details with a blurred background effect
-
-Custom animations for 3D text banners
-
-Responsive layout that adapts to different screen sizes
+#Features
+- Interactive 3D city with clickable UI panels
+- Smooth camera animations for transitions
+- Overlay panels for project details with a blurred background effect
+- Custom animations for 3D text banners
+- Responsive layout that adapts to different screen sizes
 
 # Project Structure
 
