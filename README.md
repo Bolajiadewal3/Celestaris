@@ -21,7 +21,7 @@ Responsive layout that adapts to different screen sizes
 
 ### Dependencies
 
-![Dependency Graph](dependency-graph.png)
+![Dependency Graph](output2.png)
 
 ### Components
 
@@ -120,6 +120,88 @@ Folder Structure
 
 ```mermaid
 graph LR
+classDef folderStyle fill:#f4f4f4,stroke:#000,stroke-width:2px,color:#000;
+classDef fileStyle fill:#b6e0f5,stroke:#000,stroke-width:2px,color:#000;
+classDef folderStylePublic fill:#d9e8e8,stroke:#000,stroke-width:2px,color:#000;
+classDef fileStyleCSS fill:#f9d5d3,stroke:#000,stroke-width:2px,color:#000;
+classDef fileStyleJS fill:#c7e4f2,stroke:#000,stroke-width:2px,color:#000;
+classDef fileStyleFont fill:#f1e3f2,stroke:#000,stroke-width:2px,color:#000;
+classDef fileStyleImage fill:#f2f4b3,stroke:#000,stroke-width:2px,color:#000;
+classDef fileStyleJson fill:#d6e8c6,stroke:#000,stroke-width:2px,color:#000;
+
+
+ class node_11_public folderStylePublic;
+  class node_12_City folderStyle;
+  class node_13_city_obj fileStyle;
+  class node_14_cityAMBIENCE_mp3 fileStyle;
+  class node_15_cityMAT_mtl fileStyle;
+  class node_16_cityPAL_jpg fileStyle;
+  class node_17_cityTEX_zip fileStyle;
+  class node_18_Cursors folderStyle;
+  class node_19_arrowhead_hover_svg fileStyleImage;
+  class node_20_arrowhead_mousedown_svg fileStyleImage;
+  class node_21_arrowhead_normal_svg fileStyleImage;
+  class node_22_close_normal_svg fileStyleImage;
+  class node_23_close_purple_svg fileStyleImage;
+  class node_24_lightning_normal_svg fileStyleImage;
+  class node_25_lightning_purple_svg fileStyleImage;
+  class node_26_move_normal_svg fileStyleImage;
+  class node_27_move_purple_svg fileStyleImage;
+  class node_28_Documents folderStyle;
+  class node_29_Amazon_s_Usability_pdf fileStyle;
+  class node_30_E_Business_Final_pdf fileStyle;
+  class node_31_Poetry folderStyle;
+  class node_32_lux fileStyle;
+  class node_33_uber_pdf fileStyle;
+  class node_34_Files folderStyle;
+  class node_35_arrows folderStyle;
+  class node_36_leftArrow_png fileStyleImage;
+  class node_37_rightArrow_png fileStyleImage;
+  class node_38_bia folderStyle;
+  class node_39_amazon folderStyle;
+  class node_40_amazon_glb fileStyle;
+  class node_41_nike folderStyle;
+  class node_42_nike_glb fileStyle;
+  class node_43_uber_glb fileStyle;
+  class node_44_landing folderStyle;
+  class node_45_briefcase_glb fileStyle;
+  class node_46_cap_glb fileStyle;
+  class node_47_controller_glb fileStyle;
+  class node_48_miscellaneous_glb fileStyle;
+  class node_49_misc folderStyle;
+  class node_50_books_glb fileStyle;
+  class node_51_headphones_glb fileStyle;
+  class node_52_mic_glb fileStyle;
+  class node_53_speaker_glb fileStyle;
+  class node_54_vinyl_glb fileStyle;
+  class node_55_uber folderStyle;
+  class node_56_iphone_glb fileStyle;
+  class node_57_phone_glb fileStyle;
+  class node_58_Fonts folderStyle;
+  class node_59_Lena folderStyle;
+  class node_60_Lena_ttf fileStyleFont;
+  class node_61_Orbitron folderStyle;
+  class node_62_Orbitron_Black_ttf fileStyleFont;
+  class node_63_Orbitron_Bold_ttf fileStyleFont;
+  class node_64_Orbitron_ExtraBold_ttf fileStyleFont;
+  class node_65_Orbitron_Medium_ttf fileStyleFont;
+  class node_66_Orbitron_Regular_ttf fileStyleFont;
+  class node_67_Orbitron_SemiBold_ttf fileStyleFont;
+  class node_68_Icon_JPG fileStyleImage;
+  class node_69_JavaScript folderStyle;
+  class node_70_jquery_js fileStyleJS;
+  class node_71_shared_js fileStyleJS;
+  class node_72_Lena_Regular_json fileStyleJson;
+  class node_73_Pages folderStyle;
+  class node_74_BIA folderStyle;
+  class node_75_amazon folderStyle;
+  class node_76_nike folderStyle;
+  class node_77_shared_css fileStyleCSS;
+  class node_78_uber folderStyle;
+  class node_79_Fonts folderStyle;
+  class node_80_Orbitron folderStyle;
+  class node_81_jquery_js fileStyleJS;
+
   node_0__["."]
   node_1_Landing_html["Landing.html"]
   node_2_README_md["README.md"]

@@ -1,7 +1,7 @@
 strict digraph "dependency-cruiser output"{
-    rankdir="LR" splines="true" overlap="false" nodesep=".5" ranksep="0.5" fontname="Arial-bold" fontsize="9" style="rounded,bold,filled" fillcolor="#ffffff" compound="true"
-    node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Arial" fontsize="20"]
-    edge [arrowhead="" arrowsize="1" penwidth="3.0" color="black" fontname="Arial" fontsize="9" ]
+    rankdir="LR" splines="true" overlap="false" nodesep=".1" ranksep="0.1" fontname="Arial-bold" fontsize="40" style="rounded,bold,filled" fillcolor="#ffffff" compound="true"
+    node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Arial" fontsize="40"]
+    edge [arrowhead="" arrowsize="1" penwidth="3.0" color="black" fontname="Arial" fontsize="25" ]
 
     subgraph "cluster_node_modules" {label="node_modules" subgraph "cluster_node_modules/@react-spring" {label="@react-spring" "node_modules/@react-spring/three" [label=<three> tooltip="three" URL="https://www.npmjs.com/package/@react-spring/three" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
     subgraph "cluster_node_modules" {label="node_modules" subgraph "cluster_node_modules/@react-spring" {label="@react-spring" "node_modules/@react-spring/web" [label=<web> tooltip="web" URL="https://www.npmjs.com/package/@react-spring/web" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
