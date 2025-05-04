@@ -1,25 +1,26 @@
 {
-    "projects": [
-      {
-        "title": "Gothic",
-        "abstract": "Gothic poems inspired by Victorian Romantics and Gothic writers",
-        "siteLink": "Pages/Poetry/Gothic/Gothic.html"
-      },
-      {
-        "title": "Existential",
-        "abstract": "An assortment of existential poems - aimed at the contemplative and inward-thinkers",
-        "siteLink": "Pages/Poetry/Existential/Existential.html"
-      },
-      {
-        "title": "Poetry Anthology: Canto I",
-        "abstract": "Serentiy, Silence and Salutation",
-        "siteLink": "Pages/Poetry/Lux/section0/section0.html"
-      },
-      {
-        "title": "Poetry Anthology: Canto II",
-        "abstract": "Tabula Lux",
-        "siteLink": "Pages/Poetry/Lux/section1/section1.html"
-      }
-    ]
-  }
-  
+  "projects": [
+    {
+      "title": "Gothic",
+      "abstract": "Gothic poems inspired by Victorian Romantics and Gothic writers",
+      "siteLink": "Pages/Poetry/Gothic/Gothic.html"
+    },
+    {
+      "title": "Existential",
+      "abstract": "An assortment of existential poems - aimed at the contemplative and inward-thinkers",
+      "siteLink": "Pages/Poetry/Existential/Existential.html"
+    },
+    {
+      "title": "Poetry Anthology: Canto I",
+      "abstract": "Serentiy, Silence and Salutation",
+      "navigation": "/Celestaris/poetry/section0",
+      "siteLink": "Pages/Poetry/Lux/section0/section0.html"
+    },
+    {
+      "title": "Poetry Anthology: Canto II",
+      "abstract": "Tabula Lux",
+      "navigation": "/Celestaris/poetry/section1",
+      "siteLink": "Pages/Poetry/Lux/section1/section1.html"
+    }
+  ]
+}

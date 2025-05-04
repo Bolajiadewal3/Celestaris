@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useTrail, animated, useSpring } from "@react-spring/web";
 
+import { useNavigate } from "react-router-dom";
+
 function StartScreen({ onStart, visible }) {
   const styles = useSpring({
     opacity: visible ? 1 : 0,
@@ -59,6 +61,7 @@ function StartScreen({ onStart, visible }) {
 
 function Overlay({ isActive, onClose, items = [] }) {
   const [hovered, setHovered] = useState(false);
+  const navigate = useNavigate();
 
   const overlaySpring = useSpring({
     opacity: isActive ? 1 : 0,
@@ -110,37 +113,49 @@ function Overlay({ isActive, onClose, items = [] }) {
         Exit
       </div>
 
-      {trail.map((style, index) => (
-        <animated.div
-          key={index}
-          style={{
-            ...style,
-            width: "80%",
-            height: "auto",
-            background: "#222",
-            color: "#fff",
-            padding: "20px",
-            marginBottom: "15px",
-            marginTop: "15px",
-            borderRadius: "12px",
-            transform: style.transform,
-          }}
-        >
-          <h2 style={{ fontSize: "20px", marginBottom: "10px" }}>
-            {items[index].title}
-          </h2>
-          <a
-            href={
-              items[index].website
-                ? items[index].website // External website
-                : `${import.meta.env.BASE_URL}${items[index].siteLink}` // Internal page
-            }
+      {trail.map((style, index) => {
+        const item = items[index];
+        const isExternal = Boolean(item.website);
+        const isNavigable = Boolean(item.navigation);
+
+        return (
+          <animated.div
+            key={index}
+            style={{
+              ...style,
+              width: "80%",
+              height: "auto",
+              background: "#222",
+              color: "#fff",
+              padding: "20px",
+              marginBottom: "15px",
+              marginTop: "15px",
+              borderRadius: "12px",
+              transform: style.transform,
+            }}
           >
-            Go To
-          </a>
-          <p>{items[index].abstract}</p>
-        </animated.div>
-      ))}
+            <h2 style={{ fontSize: "20px", marginBottom: "10px" }}>
+              {item.title}
+            </h2>
+
+            {!isNavigable ? (
+              <a
+                href={
+                  item.website
+                    ? item.website // External website
+                    : `${import.meta.env.BASE_URL}${item.siteLink}` // Internal page
+                }
+              >
+                Go To
+              </a>
+            ) : (
+              <a onClick={() => navigate(`${item.navigation}`)}>Go To</a>
+            )}
+
+            <p>{item.abstract}</p>
+          </animated.div>
+        );
+      })}
     </animated.div>
   );
 }

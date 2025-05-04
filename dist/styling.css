@@ -1,154 +1,135 @@
 html {
-    cursor: url("Cursors/arrowhead-normal.svg") 16 16, auto;
-    font-family: "Orbitron";
+  cursor: url("Cursors/arrowhead-normal.svg") 16 16, auto;
+  font-family: "Orbitron";
+  font-weight: 700;
 }
-
-
-
 
 #startButton {
-    cursor: url("Cursors/arrowhead-normal.svg") 16 16, auto !important;
+  cursor: url("Cursors/arrowhead-normal.svg") 16 16, auto !important;
 }
 #startButton:hover {
-    cursor: url("Cursors/arrowhead-hover.svg") 16 16, auto !important;
+  cursor: url("Cursors/arrowhead-hover.svg") 16 16, auto !important;
 }
 #startButton:active {
-    cursor: url("Cursors/arrowhead-mousedown.svg") 16 16, auto !important;
+  cursor: url("Cursors/arrowhead-mousedown.svg") 16 16, auto !important;
 }
-
 
 a:hover {
-    cursor: url("Cursors/lightning-normal.svg") 16 16, auto !important;
+  cursor: url("Cursors/lightning-normal.svg") 16 16, auto !important;
 }
 a:active {
-    cursor: url("Cursors/lightning-purple.svg") 16 16, auto !important;
+  cursor: url("Cursors/lightning-purple.svg") 16 16, auto !important;
 }
-
 
 button:hover {
-    cursor: url("Cursors/arrowhead-hover.svg") 16 16, auto !important;
+  cursor: url("Cursors/arrowhead-hover.svg") 16 16, auto !important;
 }
 button:active {
-    cursor: url("Cursors/arrowhead-mousedown.svg") 16 16, auto !important;
+  cursor: url("Cursors/arrowhead-mousedown.svg") 16 16, auto !important;
 }
 
-
-
-
-
-.smallTextButton, .normalExitButton {
-    cursor: url("Cursors/close-normal.svg") 16 16, auto !important;
+.poemLinks:hover {
+  cursor: url("Cursors/arrowhead-hover.svg") 16 16, auto !important;
 }
-.smallTextButton:hover, .normalExitButton:hover {
-    cursor: url("Cursors/close-normal.svg") 16 16, auto !important;
-}
-.smallTextButton:active, .normalExitButton:active {
-    cursor: url("Cursors/close-purple.svg") 16 16, auto !important;
+.poemLinks:active {
+  cursor: url("Cursors/arrowhead-mousedown.svg") 16 16, auto !important;
 }
 
-
-
-
+.smallTextButton,
+.normalExitButton {
+  cursor: url("Cursors/close-normal.svg") 16 16, auto !important;
+}
+.smallTextButton:hover,
+.normalExitButton:hover {
+  cursor: url("Cursors/close-normal.svg") 16 16, auto !important;
+}
+.smallTextButton:active,
+.normalExitButton:active {
+  cursor: url("Cursors/close-purple.svg") 16 16, auto !important;
+}
 
 canvas {
-    cursor: url("Cursors/move-normal.svg") 16 16, auto !important;
+  cursor: url("Cursors/move-normal.svg") 16 16, auto !important;
 }
 canvas:active {
-    cursor: url("Cursors/move-purple.svg") 16 16, auto !important;
+  cursor: url("Cursors/move-purple.svg") 16 16, auto !important;
 }
 
-
-
-
 div {
-    font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
 }
 
 h3 {
-    font-size: 1em  !important;
-    align-items: 'center';
-
+  font-size: 1em !important;
+  align-items: "center";
 }
 
-
 div > h2 {
-    font-size: 3em  !important;
-    align-items: 'center';
-
+  font-size: 3em !important;
+  align-items: "center";
 }
 
 div > p {
-    font-size: 1.5em  !important;
+  font-size: 1.5em !important;
 }
- a {
-    position: absolute !important;
-    top: 10px !important;
-    right: 10px !important;
-    border: 0.1vw solid black !important; 
-    background-color : transparent !important; 
-    padding : 3% 5% !important;
-    transition : all 0.3s ease !important; 
-    cursor : pointer;
-    box-shadow : 0px 4px 6px rgba(0, 0, 0, 0.4) !important;
-    border-radius: 12px;
-    font: inherit;
-    color: white;
-
+a {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  border: 0.1vw solid black !important;
+  background-color: transparent !important;
+  padding: 3% 5% !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4) !important;
+  border-radius: 12px;
+  font: inherit;
+  color: white;
 }
 
 a:hover {
-    background-color : white !important; 
-    color: black;
-
-
+  background-color: white !important;
+  color: black;
 }
 
 #startButton {
-
-    color: black !important;
-    cursor: pointer !important;
-    background: white !important;
-    border-color: black !important;
-    border-style: dashed !important;
-    transition : all 0.3s ease !important; 
-
+  color: black !important;
+  cursor: pointer !important;
+  background: white !important;
+  border-color: black !important;
+  border-style: dashed !important;
+  transition: all 0.3s ease !important;
 }
 
 #startButton:hover {
-
-    color: white !important;
-    background: black !important;
-    border-color: white !important;
-    border-style:solid !important;
-
-
-
+  color: white !important;
+  background: black !important;
+  border-color: white !important;
+  border-style: solid !important;
 }
 
 .smallTextBanner {
-    opacity: 0.5;
-
+  opacity: 0.5;
 }
 
 .smallTextButton {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 3em;
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    color: black !important;
-    background: white !important;
-    border-color: black !important;
-    border-style: dashed !important;
-    transition : all 0.3s ease !important; 
-    z-index: 30;
+  font-family: "Orbitron", sans-serif;
+  font-size: 3em;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  color: black !important;
+  background: white !important;
+  border-color: black !important;
+  border-style: dashed !important;
+  transition: all 0.3s ease !important;
+  z-index: 30;
 }
 
 .smallTextButton:hover {
-
-    color: white !important;
-    background: black !important;
-    border-color: white !important;
-    border-style:solid !important;
-    z-index: 30;
+  color: white !important;
+  background: black !important;
+  border-color: white !important;
+  border-style: solid !important;
+  z-index: 30;
 }
