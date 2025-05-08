@@ -23,17 +23,20 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+  color: #fff;
 }
 
 .tab-button.active,
 .tab-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.4);
+  color: #000;
 }
 
 .poem-display {
   width: 80%;
   max-width: 800px;
   border: 1px solid #fff;
+  border-radius: 5%;
   padding: 2rem;
   background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(5px);
