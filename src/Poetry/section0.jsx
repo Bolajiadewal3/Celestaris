@@ -107,6 +107,8 @@ const Section0 = () => {
     overlay.style.display = "flex";
     overlay.style.flexDirection = "column";
     overlay.style.flexWrap = "nowrap";
+    overlay.style.left = "50%";
+    overlay.style.transform = "translateX(-50%)";
 
     overlayRef.current = overlay;
     // cssRenderer.domElement.appendChild(overlay);

@@ -8,18 +8,19 @@
     {
       "title": "Existential",
       "abstract": "An assortment of existential poems - aimed at the contemplative and inward-thinkers",
+      "navigation": "/Celestaris/Poetry/existentialPoetry",
       "siteLink": "Pages/Poetry/Existential/Existential.html"
     },
     {
       "title": "Poetry Anthology: Canto I",
       "abstract": "Serentiy, Silence and Salutation",
-      "navigation": "/Celestaris/poetry/section0",
+      "navigation": "/Celestaris/Poetry/section0",
       "siteLink": "Pages/Poetry/Lux/section0/section0.html"
     },
     {
       "title": "Poetry Anthology: Canto II",
       "abstract": "Tabula Lux",
-      "navigation": "/Celestaris/poetry/section1",
+      "navigation": "/Celestaris/Poetry/section1",
       "siteLink": "Pages/Poetry/Lux/section1/section1.html"
     }
   ]
