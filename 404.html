@@ -1,18 +1,18 @@
-<!-- 404.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Redirecting...</title>
     <script>
-      // Redirect to index.html and pass the original path
       const path = window.location.pathname;
       const search = window.location.search;
       const hash = window.location.hash;
-      window.location.replace("/?" + "redirect=" + path + search + hash);
+      window.location.replace(
+        "/Celestaris/?redirect=" + encodeURIComponent(path + search + hash)
+      );
     </script>
   </head>
   <body>
-    GOING TO REDIRECT
+    Redirecting...
   </body>
 </html>
