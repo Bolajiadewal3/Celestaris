@@ -4,29 +4,15 @@
     <meta charset="UTF-8" />
     <title>Redirecting...</title>
     <script>
-      const basePath = "/Celestaris/"; // Adjust to your base URL
-      const path = window.location.pathname;
-      const search = window.location.search;
-      const hash = window.location.hash;
+      const basePath = "/Celestaris/"; // Adjust as necessary
+      const path =
+        window.location.pathname +
+        window.location.search +
+        window.location.hash;
 
-      // Construct the redirect URL
-      //const redirectUrl =
-      // basePath + "?redirect=" + encodeURIComponent(path + search + hash);
+      console.log("Redirecting from:", path);
 
-      const redirectUrl = encodeURIComponent(path + search + hash);
-
-      console.log(
-        "HERE IS THE PATH SEARCH AND HASH",
-        path,
-        " & ",
-        search,
-        " & ",
-        hash
-      );
-
-      setTimeout(() => {
-        window.location.replace(redirectUrl);
-      }, 10000);
+      window.location.replace(`${basePath}?path=${encodeURIComponent(path)}`);
     </script>
   </head>
   <body>
