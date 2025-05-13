@@ -10,8 +10,11 @@
       const hash = window.location.hash;
 
       // Construct the redirect URL
-      const redirectUrl =
-        basePath + "?redirect=" + encodeURIComponent(path + search + hash);
+      //const redirectUrl =
+      // basePath + "?redirect=" + encodeURIComponent(path + search + hash);
+
+      const redirectUrl = encodeURIComponent(path + search + hash);
+
       console.log(
         "HERE IS THE PATH SEARCH AND HASH",
         path,
