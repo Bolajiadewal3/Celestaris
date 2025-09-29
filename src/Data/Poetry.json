@@ -3,12 +3,14 @@
     {
       "title": "Gothic",
       "abstract": "Gothic poems inspired by Victorian Romantics and Gothic writers",
+      "website": "https://aremuart.wordpress.com/poetry/gothics/",
       "siteLink": "Pages/Poetry/Gothic/Gothic.html"
     },
     {
       "title": "Existential",
       "abstract": "An assortment of existential poems - aimed at the contemplative and inward-thinkers",
       "navigation": "/Celestaris/Poetry/existentialPoetry",
+      "website": "https://aremuart.wordpress.com/poetry/existentialists/",
       "siteLink": "Pages/Poetry/Existential/Existential.html"
     },
     {

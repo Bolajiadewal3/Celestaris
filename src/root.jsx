@@ -15,16 +15,23 @@ const RedirectHandler = () => {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    const redirectPath = searchParams.get("redirect");
+    const redirectPath = searchParams.get("path");
 
-    // Ensure the redirectPath starts with "/Celestaris/"
-    const isValidPath = redirectPath && redirectPath.startsWith("/Celestaris/");
+    console.log("Raw Path:", redirectPath);
+    console.log("Current Path:", location.pathname);
 
-    if (isValidPath) {
-      console.log("Redirecting to: " + redirectPath);
-      navigate(redirectPath, { replace: true });
-    } else if (redirectPath) {
-      console.warn(`Invalid redirect path: ${redirectPath}`);
+    if (redirectPath) {
+      try {
+        const decodedPath = decodeURIComponent(redirectPath);
+        console.log("Decoded Path:", decodedPath);
+
+        if (decodedPath !== location.pathname) {
+          console.log("Navigating to:", decodedPath);
+          navigate(decodedPath, { replace: true });
+        }
+      } catch (error) {
+        console.error("Error decoding path:", error);
+      }
     }
   }, [location, navigate]);
 

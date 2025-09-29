@@ -149,7 +149,18 @@ function Overlay({ isActive, onClose, items = [] }) {
                 Go To
               </a>
             ) : (
-              <a onClick={() => navigate(`${item.navigation}`)}>Go To</a>
+              <a
+                onClick={
+                  item.private
+                    ? (ev) => {
+                        ev.preventDefault();
+                        this.props.onClick(ev);
+                      }
+                    : () => navigate(`${item.navigation}`)
+                }
+              >
+                Go To
+              </a>
             )}
 
             <p>{item.abstract}</p>
