@@ -20,10 +20,15 @@ export default function Portfolio() {
           <planeGeometry args={[1.2, 0.9]} />
           <meshStandardMaterial color="black" />
 
-          <Html transform occlude>
+          <Html
+            transform
+            occlude
+            position={[0, 0, 0.01]} // slightly in front of plane
+            center
+          >
             <iframe
               src="https://aremuart.wordpress.com/"
-              style={{ width: "1024px", height: "768px", border: "none" }}
+              style={{ width: "100%", height: "100%", border: "none" }}
             />
           </Html>
         </mesh>
