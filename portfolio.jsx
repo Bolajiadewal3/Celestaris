@@ -28,7 +28,7 @@ export default function Portfolio() {
             style={{
               width: "1024px",
               height: "768px",
-              transform: "scale(0.0012)", // tweak this until it fits your plane
+              transform: "scale(0.1)", // tweak this until it fits your plane
               transformOrigin: "top left",
             }}
           >
