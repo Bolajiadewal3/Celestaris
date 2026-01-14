@@ -1,6 +1,6 @@
 import React from "react";
 import { Canvas } from "@react-three/fiber";
-import { Html } from "@react-three/drei";
+import { Html, OrbitControls } from "@react-three/drei";
 
 /**
  * Main application component rendering a Three.js city scene,
@@ -12,7 +12,7 @@ import { Html } from "@react-three/drei";
 export default function Portfolio() {
   return (
     <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-      <Canvas>
+      <Canvas camera={{ position: [0, 1, 3], fov: 50 }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
 
@@ -25,6 +25,7 @@ export default function Portfolio() {
             occlude
             position={[0, 0, 0.01]} // slightly in front of plane
             center
+            style={{ width: "100%", height: "100%" }}
           >
             <iframe
               src="https://aremuart.wordpress.com/"
@@ -34,6 +35,16 @@ export default function Portfolio() {
             />
           </Html>
         </mesh>
+
+        {/* Add OrbitControls */}
+        <OrbitControls
+          enablePan={true}
+          enableZoom={true}
+          enableRotate={true}
+          rotateSpeed={0.5}
+          zoomSpeed={0.5}
+          panSpeed={0.5}
+        />
       </Canvas>
     </div>
   );
