@@ -29,6 +29,8 @@ export default function Portfolio() {
             <iframe
               src="https://aremuart.wordpress.com/"
               style={{ width: "100%", height: "100%", border: "none" }}
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+              scrolling="yes"
             />
           </Html>
         </mesh>
