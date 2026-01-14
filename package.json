@@ -17,7 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "dependency-cruiser": "^16.10.1",
-    "vite": "^6.0.4"
+    "vite": "^7.3.1"
   },
   "dependencies": {
     "@react-spring/three": "^10.0.0-beta.0",
