@@ -25,8 +25,8 @@ function Computer() {
           transform
           wrapperClass="htmlScreen"
           //center
-          distanceFactor={1.5}
-          position={[0, 4, 0.005]}
+          distanceFactor={2}
+          position={[0, 4, 0.001]}
           rotation-x={-0.25}
           //occlude
         >
@@ -150,7 +150,7 @@ function ComputerModel({ onLoad }) {
 export default function Portfolio() {
   return (
     <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-      <Canvas camera={{ position: [0, 1, 5], fov: 50 }}>
+      <Canvas camera={{ position: [0, 3, 8], fov: 50 }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
 
