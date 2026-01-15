@@ -12,10 +12,10 @@ function CameraRig() {
   const [vec] = useState(() => new THREE.Vector3());
 
   // Define where you want the camera to land
-  const targetPosition = [-17, 6, 31];
+  const targetPosition = [0, 0, 5];
 
   useFrame((state) => {
-    state.camera.position.lerp(vec.set(...targetPosition), 0.05);
+    state.camera.position.lerp(vec.set(...targetPosition), 0.01);
 
     // 2. Make sure the camera continues to look at the center/monitor
     state.camera.lookAt(0, 0, 0);
