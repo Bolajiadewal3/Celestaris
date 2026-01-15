@@ -52,6 +52,7 @@ function Computer() {
   }
   
 
+
 /**
  * ComputerModel loads a textured 3D computer model (OBJ + MTL) and adds it to the scene.
  * It also calls `onLoad` once the model is fully loaded.
@@ -149,7 +150,6 @@ function ComputerModel({ onLoad }) {
 
   return (
     <group ref={group} position={[0, -0.8, 0]} rotation={[0, Math.PI, 0]}>
-      {/* model is injected here */}
     </group>
   );
 }
