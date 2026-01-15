@@ -1,11 +1,11 @@
 import React from "react";
-import { Canvas, useThree, useState, useFrame } from "@react-three/fiber";
+import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 import { OBJLoader, MTLLoader } from "three-stdlib";
 import * as THREE from "three";
 import { useEffect, useRef, useLayoutEffect } from "react";
 import { useGLTF } from "@react-three/drei";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 function CameraRig() {
   const { camera } = useThree();
