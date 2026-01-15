@@ -96,17 +96,6 @@ function Computer() {
 
   return (
     <group>
-      <style>{`
-        @keyframes scanline-scroll {
-          from { background-position: 0 0; }
-          to { background-position: 0 40px; }
-        }
-        @keyframes crt-flicker {
-          0% { opacity: 0.01; }
-          50% { opacity: 0.04; }
-          100% { opacity: 0.01; }
-        }
-      `}</style>
       <primitive object={scene} />
 
       {/* 2. Anchor to the Screen's transformation */}
@@ -128,6 +117,17 @@ function Computer() {
           distanceFactor={0.7}
           center
         >
+          <style>{`
+        @keyframes scanline-scroll {
+          from { background-position: 0 0; }
+          to { background-position: 0 40px; }
+        }
+        @keyframes crt-flicker {
+          0% { opacity: 0.01; }
+          50% { opacity: 0.04; }
+          100% { opacity: 0.01; }
+        }
+      `}</style>
           <div
             style={{
               position: "relative",
