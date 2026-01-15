@@ -106,91 +106,63 @@ function Computer() {
       >
         <Html
           transform
-          // 3. Apply the calculated offset to move from hinge to center
-          position={[
-            centerOffset[0] + 0.08, //Z
-            centerOffset[1] + 0.0, //Y
-            centerOffset[2] - 0.05, //x
-          ]}
           rotation-order="YXZ"
-          // Fix the rotation (Macbooks usually need -90 deg on X to face forward)
+          position={[
+            centerOffset[0] + 0.08,
+            centerOffset[1],
+            centerOffset[2] - 0.05,
+          ]}
           rotation-y={Math.PI / 2}
           rotation-x={-0.15}
           distanceFactor={0.7}
           center
-          //occlude
         >
+          {/* MASTER CONTAINER */}
           <div
             style={{
               position: "relative",
               width: "950px",
               height: "850px",
+              background: "black",
               overflow: "hidden",
             }}
           >
-            {/* 1. The actual Iframe */}
+            {/* 1. IFRAME AT THE BOTTOM */}
             <iframe
               src="https://aremuart.wordpress.com/"
               style={{
                 width: "100%",
                 height: "100%",
                 border: "none",
-                background: "black",
-                filter: "brightness(0.8) contrast(1.2) saturate(1.2)", // Makes colors 'pop' like a CRT
+                filter: "brightness(0.8) contrast(1.2)",
               }}
             />
 
-            {/* 2. The Scanline Overlay */}
+            {/* 2. SCANLINES - Using repeating gradient for better visibility */}
             <div
               style={{
                 position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
+                inset: 0,
                 pointerEvents: "none",
-                // Hard stops (0.5 to 0.5) ensure the line is a crisp "cut"
-                backgroundImage: `linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.8) 50%)`,
-                // Increase size to 8px or 10px so they survive the 3D downscaling
-                backgroundSize: "100% 8px",
-                zIndex: 10,
-                // This helps the browser keep the lines crisp when scaled
-                imageRendering: "pixelated",
+                zIndex: 100, // Very high to stay above iframe
+                backgroundImage:
+                  "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 2px, transparent 2px, transparent 4px)",
+                backgroundSize: "100% 4px",
               }}
             />
 
-            {/* 3. The Flicker/Static effect (Optional) */}
+            {/* 3. VIGNETTE & TINT - The 'Glass' layer */}
             <div
-              className="crt-flicker"
               style={{
                 position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
+                inset: 0,
                 pointerEvents: "none",
-                background: "rgba(18, 16, 16, 0.03)",
-                opacity: 0.1,
-                zIndex: 11,
+                zIndex: 101,
+                boxShadow: "inset 0 0 150px rgba(0,0,0,0.8)", // Heavier shadow
+                background: "rgba(0, 255, 50, 0.03)", // Slight green phosphor tint
               }}
             />
           </div>
-
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              pointerEvents: "none",
-              // This creates the "tube" depth look
-              boxShadow: "inset 0 0 100px rgba(0,0,0,0.7)",
-              // Optional: a slight green phosphor tint
-              background: "rgba(0, 255, 0, 0.02)",
-              zIndex: 12,
-            }}
-          />
         </Html>
       </group>
     </group>
