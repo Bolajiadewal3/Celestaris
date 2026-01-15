@@ -96,6 +96,17 @@ function Computer() {
 
   return (
     <group>
+      <style>{`
+        @keyframes scanline-scroll {
+          from { background-position: 0 0; }
+          to { background-position: 0 40px; }
+        }
+        @keyframes crt-flicker {
+          0% { opacity: 0.01; }
+          50% { opacity: 0.04; }
+          100% { opacity: 0.01; }
+        }
+      `}</style>
       <primitive object={scene} />
 
       {/* 2. Anchor to the Screen's transformation */}
@@ -153,7 +164,7 @@ function Computer() {
                 backgroundImage:
                   "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0px, rgba(0, 0, 0, 0.3) 4px, transparent 4px, transparent 8px)",
                 backgroundSize: "100% 8px",
-                animation: "scanline-scroll 10s linear infinite",
+                animation: "scanline-scroll 4s linear infinite",
                 opacity: 0.4,
               }}
             />
