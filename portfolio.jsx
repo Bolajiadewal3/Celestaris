@@ -14,7 +14,7 @@ function Computer() {
       <primitive object={scene} />
 
       {/* Attach iframe to named screen */}
-      <mesh geometry={nodes.Screen.geometry}>
+      <primitive object={nodes.Screen}>
         <meshStandardMaterial color="red" />
         <Html
           transform
@@ -28,7 +28,7 @@ function Computer() {
             style={{ width: "1024px", height: "768px", border: "none" }}
           />
         </Html>
-      </mesh>
+      </primitive>
     </group>
   );
 }
