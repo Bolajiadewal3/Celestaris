@@ -12,7 +12,7 @@ function CameraRig() {
   const [active, setActive] = useState(true);
 
   // 1. Create the target as a Vector3 object so distanceTo works correctly
-  const target = useMemo(() => new THREE.Vector3(0, 0.5, 2.5), []);
+  const target = useMemo(() => new THREE.Vector3(0, 0.75, 2.5), []);
   const tempVec = useMemo(() => new THREE.Vector3(), []);
 
   useFrame((state) => {
@@ -120,23 +120,58 @@ function Computer() {
           center
           //occlude
         >
-          <iframe
-            src="https://aremuart.wordpress.com/"
-            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          <div
             style={{
+              position: "relative",
               width: "950px",
               height: "850px",
-              border: "none",
-              background: "black",
-              // Remove rotateX from here if you are already tilting the <Html> tag
-              // Use scale to ensure the edges are hidden behind the monitor's bezel
-              transform: "scale(1.05)",
-              // This creates the 'bulging' rounded corner look of 80s/90s monitors
-              borderRadius: "1% / 1%",
-              // Optional: add a slight inner shadow to simulate depth behind the glass
-              boxShadow: "inset 0 0 100px rgba(0,0,0,0.5)",
+              overflow: "hidden",
             }}
-          />
+          >
+            {/* 1. The actual Iframe */}
+            <iframe
+              src="https://aremuart.wordpress.com/"
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "none",
+                background: "black",
+                filter: "brightness(0.8) contrast(1.2) saturate(1.2)", // Makes colors 'pop' like a CRT
+              }}
+            />
+
+            {/* 2. The Scanline Overlay */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                pointerEvents: "none", // Critical: allows clicking through to the iframe
+                background:
+                  "linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06))",
+                backgroundSize: "100% 4px, 3px 100%", // Creates the tiny grid pattern
+                zIndex: 10,
+              }}
+            />
+
+            {/* 3. The Flicker/Static effect (Optional) */}
+            <div
+              className="crt-flicker"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                pointerEvents: "none",
+                background: "rgba(18, 16, 16, 0.03)",
+                opacity: 0.1,
+                zIndex: 11,
+              }}
+            />
+          </div>
         </Html>
       </group>
     </group>
