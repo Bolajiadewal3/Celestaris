@@ -260,6 +260,34 @@ export default function Portfolio() {
         <Computer />
         <CameraLogger />
 
+        <group>
+          {/* 1. The Absolute Center (Red) */}
+          <mesh position={[0, 0, 0]}>
+            <sphereGeometry args={[0.1, 16, 16]} />
+            <meshBasicMaterial color="red" />
+          </mesh>
+
+          {/* 2. Monitor Area Indicators (Blue) 
+          Adjust these based on where your Monitor.glb actually sits */}
+          <mesh position={[1, 0, 0]}>
+            <sphereGeometry args={[0.05, 16, 16]} />
+            <meshBasicMaterial color="blue" />
+          </mesh>
+          <mesh position={[-1, 0, 0]}>
+            <sphereGeometry args={[0.05, 16, 16]} />
+            <meshBasicMaterial color="blue" />
+          </mesh>
+
+          {/* 3. Height Indicator (Green) */}
+          <mesh position={[0, 1, 0]}>
+            <sphereGeometry args={[0.05, 16, 16]} />
+            <meshBasicMaterial color="green" />
+          </mesh>
+
+          {/* Optional: Simple Grid to see the floor plane */}
+          <gridHelper args={[10, 10]} />
+        </group>
+
         {/*
         <ComputerModel />
 
