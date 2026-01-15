@@ -13,14 +13,23 @@ function Computer() {
     <group>
       <primitive object={scene} />
 
-      {/* Attach iframe to named screen */}
-      <primitive object={nodes.Screen}>
-        <meshStandardMaterial color="red" />
+      {/* Wrap screen mesh in a group */}
+      <group
+        position={nodes.Screen.position}
+        rotation={nodes.Screen.rotation}
+        scale={nodes.Screen.scale}
+      >
+        {/* The visible screen plane */}
+        <mesh geometry={nodes.Screen.geometry}>
+          <meshStandardMaterial color="red" />
+        </mesh>
+
+        {/* Html iframe on top */}
         <Html
           transform
           center
           distanceFactor={1.2}
-          position={[0, 0, 0.01]}
+          position={[0, 0, 0.01]} // tiny offset in local z
           occlude
         >
           <iframe
@@ -28,7 +37,7 @@ function Computer() {
             style={{ width: "1024px", height: "768px", border: "none" }}
           />
         </Html>
-      </primitive>
+      </group>
     </group>
   );
 }
