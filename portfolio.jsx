@@ -44,9 +44,10 @@ function Computer() {
           position={[centerOffset[0], centerOffset[1], centerOffset[2] + 0.01]}
           // Fix the rotation (Macbooks usually need -90 deg on X to face forward)
           //rotation-x={-Math.PI / 2}
-          rotation-x={-0.25}
-          distanceFactor={2.7}
+          rotation-x={-0.2}
+          distanceFactor={2.5}
           center
+          occlude
         >
           <iframe
             src="https://aremuart.wordpress.com/"
