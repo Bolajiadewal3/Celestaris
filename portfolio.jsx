@@ -16,27 +16,25 @@ export default function Portfolio() {
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
 
-        <mesh position={[0, 0, 0]}>
+        <mesh>
           <planeGeometry args={[1.2, 0.9]} />
-          <meshStandardMaterial color="black" />
+          <meshStandardMaterial color="#111" />
 
           <Html
             transform
-            occlude
             center
+            distanceFactor={1.2}
             position={[0, 0, 0.01]}
-            style={{
-              width: "1024px",
-              height: "768px",
-              transform: "scale(1)", // tweak this until it fits your plane
-              transformOrigin: "top left",
-            }}
+            occlude
           >
             <iframe
               src="https://aremuart.wordpress.com/"
-              style={{ width: "1024px", height: "768px", border: "none" }}
+              style={{
+                width: "1024px",
+                height: "768px",
+                border: "none",
+              }}
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-              scrolling="yes"
             />
           </Html>
         </mesh>
