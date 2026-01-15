@@ -3,7 +3,7 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 import { OBJLoader, MTLLoader } from "three-stdlib";
 import * as THREE from "three";
-import { useEffect, useRef, useLayoutEffect, useState } from "react";
+import { useEffect, useRef, useLayoutEffect, useState, useFrame } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useMemo } from "react";
 
