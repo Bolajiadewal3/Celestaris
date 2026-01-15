@@ -80,7 +80,7 @@ function Computer() {
           ]}
           // Fix the rotation (Macbooks usually need -90 deg on X to face forward)
           rotation-y={Math.PI / 2}
-          rotation-z={-0.25}
+          rotation-x={-0.1}
           distanceFactor={0.8}
           center
           //occlude
@@ -92,6 +92,8 @@ function Computer() {
               height: "768px",
               border: "none",
               background: "black",
+              transform: "perspective(1000px) rotateX(2deg) scale(1.05)",
+              borderRadius: "50px / 100px", // Mimics the rounded glass of old CRTs
             }}
           />
         </Html>
