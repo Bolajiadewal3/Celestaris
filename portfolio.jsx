@@ -5,37 +5,47 @@ import { OBJLoader, MTLLoader } from "three-stdlib";
 import * as THREE from "three";
 import { useEffect, useRef, useLayoutEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useMemo } from "react";
 
 function Computer() {
   const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
-  const screenRef = useRef();
+
+  // 1. Calculate the actual center of the geometry
+  const centerOffset = useMemo(() => {
+    if (!nodes.Screen) return [0, 0, 0];
+
+    // Create a bounding box for the screen geometry
+    const box = new THREE.Box3().setFromObject(nodes.Screen);
+    const center = new THREE.Vector3();
+    box.getCenter(center);
+
+    // We need the center RELATIVE to the mesh's position
+    // This removes the "hinge" offset
+    return [
+      center.x - nodes.Screen.position.x,
+      center.y - nodes.Screen.position.y,
+      center.z - nodes.Screen.position.z,
+    ];
+  }, [nodes]);
 
   return (
     <group>
-      {/* 1. Render the model. 
-            We don't put anything inside <primitive> to avoid the crash. */}
       <primitive object={scene} />
 
-      {/* 2. Place an invisible "Anchor" mesh exactly where the screen is.
-            We use the geometry and transforms from the GLTF node. */}
-      <mesh
-        geometry={nodes.Screen.geometry}
+      {/* 2. Anchor to the Screen's transformation */}
+      <group
         position={nodes.Screen.position}
         rotation={nodes.Screen.rotation}
         scale={nodes.Screen.scale}
       >
-        {/* Transparent so it doesn't block the view, but gives Html a coordinate space */}
-        <meshStandardMaterial transparent opacity={0} />
-
         <Html
           transform
-          // "occlude" can sometimes cause the appendChild error if it
-          // targets the same mesh it's inside. Let's comment it out first.
-          // occlude={[nodes.Screen]}
-
+          // 3. Apply the calculated offset to move from hinge to center
+          position={[centerOffset[0], centerOffset[1], centerOffset[2] + 0.01]}
+          // Fix the rotation (Macbooks usually need -90 deg on X to face forward)
+          rotation-x={-Math.PI / 2}
           distanceFactor={1.2}
-          position={[0, 0, 0.01]} // Relative to the anchor mesh
-          rotation-x={-Math.PI / 2} // Fixes the common GLTF tilt
+          center
         >
           <iframe
             src="https://aremuart.wordpress.com/"
@@ -47,7 +57,7 @@ function Computer() {
             }}
           />
         </Html>
-      </mesh>
+      </group>
     </group>
   );
 }
