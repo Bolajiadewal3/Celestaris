@@ -45,11 +45,11 @@ function Computer() {
           position={[
             centerOffset[0] + 0.0,
             centerOffset[1] + 0.0, //Y
-            centerOffset[2] + 0.01, //Z
+            centerOffset[2] + 0.05, //Z
           ]}
           // Fix the rotation (Macbooks usually need -90 deg on X to face forward)
           rotation-y={Math.PI / 2}
-          rotation-z={-0.1}
+          rotation-x={-1}
           distanceFactor={0.8}
           center
           //occlude
