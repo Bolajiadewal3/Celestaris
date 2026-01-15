@@ -15,8 +15,14 @@ function Computer() {
 
       {/* Attach iframe to named screen */}
       <mesh geometry={nodes.Screen.geometry}>
-        <meshStandardMaterial color="#111" />
-        <Html transform center distanceFactor={1.2}>
+        <meshStandardMaterial color="red" />
+        <Html
+          transform
+          center
+          distanceFactor={1.2}
+          position={[0, 0, 0.01]}
+          occlude
+        >
           <iframe
             src="https://aremuart.wordpress.com/"
             style={{ width: "1024px", height: "768px", border: "none" }}
