@@ -89,15 +89,15 @@ function Computer() {
           <iframe
             src="https://aremuart.wordpress.com/"
             style={{
-              width: "800px",
-              height: "900px",
+              width: "950px",
+              height: "850px",
               border: "none",
               background: "black",
               // Remove rotateX from here if you are already tilting the <Html> tag
               // Use scale to ensure the edges are hidden behind the monitor's bezel
               transform: "scale(1.05)",
               // This creates the 'bulging' rounded corner look of 80s/90s monitors
-              borderRadius: "8% / 8%",
+              borderRadius: "1% / 1%",
               // Optional: add a slight inner shadow to simulate depth behind the glass
               boxShadow: "inset 0 0 100px rgba(0,0,0,0.5)",
             }}
