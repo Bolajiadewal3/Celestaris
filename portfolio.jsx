@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 function Computer() {
-  const { scene, nodes } = useGLTF("./Computer/Macbook3.glb");
+  const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
 
   return (
     <group>
