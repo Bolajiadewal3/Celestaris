@@ -43,7 +43,7 @@ function Computer() {
           transform
           // 3. Apply the calculated offset to move from hinge to center
           position={[
-            centerOffset[0] + 0.1,
+            centerOffset[0] + 0.2,
             centerOffset[1],
             centerOffset[2] + 0.01,
           ]}
@@ -52,7 +52,7 @@ function Computer() {
           rotation-z={-0.2}
           distanceFactor={0.9}
           center
-          occlude
+          //occlude
         >
           <iframe
             src="https://aremuart.wordpress.com/"
