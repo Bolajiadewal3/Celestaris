@@ -43,8 +43,9 @@ function Computer() {
           // 3. Apply the calculated offset to move from hinge to center
           position={[centerOffset[0], centerOffset[1], centerOffset[2] + 0.01]}
           // Fix the rotation (Macbooks usually need -90 deg on X to face forward)
-          rotation-x={-Math.PI / 2}
-          distanceFactor={1.2}
+          //rotation-x={-Math.PI / 2}
+          rotation-x={0.25}
+          distanceFactor={3}
           center
         >
           <iframe
