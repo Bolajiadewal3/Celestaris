@@ -43,13 +43,13 @@ function Computer() {
           transform
           // 3. Apply the calculated offset to move from hinge to center
           position={[
-            centerOffset[0] + 0.15,
-            centerOffset[1] + 0.5,
-            centerOffset[2] + 0.01,
+            centerOffset[0] + 0.0,
+            centerOffset[1] + 0.0, //Y
+            centerOffset[2] + 0.01, //Z
           ]}
           // Fix the rotation (Macbooks usually need -90 deg on X to face forward)
           rotation-y={Math.PI / 2}
-          rotation-x={-0.1}
+          rotation-z={-0.1}
           distanceFactor={0.8}
           center
           //occlude
