@@ -7,40 +7,50 @@ import { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 function Computer() {
-  const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
-
-  return (
-    <group>
-      <primitive object={scene} />
-
-      {/* Wrap screen mesh in a group */}
-      <group
-        position={nodes.Screen.position}
-        rotation={nodes.Screen.rotation}
-        scale={nodes.Screen.scale}
-      >
-        {/* The visible screen plane */}
-        <mesh geometry={nodes.Screen.geometry}>
-          <meshStandardMaterial color="red" />
-        </mesh>
-
-        {/* Html iframe on top */}
-        <Html
-          transform
-          center
-          distanceFactor={1.2}
-          position={[0, 0, 0.01]} // tiny offset in local z
-          occlude
+    const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
+  
+    // Compute bounding box for screen to find its center
+    const screenRef = useRef();
+  
+    useEffect(() => {
+      if (!screenRef.current) return;
+      const box = new THREE.Box3().setFromObject(screenRef.current);
+      const center = new THREE.Vector3();
+      box.getCenter(center);
+      // Recenter mesh so origin is at the center
+      screenRef.current.position.sub(center);
+    }, []);
+  
+    return (
+      <group>
+        <primitive object={scene} />
+  
+        {/* Group for screen + iframe */}
+        <group
+          position={nodes.Screen.position}
+          rotation={nodes.Screen.rotation}
+          scale={nodes.Screen.scale}
         >
-          <iframe
-            src="https://aremuart.wordpress.com/"
-            style={{ width: "1024px", height: "768px", border: "none" }}
-          />
-        </Html>
+          <mesh ref={screenRef} geometry={nodes.Screen.geometry}>
+            <meshStandardMaterial color="red" />
+          </mesh>
+  
+          <Html
+            transform
+            center
+            distanceFactor={1.2}
+            position={[0, 0, 0.01]}
+          >
+            <iframe
+              src="https://aremuart.wordpress.com/"
+              style={{ width: "1024px", height: "768px", border: "none" }}
+            />
+          </Html>
+        </group>
       </group>
-    </group>
-  );
-}
+    );
+  }
+  
 
 /**
  * ComputerModel loads a textured 3D computer model (OBJ + MTL) and adds it to the scene.
@@ -72,6 +82,8 @@ function ComputerModel({ onLoad }) {
     );
   }, []);
 */
+
+/*
 
   useEffect(() => {
     const mtlLoader = new MTLLoader();
@@ -141,6 +153,8 @@ function ComputerModel({ onLoad }) {
     </group>
   );
 }
+
+*/
 
 /**
  * Main application component rendering a Three.js city scene,
