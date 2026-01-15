@@ -13,7 +13,7 @@ function CameraRig() {
   const [vec] = useState(() => new THREE.Vector3());
 
   // Define where you want the camera to land
-  const targetPosition = [0, 5, 5];
+  const targetPosition = [0, 4, 4];
 
   useFrame((state) => {
     if (!active) return;
@@ -22,7 +22,7 @@ function CameraRig() {
     // 2. Make sure the camera continues to look at the center/monitor
     state.camera.lookAt(0, 0, 0);
 
-    if (state.camera.position.distanceTo(targetPosition) < 0.5) {
+    if (state.camera.position.distanceTo(targetPosition) < 1) {
       setActive(false);
       console.log("Animation complete. OrbitControls engaged.");
     }
