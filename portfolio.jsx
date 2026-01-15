@@ -8,31 +8,34 @@ import { useGLTF } from "@react-three/drei";
 
 function Computer() {
   const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
-  const [screenNode, setScreenNode] = useState(null);
-
-  useLayoutEffect(() => {
-    // This finds the actual mesh in the model so we can "parent" the Html to it
-    if (nodes.Screen) {
-      setScreenNode(nodes.Screen);
-    }
-  }, [nodes]);
+  const screenRef = useRef();
 
   return (
     <group>
-      {/* 1. Render the model as usual */}
+      {/* 1. Render the model. 
+            We don't put anything inside <primitive> to avoid the crash. */}
       <primitive object={scene} />
 
-      {/* 2. Render the Html ONLY when the screenNode is found */}
-      {screenNode && (
+      {/* 2. Place an invisible "Anchor" mesh exactly where the screen is.
+            We use the geometry and transforms from the GLTF node. */}
+      <mesh
+        geometry={nodes.Screen.geometry}
+        position={nodes.Screen.position}
+        rotation={nodes.Screen.rotation}
+        scale={nodes.Screen.scale}
+      >
+        {/* Transparent so it doesn't block the view, but gives Html a coordinate space */}
+        <meshStandardMaterial transparent opacity={0} />
+
         <Html
           transform
-          // portal: this tells the Html to move itself inside the Screen mesh
-          portal={{ current: screenNode }}
-          // Now these coordinates are relative to the center of the screen!
-          position={[0, 0, 0.01]}
-          rotation-x={-Math.PI / 2} // Common adjustment for GLTF screen orientation
+          // "occlude" can sometimes cause the appendChild error if it
+          // targets the same mesh it's inside. Let's comment it out first.
+          // occlude={[nodes.Screen]}
+
           distanceFactor={1.2}
-          occlude={[screenNode]} // Hides iframe when lid is closed or behind objects
+          position={[0, 0, 0.01]} // Relative to the anchor mesh
+          rotation-x={-Math.PI / 2} // Fixes the common GLTF tilt
         >
           <iframe
             src="https://aremuart.wordpress.com/"
@@ -44,7 +47,7 @@ function Computer() {
             }}
           />
         </Html>
-      )}
+      </mesh>
     </group>
   );
 }
