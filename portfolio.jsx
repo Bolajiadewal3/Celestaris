@@ -10,19 +10,23 @@ import { useMemo, useState } from "react";
 function CameraRig() {
   const { camera } = useThree();
   const [active, setActive] = useState(true);
-  const [vec] = useState(() => new THREE.Vector3());
 
-  // Define where you want the camera to land
-  const targetPosition = [0, 4, 4];
+  // 1. Create the target as a Vector3 object so distanceTo works correctly
+  const target = useMemo(() => new THREE.Vector3(0, 4, 4), []);
+  const tempVec = useMemo(() => new THREE.Vector3(), []);
 
   useFrame((state) => {
     if (!active) return;
-    state.camera.position.lerp(vec.set(...targetPosition), 0.01);
 
-    // 2. Make sure the camera continues to look at the center/monitor
+    // 2. Smoothly move toward the target
+    // Increased speed slightly to 0.05 for a better feel
+    state.camera.position.lerp(target, 0.05);
+
+    // 3. Keep eyes on the monitor
     state.camera.lookAt(0, 0, 0);
 
-    if (state.camera.position.distanceTo(targetPosition) < 1) {
+    // 4. Correct distance check (Vector3 vs Vector3)
+    if (state.camera.position.distanceTo(target) < 0.1) {
       setActive(false);
       console.log("Animation complete. OrbitControls engaged.");
     }
