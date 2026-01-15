@@ -117,7 +117,6 @@ function Computer() {
           distanceFactor={0.7}
           center
         >
-          {/* MASTER CONTAINER */}
           <div
             style={{
               position: "relative",
@@ -125,41 +124,49 @@ function Computer() {
               height: "850px",
               background: "black",
               overflow: "hidden",
+              borderRadius: "40px",
+              // THE BULGE: A subtle outward glow and scale makes it look convex
+              boxShadow:
+                "0 0 50px rgba(255,255,255,0.1), inset 0 0 40px rgba(255,255,255,0.1)",
+              transform: "scale(1.05)",
             }}
           >
-            {/* 1. IFRAME AT THE BOTTOM */}
+            {/* 1. THE IFRAME */}
             <iframe
               src="https://aremuart.wordpress.com/"
               style={{
                 width: "100%",
                 height: "100%",
                 border: "none",
-                filter: "brightness(0.8) contrast(1.2)",
+                filter: "brightness(1) contrast(1.1)", // Reduced darkening
               }}
             />
 
-            {/* 2. SCANLINES - Using repeating gradient for better visibility */}
+            {/* 2. CHUNKY MOVING SCANLINES */}
             <div
               style={{
                 position: "absolute",
                 inset: 0,
                 pointerEvents: "none",
-                zIndex: 100, // Very high to stay above iframe
+                zIndex: 100,
+                // Larger lines (8px) with a slight movement animation
                 backgroundImage:
-                  "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 2px, transparent 2px, transparent 4px)",
-                backgroundSize: "100% 4px",
+                  "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0px, rgba(0, 0, 0, 0.3) 4px, transparent 4px, transparent 8px)",
+                backgroundSize: "100% 8px",
+                animation: "scanline-scroll 10s linear infinite",
+                opacity: 0.4,
               }}
             />
 
-            {/* 3. VIGNETTE & TINT - The 'Glass' layer */}
+            {/* 3. FLICKER LAYER */}
             <div
               style={{
                 position: "absolute",
                 inset: 0,
                 pointerEvents: "none",
                 zIndex: 101,
-                boxShadow: "inset 0 0 150px rgba(0,0,0,0.8)", // Heavier shadow
-                background: "rgba(0, 255, 50, 0.03)", // Slight green phosphor tint
+                background: "rgba(18, 16, 16, 0.05)",
+                animation: "crt-flicker 0.2s infinite",
               }}
             />
           </div>
