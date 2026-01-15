@@ -49,7 +49,7 @@ function Computer() {
           ]}
           // Fix the rotation (Macbooks usually need -90 deg on X to face forward)
           rotation-y={Math.PI / 2}
-          rotation-x={-1}
+          //rotation-x={-1}
           distanceFactor={0.8}
           center
           //occlude
