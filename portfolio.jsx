@@ -18,10 +18,10 @@ function Computer() {
         <meshStandardMaterial color="red" />
         <Html
           transform
-          center
+          //center
           distanceFactor={1.2}
           position={[0, 0, 0.01]}
-          occlude
+          //occlude
         >
           <iframe
             src="https://aremuart.wordpress.com/"
