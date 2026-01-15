@@ -4,6 +4,28 @@ import { Html, OrbitControls } from "@react-three/drei";
 import { OBJLoader, MTLLoader } from "three-stdlib";
 import * as THREE from "three";
 import { useEffect, useRef } from "react";
+import { useGLTF } from "@react-three/drei";
+
+function Computer() {
+  const { scene, nodes } = useGLTF("./Computer/Macbook.glb");
+
+  return (
+    <group>
+      <primitive object={scene} />
+
+      {/* Attach iframe to named screen */}
+      <mesh geometry={nodes.Screen.geometry}>
+        <meshStandardMaterial color="#111" />
+        <Html transform center distanceFactor={1.2}>
+          <iframe
+            src="https://aremuart.wordpress.com/"
+            style={{ width: "1024px", height: "768px", border: "none" }}
+          />
+        </Html>
+      </mesh>
+    </group>
+  );
+}
 
 /**
  * ComputerModel loads a textured 3D computer model (OBJ + MTL) and adds it to the scene.
@@ -118,8 +140,9 @@ export default function Portfolio() {
       <Canvas camera={{ position: [0, 1, 5], fov: 50 }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
-
         <ComputerModel />
+
+        <Computer />
 
         <mesh>
           <planeGeometry args={[1.2, 0.9]} />
@@ -143,7 +166,6 @@ export default function Portfolio() {
             />
           </Html>
         </mesh>
-
         {/* Add OrbitControls */}
         <OrbitControls
           enablePan={true}
