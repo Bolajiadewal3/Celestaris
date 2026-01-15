@@ -8,7 +8,8 @@ import { useGLTF } from "@react-three/drei";
 import { useMemo } from "react";
 
 function Computer() {
-  const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
+  //const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
+  const { scene, nodes } = useGLTF("./Computer/Monitor.glb");
 
   // 1. Calculate the actual center of the geometry
   const centerOffset = useMemo(() => {
