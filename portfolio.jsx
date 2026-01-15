@@ -12,7 +12,7 @@ function CameraRig() {
   const [active, setActive] = useState(true);
 
   // 1. Create the target as a Vector3 object so distanceTo works correctly
-  const target = useMemo(() => new THREE.Vector3(0, 2, 3), []);
+  const target = useMemo(() => new THREE.Vector3(0, 1, 2.5), []);
   const tempVec = useMemo(() => new THREE.Vector3(), []);
 
   useFrame((state) => {
@@ -20,7 +20,7 @@ function CameraRig() {
 
     // 2. Smoothly move toward the target
     // Increased speed slightly to 0.05 for a better feel
-    state.camera.position.lerp(target, 0.015);
+    state.camera.position.lerp(target, 0.03);
 
     // 3. Keep eyes on the monitor
     state.camera.lookAt(0, 1, -4);
@@ -261,11 +261,12 @@ export default function Portfolio() {
         <CameraLogger />
 
         <group>
-          {/* 1. The Absolute Center (Red) */}
           <mesh position={[0, 0, 0]}>
             <sphereGeometry args={[0.1, 16, 16]} />
             <meshBasicMaterial color="red" />
           </mesh>
+
+          {/*
 
           <mesh position={[0, 0, 1]}>
             <sphereGeometry args={[0.3, 16, 16]} />
@@ -287,8 +288,7 @@ export default function Portfolio() {
             <meshBasicMaterial color="red" />
           </mesh>
 
-          {/* 2. Monitor Area Indicators (Blue) 
-          Adjust these based on where your Monitor.glb actually sits */}
+
           <mesh position={[1, 0, 0]}>
             <sphereGeometry args={[0.05, 16, 16]} />
             <meshBasicMaterial color="blue" />
@@ -298,13 +298,12 @@ export default function Portfolio() {
             <meshBasicMaterial color="blue" />
           </mesh>
 
-          {/* 3. Height Indicator (Green) */}
           <mesh position={[0, 1, 0]}>
             <sphereGeometry args={[0.05, 16, 16]} />
             <meshBasicMaterial color="green" />
-          </mesh>
+          </mesh> 
+          */}
 
-          {/* Optional: Simple Grid to see the floor plane */}
           <gridHelper args={[10, 10]} />
         </group>
 
