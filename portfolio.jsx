@@ -74,14 +74,14 @@ function Computer() {
           transform
           // 3. Apply the calculated offset to move from hinge to center
           position={[
-            centerOffset[0] + 0.05, //Z
+            centerOffset[0] + 0.08, //Z
             centerOffset[1] + 0.0, //Y
             centerOffset[2] - 0.05, //x
           ]}
           rotation-order="YXZ"
           // Fix the rotation (Macbooks usually need -90 deg on X to face forward)
           rotation-y={Math.PI / 2}
-          rotation-x={-0.1}
+          rotation-x={-0.15}
           distanceFactor={0.7}
           center
           //occlude
@@ -89,8 +89,8 @@ function Computer() {
           <iframe
             src="https://aremuart.wordpress.com/"
             style={{
-              width: "1024px",
-              height: "768px",
+              width: "800px",
+              height: "900px",
               border: "none",
               background: "black",
               // Remove rotateX from here if you are already tilting the <Html> tag
