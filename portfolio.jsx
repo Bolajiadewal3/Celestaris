@@ -277,6 +277,16 @@ export default function Portfolio() {
             <meshBasicMaterial color="red" />
           </mesh>
 
+          <mesh position={[0, 0, 10]}>
+            <sphereGeometry args={[0.4, 16, 16]} />
+            <meshBasicMaterial color="red" />
+          </mesh>
+
+          <mesh position={[0, 10, 0]}>
+            <sphereGeometry args={[0.4, 16, 16]} />
+            <meshBasicMaterial color="red" />
+          </mesh>
+
           {/* 2. Monitor Area Indicators (Blue) 
           Adjust these based on where your Monitor.glb actually sits */}
           <mesh position={[1, 0, 0]}>
