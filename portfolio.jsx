@@ -12,7 +12,7 @@ function CameraRig() {
   const [active, setActive] = useState(true);
 
   // 1. Create the target as a Vector3 object so distanceTo works correctly
-  const target = useMemo(() => new THREE.Vector3(0, 2, 2.5), []);
+  const target = useMemo(() => new THREE.Vector3(0, 3, 4), []);
   const tempVec = useMemo(() => new THREE.Vector3(), []);
 
   useFrame((state) => {
@@ -23,7 +23,7 @@ function CameraRig() {
     state.camera.position.lerp(target, 0.015);
 
     // 3. Keep eyes on the monitor
-    state.camera.lookAt(0, 6, 4);
+    state.camera.lookAt(0, 0, 0);
 
     // 4. Correct distance check (Vector3 vs Vector3)
     if (state.camera.position.distanceTo(target) < 0.1) {
