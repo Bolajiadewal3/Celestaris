@@ -140,9 +140,11 @@ export default function Portfolio() {
       <Canvas camera={{ position: [0, 1, 5], fov: 50 }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
-        <ComputerModel />
 
         <Computer />
+
+        {/*
+        <ComputerModel />
 
         <mesh>
           <planeGeometry args={[1.2, 0.9]} />
@@ -166,6 +168,9 @@ export default function Portfolio() {
             />
           </Html>
         </mesh>
+
+
+        */}
         {/* Add OrbitControls */}
         <OrbitControls
           enablePan={true}
