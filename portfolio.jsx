@@ -148,11 +148,14 @@ function Computer() {
                 left: 0,
                 width: "100%",
                 height: "100%",
-                pointerEvents: "none", // Critical: allows clicking through to the iframe
-                background:
-                  "linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06))",
-                backgroundSize: "100% 4px, 3px 100%", // Creates the tiny grid pattern
+                pointerEvents: "none",
+                // Hard stops (0.5 to 0.5) ensure the line is a crisp "cut"
+                backgroundImage: `linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.8) 50%)`,
+                // Increase size to 8px or 10px so they survive the 3D downscaling
+                backgroundSize: "100% 8px",
                 zIndex: 10,
+                // This helps the browser keep the lines crisp when scaled
+                imageRendering: "pixelated",
               }}
             />
 
@@ -172,6 +175,22 @@ function Computer() {
               }}
             />
           </div>
+
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              pointerEvents: "none",
+              // This creates the "tube" depth look
+              boxShadow: "inset 0 0 100px rgba(0,0,0,0.7)",
+              // Optional: a slight green phosphor tint
+              background: "rgba(0, 255, 0, 0.02)",
+              zIndex: 12,
+            }}
+          />
         </Html>
       </group>
     </group>
