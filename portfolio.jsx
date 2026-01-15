@@ -25,8 +25,8 @@ function Computer() {
           transform
           wrapperClass="htmlScreen"
           //center
-          distanceFactor={1.2}
-          position={[0, 4, 0.05]}
+          distanceFactor={1.5}
+          position={[0, 4, 0.005]}
           rotation-x={-0.25}
           //occlude
         >
