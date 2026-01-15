@@ -74,7 +74,7 @@ function Computer() {
           transform
           // 3. Apply the calculated offset to move from hinge to center
           position={[
-            centerOffset[0] + 0.1, //Z
+            centerOffset[0] + 0.05, //Z
             centerOffset[1] + 0.0, //Y
             centerOffset[2] - 0.05, //x
           ]}
@@ -82,7 +82,7 @@ function Computer() {
           // Fix the rotation (Macbooks usually need -90 deg on X to face forward)
           rotation-y={Math.PI / 2}
           rotation-x={-0.1}
-          distanceFactor={0.8}
+          distanceFactor={0.7}
           center
           //occlude
         >
@@ -97,7 +97,7 @@ function Computer() {
               // Use scale to ensure the edges are hidden behind the monitor's bezel
               transform: "scale(1.05)",
               // This creates the 'bulging' rounded corner look of 80s/90s monitors
-              borderRadius: "15% / 8%",
+              borderRadius: "8% / 8%",
               // Optional: add a slight inner shadow to simulate depth behind the glass
               boxShadow: "inset 0 0 100px rgba(0,0,0,0.5)",
             }}
