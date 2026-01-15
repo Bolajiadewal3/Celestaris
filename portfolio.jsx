@@ -268,13 +268,13 @@ export default function Portfolio() {
           </mesh>
 
           <mesh position={[0, 0, 1]}>
-            <sphereGeometry args={[0.05, 16, 16]} />
-            <meshBasicMaterial color="green" />
+            <sphereGeometry args={[0.3, 16, 16]} />
+            <meshBasicMaterial color="red" />
           </mesh>
 
           <mesh position={[0, 0, 3]}>
-            <sphereGeometry args={[0.05, 16, 16]} />
-            <meshBasicMaterial color="yellow" />
+            <sphereGeometry args={[0.3, 16, 16]} />
+            <meshBasicMaterial color="red" />
           </mesh>
 
           {/* 2. Monitor Area Indicators (Blue) 
