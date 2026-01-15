@@ -12,7 +12,7 @@ function CameraRig() {
   const [active, setActive] = useState(true);
 
   // 1. Create the target as a Vector3 object so distanceTo works correctly
-  const target = useMemo(() => new THREE.Vector3(0, 3, 4), []);
+  const target = useMemo(() => new THREE.Vector3(0, 2, 3), []);
   const tempVec = useMemo(() => new THREE.Vector3(), []);
 
   useFrame((state) => {
@@ -337,6 +337,7 @@ export default function Portfolio() {
 
         */}
         {/* Add OrbitControls */}
+        {/*
         <OrbitControls
           makeDefault
           enablePan={true}
@@ -346,6 +347,7 @@ export default function Portfolio() {
           zoomSpeed={0.5}
           panSpeed={0.5}
         />
+        */}
       </Canvas>
     </div>
   );
