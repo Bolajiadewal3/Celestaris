@@ -133,3 +133,20 @@ a:hover {
   border-style: solid !important;
   z-index: 30;
 }
+
+@keyframes crt-flicker-anim {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+.crt-flicker {
+  animation: crt-flicker-anim 0.1s infinite;
+  background: white; /* Give it a tiny bit of white 'noise' */
+}
