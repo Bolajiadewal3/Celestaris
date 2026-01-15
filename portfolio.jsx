@@ -1,9 +1,9 @@
 import React from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 import { OBJLoader, MTLLoader } from "three-stdlib";
 import * as THREE from "three";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 /**
  * ComputerModel loads a textured 3D computer model (OBJ + MTL) and adds it to the scene.
