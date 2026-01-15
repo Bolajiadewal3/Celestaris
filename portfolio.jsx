@@ -14,13 +14,20 @@ function Computer() {
       <primitive object={scene} />
 
       {/* Attach iframe to named screen */}
-      <mesh geometry={nodes.Screen.geometry}>
+      <mesh
+        geometry={nodes.Screen.geometry}
+        position={nodes.Screen.position}
+        rotation={nodes.Screen.rotation}
+        scale={nodes.Screen.scale}
+      >
         <meshStandardMaterial color="red" />
         <Html
           transform
+          wrapperClass="htmlScreen"
           //center
           distanceFactor={1.2}
           position={[0, 0, 0.01]}
+          rotation-x={-0.25}
           //occlude
         >
           <iframe
