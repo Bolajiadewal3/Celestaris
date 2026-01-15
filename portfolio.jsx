@@ -12,7 +12,7 @@ function CameraRig() {
   const [active, setActive] = useState(true);
 
   // 1. Create the target as a Vector3 object so distanceTo works correctly
-  const target = useMemo(() => new THREE.Vector3(0, 2, 3), []);
+  const target = useMemo(() => new THREE.Vector3(0, 2, 2.5), []);
   const tempVec = useMemo(() => new THREE.Vector3(), []);
 
   useFrame((state) => {
