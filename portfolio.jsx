@@ -48,10 +48,22 @@ function ComputerModel({ onLoad }) {
 
       // Load the OBJ model
       objLoader.load("./Computer/obj.obj", (obj) => {
-        obj.scale.set(0.15, 0.15, 0.15); // Scale to fit the scene
-        obj.position.set(70, 0, -65); // Position in the scene
+        // Compute bounding box
+        const box = new THREE.Box3().setFromObject(obj);
+        const size = new THREE.Vector3();
+        const center = new THREE.Vector3();
 
-        // Enable shadows on all mesh children
+        box.getSize(size);
+        box.getCenter(center);
+
+        // Recenter model
+        obj.position.sub(center);
+
+        // Normalize scale (fit inside ~2 units)
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const scale = 2 / maxDim;
+        obj.scale.setScalar(scale);
+
         obj.traverse((child) => {
           if (child.isMesh) {
             child.castShadow = true;
@@ -59,9 +71,10 @@ function ComputerModel({ onLoad }) {
           }
         });
 
-        // Add to group and notify parent
         group.current.add(obj);
-        onLoad();
+        const helper = new THREE.BoxHelper(obj, 0xff0000);
+        group.current.add(helper);
+        onLoad?.();
       });
     });
 
@@ -85,7 +98,11 @@ function ComputerModel({ onLoad }) {
     };
   }, []);
 
-  return <group ref={group} />;
+  return (
+    <group ref={group} position={[0, -0.8, 0]} rotation={[0, Math.PI, 0]}>
+      {/* model is injected here */}
+    </group>
+  );
 }
 
 /**
