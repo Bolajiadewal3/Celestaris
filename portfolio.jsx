@@ -7,6 +7,29 @@ import { useEffect, useRef, useLayoutEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useMemo } from "react";
 
+function CameraRig() {
+  const { camera } = useThree();
+  const [vec] = useState(() => new THREE.Vector3());
+
+  // Define where you want the camera to land
+  const targetPosition = [-17, 6, 31];
+
+  useFrame((state) => {
+    state.camera.position.lerp(vec.set(...targetPosition), 0.05);
+
+    // 2. Make sure the camera continues to look at the center/monitor
+    state.camera.lookAt(0, 0, 0);
+  });
+
+  return (
+    // Attach a pointLight directly to the camera
+    // This light moves wherever the camera moves
+    <primitive object={camera}>
+      <pointLight intensity={1.5} distance={20} color="white" />
+    </primitive>
+  );
+}
+
 function CameraLogger() {
   const { camera } = useThree();
 
@@ -88,6 +111,7 @@ function Computer() {
         >
           <iframe
             src="https://aremuart.wordpress.com/"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
             style={{
               width: "950px",
               height: "850px",
@@ -218,9 +242,9 @@ function ComputerModel({ onLoad }) {
 export default function Portfolio() {
   return (
     <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-      <Canvas camera={{ position: [0, 3, 8], fov: 50 }}>
+      <Canvas camera={{ position: [10, 10, 20], fov: 50 }}>
+        <CameraRig />
         <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} />
 
         <Computer />
         <CameraLogger />
@@ -255,6 +279,7 @@ export default function Portfolio() {
         */}
         {/* Add OrbitControls */}
         <OrbitControls
+          makeDefault
           enablePan={true}
           enableZoom={true}
           enableRotate={true}
