@@ -7,6 +7,37 @@ import { useEffect, useRef, useLayoutEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useMemo } from "react";
 
+function CameraLogger() {
+  const { camera } = useThree();
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key.toLowerCase() === "q") {
+        // Extracting position
+        const { x, y, z } = camera.position;
+
+        // Extracting rotation (in radians)
+        const { x: rx, y: ry, z: rz } = camera.rotation;
+
+        console.log("--- Camera Coordinates ---");
+        console.log(
+          `Position: [${x.toFixed(2)}, ${y.toFixed(2)}, ${z.toFixed(2)}]`
+        );
+        console.log(
+          `Rotation: [${rx.toFixed(2)}, ${ry.toFixed(2)}, ${rz.toFixed(2)}]`
+        );
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup listener on unmount
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [camera]);
+
+  return null;
+}
+
 function Computer() {
   //const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
   const { scene, nodes } = useGLTF("./Computer/Monitor.glb");
@@ -43,13 +74,13 @@ function Computer() {
           transform
           // 3. Apply the calculated offset to move from hinge to center
           position={[
-            centerOffset[0] + 0.0,
+            centerOffset[0] - 3.0,
             centerOffset[1] + 0.0, //Y
             centerOffset[2] + 0.05, //Z
           ]}
           // Fix the rotation (Macbooks usually need -90 deg on X to face forward)
           rotation-y={Math.PI / 2}
-          //rotation-x={-1}
+          rotation-Z={-1}
           distanceFactor={0.8}
           center
           //occlude
@@ -184,6 +215,7 @@ export default function Portfolio() {
         <pointLight position={[10, 10, 10]} />
 
         <Computer />
+        <CameraLogger />
 
         {/*
         <ComputerModel />
