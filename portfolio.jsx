@@ -22,7 +22,7 @@ function CameraRig() {
     // 2. Make sure the camera continues to look at the center/monitor
     state.camera.lookAt(0, 0, 0);
 
-    if (state.camera.position.distanceTo(target) < 0.05) {
+    if (state.camera.position.distanceTo(targetPosition) < 0.05) {
       setActive(false);
       console.log("Animation complete. OrbitControls engaged.");
     }
@@ -32,7 +32,7 @@ function CameraRig() {
     // Attach a pointLight directly to the camera
     // This light moves wherever the camera moves
     <primitive object={camera}>
-      <pointLight intensity={1.5} distance={20} color="white" />
+      <pointLight intensity={3} distance={20} color="white" />
     </primitive>
   );
 }
