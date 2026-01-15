@@ -3,35 +3,49 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 import { OBJLoader, MTLLoader } from "three-stdlib";
 import * as THREE from "three";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useLayoutEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 
 function Computer() {
   const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
+  const [screenNode, setScreenNode] = useState(null);
+
+  useLayoutEffect(() => {
+    // This finds the actual mesh in the model so we can "parent" the Html to it
+    if (nodes.Screen) {
+      setScreenNode(nodes.Screen);
+    }
+  }, [nodes]);
 
   return (
-    <primitive object={scene}>
-      {/* The 'primitive' tag puts the whole model in the scene. 
-        By using <Html /> inside the existing Screen mesh, 
-        it inherits ALL transformations automatically.
-      */}
-      <mesh object={nodes.Screen}>
+    <group>
+      {/* 1. Render the model as usual */}
+      <primitive object={scene} />
+
+      {/* 2. Render the Html ONLY when the screenNode is found */}
+      {screenNode && (
         <Html
           transform
-          // If the iframe is upside down or tilted,
-          // use rotation here to fix the "Paper" orientation once.
-          rotation-x={-Math.PI / 2}
-          position={[0, 0, 0.05]} // Only a tiny Z-offset to prevent flickering (Z-fighting)
+          // portal: this tells the Html to move itself inside the Screen mesh
+          portal={{ current: screenNode }}
+          // Now these coordinates are relative to the center of the screen!
+          position={[0, 0, 0.01]}
+          rotation-x={-Math.PI / 2} // Common adjustment for GLTF screen orientation
           distanceFactor={1.2}
-          portal={{ current: scene }} // Ensures it stays within the model context
+          occlude={[screenNode]} // Hides iframe when lid is closed or behind objects
         >
           <iframe
             src="https://aremuart.wordpress.com/"
-            style={{ width: "1024px", height: "768px", border: "none" }}
+            style={{
+              width: "1024px",
+              height: "768px",
+              border: "none",
+              background: "black",
+            }}
           />
         </Html>
-      </mesh>
-    </primitive>
+      )}
+    </group>
   );
 }
 
