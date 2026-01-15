@@ -23,7 +23,7 @@ function CameraRig() {
     state.camera.position.lerp(target, 0.015);
 
     // 3. Keep eyes on the monitor
-    state.camera.lookAt(0, 0, 0);
+    state.camera.lookAt(0, 0, 4);
 
     // 4. Correct distance check (Vector3 vs Vector3)
     if (state.camera.position.distanceTo(target) < 0.1) {
