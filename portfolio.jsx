@@ -78,6 +78,7 @@ function Computer() {
             centerOffset[1] + 0.0, //Y
             centerOffset[2] - 0.05, //x
           ]}
+          rotation-order="YXZ"
           // Fix the rotation (Macbooks usually need -90 deg on X to face forward)
           rotation-y={Math.PI / 2}
           rotation-x={-0.1}
@@ -92,8 +93,13 @@ function Computer() {
               height: "768px",
               border: "none",
               background: "black",
-              transform: "perspective(1000px) rotateX(2deg) scale(1.05)",
-              borderRadius: "50px / 100px", // Mimics the rounded glass of old CRTs
+              // Remove rotateX from here if you are already tilting the <Html> tag
+              // Use scale to ensure the edges are hidden behind the monitor's bezel
+              transform: "scale(1.05)",
+              // This creates the 'bulging' rounded corner look of 80s/90s monitors
+              borderRadius: "15% / 8%",
+              // Optional: add a slight inner shadow to simulate depth behind the glass
+              boxShadow: "inset 0 0 100px rgba(0,0,0,0.5)",
             }}
           />
         </Html>
