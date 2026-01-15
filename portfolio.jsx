@@ -10,25 +10,20 @@ function Computer() {
   const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
 
   return (
-    <group>
-      <primitive object={scene} />
-
-      {/* Attach iframe to named screen */}
-      <mesh
-        geometry={nodes.Screen.geometry}
-        position={nodes.Screen.position}
-        rotation={nodes.Screen.rotation}
-        scale={nodes.Screen.scale}
-      >
-        <meshStandardMaterial color="red" />
+    <primitive object={scene}>
+      {/* The 'primitive' tag puts the whole model in the scene. 
+        By using <Html /> inside the existing Screen mesh, 
+        it inherits ALL transformations automatically.
+      */}
+      <mesh object={nodes.Screen}>
         <Html
           transform
-          wrapperClass="htmlScreen"
-          //center
-          distanceFactor={2}
-          position={[0, 4, 0.001]}
-          rotation-x={-0.25}
-          //occlude
+          // If the iframe is upside down or tilted,
+          // use rotation here to fix the "Paper" orientation once.
+          rotation-x={-Math.PI / 2}
+          position={[0, 0, 0.05]} // Only a tiny Z-offset to prevent flickering (Z-fighting)
+          distanceFactor={1.2}
+          portal={{ current: scene }} // Ensures it stays within the model context
         >
           <iframe
             src="https://aremuart.wordpress.com/"
@@ -36,7 +31,7 @@ function Computer() {
           />
         </Html>
       </mesh>
-    </group>
+    </primitive>
   );
 }
 
