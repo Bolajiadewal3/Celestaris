@@ -76,9 +76,23 @@ function Computer() {
   //const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
   const { scene, nodes } = useGLTF("./Computer/Monitor.glb");
 
+  const [showEffects, setShowEffects] = useState(true);
+
   // 1. Calculate the actual center of the geometry
   const centerOffset = useMemo(() => {
     if (!nodes.Screen) return [0, 0, 0];
+
+    <mesh
+      position={[
+        nodes.Screen.position.x + 0.5,
+        0,
+        nodes.Screen.position.z + 0.5,
+      ]}
+      onClick={() => setShowEffects(!showEffects)}
+    >
+      <boxGeometry args={[0.2, 0.2, 0.2]} />
+      <meshStandardMaterial color={showEffects ? "red" : "green"} />
+    </mesh>;
 
     // Create a bounding box for the screen geometry
     const box = new THREE.Box3().setFromObject(nodes.Screen);
@@ -136,10 +150,11 @@ function Computer() {
               background: "black",
               overflow: "hidden",
               borderRadius: "40px",
-              // THE BULGE: A subtle outward glow and scale makes it look convex
-              boxShadow:
-                "0 0 50px rgba(255,255,255,0.1), inset 0 0 40px rgba(255,255,255,0.1)",
-              transform: "scale(1.05)",
+              boxShadow: showEffects
+                ? "0 0 50px rgba(255,255,255,0.1), inset 0 0 40px rgba(255,255,255,0.1)"
+                : "none",
+              transform: showEffects ? "scale(1.05)" : "scale(1)",
+              transition: "all 0.3s ease", // Smooth transition when toggling
             }}
           >
             {/* 1. THE IFRAME */}
@@ -149,37 +164,41 @@ function Computer() {
                 width: "100%",
                 height: "100%",
                 border: "none",
-                filter: "brightness(1) contrast(1.1)", // Reduced darkening
+                // Filters only apply when effects are on
+                filter: showEffects ? "brightness(1) contrast(1.1)" : "none",
               }}
             />
 
-            {/* 2. CHUNKY MOVING SCANLINES */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                pointerEvents: "none",
-                zIndex: 100,
-                // Larger lines (8px) with a slight movement animation
-                backgroundImage:
-                  "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0px, rgba(0, 0, 0, 0.3) 4px, transparent 4px, transparent 8px)",
-                backgroundSize: "100% 8px",
-                animation: "scanline-scroll 4s linear infinite",
-                opacity: 0.4,
-              }}
-            />
+            {showEffects && (
+              <>
+                {/* 2. CHUNKY MOVING SCANLINES */}
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    pointerEvents: "none",
+                    zIndex: 100,
+                    backgroundImage:
+                      "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 10px, transparent 10px, transparent 20px)",
+                    backgroundSize: "100% 20px",
+                    animation: "scanline-scroll 4s linear infinite",
+                    opacity: 0.2,
+                  }}
+                />
 
-            {/* 3. FLICKER LAYER */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                pointerEvents: "none",
-                zIndex: 101,
-                background: "rgba(18, 16, 16, 0.05)",
-                animation: "crt-flicker 0.2s infinite",
-              }}
-            />
+                {/* 3. FLICKER LAYER */}
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    pointerEvents: "none",
+                    zIndex: 101,
+                    background: "transparent",
+                    animation: "crt-flicker 0.2s infinite",
+                  }}
+                />
+              </>
+            )}
           </div>
         </Html>
       </group>
