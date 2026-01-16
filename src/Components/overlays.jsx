@@ -153,11 +153,16 @@ function Overlay({ isActive, onClose, items = [] }) {
           */
               <a
                 onClick={
-                  item.private
+                  /*item.private
                     ? (ev) => {
                         ev.preventDefault();
                         this.props.onClick(ev);
                         console.log("SHOULDNT BE HERE");
+                      }*/
+
+                  item.external
+                    ? () => {
+                        window.location.href = item.website;
                       }
                     : () => {
                         console.log("HERE");
