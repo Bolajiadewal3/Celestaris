@@ -327,13 +327,11 @@ export default function Portfolio() {
         <CameraLogger />
 
         <group>
-          <mesh position={[0, 0, 0]}>
-            <sphereGeometry args={[0.1, 16, 16]} />
-            <meshBasicMaterial color="red" />
-          </mesh>
-
           {/*
-
+<mesh position={[0, 0, 0]}>
+<sphereGeometry args={[0.1, 16, 16]} />
+<meshBasicMaterial color="red" />
+</mesh>
           <mesh position={[0, 0, 1]}>
             <sphereGeometry args={[0.3, 16, 16]} />
             <meshBasicMaterial color="red" />
@@ -402,7 +400,7 @@ export default function Portfolio() {
 
         */}
         {/* Add OrbitControls */}
-        {
+        {/*
           <OrbitControls
             makeDefault
             enablePan={true}
@@ -412,7 +410,7 @@ export default function Portfolio() {
             zoomSpeed={0.5}
             panSpeed={0.5}
           />
-        }
+        */}
       </Canvas>
     </div>
   );

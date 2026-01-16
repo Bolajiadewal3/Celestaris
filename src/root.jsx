@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Portfolio from "../portfolio.jsx";
+import Portfolio from "./portfolio.jsx";
 
 const RedirectHandler = () => {
   const navigate = useNavigate();
