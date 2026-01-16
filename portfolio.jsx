@@ -98,18 +98,22 @@ function Computer() {
 
   return (
     <group>
+      <primitive object={scene} />
+
       <mesh
-        position={[
-          nodes.Button.position.x,
-          nodes.Button.position.y,
-          nodes.Button.position.z,
-        ]}
+        position={nodes.Button.position}
+        rotation={nodes.Button.rotation}
+        scale={nodes.Button.scale}
         onClick={() => setShowEffects(!showEffects)}
       >
-        <boxGeometry args={[0.2, 0.2, 0.2]} />
-        <meshStandardMaterial color={showEffects ? "red" : "green"} />
+        {/* We use the geometry and material already in the file */}
+        <primitive object={nodes.Button.geometry} attach="geometry" />
+        <meshStandardMaterial
+          color={showEffects ? "red" : "green"}
+          emissive={showEffects ? "red" : "green"}
+          emissiveIntensity={0.5}
+        />
       </mesh>
-      <primitive object={scene} />
 
       {/* 2. Anchor to the Screen's transformation */}
       <group
