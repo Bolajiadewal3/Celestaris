@@ -20,7 +20,7 @@ function CameraRig() {
 
     // 2. Smoothly move toward the target
     // Increased speed slightly to 0.05 for a better feel
-    state.camera.position.lerp(target, 0.05);
+    state.camera.position.lerp(target, 0.03);
 
     // 3. Keep eyes on the monitor
     state.camera.lookAt(0, 1, -4.5);
@@ -110,6 +110,18 @@ function Computer() {
 
   return (
     <group>
+      <mesh
+        position={[
+          nodes.Screen.position.x + 0.5,
+          0,
+          nodes.Screen.position.z + 0.5,
+        ]}
+        onClick={() => setShowEffects(!showEffects)}
+      >
+        <boxGeometry args={[0.2, 0.2, 0.2]} />
+        <meshStandardMaterial color={showEffects ? "red" : "green"} />
+      </mesh>
+
       <primitive object={scene} />
 
       {/* 2. Anchor to the Screen's transformation */}
