@@ -82,18 +82,6 @@ function Computer() {
   const centerOffset = useMemo(() => {
     if (!nodes.Screen) return [0, 0, 0];
 
-    <mesh
-      position={[
-        nodes.Screen.position.x + 3,
-        nodes.Screen.position.y + 2,
-        nodes.Screen.position.z + 6,
-      ]}
-      onClick={() => setShowEffects(!showEffects)}
-    >
-      <boxGeometry args={[0.2, 0.2, 0.2]} />
-      <meshStandardMaterial color={showEffects ? "red" : "green"} />
-    </mesh>;
-
     // Create a bounding box for the screen geometry
     const box = new THREE.Box3().setFromObject(nodes.Screen);
     const center = new THREE.Vector3();
@@ -112,9 +100,9 @@ function Computer() {
     <group>
       <mesh
         position={[
-          nodes.Screen.position.x + 0.5,
-          0,
-          nodes.Screen.position.z + 0.5,
+          nodes.Screen.position.x + 0.8,
+          nodes.Screen.position.y + 0.3,
+          nodes.Screen.position.z + 0.6,
         ]}
         onClick={() => setShowEffects(!showEffects)}
       >
