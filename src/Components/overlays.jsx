@@ -155,24 +155,26 @@ function Overlay({ isActive, onClose, items = [] }) {
                     ? (ev) => {
                         ev.preventDefault();
                         this.props.onClick(ev);
+                        console.log("SHOULDNT BE HERE");
                       }
                     : () => {
-                        // Check if siteLink exists to pass to the iframe
+                        console.log("HERE");
                         if (item.siteLink) {
-                          Console.log("ARRIVED HERE");
+                          console.log("HERE2");
+                          // 1. Create the full URL for the iframe to consume
                           const fullUrl = `${window.location.origin}${
                             import.meta.env.BASE_URL
                           }${item.siteLink}`;
-                          navigate(
-                            `${window.location.origin}${
-                              import.meta.env.BASE_URL
-                            }Computer`,
-                            {
-                              state: { iframeUrl: fullUrl },
-                            }
-                          );
-                          Console.log(fullUrl);
+
+                          console.log("Passing to iframe:", fullUrl);
+
+                          // 2. Navigate using the INTERNAL path only.
+                          navigate("/Computer", {
+                            state: { iframeUrl: fullUrl },
+                          });
                         } else {
+                          console.log("SHOULD BE MOVING HERE");
+
                           navigate(item.navigation);
                         }
                       }
