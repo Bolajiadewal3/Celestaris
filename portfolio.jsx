@@ -162,10 +162,10 @@ function Computer() {
                 zIndex: 100,
                 // Larger lines (8px) with a slight movement animation
                 backgroundImage:
-                  "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0px, rgba(0, 0, 0, 0.3) 8px, transparent 4px, transparent 8px)",
-                backgroundSize: "100% 16px",
+                  "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0px, rgba(0, 0, 0, 0.3) 4px, transparent 4px, transparent 8px)",
+                backgroundSize: "100% 8px",
                 animation: "scanline-scroll 4s linear infinite",
-                opacity: 0.2,
+                opacity: 0.4,
               }}
             />
 
