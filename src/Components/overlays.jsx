@@ -156,7 +156,20 @@ function Overlay({ isActive, onClose, items = [] }) {
                         ev.preventDefault();
                         this.props.onClick(ev);
                       }
-                    : () => navigate(`${item.navigation}`)
+                    : () => {
+                        // Check if siteLink exists to pass to the iframe
+                        if (item.siteLink) {
+                          const fullUrl = `${window.location.origin}${
+                            import.meta.env.BASE_URL
+                          }${item.siteLink}`;
+                          navigate(item.navigation, {
+                            state: { iframeUrl: fullUrl },
+                          });
+                          Console.log(fullUrl);
+                        } else {
+                          navigate(item.navigation);
+                        }
+                      }
                 }
               >
                 Go To

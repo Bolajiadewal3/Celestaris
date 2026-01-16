@@ -6,6 +6,7 @@ import * as THREE from "three";
 import { useEffect, useRef, useLayoutEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function CameraRig() {
   const { camera } = useThree();
@@ -75,9 +76,11 @@ function CameraLogger() {
 function Computer() {
   //const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
   const { scene, nodes } = useGLTF("./Monitor2.glb");
-
+  const location = useLocation();
   const [showEffects, setShowEffects] = useState(true);
-
+  const iframeSrc =
+    location.state?.iframeUrl ||
+    "https://bolajiadewal3.github.io/Celestaris/Portfolio";
   // 1. Calculate the actual center of the geometry
   const centerOffset = useMemo(() => {
     if (!nodes.Screen) return [0, 0, 0];
@@ -162,7 +165,7 @@ function Computer() {
           >
             {/* 1. THE IFRAME */}
             <iframe
-              src="https://bolajiadewal3.github.io/Celestaris/Portfolio"
+              src={iframeSrc}
               loading="lazy"
               style={{
                 width: "100%",
