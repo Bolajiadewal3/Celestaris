@@ -137,7 +137,7 @@ function Overlay({ isActive, onClose, items = [] }) {
             <h2 style={{ fontSize: "20px", marginBottom: "10px" }}>
               {item.title}
             </h2>
-            {{
+            {
               /*
             !isNavigable ? (
               <a
@@ -151,7 +151,6 @@ function Overlay({ isActive, onClose, items = [] }) {
               </a>
             ) : 
           */
-            }(
               <a
                 onClick={
                   item.private
@@ -185,7 +184,7 @@ function Overlay({ isActive, onClose, items = [] }) {
               >
                 Go To
               </a>
-            )}
+            }
             <p>{item.abstract}</p>
           </animated.div>
         );
