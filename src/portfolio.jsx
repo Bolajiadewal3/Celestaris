@@ -74,7 +74,7 @@ function CameraLogger() {
 
 function Computer() {
   //const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
-  const { scene, nodes } = useGLTF("/Computer/Monitor2.glb");
+  const { scene, nodes } = useGLTF("./Monitor2.glb");
 
   const [showEffects, setShowEffects] = useState(true);
 
