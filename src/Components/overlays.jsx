@@ -171,7 +171,7 @@ function Overlay({ isActive, onClose, items = [] }) {
                           console.log("Passing to iframe:", fullUrl);
 
                           // 2. Navigate using the INTERNAL path only.
-                          navigate("/Computer", {
+                          navigate(`${import.meta.env.BASE_URL}Computer`, {
                             state: { iframeUrl: fullUrl },
                           });
                         } else {
