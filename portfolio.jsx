@@ -74,7 +74,7 @@ function CameraLogger() {
 
 function Computer() {
   //const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
-  const { scene, nodes } = useGLTF("./Computer/Monitor.glb");
+  const { scene, nodes } = useGLTF("./Computer/Monitor2.glb");
 
   const [showEffects, setShowEffects] = useState(true);
 
@@ -98,6 +98,17 @@ function Computer() {
 
   return (
     <group>
+      <mesh
+        position={[
+          nodes.Button.position.x,
+          nodes.Button.position.y,
+          nodes.Button.position.z,
+        ]}
+        onClick={() => setShowEffects(!showEffects)}
+      >
+        <boxGeometry args={[0.2, 0.2, 0.2]} />
+        <meshStandardMaterial color={showEffects ? "red" : "green"} />
+      </mesh>
       <primitive object={scene} />
 
       {/* 2. Anchor to the Screen's transformation */}
@@ -106,18 +117,6 @@ function Computer() {
         rotation={nodes.Screen.rotation}
         scale={nodes.Screen.scale}
       >
-        <mesh
-          position={[
-            nodes.Screen.position.x + 0.2,
-            nodes.Screen.position.y - 1,
-            nodes.Screen.position.z + 1,
-          ]}
-          onClick={() => setShowEffects(!showEffects)}
-        >
-          <boxGeometry args={[0.2, 0.2, 0.2]} />
-          <meshStandardMaterial color={showEffects ? "red" : "green"} />
-        </mesh>
-
         <Html
           transform
           rotation-order="YXZ"
