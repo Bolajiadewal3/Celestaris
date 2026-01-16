@@ -75,7 +75,9 @@ function CameraLogger() {
 
 function Computer() {
   //const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
-  const { scene, nodes } = useGLTF("./Monitor2.glb");
+  const { scene, nodes } = useGLTF(
+    `${import.meta.env.BASE_URL}Computer/Monitor2.glb`
+  );
   const location = useLocation();
   const [showEffects, setShowEffects] = useState(true);
   const iframeSrc =
