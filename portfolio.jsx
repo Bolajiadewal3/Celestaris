@@ -83,11 +83,7 @@ function Computer() {
     if (!nodes.Screen) return [0, 0, 0];
 
     <mesh
-      position={[
-        nodes.Screen.position.x + 0.5,
-        0,
-        nodes.Screen.position.z + 0.5,
-      ]}
+      position={[nodes.Screen.position.x + 0.5, 0, nodes.Screen.position.z + 3]}
       onClick={() => setShowEffects(!showEffects)}
     >
       <boxGeometry args={[0.2, 0.2, 0.2]} />
@@ -411,17 +407,17 @@ export default function Portfolio() {
 
         */}
         {/* Add OrbitControls */}
-        {/*
-        <OrbitControls
-          makeDefault
-          enablePan={true}
-          enableZoom={true}
-          enableRotate={true}
-          rotateSpeed={0.5}
-          zoomSpeed={0.5}
-          panSpeed={0.5}
-        />
-        */}
+        {
+          <OrbitControls
+            makeDefault
+            enablePan={true}
+            enableZoom={true}
+            enableRotate={true}
+            rotateSpeed={0.5}
+            zoomSpeed={0.5}
+            panSpeed={0.5}
+          />
+        }
       </Canvas>
     </div>
   );
