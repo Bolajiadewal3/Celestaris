@@ -137,8 +137,9 @@ function Overlay({ isActive, onClose, items = [] }) {
             <h2 style={{ fontSize: "20px", marginBottom: "10px" }}>
               {item.title}
             </h2>
-
-            {!isNavigable ? (
+            {{
+              /*
+            !isNavigable ? (
               <a
                 href={
                   item.website
@@ -148,7 +149,9 @@ function Overlay({ isActive, onClose, items = [] }) {
               >
                 Go To
               </a>
-            ) : (
+            ) : 
+          */
+            }(
               <a
                 onClick={
                   item.private
@@ -162,9 +165,9 @@ function Overlay({ isActive, onClose, items = [] }) {
                         if (item.siteLink) {
                           console.log("HERE2");
                           // 1. Create the full URL for the iframe to consume
-                          const fullUrl = `${window.location.origin}${
-                            import.meta.env.BASE_URL
-                          }${item.siteLink}`;
+                          const fullUrl = `${import.meta.env.BASE_URL}${
+                            item.siteLink
+                          }`;
 
                           console.log("Passing to iframe:", fullUrl);
 
@@ -183,7 +186,6 @@ function Overlay({ isActive, onClose, items = [] }) {
                 Go To
               </a>
             )}
-
             <p>{item.abstract}</p>
           </animated.div>
         );
