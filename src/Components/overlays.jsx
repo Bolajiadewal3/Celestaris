@@ -162,9 +162,14 @@ function Overlay({ isActive, onClose, items = [] }) {
                           const fullUrl = `${window.location.origin}${
                             import.meta.env.BASE_URL
                           }${item.siteLink}`;
-                          navigate(item.navigation, {
-                            state: { iframeUrl: fullUrl },
-                          });
+                          navigate(
+                            `${window.location.origin}${
+                              import.meta.env.BASE_URL
+                            }Computer`,
+                            {
+                              state: { iframeUrl: fullUrl },
+                            }
+                          );
                           Console.log(fullUrl);
                         } else {
                           navigate(item.navigation);
