@@ -139,7 +139,7 @@ function Computer() {
               // THE BULGE: A subtle outward glow and scale makes it look convex
               boxShadow:
                 "0 0 50px rgba(255,255,255,0.1), inset 0 0 40px rgba(255,255,255,0.1)",
-              transform: "scale(1.05)",
+              transform: "scale(1.01)",
             }}
           >
             {/* 1. THE IFRAME */}
@@ -149,7 +149,7 @@ function Computer() {
                 width: "100%",
                 height: "100%",
                 border: "none",
-                filter: "brightness(1) contrast(1.1)", // Reduced darkening
+                filter: "brightness(1) contrast(1.2)", // Reduced darkening
               }}
             />
 
@@ -162,10 +162,10 @@ function Computer() {
                 zIndex: 100,
                 // Larger lines (8px) with a slight movement animation
                 backgroundImage:
-                  "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0px, rgba(0, 0, 0, 0.3) 4px, transparent 4px, transparent 8px)",
-                backgroundSize: "100% 8px",
+                  "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0px, rgba(0, 0, 0, 0.2) 8px, transparent 4px, transparent 8px)",
+                backgroundSize: "100% 16px",
                 animation: "scanline-scroll 4s linear infinite",
-                opacity: 0.4,
+                opacity: 0.25,
               }}
             />
 
