@@ -98,18 +98,6 @@ function Computer() {
 
   return (
     <group>
-      <mesh
-        position={[
-          nodes.Screen.position.x + 0.8,
-          nodes.Screen.position.y + 10,
-          nodes.Screen.position.z - 10,
-        ]}
-        onClick={() => setShowEffects(!showEffects)}
-      >
-        <boxGeometry args={[0.2, 0.2, 0.2]} />
-        <meshStandardMaterial color={showEffects ? "red" : "green"} />
-      </mesh>
-
       <primitive object={scene} />
 
       {/* 2. Anchor to the Screen's transformation */}
@@ -118,6 +106,18 @@ function Computer() {
         rotation={nodes.Screen.rotation}
         scale={nodes.Screen.scale}
       >
+        <mesh
+          position={[
+            nodes.Screen.position.x + 0.8,
+            nodes.Screen.position.y + 2,
+            nodes.Screen.position.z - 2,
+          ]}
+          onClick={() => setShowEffects(!showEffects)}
+        >
+          <boxGeometry args={[0.2, 0.2, 0.2]} />
+          <meshStandardMaterial color={showEffects ? "red" : "green"} />
+        </mesh>
+
         <Html
           transform
           rotation-order="YXZ"
