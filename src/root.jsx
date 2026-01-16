@@ -45,7 +45,7 @@ createRoot(document.getElementById("root")).render(
 
     <Routes>
       <Route path="/Celestaris/" element={<App />} />
-      <Route path="/Celestaris/Portfolio" element={<Portfolio />} />
+      <Route path="/Celestaris/Computer" element={<Portfolio />} />
 
       <Route path="/Celestaris/Poetry/section0" element={<Section0 />} />
       <Route
