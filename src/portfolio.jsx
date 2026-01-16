@@ -162,7 +162,8 @@ function Computer() {
           >
             {/* 1. THE IFRAME */}
             <iframe
-              src="https://aremuart.wordpress.com/"
+              src="https://bolajiadewal3.github.io/Celestaris/Portfolio"
+              loading="lazy"
               style={{
                 width: "100%",
                 height: "100%",
