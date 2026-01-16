@@ -101,8 +101,8 @@ function Computer() {
       <mesh
         position={[
           nodes.Screen.position.x + 0.8,
-          nodes.Screen.position.y + 0.18,
-          nodes.Screen.position.z - 0.8,
+          nodes.Screen.position.y + 0.5,
+          nodes.Screen.position.z - 2,
         ]}
         onClick={() => setShowEffects(!showEffects)}
       >
