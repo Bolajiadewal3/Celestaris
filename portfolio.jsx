@@ -83,7 +83,11 @@ function Computer() {
     if (!nodes.Screen) return [0, 0, 0];
 
     <mesh
-      position={[nodes.Screen.position.x + 0.5, 0, nodes.Screen.position.z + 3]}
+      position={[
+        nodes.Screen.position.x + 0.8,
+        nodes.Screen.position.y + 0.2,
+        nodes.Screen.position.z + 4,
+      ]}
       onClick={() => setShowEffects(!showEffects)}
     >
       <boxGeometry args={[0.2, 0.2, 0.2]} />
