@@ -159,6 +159,7 @@ function Overlay({ isActive, onClose, items = [] }) {
                     : () => {
                         // Check if siteLink exists to pass to the iframe
                         if (item.siteLink) {
+                          Console.log("ARRIVED HERE");
                           const fullUrl = `${window.location.origin}${
                             import.meta.env.BASE_URL
                           }${item.siteLink}`;
