@@ -83,6 +83,17 @@ function Computer() {
   const iframeSrc =
     location.state?.iframeUrl ||
     "https://bolajiadewal3.github.io/Celestaris/Portfolio";
+
+  const handleFullReset = () => {
+    if (document.referrer) {
+      // If there is a previous page in history, go there and force reload
+      window.location.href = document.referrer;
+    } else {
+      // Fallback: Navigate to the root/landing and force refresh
+      window.location.assign("/");
+    }
+  };
+
   // 1. Calculate the actual center of the geometry
   const centerOffset = useMemo(() => {
     if (!nodes.Screen) return [0, 0, 0];
@@ -114,9 +125,28 @@ function Computer() {
         {/* We use the geometry and material already in the file */}
         <primitive object={nodes.Button.geometry} attach="geometry" />
         <meshStandardMaterial
-          color={showEffects ? "red" : "green"}
-          emissive={showEffects ? "red" : "green"}
+          color={showEffects ? "green" : "red"}
+          emissive={showEffects ? "green" : "red"}
           emissiveIntensity={0.5}
+        />
+      </mesh>
+
+      <mesh
+        // Offset slightly on the X axis to place it next to the first button
+        position={[
+          nodes.Button.position.x + 0.15,
+          nodes.Button.position.y,
+          nodes.Button.position.z,
+        ]}
+        rotation={nodes.Button.rotation}
+        scale={nodes.Button.scale}
+        onClick={handleFullReset}
+      >
+        <primitive object={nodes.Button.geometry} attach="geometry" />
+        <meshStandardMaterial
+          color="red"
+          emissive="red"
+          emissiveIntensity={0.8}
         />
       </mesh>
 
