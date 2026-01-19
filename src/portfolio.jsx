@@ -1,12 +1,26 @@
 import React from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import { Html, OrbitControls } from "@react-three/drei";
+import {
+  Html,
+  OrbitControls,
+  Environment,
+  ContactShadows,
+  PerspectiveCamera,
+} from "@react-three/drei";
 import { OBJLoader, MTLLoader } from "three-stdlib";
 import * as THREE from "three";
 import { useEffect, useRef, useLayoutEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
+import {
+  DepthOfField,
+  Vignette,
+  Bloom,
+  BrightnessContrast,
+  EffectComposer,
+  HueSaturation,
+} from "@react-three/postprocessing";
 
 const clickSound = new Audio("./Computer/mouse_click.mp3");
 const buttonSound = new Audio("./Computer/button_click.mp3");
