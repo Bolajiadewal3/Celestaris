@@ -20,6 +20,7 @@ import {
   BrightnessContrast,
   EffectComposer,
   HueSaturation,
+  Noise,
 } from "@react-three/postprocessing";
 
 const clickSound = new Audio("./Computer/mouse_click.mp3");
