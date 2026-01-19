@@ -25,6 +25,18 @@ import {
 
 const clickSound = new Audio("./Computer/mouse_click.mp3");
 const buttonSound = new Audio("./Computer/button_click.mp3");
+const [hoveredText, setHoveredText] = useState(null);
+
+const handlePointerOver = (text) => {
+  // Optional: play a tiny "blip" sound here
+  setHoveredText(text);
+  document.body.style.cursor = "pointer";
+};
+
+const handlePointerOut = () => {
+  setHoveredText(null);
+  document.body.style.cursor = "auto";
+};
 
 function CameraRig() {
   const { camera } = useThree();
@@ -151,6 +163,8 @@ function Computer() {
           setShowEffects(!showEffects);
           playButton();
         }}
+        onPointerOver={() => handlePointerOver("Go back to last page")}
+        onPointerOut={handlePointerOut}
       >
         {/* We use the geometry and material already in the file */}
         <primitive object={nodes.Button.geometry} attach="geometry" />
@@ -174,6 +188,8 @@ function Computer() {
           playButton();
           handleFullReset();
         }}
+        onPointerOver={() => handlePointerOver("Toggle CRT Effects")}
+        onPointerOut={handlePointerOut}
       >
         <primitive object={nodes.Button.geometry} attach="geometry" />
         <meshStandardMaterial
@@ -182,6 +198,36 @@ function Computer() {
           emissiveIntensity={0.8}
         />
       </mesh>
+
+      {hoveredText && (
+        <Html
+          // Position it slightly above the buttons
+          position={[
+            nodes.Button.position.x + 0.075,
+            nodes.Button.position.y + 0.2,
+            nodes.Button.position.z,
+          ]}
+          center
+          distanceFactor={3} // Adjust size based on camera distance
+        >
+          <div
+            style={{
+              background: "rgba(0, 0, 0, 0.8)",
+              color: "white",
+              padding: "4px 10px",
+              borderRadius: "4px",
+              fontFamily: "monospace",
+              fontSize: "12px",
+              whiteSpace: "nowrap",
+              border: "1px solid red",
+              pointerEvents: "none", // Critical so it doesn't block clicks
+              boxShadow: "0 0 10px rgba(255, 0, 0, 0.5)",
+            }}
+          >
+            {hoveredText}
+          </div>
+        </Html>
+      )}
 
       {/* 2. Anchor to the Screen's transformation */}
       <group
@@ -224,7 +270,7 @@ function Computer() {
               boxShadow: showEffects
                 ? "0 0 50px rgba(255,255,255,0.1), inset 0 0 40px rgba(255,255,255,0.1)"
                 : "none",
-              transform: showEffects ? "scale(1.05)" : "scale(1)",
+              transform: showEffects ? "scale(1.05)" : "scale(1.04)",
               transition: "all 0.3s ease", // Smooth transition when toggling
             }}
           >
