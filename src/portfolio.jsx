@@ -23,13 +23,8 @@ import {
   Noise,
 } from "@react-three/postprocessing";
 
-const sounds = useMemo(
-  () => ({
-    click: new Audio("./Computer/mouse_click.mp3"),
-    button: new Audio("./Computer/button_click.mp3"),
-  }),
-  []
-);
+const clickSound = new Audio("./Computer/mouse_click.mp3");
+const buttonSound = new Audio("./Computer/button_click.mp3");
 
 function CameraRig() {
   const { camera } = useThree();
@@ -98,13 +93,13 @@ function CameraLogger() {
 
 function Computer() {
   const playClick = () => {
-    sounds.click.currentTime = 0;
-    sounds.click.play();
+    clickSound.currentTime = 0;
+    clickSound.play();
   };
 
   const playButton = () => {
-    sounds.button.currentTime = 0;
-    sounds.button.play();
+    buttonSound.currentTime = 0;
+    buttonSound.play();
   };
   //const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
   const { scene, nodes } = useGLTF(
