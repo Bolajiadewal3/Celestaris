@@ -283,6 +283,8 @@ function Computer() {
   );
 }
 
+useGLTF.preload(`${import.meta.env.BASE_URL}Computer/Monitor2.glb`);
+
 /**
  * Main application component rendering a Three.js city scene,
  * interactive UI overlays, banners, and ambient experience.
@@ -414,5 +416,3 @@ export default function Portfolio() {
     </div>
   );
 }
-
-useGLTF.preload(`${import.meta.env.BASE_URL}Computer/Monitor2.glb`);
