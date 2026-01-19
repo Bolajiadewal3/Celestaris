@@ -8,6 +8,9 @@ import { useGLTF } from "@react-three/drei";
 import { useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 
+const clickSound = new Audio("./Computer/mouse_click.mp3");
+const buttonSound = new Audio("./Computer/button_click.mp3");
+
 function CameraRig() {
   const { camera } = useThree();
   const [active, setActive] = useState(true);
@@ -74,6 +77,15 @@ function CameraLogger() {
 }
 
 function Computer() {
+  const playClick = () => {
+    clickSound.currentTime = 0;
+    clickSound.play();
+  };
+
+  const playButton = () => {
+    buttonSound.currentTime = 0;
+    buttonSound.play();
+  };
   //const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
   const { scene, nodes } = useGLTF(
     `${import.meta.env.BASE_URL}Computer/Monitor2.glb`
@@ -120,7 +132,10 @@ function Computer() {
         position={nodes.Button.position}
         rotation={nodes.Button.rotation}
         scale={nodes.Button.scale}
-        onClick={() => setShowEffects(!showEffects)}
+        onClick={() => {
+          setShowEffects(!showEffects);
+          playButton();
+        }}
       >
         {/* We use the geometry and material already in the file */}
         <primitive object={nodes.Button.geometry} attach="geometry" />
@@ -140,7 +155,10 @@ function Computer() {
         ]}
         rotation={nodes.Button.rotation}
         scale={nodes.Button.scale}
-        onClick={handleFullReset}
+        onClick={() => {
+          playButton();
+          handleFullReset;
+        }}
       >
         <primitive object={nodes.Button.geometry} attach="geometry" />
         <meshStandardMaterial
@@ -358,7 +376,15 @@ export default function Portfolio() {
       <Canvas camera={{ position: [10, 10, 20], fov: 50 }}>
         <CameraRig />
         <ambientLight intensity={0.5} />
-
+        <Environment preset="city" />
+        <ContactShadows
+          position={[0, -0.8, 0]}
+          opacity={0.4}
+          scale={10}
+          blur={2}
+          far={0.8}
+        />
+        <pointLight position={[2, 2, 2]} intensity={1.5} color="#ff00ff" />
         <Computer />
         <CameraLogger />
 
@@ -406,6 +432,12 @@ export default function Portfolio() {
 
           <gridHelper args={[10, 10]} />
         </group>
+
+        <EffectComposer>
+          <Bloom luminanceThreshold={1} intensity={1.5} levels={9} mipmapBlur />
+          <Noise opacity={0.05} /> {/* Adds a subtle cinematic grain */}
+          <Vignette eskil={false} offset={0.1} darkness={1.1} />
+        </EffectComposer>
 
         {/*
         <ComputerModel />

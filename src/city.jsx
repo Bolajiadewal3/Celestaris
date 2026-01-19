@@ -206,19 +206,27 @@ export default function App() {
   /**
    * Starts city background audio on first interaction.
    */
+
+  const audioRef = useRef(null);
+
   const startAudio = () => {
     if (!audioStarted) {
       const audio = new Audio("./City/cityAMBIENCE.mp3");
       audio.loop = true;
+      audioRef.current = audio;
       audio.play();
       setAudioStarted(true);
     }
   };
 
-
-
-  
-
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
@@ -239,7 +247,6 @@ export default function App() {
           }}
         />
       )}
-
 
       <StartScreen
         onStart={() => {
