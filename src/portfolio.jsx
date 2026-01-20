@@ -324,7 +324,7 @@ function Computer() {
   );
 }
 
-useGLTF.preload(`${import.meta.env.BASE_URL}Computer/Monitor2.glb`);
+//useGLTF.preload(`${import.meta.env.BASE_URL}Computer/Monitor2.glb`);
 
 /**
  * Main application component rendering a Three.js city scene,
