@@ -30,7 +30,7 @@ import {
 
 function Tablet() {
   return (
-    <group position={[0, -1, -7]} rotation={[-Math.PI / 10, 0, 0]}>
+    <group position={[0, -1, -4.5]} rotation={[-Math.PI / 10, 0, 0]}>
       {/* 1. The Tablet Shell */}
       <mesh castShadow>
         {/* Dimensions: 3.2 units wide, 5 units tall */}
@@ -42,7 +42,7 @@ function Tablet() {
       <Html
         transform
         occlude="blending"
-        distanceFactor={3}
+        distanceFactor={2}
         position={[0, 0, 0.08]}
       >
         <div
