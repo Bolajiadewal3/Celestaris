@@ -1,6 +1,8 @@
 # Celestaris
 
 React / Three.js Portfolio Website Documentatiom
+[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://mobolajiadewal3.github.io/Celestaris/)
+[View Technical Documentation](./DOCUMENTATION.md)
 
 ## Project Overview
 
