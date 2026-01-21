@@ -52,6 +52,40 @@ function Tablet() {
   );
 }
 
+function CameraRig() {
+  const { camera } = useThree();
+  const [active, setActive] = useState(true);
+
+  // 1. Create the target as a Vector3 object so distanceTo works correctly
+  const target = useMemo(() => new THREE.Vector3(0, 0.75, 2.5), []);
+  const tempVec = useMemo(() => new THREE.Vector3(), []);
+
+  useFrame((state) => {
+    if (!active) return;
+
+    // 2. Smoothly move toward the target
+    // Increased speed slightly to 0.05 for a better feel
+    state.camera.position.lerp(target, 0.03);
+
+    // 3. Keep eyes on the monitor
+    state.camera.lookAt(0, 1, -4.5);
+
+    // 4. Correct distance check (Vector3 vs Vector3)
+    if (state.camera.position.distanceTo(target) < 0.1) {
+      setActive(false);
+      console.log("Animation complete. OrbitControls engaged.");
+    }
+  });
+
+  return (
+    // Attach a pointLight directly to the camera
+    // This light moves wherever the camera moves
+    <primitive object={camera}>
+      <pointLight intensity={3} distance={20} color="white" />
+    </primitive>
+  );
+}
+
 export default function Documentation() {
   return (
     <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
