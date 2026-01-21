@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Portfolio from "./portfolio.jsx";
+import Documentation from "./documentation.jsx";
 
 const RedirectHandler = () => {
   const navigate = useNavigate();
@@ -46,6 +47,7 @@ createRoot(document.getElementById("root")).render(
     <Routes>
       <Route path="/Celestaris/" element={<App />} />
       <Route path="/Celestaris/Computer" element={<Portfolio />} />
+      <Route path="/Celestaris/Documentation" element={<Documentation />} />
 
       <Route path="/Celestaris/Poetry/section0" element={<Section0 />} />
       <Route
