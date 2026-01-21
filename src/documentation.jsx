@@ -30,16 +30,16 @@ import {
 
 function Tablet() {
   return (
-    <group position={[2, 0.5, 0.5]} rotation={[0, -Math.PI / 6, 0]}>
+    <group position={[1, 0.5, 0.5]} rotation={[0, 0, 0]}>
       {" "}
       <mesh>
-        <boxGeometry args={[10, 7, 0.2]} />
+        <boxGeometry args={[3, 5, 0.2]} />
         <meshStandardMaterial color="#222" roughness={0.1} />
       </mesh>
       {/* The Interactive Documentation Screen */}
       <Html transform occlude distanceFactor={5} position={[0, 0, 0.11]}>
         <iframe
-          src="https://mobolajiadewal3.github.io/Celestaris/docs/index.html"
+          src={`${import.meta.env.BASE_URL}docs/index.html`}
           style={{
             width: "800px",
             height: "600px",
