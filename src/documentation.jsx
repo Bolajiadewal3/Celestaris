@@ -41,7 +41,6 @@ function Tablet() {
       {/* 2. The Screen */}
       <Html
         transform
-        // If occlude makes it disappear, try removing it or passing the mesh ref
         occlude="blending"
         // A lower distanceFactor makes the HTML "smaller" in 3D space
         distanceFactor={4.5}
@@ -56,7 +55,7 @@ function Tablet() {
             overflow: "hidden",
             display: "flex",
             flexDirection: "column",
-            pointerEvents: "auto", // Ensures you can scroll/click
+            pointerEvents: "auto",
             userSelect: "none",
           }}
         >
