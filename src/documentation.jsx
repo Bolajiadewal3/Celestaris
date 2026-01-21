@@ -30,7 +30,7 @@ import {
 
 function Tablet() {
   return (
-    <group position={[0, -1, -2]} rotation={[-Math.PI / 10, 0, 0]}>
+    <group position={[0, -1, -3.5]} rotation={[-Math.PI / 10, 0, 0]}>
       {/* 1. The Tablet Shell */}
       <mesh castShadow>
         {/* Dimensions: 3.2 units wide, 5 units tall */}
@@ -129,10 +129,6 @@ export default function Documentation() {
           <pointLight position={[2, 2, 2]} intensity={1.5} color="#ff00ff" />
           <Tablet />
 
-          <group>
-            <gridHelper args={[10, 10]} />
-          </group>
-
           <EffectComposer>
             <Bloom
               luminanceThreshold={1}
@@ -143,16 +139,6 @@ export default function Documentation() {
             <Noise opacity={0.05} /> {/* Adds a subtle cinematic grain */}
             <Vignette eskil={false} offset={0.1} darkness={1.1} />
           </EffectComposer>
-
-          <OrbitControls
-            makeDefault
-            enablePan={true}
-            enableZoom={true}
-            enableRotate={true}
-            rotateSpeed={0.5}
-            zoomSpeed={0.5}
-            panSpeed={0.5}
-          />
         </Suspense>
       </Canvas>
     </div>
