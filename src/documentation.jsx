@@ -28,26 +28,54 @@ import {
   Noise,
 } from "@react-three/postprocessing";
 
+import { Html } from "@react-three/drei";
+
 function Tablet() {
+  const screenWidth = 600;
+  const screenHeight = 900;
+
+  const scale = 4;
+
   return (
-    <group position={[1, 0.5, 0.5]} rotation={[0, 0, 0]}>
-      {" "}
-      <mesh>
-        <boxGeometry args={[3, 5, 0.2]} />
-        <meshStandardMaterial color="#222" roughness={0.1} />
+    <group position={[0, 0.5, -4]} rotation={[Math.PI / 10, 0, 0]}>
+      <mesh castShadow>
+        <boxGeometry args={[3.2, 5.2, 0.15]} />
+        <meshStandardMaterial color="#111" roughness={0.2} metalness={0.8} />
       </mesh>
-      {/* The Interactive Documentation Screen */}
-      <Html transform occlude distanceFactor={5} position={[0, 0, 0.11]}>
-        <iframe
-          src={`${import.meta.env.BASE_URL}docs/index.html`}
+
+      <Html
+        transform
+        occlude
+        distanceFactor={scale}
+        position={[0, 0, 0.08]} // Set slightly in front of the mesh center
+      >
+        <div
           style={{
-            width: "800px",
-            height: "600px",
-            border: "none",
+            width: `${screenWidth}px`,
+            height: `${screenHeight}px`,
             background: "white",
+            borderRadius: "40px", // Rounding the "Glass"
+            overflow: "hidden",
+            border: "10px solid black", // Inner bezel
+            boxShadow: "0 0 20px rgba(0,0,0,0.5)",
           }}
-        />
+        >
+          <iframe
+            src={`${import.meta.env.BASE_URL}docs/index.html`}
+            title="Documentation"
+            style={{
+              width: "100%",
+              height: "100%",
+              border: "none",
+            }}
+          />
+        </div>
       </Html>
+
+      <mesh position={[0, -2.4, 0.08]}>
+        <circleGeometry args={[0.15, 32]} />
+        <meshStandardMaterial color="#333" />
+      </mesh>
     </group>
   );
 }
