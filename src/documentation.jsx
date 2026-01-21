@@ -29,33 +29,35 @@ import {
 } from "@react-three/postprocessing";
 
 function Tablet() {
-  const screenWidth = 600;
-  const screenHeight = 900;
-
-  const scale = 4;
-
   return (
     <group position={[0, 0.5, -4]} rotation={[Math.PI / 10, 0, 0]}>
+      {/* 1. The Tablet Shell */}
       <mesh castShadow>
-        <boxGeometry args={[3.2, 5.2, 0.15]} />
-        <meshStandardMaterial color="#111" roughness={0.2} metalness={0.8} />
+        {/* Dimensions: 3.2 units wide, 5 units tall */}
+        <boxGeometry args={[3.2, 5, 0.15]} />
+        <meshStandardMaterial color="#111" roughness={0.2} />
       </mesh>
 
+      {/* 2. The Screen */}
       <Html
         transform
-        occlude
-        distanceFactor={scale}
-        position={[0, 0, 0.08]} // Set slightly in front of the mesh center
+        // If occlude makes it disappear, try removing it or passing the mesh ref
+        occlude="blending"
+        // A lower distanceFactor makes the HTML "smaller" in 3D space
+        distanceFactor={4.5}
+        position={[0, 0, 0.08]}
       >
         <div
           style={{
-            width: `${screenWidth}px`,
-            height: `${screenHeight}px`,
+            width: "600px", // Pixels match the aspect ratio of 3x5
+            height: "900px",
             background: "white",
-            borderRadius: "40px", // Rounding the "Glass"
+            borderRadius: "30px",
             overflow: "hidden",
-            border: "10px solid black", // Inner bezel
-            boxShadow: "0 0 20px rgba(0,0,0,0.5)",
+            display: "flex",
+            flexDirection: "column",
+            pointerEvents: "auto", // Ensures you can scroll/click
+            userSelect: "none",
           }}
         >
           <iframe
@@ -69,11 +71,6 @@ function Tablet() {
           />
         </div>
       </Html>
-
-      <mesh position={[0, -2.4, 0.08]}>
-        <circleGeometry args={[0.15, 32]} />
-        <meshStandardMaterial color="#333" />
-      </mesh>
     </group>
   );
 }
