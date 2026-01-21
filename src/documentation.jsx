@@ -30,7 +30,7 @@ import {
 
 function Tablet() {
   return (
-    <group position={[0, 0.5, -4]} rotation={[-Math.PI / 10, 0, 0]}>
+    <group position={[0, -1, -7]} rotation={[-Math.PI / 10, 0, 0]}>
       {/* 1. The Tablet Shell */}
       <mesh castShadow>
         {/* Dimensions: 3.2 units wide, 5 units tall */}
