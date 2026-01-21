@@ -122,6 +122,16 @@ export default function Documentation() {
             <Noise opacity={0.05} /> {/* Adds a subtle cinematic grain */}
             <Vignette eskil={false} offset={0.1} darkness={1.1} />
           </EffectComposer>
+
+          <OrbitControls
+            makeDefault
+            enablePan={true}
+            enableZoom={true}
+            enableRotate={true}
+            rotateSpeed={0.5}
+            zoomSpeed={0.5}
+            panSpeed={0.5}
+          />
         </Suspense>
       </Canvas>
     </div>
