@@ -30,7 +30,7 @@ import {
 
 function Tablet() {
   return (
-    <group position={[-20, 5, 20]}>
+    <group position={[2, 0.5, 0.5]} rotation={[0, -Math.PI / 6, 0]}>
       {" "}
       <mesh>
         <boxGeometry args={[10, 7, 0.2]} />
@@ -39,7 +39,7 @@ function Tablet() {
       {/* The Interactive Documentation Screen */}
       <Html transform occlude distanceFactor={5} position={[0, 0, 0.11]}>
         <iframe
-          src="https://mobolajiadewal3.github.io/Celestaris/docs/"
+          src="https://mobolajiadewal3.github.io/Celestaris/docs/index.html"
           style={{
             width: "800px",
             height: "600px",
