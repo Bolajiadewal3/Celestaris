@@ -28,8 +28,6 @@ import {
   Noise,
 } from "@react-three/postprocessing";
 
-import { Html } from "@react-three/drei";
-
 function Tablet() {
   const screenWidth = 600;
   const screenHeight = 900;
