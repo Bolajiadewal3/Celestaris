@@ -25,18 +25,6 @@ import {
 
 const clickSound = new Audio("./Computer/mouse_click.mp3");
 const buttonSound = new Audio("./Computer/button_click.mp3");
-const [hoveredText, setHoveredText] = useState(null);
-
-const handlePointerOver = (text) => {
-  // Optional: play a tiny "blip" sound here
-  setHoveredText(text);
-  document.body.style.cursor = "pointer";
-};
-
-const handlePointerOut = () => {
-  setHoveredText(null);
-  document.body.style.cursor = "auto";
-};
 
 function CameraRig() {
   const { camera } = useThree();
@@ -104,6 +92,19 @@ function CameraLogger() {
 }
 
 function Computer() {
+  const [hoveredText, setHoveredText] = useState(null);
+
+  const handlePointerOver = (text) => {
+    // Optional: play a tiny "blip" sound here
+    setHoveredText(text);
+    document.body.style.cursor = "pointer";
+  };
+
+  const handlePointerOut = () => {
+    setHoveredText(null);
+    document.body.style.cursor = "auto";
+  };
+
   const playClick = () => {
     clickSound.currentTime = 0;
     clickSound.play();
@@ -324,7 +325,7 @@ function Computer() {
   );
 }
 
-//useGLTF.preload(`${import.meta.env.BASE_URL}Computer/Monitor2.glb`);
+useGLTF.preload(`${import.meta.env.BASE_URL}Computer/Monitor2.glb`);
 
 /**
  * Main application component rendering a Three.js city scene,
