@@ -234,7 +234,6 @@ function Computer() {
         </Html>
       )}
 
-      {/* 2. Anchor to the Screen's transformation */}
       <group
         position={nodes.Screen.position}
         rotation={nodes.Screen.rotation}

@@ -42,7 +42,6 @@ function Tablet() {
       <Html
         transform
         occlude="blending"
-        // A lower distanceFactor makes the HTML "smaller" in 3D space
         distanceFactor={4.5}
         position={[0, 0, 0.08]}
       >
