@@ -29,7 +29,6 @@ import {
 
 const clickSound = new Audio("./Computer/mouse_click.mp3");
 const buttonSound = new Audio("./Computer/button_click.mp3");
-const navigate = useNavigate();
 
 function CameraRig() {
   const { camera } = useThree();
@@ -140,6 +139,8 @@ function Computer() {
   };
 
   const switchToDocumentation = () => {
+    const navigate = useNavigate();
+
     navigate(`${import.meta.env.BASE_URL}Documentation`);
   };
 
