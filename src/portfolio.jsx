@@ -16,7 +16,7 @@ import * as THREE from "three";
 import { useEffect, useRef, useLayoutEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   DepthOfField,
   Vignette,
@@ -29,6 +29,7 @@ import {
 
 const clickSound = new Audio("./Computer/mouse_click.mp3");
 const buttonSound = new Audio("./Computer/button_click.mp3");
+const navigate = useNavigate();
 
 function CameraRig() {
   const { camera } = useThree();
@@ -138,6 +139,10 @@ function Computer() {
     }
   };
 
+  const switchToDocumentation = () => {
+    navigate(`${import.meta.env.BASE_URL}Documentation`);
+  };
+
   // 1. Calculate the actual center of the geometry
   const centerOffset = useMemo(() => {
     if (!nodes.Screen) return [0, 0, 0];
@@ -159,6 +164,30 @@ function Computer() {
   return (
     <group>
       <primitive object={scene} />
+
+      <mesh
+        position={[
+          nodes.Button.position.x - 0.15,
+          nodes.Button.position.y,
+          nodes.Button.position.z,
+        ]}
+        rotation={nodes.Button.rotation}
+        scale={nodes.Button.scale}
+        onClick={() => {
+          playButton();
+          switchToDocumentation();
+        }}
+        onPointerOver={() => handlePointerOver("Site Documentation")}
+        onPointerOut={handlePointerOut}
+      >
+        {/* We use the geometry and material already in the file */}
+        <primitive object={nodes.Button.geometry} attach="geometry" />
+        <meshStandardMaterial
+          color="blue"
+          emissive="cornflowerblue"
+          emissiveIntensity={0.5}
+        />
+      </mesh>
 
       <mesh
         position={nodes.Button.position}
@@ -198,8 +227,8 @@ function Computer() {
       >
         <primitive object={nodes.Button.geometry} attach="geometry" />
         <meshStandardMaterial
-          color="red"
-          emissive="red"
+          color="goldenrod"
+          emissive="gold"
           emissiveIntensity={0.8}
         />
       </mesh>
