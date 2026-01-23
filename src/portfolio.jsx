@@ -168,9 +168,9 @@ function Computer() {
 
       <mesh
         position={[
-          nodes.Button.position.x - 0.15,
+          nodes.Button.position.x - 0.2,
           nodes.Button.position.y,
-          nodes.Button.position.z + 0.08,
+          nodes.Button.position.z + 0.03,
         ]}
         rotation={nodes.Button.rotation}
         scale={nodes.Button.scale}
