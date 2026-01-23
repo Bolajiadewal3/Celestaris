@@ -138,9 +138,9 @@ function Computer() {
     }
   };
 
-  const switchToDocumentation = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
+  const switchToDocumentation = () => {
     navigate(`${import.meta.env.BASE_URL}Documentation`);
   };
 
@@ -170,7 +170,7 @@ function Computer() {
         position={[
           nodes.Button.position.x - 0.15,
           nodes.Button.position.y,
-          nodes.Button.position.z,
+          nodes.Button.position.z + 0.08,
         ]}
         rotation={nodes.Button.rotation}
         scale={nodes.Button.scale}
