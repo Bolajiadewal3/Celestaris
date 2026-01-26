@@ -135,18 +135,14 @@ function CameraRig() {
   // Target coordinates for the camera focus point
   const target = useMemo(() => new THREE.Vector3(0, 0.75, 2.5), []);
 
-  /** @type {THREE.Vector3} */
-  const tempVec = useMemo(() => new THREE.Vector3(), []);
-
   useFrame((state) => {
     if (!active) return;
-
+    // LERP (Linear Interpolation) for smooth "Premium" feel
     state.camera.position.lerp(target, 0.03);
     state.camera.lookAt(0, 1, -4.5);
 
     if (state.camera.position.distanceTo(target) &lt; 0.1) {
       setActive(false);
-      console.log("Animation complete.");
     }
   });
 

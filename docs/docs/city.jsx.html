@@ -90,9 +90,11 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * City scene component and model loaders.
  * @module City
+ * @category Scenes
+ * @description The high-performance urban landing page.
  */
+
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Sky, OrbitControls } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
@@ -122,82 +124,58 @@ import {
 import { degreesToRadians } from "./utils"; // Utility function for cleaner rotation input
 
 /**
- * CityModel loads a textured 3D city model (OBJ + MTL) and adds it to the scene.
- * It also calls `onLoad` once the model is fully loaded.
- *
+ * CityModel manages the complex OBJ/MTL loading and asset disposal.
  * @component
- * @param {Object} props - Component props
- * @param {Function} props.onLoad - Callback triggered after the model is successfully loaded
- * @returns {JSX.Element} - A group element containing the loaded 3D city model
+ * @category 3D Assets
  */
 function CityModel({ onLoad }) {
   const group = useRef();
-  const { scene } = useThree(); // Scene is available if needed, though unused here
-
-  // Load the city texture for use in the material (optional for visual debugging or preview)
-  useEffect(() => {
-    const textureLoader = new THREE.TextureLoader();
-    textureLoader.load(
-      "./City/cityPAL.jpg",
-      (texture) => {
-        console.log("Texture loaded", texture);
-        // This texture can be stored and used if needed later
-      },
-      undefined,
-      (err) => {
-        console.error("Texture load failed", err);
-      }
-    );
-  }, []);
 
   useEffect(() => {
     const mtlLoader = new MTLLoader();
 
-    // Load material definitions
     mtlLoader.load("./City/cityMAT.mtl", (materials) => {
       materials.preload();
 
       const objLoader = new OBJLoader();
-      objLoader.setMaterials(materials); // Attach materials to the OBJ loader
+      objLoader.setMaterials(materials);
 
-      // Load the OBJ model
       objLoader.load("./City/city.obj", (obj) => {
-        obj.scale.set(0.15, 0.15, 0.15); // Scale to fit the scene
-        obj.position.set(70, 0, -65); // Position in the scene
+        obj.scale.set(0.15, 0.15, 0.15);
+        obj.position.set(70, 0, -65);
 
-        // Enable shadows on all mesh children
         obj.traverse((child) => {
           if (child.isMesh) {
             child.castShadow = true;
             child.receiveShadow = true;
+            child.material.side = THREE.FrontSide;
           }
         });
 
-        // Add to group and notify parent
-        group.current.add(obj);
+        group.current?.add(obj);
         onLoad();
       });
     });
 
-    // Cleanup function to dispose of the model and its resources
     return () => {
       if (group.current) {
         group.current.children.forEach((obj) => {
           group.current.remove(obj);
+
           obj.traverse((child) => {
             if (child.geometry) child.geometry.dispose();
+
             if (child.material) {
-              if (Array.isArray(child.material)) {
-                child.material.forEach((mat) => mat.dispose());
-              } else {
-                child.material.dispose();
-              }
+              const materials = Array.isArray(child.material)
+                ? child.material
+                : [child.material];
+              materials.forEach((m) => m.dispose());
             }
           });
         });
       }
     };
-  }, []);
+  }, [onLoad]);
 
   return &lt;group ref={group} />;
 }
