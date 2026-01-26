@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Celestaris Documentation module:City</title>
+  <title>Celestaris Documentation CityModel</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -78,7 +78,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Components</p>
-                    <h1>module:City</h1>
+                    <h1>CityModel</h1>
                 </header>
                 
 
@@ -90,7 +90,7 @@
 <header>
     
         <h2>
-            &ltmodule:City  /&gt
+            &ltCityModel  /&gt
         </h2>
         
     
@@ -110,12 +110,12 @@
 
 
     
-    <h4 class="name" id="module:City">
-        <a class="href-link" href="#module:City">#</a>
+    <h4 class="name" id="CityModel">
+        <a class="href-link" href="#CityModel">#</a>
         
         <span class="code-name">
             
-                &ltmodule:City  /&gt
+                &ltCityModel  /&gt
             
         </span>
     </h4>
@@ -124,8 +124,8 @@
     
     
     <div class="description">
-        <p>Main application component rendering a Three.js city scene,
-interactive UI overlays, banners, and ambient experience.</p>
+        <p>CityModel loads a textured 3D city model (OBJ + MTL) and adds it to the scene.
+It also calls <code>onLoad</code> once the model is fully loaded.</p>
     </div>
     
 
@@ -138,6 +138,83 @@ interactive UI overlays, banners, and ambient experience.</p>
     
 
 
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Component props</p></td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>onLoad</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">function</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Callback triggered after the model is successfully loaded</p></td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -178,7 +255,7 @@ interactive UI overlays, banners, and ambient experience.</p>
         <p class="tag-source">
             <a href="city.jsx.html" class="button">View Source</a>
             <span>
-                <a href="city.jsx.html">city.jsx</a>, <a href="city.jsx.html#line152">line 152</a>
+                <a href="city.jsx.html">city.jsx</a>, <a href="city.jsx.html#line42">line 42</a>
             </span>
         </p>
     
@@ -208,6 +285,10 @@ interactive UI overlays, banners, and ambient experience.</p>
                     
 
 <div class="columns">
+    
+    <div class='param-desc column is-7'><ul>
+<li>A group element containing the loaded 3D city model</li>
+</ul></div>
     
     
     <div class='column is-5 has-text-left'>
@@ -241,16 +322,6 @@ interactive UI overlays, banners, and ambient experience.</p>
 
     
 
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="module-City-CameraLight.html">CameraLight</a></dt>
-            <dd></dd>
-        
-            <dt><a href="module-City-CityModel.html">CityModel</a></dt>
-            <dd></dd>
-        </dl>
     
 
     
