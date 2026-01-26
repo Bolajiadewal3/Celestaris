@@ -1,79 +1,78 @@
 /**
- * Main Portfolio experience and computer setup.
  * @module Portfolio
+ * @description Manages the main 3D portfolio scene, including the smooth camera transition
+ * from the world view to the computer terminal.
  */
-import { React, Suspense } from "react";
+
+import { Suspense } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import {
   Html,
   OrbitControls,
   Environment,
   ContactShadows,
-  PerspectiveCamera,
 } from "@react-three/drei";
-import { OBJLoader, MTLLoader } from "three-stdlib";
 import * as THREE from "three";
-import { useEffect, useRef, useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
-  DepthOfField,
   Vignette,
   Bloom,
-  BrightnessContrast,
   EffectComposer,
-  HueSaturation,
   Noise,
 } from "@react-three/postprocessing";
 
 const clickSound = new Audio("./Computer/mouse_click.mp3");
 const buttonSound = new Audio("./Computer/button_click.mp3");
 
+/**
+ * Handles the cinematic smooth camera transition on mount.
+ * @component
+ * @description
+ * Uses `useFrame` to linearly interpolate (lerp) the camera from its global position
+ * to a specific focus point in front of the monitor. Once the camera is within
+ * a threshold distance, the animation "disengages" to allow for other interactions.
+ */
 function CameraRig() {
-  const { camera } = useThree();
   const [active, setActive] = useState(true);
 
-  // 1. Create the target as a Vector3 object so distanceTo works correctly
+  /** @type {THREE.Vector3} Target coordinates for the camera focus point */
   const target = useMemo(() => new THREE.Vector3(0, 0.75, 2.5), []);
   const tempVec = useMemo(() => new THREE.Vector3(), []);
 
   useFrame((state) => {
     if (!active) return;
 
-    // 2. Smoothly move toward the target
-    // Increased speed slightly to 0.05 for a better feel
+    // Smoothly moves camera to target position using a lerp factor of 0.05
     state.camera.position.lerp(target, 0.03);
-
-    // 3. Keep eyes on the monitor
     state.camera.lookAt(0, 1, -4.5);
 
-    // 4. Correct distance check (Vector3 vs Vector3)
+    // Disables the animation once the camera is close enough to the target
     if (state.camera.position.distanceTo(target) < 0.1) {
       setActive(false);
-      console.log("Animation complete. OrbitControls engaged.");
+      console.log("Animation complete.");
     }
   });
 
-  return (
-    // Attach a pointLight directly to the camera
-    // This light moves wherever the camera moves
-    <primitive object={camera}>
-      <pointLight intensity={3} distance={20} color="white" />
-    </primitive>
-  );
+  return null;
 }
 
+/**
+ * Utility developer component for coordinate mapping.
+ * @component
+ * @description
+ * Listens for a 'Q' keypress and logs the current camera Position and Rotation to the console.
+ * Essential for precisely placing 3D objects like buttons and labels within the scene.
+ */
 function CameraLogger() {
   const { camera } = useThree();
 
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key.toLowerCase() === "q") {
-        // Extracting position
         const { x, y, z } = camera.position;
-
-        // Extracting rotation (in radians)
         const { x: rx, y: ry, z: rz } = camera.rotation;
 
         console.log("--- Camera Coordinates ---");
@@ -87,74 +86,49 @@ function CameraLogger() {
     };
 
     window.addEventListener("keydown", handleKeyDown);
-
-    // Cleanup listener on unmount
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [camera]);
 
   return null;
 }
 
+/**
+ * The 3D Computer terminal assembly.
+ * @component
+ * @description
+ * Renders a GLTF monitor model with interactive hardware buttons and an embedded HTML screen.
+ * Includes CRT post-processing effects (scanlines, flicker) and dynamic tooltip positioning.
+ */
 function Computer() {
+  /** @type {String|null} State to track which button is currently being hovered */
   const [hoveredText, setHoveredText] = useState(null);
 
-  const handlePointerOver = (text) => {
-    // Optional: play a tiny "blip" sound here
-    setHoveredText(text);
-    document.body.style.cursor = "pointer";
-  };
+  /** @type {Boolean} Controls the visibility of CRT scanlines and flicker overlays */
+  const [showEffects, setShowEffects] = useState(true);
 
-  const handlePointerOut = () => {
-    setHoveredText(null);
-    document.body.style.cursor = "auto";
-  };
-
-  const playClick = () => {
-    clickSound.currentTime = 0;
-    clickSound.play();
-  };
-
-  const playButton = () => {
-    buttonSound.currentTime = 0;
-    buttonSound.play();
-  };
-  //const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
   const { scene, nodes } = useGLTF(
     `${import.meta.env.BASE_URL}Computer/Monitor2.glb`
   );
   const location = useLocation();
-  const [showEffects, setShowEffects] = useState(true);
+  const navigate = useNavigate();
+
+  /** @type {String} The URL to be rendered within the monitor's screen iframe */
   const iframeSrc =
     location.state?.iframeUrl ||
     "https://bolajiadewal3.github.io/Celestaris/Portfolio";
 
-  const handleFullReset = () => {
-    if (document.referrer) {
-      // If there is a previous page in history, go there and force reload
-      window.location.href = document.referrer;
-    } else {
-      // Fallback: Navigate to the root/landing and force refresh
-      window.location.assign("/");
-    }
-  };
-
-  const navigate = useNavigate();
-
-  const switchToDocumentation = () => {
-    navigate(`${import.meta.env.BASE_URL}Documentation`);
-  };
-
-  // 1. Calculate the actual center of the geometry
+  /**
+   * Calculates the geometric center of the screen mesh.
+   * @description
+   * This is necessary because the GLTF mesh might have its origin at a corner or hinge.
+   * Calculating the bounding box center allows the HTML screen to be perfectly centered.
+   * @returns {Array<number>} [x, y, z] offset relative to the mesh position.
+   */
   const centerOffset = useMemo(() => {
     if (!nodes.Screen) return [0, 0, 0];
-
-    // Create a bounding box for the screen geometry
     const box = new THREE.Box3().setFromObject(nodes.Screen);
     const center = new THREE.Vector3();
     box.getCenter(center);
-
-    // We need the center RELATIVE to the mesh's position
-    // This removes the "hinge" offset
     return [
       center.x - nodes.Screen.position.x,
       center.y - nodes.Screen.position.y,
@@ -162,10 +136,17 @@ function Computer() {
     ];
   }, [nodes]);
 
+  const playButton = () => {
+    buttonSound.currentTime = 0;
+    buttonSound.play();
+  };
+
   return (
     <group>
+      {/* The static Monitor model */}
       <primitive object={scene} />
 
+      {/* HARDWARE BUTTON: Site Documentation (Blue) */}
       <mesh
         position={[
           nodes.Button.position.x - 0.17,
@@ -176,12 +157,17 @@ function Computer() {
         scale={nodes.Button.scale}
         onClick={() => {
           playButton();
-          switchToDocumentation();
+          navigate(`${import.meta.env.BASE_URL}Documentation`);
         }}
-        onPointerOver={() => handlePointerOver("Site Documentation")}
-        onPointerOut={handlePointerOut}
+        onPointerOver={() => {
+          setHoveredText("Site Documentation");
+          document.body.style.cursor = "pointer";
+        }}
+        onPointerOut={() => {
+          setHoveredText(null);
+          document.body.style.cursor = "auto";
+        }}
       >
-        {/* We use the geometry and material already in the file */}
         <primitive object={nodes.Button.geometry} attach="geometry" />
         <meshStandardMaterial
           color="blue"
@@ -190,6 +176,7 @@ function Computer() {
         />
       </mesh>
 
+      {/* HARDWARE BUTTON: Toggle CRT (Green/Red) */}
       <mesh
         position={nodes.Button.position}
         rotation={nodes.Button.rotation}
@@ -198,10 +185,15 @@ function Computer() {
           setShowEffects(!showEffects);
           playButton();
         }}
-        onPointerOver={() => handlePointerOver("Toggle CRT Effects")}
-        onPointerOut={handlePointerOut}
+        onPointerOver={() => {
+          setHoveredText("Toggle CRT Effects");
+          document.body.style.cursor = "pointer";
+        }}
+        onPointerOut={() => {
+          setHoveredText(null);
+          document.body.style.cursor = "auto";
+        }}
       >
-        {/* We use the geometry and material already in the file */}
         <primitive object={nodes.Button.geometry} attach="geometry" />
         <meshStandardMaterial
           color={showEffects ? "green" : "red"}
@@ -211,7 +203,6 @@ function Computer() {
       </mesh>
 
       <mesh
-        // Offset slightly on the X axis to place it next to the first button
         position={[
           nodes.Button.position.x + 0.15,
           nodes.Button.position.y,
@@ -221,10 +212,20 @@ function Computer() {
         scale={nodes.Button.scale}
         onClick={() => {
           playButton();
-          handleFullReset();
+          if (document.referrer) {
+            window.location.href = document.referrer;
+          } else {
+            window.location.assign("/Celestaris/");
+          }
         }}
-        onPointerOver={() => handlePointerOver("Go To Last Page")}
-        onPointerOut={handlePointerOut}
+        onPointerOver={() => {
+          setHoveredText("Go to Last Page");
+          document.body.style.cursor = "pointer";
+        }}
+        onPointerOut={() => {
+          setHoveredText(null);
+          document.body.style.cursor = "auto";
+        }}
       >
         <primitive object={nodes.Button.geometry} attach="geometry" />
         <meshStandardMaterial
@@ -234,36 +235,22 @@ function Computer() {
         />
       </mesh>
 
+      {/* Dynamic Tooltip Label */}
       {hoveredText && (
         <Html
-          // Position it slightly above the buttons
           position={[
             nodes.Button.position.x + 0.075,
             nodes.Button.position.y + 0.2,
             nodes.Button.position.z,
           ]}
           center
-          distanceFactor={3} // Adjust size based on camera distance
+          distanceFactor={3}
         >
-          <div
-            style={{
-              background: "rgba(0, 0, 0, 0.8)",
-              color: "white",
-              padding: "4px 10px",
-              borderRadius: "4px",
-              fontFamily: "monospace",
-              fontSize: "12px",
-              whiteSpace: "nowrap",
-              border: "1px solid red",
-              pointerEvents: "none", // Critical so it doesn't block clicks
-              boxShadow: "0 0 10px rgba(255, 0, 0, 0.5)",
-            }}
-          >
-            {hoveredText}
-          </div>
+          <div className="monitor-tooltip">{hoveredText}</div>
         </Html>
       )}
 
+      {/* VIRTUAL SCREEN: The Interactive Iframe */}
       <group
         position={nodes.Screen.position}
         rotation={nodes.Screen.rotation}
@@ -282,73 +269,18 @@ function Computer() {
           distanceFactor={0.7}
           center
         >
-          <style>{`
-        @keyframes scanline-scroll {
-          from { background-position: 0 0; }
-          to { background-position: 0 40px; }
-        }
-        @keyframes crt-flicker {
-          0% { opacity: 0.01; }
-          50% { opacity: 0.04; }
-          100% { opacity: 0.01; }
-        }
-      `}</style>
+          {/* Much cleaner div using conditional class for effects */}
           <div
-            style={{
-              position: "relative",
-              width: "950px",
-              height: "850px",
-              background: "black",
-              overflow: "hidden",
-              borderRadius: "40px",
-              boxShadow: showEffects
-                ? "0 0 50px rgba(255,255,255,0.1), inset 0 0 40px rgba(255,255,255,0.1)"
-                : "none",
-              transform: showEffects ? "scale(1.05)" : "scale(1.04)",
-              transition: "all 0.3s ease", // Smooth transition when toggling
-            }}
+            className={`screen-container ${
+              showEffects ? "effects-active" : ""
+            }`}
           >
-            {/* 1. THE IFRAME */}
-            <iframe
-              src={iframeSrc}
-              loading="lazy"
-              style={{
-                width: "100%",
-                height: "100%",
-                border: "none",
-                // Filters only apply when effects are on
-                filter: showEffects ? "brightness(1) contrast(1.1)" : "none",
-              }}
-            />
+            <iframe src={iframeSrc} className="monitor-iframe" />
 
             {showEffects && (
               <>
-                {/* 2. CHUNKY MOVING SCANLINES */}
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    pointerEvents: "none",
-                    zIndex: 100,
-                    backgroundImage:
-                      "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 10px, transparent 10px, transparent 20px)",
-                    backgroundSize: "100% 20px",
-                    animation: "scanline-scroll 4s linear infinite",
-                    opacity: 0.2,
-                  }}
-                />
-
-                {/* 3. FLICKER LAYER */}
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    pointerEvents: "none",
-                    zIndex: 101,
-                    background: "transparent",
-                    animation: "crt-flicker 0.2s infinite",
-                  }}
-                />
+                <div className="scanline-layer" />
+                <div className="flicker-layer" />
               </>
             )}
           </div>
@@ -361,11 +293,9 @@ function Computer() {
 useGLTF.preload(`${import.meta.env.BASE_URL}Computer/Monitor2.glb`);
 
 /**
- * Main application component rendering a Three.js city scene,
- * interactive UI overlays, banners, and ambient experience.
- *
+ * Main Portfolio Entry Point.
  * @component
- * @returns {JSX.Element}
+ * @returns {JSX.Element} The full Canvas-based 3D environment.
  */
 export default function Portfolio() {
   return (
@@ -379,14 +309,6 @@ export default function Portfolio() {
           <CameraRig />
           <ambientLight intensity={0.5} />
           <Environment preset="city" />
-          <ContactShadows
-            position={[0, -0.8, 0]}
-            opacity={0.4}
-            scale={10}
-            blur={2}
-            far={0.8}
-          />
-          <pointLight position={[2, 2, 2]} intensity={1.5} color="#ff00ff" />
           <Computer />
           <CameraLogger />
 
@@ -395,13 +317,8 @@ export default function Portfolio() {
           </group>
 
           <EffectComposer>
-            <Bloom
-              luminanceThreshold={1}
-              intensity={1.5}
-              levels={9}
-              mipmapBlur
-            />
-            <Noise opacity={0.05} /> {/* Adds a subtle cinematic grain */}
+            <Bloom intensity={1.5} mipmapBlur />
+            <Noise opacity={0.05} />
             <Vignette eskil={false} offset={0.1} darkness={1.1} />
           </EffectComposer>
         </Suspense>
