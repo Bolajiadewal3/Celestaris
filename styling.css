@@ -133,3 +133,98 @@ a:hover {
   border-style: solid !important;
   z-index: 30;
 }
+
+/* portfolio.css */
+
+/* --- CRT Animations --- */
+@keyframes scanline-scroll {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 40px;
+  }
+}
+
+@keyframes crt-flicker {
+  0% {
+    opacity: 0.01;
+  }
+  50% {
+    opacity: 0.04;
+  }
+  100% {
+    opacity: 0.01;
+  }
+}
+
+/* --- Tooltip UI --- */
+.monitor-tooltip {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: "monospace";
+  font-size: 12px;
+  white-space: nowrap;
+  border: 1px solid red;
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* --- Monitor Screen --- */
+.screen-container {
+  position: relative;
+  width: 950px;
+  height: 850px;
+  background: black;
+  overflow: hidden;
+  border-radius: 40px;
+  transition: all 0.3s ease;
+  transform: scale(1.04); /* Base scale */
+}
+
+/* Modifier class for when effects are ON */
+.screen-container.effects-active {
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.1),
+    inset 0 0 40px rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.monitor-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  transition: filter 0.3s ease;
+}
+
+.effects-active .monitor-iframe {
+  filter: brightness(1) contrast(1.1);
+}
+
+/* --- Effect Layers --- */
+.scanline-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  background-size: 100% 20px;
+  animation: scanline-scroll 4s linear infinite;
+  opacity: 0.2;
+}
+
+.flicker-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 101;
+  background: transparent;
+  animation: crt-flicker 0.2s infinite;
+}
