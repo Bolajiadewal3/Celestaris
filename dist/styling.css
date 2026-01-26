@@ -1,58 +1,88 @@
 html {
-  cursor: url("Cursors/arrowhead-normal.svg") 16 16, auto;
+  cursor:
+    url("Cursors/arrowhead-normal.svg") 16 16,
+    auto;
   font-family: "Orbitron";
   font-weight: 700;
 }
 
 #startButton {
-  cursor: url("Cursors/arrowhead-normal.svg") 16 16, auto !important;
+  cursor:
+    url("Cursors/arrowhead-normal.svg") 16 16,
+    auto !important;
 }
 #startButton:hover {
-  cursor: url("Cursors/arrowhead-hover.svg") 16 16, auto !important;
+  cursor:
+    url("Cursors/arrowhead-hover.svg") 16 16,
+    auto !important;
 }
 #startButton:active {
-  cursor: url("Cursors/arrowhead-mousedown.svg") 16 16, auto !important;
+  cursor:
+    url("Cursors/arrowhead-mousedown.svg") 16 16,
+    auto !important;
 }
 
 a:hover {
-  cursor: url("Cursors/lightning-normal.svg") 16 16, auto !important;
+  cursor:
+    url("Cursors/lightning-normal.svg") 16 16,
+    auto !important;
 }
 a:active {
-  cursor: url("Cursors/lightning-purple.svg") 16 16, auto !important;
+  cursor:
+    url("Cursors/lightning-purple.svg") 16 16,
+    auto !important;
 }
 
 button:hover {
-  cursor: url("Cursors/arrowhead-hover.svg") 16 16, auto !important;
+  cursor:
+    url("Cursors/arrowhead-hover.svg") 16 16,
+    auto !important;
 }
 button:active {
-  cursor: url("Cursors/arrowhead-mousedown.svg") 16 16, auto !important;
+  cursor:
+    url("Cursors/arrowhead-mousedown.svg") 16 16,
+    auto !important;
 }
 
 .poemLinks:hover {
-  cursor: url("Cursors/arrowhead-hover.svg") 16 16, auto !important;
+  cursor:
+    url("Cursors/arrowhead-hover.svg") 16 16,
+    auto !important;
 }
 .poemLinks:active {
-  cursor: url("Cursors/arrowhead-mousedown.svg") 16 16, auto !important;
+  cursor:
+    url("Cursors/arrowhead-mousedown.svg") 16 16,
+    auto !important;
 }
 
 .smallTextButton,
 .normalExitButton {
-  cursor: url("Cursors/close-normal.svg") 16 16, auto !important;
+  cursor:
+    url("Cursors/close-normal.svg") 16 16,
+    auto !important;
 }
 .smallTextButton:hover,
 .normalExitButton:hover {
-  cursor: url("Cursors/close-normal.svg") 16 16, auto !important;
+  cursor:
+    url("Cursors/close-normal.svg") 16 16,
+    auto !important;
 }
 .smallTextButton:active,
 .normalExitButton:active {
-  cursor: url("Cursors/close-purple.svg") 16 16, auto !important;
+  cursor:
+    url("Cursors/close-purple.svg") 16 16,
+    auto !important;
 }
 
 canvas {
-  cursor: url("Cursors/move-normal.svg") 16 16, auto !important;
+  cursor:
+    url("Cursors/move-normal.svg") 16 16,
+    auto !important;
 }
 canvas:active {
-  cursor: url("Cursors/move-purple.svg") 16 16, auto !important;
+  cursor:
+    url("Cursors/move-purple.svg") 16 16,
+    auto !important;
 }
 
 div {
@@ -186,7 +216,8 @@ a:hover {
 
 /* Modifier class for when effects are ON */
 .screen-container.effects-active {
-  box-shadow: 0 0 50px rgba(255, 255, 255, 0.1),
+  box-shadow:
+    0 0 50px rgba(255, 255, 255, 0.1),
     inset 0 0 40px rgba(255, 255, 255, 0.1);
   transform: scale(1.05);
 }
@@ -227,4 +258,22 @@ a:hover {
   z-index: 101;
   background: transparent;
   animation: crt-flicker 0.2s infinite;
+}
+
+.tablet-screen {
+  width: "600px";
+  height: "900px";
+  background: "white";
+  border-radius: "30px";
+  overflow: "hidden";
+  display: "flex";
+  flex-direction: "column";
+  pointer-events: "auto";
+  user-select: "none";
+}
+
+.tablet-iframe {
+  width: "100%";
+  height: "100%";
+  border: "none";
 }
