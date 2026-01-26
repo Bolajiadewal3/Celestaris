@@ -449,8 +449,9 @@ $99e5c865b19c7c75$exports["default"] = $99e5c865b19c7c75$var$_default;
 
 
 /**
- * City scene component and model loaders.
  * @module City
+ * @category Scenes
+ * @description The high-performance urban landing page.
  */ 
 
 
@@ -914,63 +915,48 @@ function $8c8a4d7c0a98efcd$export$c9fcf1a7df975d78(degrees) {
 
 
 /**
- * CityModel loads a textured 3D city model (OBJ + MTL) and adds it to the scene.
- * It also calls `onLoad` once the model is fully loaded.
- *
+ * CityModel manages the complex OBJ/MTL loading and asset disposal.
  * @component
- * @param {Object} props - Component props
- * @param {Function} props.onLoad - Callback triggered after the model is successfully loaded
- * @returns {JSX.Element} - A group element containing the loaded 3D city model
+ * @category 3D Assets
  */ function $9e79c54aa8a563fd$var$CityModel({ onLoad: onLoad }) {
     const group = (0, $8I7SX$react.useRef)();
-    const { scene: scene } = (0, $8I7SX$reactthreefiber.useThree)(); // Scene is available if needed, though unused here
-    // Load the city texture for use in the material (optional for visual debugging or preview)
-    (0, $8I7SX$react.useEffect)(()=>{
-        const textureLoader = new $8I7SX$three.TextureLoader();
-        textureLoader.load("./City/cityPAL.jpg", (texture)=>{
-            console.log("Texture loaded", texture);
-        // This texture can be stored and used if needed later
-        }, undefined, (err)=>{
-            console.error("Texture load failed", err);
-        });
-    }, []);
     (0, $8I7SX$react.useEffect)(()=>{
         const mtlLoader = new (0, $8I7SX$threestdlib.MTLLoader)();
-        // Load material definitions
         mtlLoader.load("./City/cityMAT.mtl", (materials)=>{
             materials.preload();
             const objLoader = new (0, $8I7SX$threestdlib.OBJLoader)();
-            objLoader.setMaterials(materials); // Attach materials to the OBJ loader
-            // Load the OBJ model
+            objLoader.setMaterials(materials);
             objLoader.load("./City/city.obj", (obj)=>{
-                obj.scale.set(0.15, 0.15, 0.15); // Scale to fit the scene
-                obj.position.set(70, 0, -65); // Position in the scene
-                // Enable shadows on all mesh children
+                obj.scale.set(0.15, 0.15, 0.15);
+                obj.position.set(70, 0, -65);
                 obj.traverse((child)=>{
                     if (child.isMesh) {
                         child.castShadow = true;
                         child.receiveShadow = true;
+                        child.material.side = $8I7SX$three.FrontSide;
                     }
                 });
-                // Add to group and notify parent
-                group.current.add(obj);
+                group.current?.add(obj);
                 onLoad();
             });
         });
-        // Cleanup function to dispose of the model and its resources
         return ()=>{
             if (group.current) group.current.children.forEach((obj)=>{
                 group.current.remove(obj);
                 obj.traverse((child)=>{
                     if (child.geometry) child.geometry.dispose();
                     if (child.material) {
-                        if (Array.isArray(child.material)) child.material.forEach((mat)=>mat.dispose());
-                        else child.material.dispose();
+                        const materials = Array.isArray(child.material) ? child.material : [
+                            child.material
+                        ];
+                        materials.forEach((m)=>m.dispose());
                     }
                 });
             });
         };
-    }, []);
+    }, [
+        onLoad
+    ]);
     return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("group", {
         ref: group
     });
@@ -1417,15 +1403,12 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
     const [active, setActive] = (0, $8I7SX$react.useState)(true);
     /** @type {THREE.Vector3} */ // Target coordinates for the camera focus point
     const target = (0, $8I7SX$react.useMemo)(()=>new $8I7SX$three.Vector3(0, 0.75, 2.5), []);
-    /** @type {THREE.Vector3} */ const tempVec = (0, $8I7SX$react.useMemo)(()=>new $8I7SX$three.Vector3(), []);
     (0, $8I7SX$reactthreefiber.useFrame)((state)=>{
         if (!active) return;
+        // LERP (Linear Interpolation) for smooth "Premium" feel
         state.camera.position.lerp(target, 0.03);
         state.camera.lookAt(0, 1, -4.5);
-        if (state.camera.position.distanceTo(target) < 0.1) {
-            setActive(false);
-            console.log("Animation complete.");
-        }
+        if (state.camera.position.distanceTo(target) < 0.1) setActive(false);
     });
     return null;
 }

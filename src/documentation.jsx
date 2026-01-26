@@ -1,30 +1,18 @@
 /**
- * Main Documentation experience and tablet setup.
  * @module Documentation
+ * @category Scenes
+ * @description Technical showcase featuring an interactive 3D tablet.
  */
 
 import { React, Suspense } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import {
-  Html,
-  OrbitControls,
-  Environment,
-  ContactShadows,
-  PerspectiveCamera,
-} from "@react-three/drei";
-import { OBJLoader, MTLLoader } from "three-stdlib";
+import { Html, Environment, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
-import { useEffect, useRef, useLayoutEffect } from "react";
-import { useGLTF } from "@react-three/drei";
 import { useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
 import {
-  DepthOfField,
   Vignette,
   Bloom,
-  BrightnessContrast,
   EffectComposer,
-  HueSaturation,
   Noise,
 } from "@react-three/postprocessing";
 
@@ -45,27 +33,11 @@ function Tablet() {
         distanceFactor={2}
         position={[0, 0, 0.08]}
       >
-        <div
-          style={{
-            width: "600px", // Pixels match the aspect ratio of 3x5
-            height: "900px",
-            background: "white",
-            borderRadius: "30px",
-            overflow: "hidden",
-            display: "flex",
-            flexDirection: "column",
-            pointerEvents: "auto",
-            userSelect: "none",
-          }}
-        >
+        <div className="tablet-screen">
           <iframe
+            className="tablet-iframe"
             src={`${import.meta.env.BASE_URL}docs/index.html`}
             title="Documentation"
-            style={{
-              width: "100%",
-              height: "100%",
-              border: "none",
-            }}
           />
         </div>
       </Html>
