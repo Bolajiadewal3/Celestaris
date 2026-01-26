@@ -1390,6 +1390,7 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
 
 /**
  * @module Portfolio
+ * @category Scenes
  * @description Manages the main 3D portfolio scene, including the smooth camera transition
  * from the world view to the computer terminal.
  */ 
@@ -1407,20 +1408,20 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
 /**
  * Handles the cinematic smooth camera transition on mount.
  * @component
+ * @category Camera Logic
  * @description
  * Uses `useFrame` to linearly interpolate (lerp) the camera from its global position
  * to a specific focus point in front of the monitor. Once the camera is within
  * a threshold distance, the animation "disengages" to allow for other interactions.
  */ function $a0362f18e412ef3b$var$CameraRig() {
     const [active, setActive] = (0, $8I7SX$react.useState)(true);
-    /** @type {THREE.Vector3} Target coordinates for the camera focus point */ const target = (0, $8I7SX$react.useMemo)(()=>new $8I7SX$three.Vector3(0, 0.75, 2.5), []);
-    const tempVec = (0, $8I7SX$react.useMemo)(()=>new $8I7SX$three.Vector3(), []);
+    /** @type {THREE.Vector3} */ // Target coordinates for the camera focus point
+    const target = (0, $8I7SX$react.useMemo)(()=>new $8I7SX$three.Vector3(0, 0.75, 2.5), []);
+    /** @type {THREE.Vector3} */ const tempVec = (0, $8I7SX$react.useMemo)(()=>new $8I7SX$three.Vector3(), []);
     (0, $8I7SX$reactthreefiber.useFrame)((state)=>{
         if (!active) return;
-        // Smoothly moves camera to target position using a lerp factor of 0.05
         state.camera.position.lerp(target, 0.03);
         state.camera.lookAt(0, 1, -4.5);
-        // Disables the animation once the camera is close enough to the target
         if (state.camera.position.distanceTo(target) < 0.1) {
             setActive(false);
             console.log("Animation complete.");
@@ -1431,9 +1432,8 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
 /**
  * Utility developer component for coordinate mapping.
  * @component
- * @description
- * Listens for a 'Q' keypress and logs the current camera Position and Rotation to the console.
- * Essential for precisely placing 3D objects like buttons and labels within the scene.
+ * @category Developer Tools
+ * @description Listens for a 'Q' keypress and logs the current camera Position/Rotation.
  */ function $a0362f18e412ef3b$var$CameraLogger() {
     const { camera: camera } = (0, $8I7SX$reactthreefiber.useThree)();
     (0, $8I7SX$react.useEffect)(()=>{
@@ -1456,21 +1456,20 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
 /**
  * The 3D Computer terminal assembly.
  * @component
+ * @category Interactive Objects
  * @description
  * Renders a GLTF monitor model with interactive hardware buttons and an embedded HTML screen.
- * Includes CRT post-processing effects (scanlines, flicker) and dynamic tooltip positioning.
  */ function $a0362f18e412ef3b$var$Computer() {
-    /** @type {String|null} State to track which button is currently being hovered */ const [hoveredText, setHoveredText] = (0, $8I7SX$react.useState)(null);
-    /** @type {Boolean} Controls the visibility of CRT scanlines and flicker overlays */ const [showEffects, setShowEffects] = (0, $8I7SX$react.useState)(true);
+    /** @type {String|null} */ // State to track which button is currently being hovered
+    const [hoveredText, setHoveredText] = (0, $8I7SX$react.useState)(null);
+    /** @type {Boolean} */ // Controls the visibility of CRT scanlines and flicker overlays
+    const [showEffects, setShowEffects] = (0, $8I7SX$react.useState)(true);
     const { scene: scene, nodes: nodes } = (0, $8I7SX$reactthreedrei.useGLTF)(`${$a0362f18e412ef3b$import_meta.env.BASE_URL}Computer/Monitor2.glb`);
     const location = (0, $8I7SX$reactrouterdom.useLocation)();
     const navigate = (0, $8I7SX$reactrouterdom.useNavigate)();
-    /** @type {String} The URL to be rendered within the monitor's screen iframe */ const iframeSrc = location.state?.iframeUrl || "https://bolajiadewal3.github.io/Celestaris/Portfolio";
+    /** @type {String} */ const iframeSrc = location.state?.iframeUrl || "https://bolajiadewal3.github.io/Celestaris/Portfolio";
     /**
    * Calculates the geometric center of the screen mesh.
-   * @description
-   * This is necessary because the GLTF mesh might have its origin at a corner or hinge.
-   * Calculating the bounding box center allows the HTML screen to be perfectly centered.
    * @returns {Array<number>} [x, y, z] offset relative to the mesh position.
    */ const centerOffset = (0, $8I7SX$react.useMemo)(()=>{
         if (!nodes.Screen) return [

@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Celestaris Documentation CameraLogger</title>
+  <title>Celestaris Documentation CameraRig</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -78,7 +78,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Components</p>
-                    <h1>CameraLogger</h1>
+                    <h1>CameraRig</h1>
                 </header>
                 
 
@@ -90,7 +90,7 @@
 <header>
     
         <h2>
-            &ltCameraLogger  /&gt
+            &ltCameraRig  /&gt
         </h2>
         
     
@@ -110,12 +110,12 @@
 
 
     
-    <h4 class="name" id="CameraLogger">
-        <a class="href-link" href="#CameraLogger">#</a>
+    <h4 class="name" id="CameraRig">
+        <a class="href-link" href="#CameraRig">#</a>
         
         <span class="code-name">
             
-                &ltCameraLogger  /&gt
+                &ltCameraRig  /&gt
             
         </span>
     </h4>
@@ -124,7 +124,9 @@
     
     
     <div class="description">
-        <p>Listens for a 'Q' keypress and logs the current camera Position/Rotation.</p>
+        <p>Uses <code>useFrame</code> to linearly interpolate (lerp) the camera from its global position
+to a specific focus point in front of the monitor. Once the camera is within
+a threshold distance, the animation &quot;disengages&quot; to allow for other interactions.</p>
     </div>
     
 
@@ -177,7 +179,7 @@
         <p class="tag-source">
             <a href="portfolio.jsx.html" class="button">View Source</a>
             <span>
-                <a href="portfolio.jsx.html">portfolio.jsx</a>, <a href="portfolio.jsx.html#line71">line 71</a>
+                <a href="portfolio.jsx.html">portfolio.jsx</a>, <a href="portfolio.jsx.html#line38">line 38</a>
             </span>
         </p>
     

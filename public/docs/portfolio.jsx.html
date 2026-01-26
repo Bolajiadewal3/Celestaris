@@ -1,6 +1,96 @@
-/**
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Celestaris Documentation portfolio.jsx</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Celestaris Engine Docs</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="module-City.html">City</a></li><li><a href="module-City-CameraLight.html">CameraLight</a></li><li><a href="module-City-CityModel.html">CityModel</a></li><li><a href="module-Portfolio.html">Portfolio</a></li><li><a href="module-Portfolio-CameraLogger.html">CameraLogger</a></li><li><a href="module-Portfolio-CameraRig.html">CameraRig</a></li><li><a href="module-Portfolio-Computer.html">Computer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>portfolio.jsx</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * @module Portfolio
- * @category Scenes
  * @description Manages the main 3D portfolio scene, including the smooth camera transition
  * from the world view to the computer terminal.
  */
@@ -31,7 +121,6 @@ const buttonSound = new Audio("./Computer/button_click.mp3");
 /**
  * Handles the cinematic smooth camera transition on mount.
  * @component
- * @category Camera Logic
  * @description
  * Uses `useFrame` to linearly interpolate (lerp) the camera from its global position
  * to a specific focus point in front of the monitor. Once the camera is within
@@ -40,20 +129,19 @@ const buttonSound = new Audio("./Computer/button_click.mp3");
 function CameraRig() {
   const [active, setActive] = useState(true);
 
-  /** @type {THREE.Vector3} */
-  // Target coordinates for the camera focus point
+  /** @type {THREE.Vector3} Target coordinates for the camera focus point */
   const target = useMemo(() => new THREE.Vector3(0, 0.75, 2.5), []);
-
-  /** @type {THREE.Vector3} */
   const tempVec = useMemo(() => new THREE.Vector3(), []);
 
   useFrame((state) => {
     if (!active) return;
 
+    // Smoothly moves camera to target position using a lerp factor of 0.05
     state.camera.position.lerp(target, 0.03);
     state.camera.lookAt(0, 1, -4.5);
 
-    if (state.camera.position.distanceTo(target) < 0.1) {
+    // Disables the animation once the camera is close enough to the target
+    if (state.camera.position.distanceTo(target) &lt; 0.1) {
       setActive(false);
       console.log("Animation complete.");
     }
@@ -65,8 +153,9 @@ function CameraRig() {
 /**
  * Utility developer component for coordinate mapping.
  * @component
- * @category Developer Tools
- * @description Listens for a 'Q' keypress and logs the current camera Position/Rotation.
+ * @description
+ * Listens for a 'Q' keypress and logs the current camera Position and Rotation to the console.
+ * Essential for precisely placing 3D objects like buttons and labels within the scene.
  */
 function CameraLogger() {
   const { camera } = useThree();
@@ -79,10 +168,10 @@ function CameraLogger() {
 
         console.log("--- Camera Coordinates ---");
         console.log(
-          `Position: [${x.toFixed(2)}, ${y.toFixed(2)}, ${z.toFixed(2)}]`,
+          `Position: [${x.toFixed(2)}, ${y.toFixed(2)}, ${z.toFixed(2)}]`
         );
         console.log(
-          `Rotation: [${rx.toFixed(2)}, ${ry.toFixed(2)}, ${rz.toFixed(2)}]`,
+          `Rotation: [${rx.toFixed(2)}, ${ry.toFixed(2)}, ${rz.toFixed(2)}]`
         );
       }
     };
@@ -97,33 +186,34 @@ function CameraLogger() {
 /**
  * The 3D Computer terminal assembly.
  * @component
- * @category Interactive Objects
  * @description
  * Renders a GLTF monitor model with interactive hardware buttons and an embedded HTML screen.
+ * Includes CRT post-processing effects (scanlines, flicker) and dynamic tooltip positioning.
  */
 function Computer() {
-  /** @type {String|null} */
-  // State to track which button is currently being hovered
+  /** @type {String|null} State to track which button is currently being hovered */
   const [hoveredText, setHoveredText] = useState(null);
 
-  /** @type {Boolean} */
-  // Controls the visibility of CRT scanlines and flicker overlays
+  /** @type {Boolean} Controls the visibility of CRT scanlines and flicker overlays */
   const [showEffects, setShowEffects] = useState(true);
 
   const { scene, nodes } = useGLTF(
-    `${import.meta.env.BASE_URL}Computer/Monitor2.glb`,
+    `${import.meta.env.BASE_URL}Computer/Monitor2.glb`
   );
   const location = useLocation();
   const navigate = useNavigate();
 
-  /** @type {String} */
+  /** @type {String} The URL to be rendered within the monitor's screen iframe */
   const iframeSrc =
     location.state?.iframeUrl ||
     "https://bolajiadewal3.github.io/Celestaris/Portfolio";
 
   /**
    * Calculates the geometric center of the screen mesh.
-   * @returns {Array<number>} [x, y, z] offset relative to the mesh position.
+   * @description
+   * This is necessary because the GLTF mesh might have its origin at a corner or hinge.
+   * Calculating the bounding box center allows the HTML screen to be perfectly centered.
+   * @returns {Array&lt;number>} [x, y, z] offset relative to the mesh position.
    */
   const centerOffset = useMemo(() => {
     if (!nodes.Screen) return [0, 0, 0];
@@ -143,12 +233,12 @@ function Computer() {
   };
 
   return (
-    <group>
+    &lt;group>
       {/* The static Monitor model */}
-      <primitive object={scene} />
+      &lt;primitive object={scene} />
 
       {/* HARDWARE BUTTON: Site Documentation (Blue) */}
-      <mesh
+      &lt;mesh
         position={[
           nodes.Button.position.x - 0.17,
           nodes.Button.position.y,
@@ -169,16 +259,16 @@ function Computer() {
           document.body.style.cursor = "auto";
         }}
       >
-        <primitive object={nodes.Button.geometry} attach="geometry" />
-        <meshStandardMaterial
+        &lt;primitive object={nodes.Button.geometry} attach="geometry" />
+        &lt;meshStandardMaterial
           color="blue"
           emissive="cornflowerblue"
           emissiveIntensity={0.5}
         />
-      </mesh>
+      &lt;/mesh>
 
       {/* HARDWARE BUTTON: Toggle CRT (Green/Red) */}
-      <mesh
+      &lt;mesh
         position={nodes.Button.position}
         rotation={nodes.Button.rotation}
         scale={nodes.Button.scale}
@@ -195,15 +285,15 @@ function Computer() {
           document.body.style.cursor = "auto";
         }}
       >
-        <primitive object={nodes.Button.geometry} attach="geometry" />
-        <meshStandardMaterial
+        &lt;primitive object={nodes.Button.geometry} attach="geometry" />
+        &lt;meshStandardMaterial
           color={showEffects ? "green" : "red"}
           emissive={showEffects ? "green" : "red"}
           emissiveIntensity={0.5}
         />
-      </mesh>
+      &lt;/mesh>
 
-      <mesh
+      &lt;mesh
         position={[
           nodes.Button.position.x + 0.15,
           nodes.Button.position.y,
@@ -228,17 +318,17 @@ function Computer() {
           document.body.style.cursor = "auto";
         }}
       >
-        <primitive object={nodes.Button.geometry} attach="geometry" />
-        <meshStandardMaterial
+        &lt;primitive object={nodes.Button.geometry} attach="geometry" />
+        &lt;meshStandardMaterial
           color="goldenrod"
           emissive="gold"
           emissiveIntensity={0.8}
         />
-      </mesh>
+      &lt;/mesh>
 
       {/* Dynamic Tooltip Label */}
-      {hoveredText && (
-        <Html
+      {hoveredText &amp;&amp; (
+        &lt;Html
           position={[
             nodes.Button.position.x + 0.075,
             nodes.Button.position.y + 0.2,
@@ -247,17 +337,17 @@ function Computer() {
           center
           distanceFactor={3}
         >
-          <div className="monitor-tooltip">{hoveredText}</div>
-        </Html>
+          &lt;div className="monitor-tooltip">{hoveredText}&lt;/div>
+        &lt;/Html>
       )}
 
       {/* VIRTUAL SCREEN: The Interactive Iframe */}
-      <group
+      &lt;group
         position={nodes.Screen.position}
         rotation={nodes.Screen.rotation}
         scale={nodes.Screen.scale}
       >
-        <Html
+        &lt;Html
           transform
           rotation-order="YXZ"
           position={[
@@ -271,23 +361,23 @@ function Computer() {
           center
         >
           {/* Much cleaner div using conditional class for effects */}
-          <div
+          &lt;div
             className={`screen-container ${
               showEffects ? "effects-active" : ""
             }`}
           >
-            <iframe src={iframeSrc} className="monitor-iframe" />
+            &lt;iframe src={iframeSrc} className="monitor-iframe" />
 
-            {showEffects && (
-              <>
-                <div className="scanline-layer" />
-                <div className="flicker-layer" />
-              </>
+            {showEffects &amp;&amp; (
+              &lt;>
+                &lt;div className="scanline-layer" />
+                &lt;div className="flicker-layer" />
+              &lt;/>
             )}
-          </div>
-        </Html>
-      </group>
-    </group>
+          &lt;/div>
+        &lt;/Html>
+      &lt;/group>
+    &lt;/group>
   );
 }
 
@@ -296,34 +386,54 @@ useGLTF.preload(`${import.meta.env.BASE_URL}Computer/Monitor2.glb`);
 /**
  * Main Portfolio Entry Point.
  * @component
- * @category Scenes
+ * @returns {JSX.Element} The full Canvas-based 3D environment.
  */
 export default function Portfolio() {
   return (
-    <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-      <Canvas
+    &lt;div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+      &lt;Canvas
         dpr={[1, 1.5]}
         gl={{ powerPreference: "high-performance", antialias: false }}
         camera={{ position: [10, 10, 20], fov: 50 }}
       >
-        <Suspense fallback={<Html center>Loading Experience...</Html>}>
-          <CameraRig />
-          <ambientLight intensity={0.5} />
-          <Environment preset="city" />
-          <Computer />
-          <CameraLogger />
+        &lt;Suspense fallback={&lt;Html center>Loading Experience...&lt;/Html>}>
+          &lt;CameraRig />
+          &lt;ambientLight intensity={0.5} />
+          &lt;Environment preset="city" />
+          &lt;Computer />
+          &lt;CameraLogger />
 
-          <group>
-            <gridHelper args={[10, 10]} />
-          </group>
+          &lt;group>
+            &lt;gridHelper args={[10, 10]} />
+          &lt;/group>
 
-          <EffectComposer>
-            <Bloom intensity={1.5} mipmapBlur />
-            <Noise opacity={0.05} />
-            <Vignette eskil={false} offset={0.1} darkness={1.1} />
-          </EffectComposer>
-        </Suspense>
-      </Canvas>
-    </div>
+          &lt;EffectComposer>
+            &lt;Bloom intensity={1.5} mipmapBlur />
+            &lt;Noise opacity={0.05} />
+            &lt;Vignette eskil={false} offset={0.1} darkness={1.1} />
+          &lt;/EffectComposer>
+        &lt;/Suspense>
+      &lt;/Canvas>
+    &lt;/div>
   );
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>
