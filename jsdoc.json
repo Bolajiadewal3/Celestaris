@@ -1,15 +1,30 @@
 {
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
   "source": {
     "include": ["src"],
-    "includePattern": ".+\\.js(doc|x)?$",
+    "includePattern": ".+\\.jsx?$",
     "excludePattern": "(^|\\/|\\\\)_"
   },
+  "plugins": ["plugins/markdown", "node_modules/better-docs/component"],
   "opts": {
-    "destination": "./docs",
-    "recurse": true
+    "destination": "./docs/",
+    "recurse": true,
+    "template": "node_modules/better-docs"
   },
   "templates": {
-    "cleverLinks": true,
-    "monospaceLinks": true
+    "better-docs": {
+      "name": "Celestaris Engine Docs",
+      "title": "Celestaris Documentation",
+      "hideGenerator": true,
+      "navigation": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/bolajiadewal3/Celestaris"
+        }
+      ]
+    }
   }
 }

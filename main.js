@@ -448,7 +448,10 @@ $99e5c865b19c7c75$exports["default"] = $99e5c865b19c7c75$var$_default;
 
 
 
-
+/**
+ * City scene component and model loaders.
+ * @module City
+ */ 
 
 
 
@@ -1385,8 +1388,11 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
 }
 
 
-
-
+/**
+ * @module Portfolio
+ * @description Manages the main 3D portfolio scene, including the smooth camera transition
+ * from the world view to the computer terminal.
+ */ 
 
 
 
@@ -1398,44 +1404,42 @@ var $a0362f18e412ef3b$import_meta = Object.assign(Object.create(null), {
 });
 const $a0362f18e412ef3b$var$clickSound = new Audio("./Computer/mouse_click.mp3");
 const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3");
-function $a0362f18e412ef3b$var$CameraRig() {
-    const { camera: camera } = (0, $8I7SX$reactthreefiber.useThree)();
+/**
+ * Handles the cinematic smooth camera transition on mount.
+ * @component
+ * @description
+ * Uses `useFrame` to linearly interpolate (lerp) the camera from its global position
+ * to a specific focus point in front of the monitor. Once the camera is within
+ * a threshold distance, the animation "disengages" to allow for other interactions.
+ */ function $a0362f18e412ef3b$var$CameraRig() {
     const [active, setActive] = (0, $8I7SX$react.useState)(true);
-    // 1. Create the target as a Vector3 object so distanceTo works correctly
-    const target = (0, $8I7SX$react.useMemo)(()=>new $8I7SX$three.Vector3(0, 0.75, 2.5), []);
+    /** @type {THREE.Vector3} Target coordinates for the camera focus point */ const target = (0, $8I7SX$react.useMemo)(()=>new $8I7SX$three.Vector3(0, 0.75, 2.5), []);
     const tempVec = (0, $8I7SX$react.useMemo)(()=>new $8I7SX$three.Vector3(), []);
     (0, $8I7SX$reactthreefiber.useFrame)((state)=>{
         if (!active) return;
-        // 2. Smoothly move toward the target
-        // Increased speed slightly to 0.05 for a better feel
+        // Smoothly moves camera to target position using a lerp factor of 0.05
         state.camera.position.lerp(target, 0.03);
-        // 3. Keep eyes on the monitor
         state.camera.lookAt(0, 1, -4.5);
-        // 4. Correct distance check (Vector3 vs Vector3)
+        // Disables the animation once the camera is close enough to the target
         if (state.camera.position.distanceTo(target) < 0.1) {
             setActive(false);
-            console.log("Animation complete. OrbitControls engaged.");
+            console.log("Animation complete.");
         }
     });
-    return(// Attach a pointLight directly to the camera
-    // This light moves wherever the camera moves
-    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("primitive", {
-        object: camera,
-        children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("pointLight", {
-            intensity: 3,
-            distance: 20,
-            color: "white"
-        })
-    }));
+    return null;
 }
-function $a0362f18e412ef3b$var$CameraLogger() {
+/**
+ * Utility developer component for coordinate mapping.
+ * @component
+ * @description
+ * Listens for a 'Q' keypress and logs the current camera Position and Rotation to the console.
+ * Essential for precisely placing 3D objects like buttons and labels within the scene.
+ */ function $a0362f18e412ef3b$var$CameraLogger() {
     const { camera: camera } = (0, $8I7SX$reactthreefiber.useThree)();
     (0, $8I7SX$react.useEffect)(()=>{
         const handleKeyDown = (event)=>{
             if (event.key.toLowerCase() === "q") {
-                // Extracting position
                 const { x: x, y: y, z: z } = camera.position;
-                // Extracting rotation (in radians)
                 const { x: rx, y: ry, z: rz } = camera.rotation;
                 console.log("--- Camera Coordinates ---");
                 console.log(`Position: [${x.toFixed(2)}, ${y.toFixed(2)}, ${z.toFixed(2)}]`);
@@ -1443,56 +1447,40 @@ function $a0362f18e412ef3b$var$CameraLogger() {
             }
         };
         window.addEventListener("keydown", handleKeyDown);
-        // Cleanup listener on unmount
         return ()=>window.removeEventListener("keydown", handleKeyDown);
     }, [
         camera
     ]);
     return null;
 }
-function $a0362f18e412ef3b$var$Computer() {
-    const [hoveredText, setHoveredText] = (0, $8I7SX$react.useState)(null);
-    const handlePointerOver = (text)=>{
-        // Optional: play a tiny "blip" sound here
-        setHoveredText(text);
-        document.body.style.cursor = "pointer";
-    };
-    const handlePointerOut = ()=>{
-        setHoveredText(null);
-        document.body.style.cursor = "auto";
-    };
-    const playClick = ()=>{
-        $a0362f18e412ef3b$var$clickSound.currentTime = 0;
-        $a0362f18e412ef3b$var$clickSound.play();
-    };
-    const playButton = ()=>{
-        $a0362f18e412ef3b$var$buttonSound.currentTime = 0;
-        $a0362f18e412ef3b$var$buttonSound.play();
-    };
-    //const { scene, nodes } = useGLTF("./Computer/Macbook2.glb");
+/**
+ * The 3D Computer terminal assembly.
+ * @component
+ * @description
+ * Renders a GLTF monitor model with interactive hardware buttons and an embedded HTML screen.
+ * Includes CRT post-processing effects (scanlines, flicker) and dynamic tooltip positioning.
+ */ function $a0362f18e412ef3b$var$Computer() {
+    /** @type {String|null} State to track which button is currently being hovered */ const [hoveredText, setHoveredText] = (0, $8I7SX$react.useState)(null);
+    /** @type {Boolean} Controls the visibility of CRT scanlines and flicker overlays */ const [showEffects, setShowEffects] = (0, $8I7SX$react.useState)(true);
     const { scene: scene, nodes: nodes } = (0, $8I7SX$reactthreedrei.useGLTF)(`${$a0362f18e412ef3b$import_meta.env.BASE_URL}Computer/Monitor2.glb`);
     const location = (0, $8I7SX$reactrouterdom.useLocation)();
-    const [showEffects, setShowEffects] = (0, $8I7SX$react.useState)(true);
-    const iframeSrc = location.state?.iframeUrl || "https://bolajiadewal3.github.io/Celestaris/Portfolio";
-    const handleFullReset = ()=>{
-        if (document.referrer) // If there is a previous page in history, go there and force reload
-        window.location.href = document.referrer;
-        else // Fallback: Navigate to the root/landing and force refresh
-        window.location.assign("/");
-    };
-    // 1. Calculate the actual center of the geometry
-    const centerOffset = (0, $8I7SX$react.useMemo)(()=>{
+    const navigate = (0, $8I7SX$reactrouterdom.useNavigate)();
+    /** @type {String} The URL to be rendered within the monitor's screen iframe */ const iframeSrc = location.state?.iframeUrl || "https://bolajiadewal3.github.io/Celestaris/Portfolio";
+    /**
+   * Calculates the geometric center of the screen mesh.
+   * @description
+   * This is necessary because the GLTF mesh might have its origin at a corner or hinge.
+   * Calculating the bounding box center allows the HTML screen to be perfectly centered.
+   * @returns {Array<number>} [x, y, z] offset relative to the mesh position.
+   */ const centerOffset = (0, $8I7SX$react.useMemo)(()=>{
         if (!nodes.Screen) return [
             0,
             0,
             0
         ];
-        // Create a bounding box for the screen geometry
         const box = new $8I7SX$three.Box3().setFromObject(nodes.Screen);
         const center = new $8I7SX$three.Vector3();
         box.getCenter(center);
-        // We need the center RELATIVE to the mesh's position
-        // This removes the "hinge" offset
         return [
             center.x - nodes.Screen.position.x,
             center.y - nodes.Screen.position.y,
@@ -1501,10 +1489,46 @@ function $a0362f18e412ef3b$var$Computer() {
     }, [
         nodes
     ]);
+    const playButton = ()=>{
+        $a0362f18e412ef3b$var$buttonSound.currentTime = 0;
+        $a0362f18e412ef3b$var$buttonSound.play();
+    };
     return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("group", {
         children: [
             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("primitive", {
                 object: scene
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
+                position: [
+                    nodes.Button.position.x - 0.17,
+                    nodes.Button.position.y,
+                    nodes.Button.position.z + 0.027
+                ],
+                rotation: nodes.Button.rotation,
+                scale: nodes.Button.scale,
+                onClick: ()=>{
+                    playButton();
+                    navigate(`${$a0362f18e412ef3b$import_meta.env.BASE_URL}Documentation`);
+                },
+                onPointerOver: ()=>{
+                    setHoveredText("Site Documentation");
+                    document.body.style.cursor = "pointer";
+                },
+                onPointerOut: ()=>{
+                    setHoveredText(null);
+                    document.body.style.cursor = "auto";
+                },
+                children: [
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("primitive", {
+                        object: nodes.Button.geometry,
+                        attach: "geometry"
+                    }),
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("meshStandardMaterial", {
+                        color: "blue",
+                        emissive: "cornflowerblue",
+                        emissiveIntensity: 0.5
+                    })
+                ]
             }),
             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
                 position: nodes.Button.position,
@@ -1514,8 +1538,14 @@ function $a0362f18e412ef3b$var$Computer() {
                     setShowEffects(!showEffects);
                     playButton();
                 },
-                onPointerOver: ()=>handlePointerOver("Toggle CRT Effects"),
-                onPointerOut: handlePointerOut,
+                onPointerOver: ()=>{
+                    setHoveredText("Toggle CRT Effects");
+                    document.body.style.cursor = "pointer";
+                },
+                onPointerOut: ()=>{
+                    setHoveredText(null);
+                    document.body.style.cursor = "auto";
+                },
                 children: [
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("primitive", {
                         object: nodes.Button.geometry,
@@ -1529,7 +1559,6 @@ function $a0362f18e412ef3b$var$Computer() {
                 ]
             }),
             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
-                // Offset slightly on the X axis to place it next to the first button
                 position: [
                     nodes.Button.position.x + 0.15,
                     nodes.Button.position.y,
@@ -1539,24 +1568,30 @@ function $a0362f18e412ef3b$var$Computer() {
                 scale: nodes.Button.scale,
                 onClick: ()=>{
                     playButton();
-                    handleFullReset();
+                    if (document.referrer) window.location.href = document.referrer;
+                    else window.location.assign("/Celestaris/");
                 },
-                onPointerOver: ()=>handlePointerOver("Go To Last Page"),
-                onPointerOut: handlePointerOut,
+                onPointerOver: ()=>{
+                    setHoveredText("Go to Last Page");
+                    document.body.style.cursor = "pointer";
+                },
+                onPointerOut: ()=>{
+                    setHoveredText(null);
+                    document.body.style.cursor = "auto";
+                },
                 children: [
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("primitive", {
                         object: nodes.Button.geometry,
                         attach: "geometry"
                     }),
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("meshStandardMaterial", {
-                        color: "red",
-                        emissive: "red",
+                        color: "goldenrod",
+                        emissive: "gold",
                         emissiveIntensity: 0.8
                     })
                 ]
             }),
             hoveredText && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Html), {
-                // Position it slightly above the buttons
                 position: [
                     nodes.Button.position.x + 0.075,
                     nodes.Button.position.y + 0.2,
@@ -1565,18 +1600,7 @@ function $a0362f18e412ef3b$var$Computer() {
                 center: true,
                 distanceFactor: 3,
                 children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
-                    style: {
-                        background: "rgba(0, 0, 0, 0.8)",
-                        color: "white",
-                        padding: "4px 10px",
-                        borderRadius: "4px",
-                        fontFamily: "monospace",
-                        fontSize: "12px",
-                        whiteSpace: "nowrap",
-                        border: "1px solid red",
-                        pointerEvents: "none",
-                        boxShadow: "0 0 10px rgba(255, 0, 0, 0.5)"
-                    },
+                    className: "monitor-tooltip",
                     children: hoveredText
                 })
             }),
@@ -1584,7 +1608,7 @@ function $a0362f18e412ef3b$var$Computer() {
                 position: nodes.Screen.position,
                 rotation: nodes.Screen.rotation,
                 scale: nodes.Screen.scale,
-                children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreedrei.Html), {
+                children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Html), {
                     transform: true,
                     "rotation-order": "YXZ",
                     position: [
@@ -1596,73 +1620,25 @@ function $a0362f18e412ef3b$var$Computer() {
                     "rotation-x": -0.15,
                     distanceFactor: 0.7,
                     center: true,
-                    children: [
-                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("style", {
-                            children: `
-        @keyframes scanline-scroll {
-          from { background-position: 0 0; }
-          to { background-position: 0 40px; }
-        }
-        @keyframes crt-flicker {
-          0% { opacity: 0.01; }
-          50% { opacity: 0.04; }
-          100% { opacity: 0.01; }
-        }
-      `
-                        }),
-                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("div", {
-                            style: {
-                                position: "relative",
-                                width: "950px",
-                                height: "850px",
-                                background: "black",
-                                overflow: "hidden",
-                                borderRadius: "40px",
-                                boxShadow: showEffects ? "0 0 50px rgba(255,255,255,0.1), inset 0 0 40px rgba(255,255,255,0.1)" : "none",
-                                transform: showEffects ? "scale(1.05)" : "scale(1.04)",
-                                transition: "all 0.3s ease"
-                            },
-                            children: [
-                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("iframe", {
-                                    src: iframeSrc,
-                                    loading: "lazy",
-                                    style: {
-                                        width: "100%",
-                                        height: "100%",
-                                        border: "none",
-                                        // Filters only apply when effects are on
-                                        filter: showEffects ? "brightness(1) contrast(1.1)" : "none"
-                                    }
-                                }),
-                                showEffects && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactjsxruntime.Fragment), {
-                                    children: [
-                                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
-                                            style: {
-                                                position: "absolute",
-                                                inset: 0,
-                                                pointerEvents: "none",
-                                                zIndex: 100,
-                                                backgroundImage: "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 10px, transparent 10px, transparent 20px)",
-                                                backgroundSize: "100% 20px",
-                                                animation: "scanline-scroll 4s linear infinite",
-                                                opacity: 0.2
-                                            }
-                                        }),
-                                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
-                                            style: {
-                                                position: "absolute",
-                                                inset: 0,
-                                                pointerEvents: "none",
-                                                zIndex: 101,
-                                                background: "transparent",
-                                                animation: "crt-flicker 0.2s infinite"
-                                            }
-                                        })
-                                    ]
-                                })
-                            ]
-                        })
-                    ]
+                    children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("div", {
+                        className: `screen-container ${showEffects ? "effects-active" : ""}`,
+                        children: [
+                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("iframe", {
+                                src: iframeSrc,
+                                className: "monitor-iframe"
+                            }),
+                            showEffects && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactjsxruntime.Fragment), {
+                                children: [
+                                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
+                                        className: "scanline-layer"
+                                    }),
+                                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
+                                        className: "flicker-layer"
+                                    })
+                                ]
+                            })
+                        ]
+                    })
                 })
             })
         ]
@@ -1706,26 +1682,6 @@ function $a0362f18e412ef3b$export$2e2bcd8739ae039() {
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Environment), {
                         preset: "city"
                     }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.ContactShadows), {
-                        position: [
-                            0,
-                            -0.8,
-                            0
-                        ],
-                        opacity: 0.4,
-                        scale: 10,
-                        blur: 2,
-                        far: 0.8
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("pointLight", {
-                        position: [
-                            2,
-                            2,
-                            2
-                        ],
-                        intensity: 1.5,
-                        color: "#ff00ff"
-                    }),
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($a0362f18e412ef3b$var$Computer, {}),
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($a0362f18e412ef3b$var$CameraLogger, {}),
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("group", {
@@ -1739,15 +1695,12 @@ function $a0362f18e412ef3b$export$2e2bcd8739ae039() {
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreepostprocessing.EffectComposer), {
                         children: [
                             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Bloom), {
-                                luminanceThreshold: 1,
                                 intensity: 1.5,
-                                levels: 9,
                                 mipmapBlur: true
                             }),
                             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Noise), {
                                 opacity: 0.05
                             }),
-                            " ",
                             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Vignette), {
                                 eskil: false,
                                 offset: 0.1,
@@ -1770,6 +1723,9 @@ window.ReactWrapper = (0, (/*@__PURE__*/$parcel$interopDefault($99e5c865b19c7c75
 reactComponents['App'] = (0, $9e79c54aa8a563fd$export$2e2bcd8739ae039);
 reactComponents['App'] = (0, $9e79c54aa8a563fd$export$2e2bcd8739ae039);
 reactComponents['App'] = (0, $9e79c54aa8a563fd$export$2e2bcd8739ae039);
+reactComponents['Portfolio'] = (0, $a0362f18e412ef3b$export$2e2bcd8739ae039);
+reactComponents['Portfolio'] = (0, $a0362f18e412ef3b$export$2e2bcd8739ae039);
+reactComponents['Portfolio'] = (0, $a0362f18e412ef3b$export$2e2bcd8739ae039);
 reactComponents['Portfolio'] = (0, $a0362f18e412ef3b$export$2e2bcd8739ae039);
 
 
