@@ -115,8 +115,11 @@ function Computer() {
 
   /** @type {String} */
   const iframeSrc =
-    location.state?.iframeUrl ||
-    "https://bolajiadewal3.github.io/Celestaris/Portfolio/";
+    `${location.state?.iframeUrl}` ||
+    `${import.meta.env.BASE_URL}Portfolio/index.html`;
+  //const iframeSrc = `${import.meta.env.BASE_URL}Portfolio/index.html`;
+
+  console.log(`The imported iframe site is: ${iframeSrc}`);
 
   /**
    * Calculates the geometric center of the screen mesh.
@@ -273,7 +276,11 @@ function Computer() {
               showEffects ? "effects-active" : ""
             }`}
           >
-            <iframe src={iframeSrc} className="monitor-iframe" />
+            <iframe
+              src={iframeSrc}
+              className="monitor-iframe"
+              sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+            />
 
             {showEffects && (
               <>

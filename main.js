@@ -1482,7 +1482,7 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
     const { scene: scene, nodes: nodes } = (0, $8I7SX$reactthreedrei.useGLTF)(`${$a0362f18e412ef3b$import_meta.env.BASE_URL}Computer/Monitor2.glb`);
     const location = (0, $8I7SX$reactrouterdom.useLocation)();
     const navigate = (0, $8I7SX$reactrouterdom.useNavigate)();
-    /** @type {String} */ const iframeSrc = location.state?.iframeUrl || "https://bolajiadewal3.github.io/Celestaris/Portfolio";
+    /** @type {String} */ const iframeSrc = location.state?.iframeUrl || "https://bolajiadewal3.github.io/Celestaris/Portfolio/";
     /**
    * Calculates the geometric center of the screen mesh.
    * @returns {Array<number>} [x, y, z] offset relative to the mesh position.

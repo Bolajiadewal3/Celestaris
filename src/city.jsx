@@ -39,11 +39,18 @@ import { degreesToRadians } from "./utils"; // Utility function for cleaner rota
  */
 function CityModel() {
   // useLoader automatically "suspends" this component
-  const materials = useLoader(MTLLoader, "./City/cityMAT.mtl");
-  const obj = useLoader(OBJLoader, "./City/city.obj", (loader) => {
-    materials.preload();
-    loader.setMaterials(materials);
-  });
+  const materials = useLoader(
+    MTLLoader,
+    `${import.meta.env.BASE_URL}City/cityMAT.mtl`,
+  );
+  const obj = useLoader(
+    OBJLoader,
+    `${import.meta.env.BASE_URL}City/city.obj`,
+    (loader) => {
+      materials.preload();
+      loader.setMaterials(materials);
+    },
+  );
 
   // Apply shadows/settings after loading
   useEffect(() => {
@@ -163,7 +170,9 @@ export default function App() {
 
   const startAudio = () => {
     if (!audioStarted) {
-      const audio = new Audio("./City/cityAMBIENCE.mp3");
+      const audio = new Audio(
+        `${import.meta.env.BASE_URL}City/cityAMBIENCE.mp3`,
+      );
       audio.loop = true;
       audioRef.current = audio;
 
@@ -346,7 +355,7 @@ export default function App() {
             azimuth={0.25}
           />
 
-          <CityModel onLoad={() => setCityLoaded(true)} />
+          <CityModel />
 
           {/* Visual postprocessing */}
           <EffectComposer enabled={!isOverlayActive}>

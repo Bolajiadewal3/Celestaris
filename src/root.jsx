@@ -24,12 +24,32 @@ const RedirectHandler = () => {
 
     if (redirectPath) {
       try {
-        const decodedPath = decodeURIComponent(redirectPath);
+        let decodedPath = decodeURIComponent(redirectPath);
         console.log("Decoded Path:", decodedPath);
 
-        if (decodedPath !== location.pathname) {
-          console.log("Navigating to:", decodedPath);
-          navigate(decodedPath, { replace: true });
+        const basename = "/Celestaris";
+        if (decodedPath.startsWith(basename)) {
+          decodedPath = decodedPath.substring(basename.length);
+        }
+
+        const isWordPressPath = decodedPath.toLowerCase().includes("portfolio");
+
+        if (isWordPressPath) {
+          // Redirect the PARENT window to /Computer
+          // and pass the deep link via state so the iframe can find it
+          console.log("Redirecting WP path to Computer route:", decodedPath);
+          navigate("/Computer", {
+            replace: true,
+            state: { iframeUrl: `${basename}${decodedPath}` },
+          });
+          return;
+        }
+
+        const targetPath = decodedPath || "/";
+
+        if (targetPath !== location.pathname) {
+          console.log("Clean Navigation to:", targetPath);
+          navigate(targetPath, { replace: true });
         }
       } catch (error) {
         console.error("Error decoding path:", error);
