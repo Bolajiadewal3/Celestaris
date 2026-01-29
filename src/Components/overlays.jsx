@@ -8,10 +8,45 @@ import { useProgress } from "@react-three/drei";
 function Loader() {
   const { progress } = useProgress();
   return (
-    <div className="loading-container">
-      <h1>LOADING CITY</h1>
-      <div className="progress-bar" style={{ width: `${progress}%` }} />
-      <p>{Math.round(progress)}%</p>
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "#fff",
+        zIndex: 2000,
+        color: "black",
+        fontFamily: "sans-serif",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "2rem",
+          marginBottom: "20px",
+          letterSpacing: "0.2em",
+        }}
+      >
+        LOADING EXPERIENCE
+      </div>
+      <div style={{ width: "200px", height: "2px", background: "#333" }}>
+        <div
+          style={{
+            width: `${progress}%`,
+            height: "100%",
+            background: "#6a0dad",
+            transition: "width 0.3s ease",
+          }}
+        />
+      </div>
+      <div style={{ marginTop: "10px", fontSize: "0.8rem", opacity: 0.5 }}>
+        {Math.round(progress)}%
+      </div>
     </div>
   );
 }

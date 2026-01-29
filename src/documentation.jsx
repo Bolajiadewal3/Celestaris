@@ -6,6 +6,7 @@
 
 import { React, Suspense } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
+import { Loader } from "./Components/overlays.jsx";
 import { Html, Environment, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
 import { useMemo, useState } from "react";
@@ -82,12 +83,12 @@ function CameraRig() {
 export default function Documentation() {
   return (
     <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-      <Canvas
-        dpr={[1, 1.5]}
-        gl={{ powerPreference: "high-performance", antialias: false }}
-        camera={{ position: [10, 10, 20], fov: 50 }}
-      >
-        <Suspense fallback={<Html center>Loading Experience...</Html>}>
+      <Suspense fallback={<Loader />}>
+        <Canvas
+          dpr={[1, 1.5]}
+          gl={{ powerPreference: "high-performance", antialias: false }}
+          camera={{ position: [10, 10, 20], fov: 50 }}
+        >
           <CameraRig />
           <ambientLight intensity={0.5} />
           <Environment preset="city" />
@@ -111,8 +112,8 @@ export default function Documentation() {
             <Noise opacity={0.05} /> {/* Adds a subtle cinematic grain */}
             <Vignette eskil={false} offset={0.1} darkness={1.1} />
           </EffectComposer>
-        </Suspense>
-      </Canvas>
+        </Canvas>
+      </Suspense>
     </div>
   );
 }

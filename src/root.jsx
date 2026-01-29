@@ -41,20 +41,17 @@ const RedirectHandler = () => {
 };
 
 createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/Celestaris">
     <RedirectHandler />
 
     <Routes>
-      <Route path="/Celestaris/" element={<App />} />
-      <Route path="/Celestaris/Computer" element={<Portfolio />} />
-      <Route path="/Celestaris/Documentation" element={<Documentation />} />
+      <Route path="/" element={<App />} />
+      <Route path="/Computer" element={<Portfolio />} />
+      <Route path="/Documentation" element={<Documentation />} />
 
-      <Route path="/Celestaris/Poetry/section0" element={<Section0 />} />
-      <Route
-        path="/Celestaris/Poetry/existentialPoetry"
-        element={<ExistentialPoetry />}
-      />
+      <Route path="/Poetry/section0" element={<Section0 />} />
+      <Route path="/Poetry/existentialPoetry" element={<ExistentialPoetry />} />
     </Routes>
-  </BrowserRouter>
+  </BrowserRouter>,
 );
 console.log("HAPPENED !!");

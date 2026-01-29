@@ -6,6 +6,7 @@
  */
 
 import { Suspense } from "react";
+import { Loader } from "./Components/overlays.jsx";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import {
   Html,
@@ -115,7 +116,7 @@ function Computer() {
   /** @type {String} */
   const iframeSrc =
     location.state?.iframeUrl ||
-    "https://bolajiadewal3.github.io/Celestaris/Portfolio";
+    "https://bolajiadewal3.github.io/Celestaris/Portfolio/";
 
   /**
    * Calculates the geometric center of the screen mesh.
@@ -297,12 +298,12 @@ useGLTF.preload(`${import.meta.env.BASE_URL}Computer/Monitor2.glb`);
 export default function Portfolio() {
   return (
     <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-      <Canvas
-        dpr={[1, 1.5]}
-        gl={{ powerPreference: "high-performance", antialias: false }}
-        camera={{ position: [10, 10, 20], fov: 50 }}
-      >
-        <Suspense fallback={<Html center>Loading Experience...</Html>}>
+      <Suspense fallback={<Loader />}>
+        <Canvas
+          dpr={[1, 1.5]}
+          gl={{ powerPreference: "high-performance", antialias: false }}
+          camera={{ position: [10, 10, 20], fov: 50 }}
+        >
           <CameraRig />
           <ambientLight intensity={0.5} />
           <Environment preset="city" />
@@ -318,8 +319,8 @@ export default function Portfolio() {
             <Noise opacity={0.05} />
             <Vignette eskil={false} offset={0.1} darkness={1.1} />
           </EffectComposer>
-        </Suspense>
-      </Canvas>
+        </Canvas>
+      </Suspense>
     </div>
   );
 }

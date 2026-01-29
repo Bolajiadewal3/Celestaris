@@ -1,95 +1,96 @@
-
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Celestaris Documentation portfolio.jsx</title>
 
-<head>
-  
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Celestaris Documentation portfolio.jsx</title>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css"
+    />
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css" />
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css" />
+    <link type="text/css" rel="stylesheet" href="" />
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </head>
 
-  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="./build/entry.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
-  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
-  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
-  <link type="text/css" rel="stylesheet" href="">
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-  
-</head>
-
-
-
-<body class="layout small-header">
+  <body class="layout small-header">
     <div id="stickyNavbarOverlay"></div>
-    
 
-<div class="top-nav">
-    <div class="inner">
-        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
+    <div class="top-nav">
+      <div class="inner">
+        <a
+          id="hamburger"
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
         </a>
         <div class="logo">
-            
-             
-                <a href="index.html">
-                    <h1 class="navbar-item">Celestaris Engine Docs</h1>
-                </a>
-            
+          <a href="index.html">
+            <h1 class="navbar-item">Celestaris Engine Docs</h1>
+          </a>
         </div>
         <div class="menu">
-            
-            <div class="navigation">
-                <a
-                    href="index.html"
-                    class="link"
-                >
-                    Documentation
-                </a>
-                
-                
-                
-            </div>
+          <div class="navigation">
+            <a href="index.html" class="link"> Documentation </a>
+          </div>
         </div>
+      </div>
     </div>
-</div>
     <div id="main">
-        <div
-            class="sidebar "
-            id="sidebarNav"
-        >
-            
-            <nav>
-                
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="module-City.html">City</a></li><li><a href="module-City-CameraLight.html">CameraLight</a></li><li><a href="module-City-CityModel.html">CityModel</a></li><li><a href="module-Portfolio.html">Portfolio</a></li><li><a href="module-Portfolio-CameraLogger.html">CameraLogger</a></li><li><a href="module-Portfolio-CameraRig.html">CameraRig</a></li><li><a href="module-Portfolio-Computer.html">Computer</a></li></ul></div>
-                
-            </nav>
-        </div>
-        <div class="core" id="main-content-wrapper">
-            <div class="content">
-                <header class="page-title">
-                    <p>Source</p>
-                    <h1>portfolio.jsx</h1>
-                </header>
-                
+      <div class="sidebar" id="sidebarNav">
+        <nav>
+          <h2><a href="index.html">Documentation</a></h2>
+          <div class="category">
+            <h3>Components</h3>
+            <ul>
+              <li><a href="module-City.html">City</a></li>
+              <li><a href="module-City-CameraLight.html">CameraLight</a></li>
+              <li><a href="module-City-CityModel.html">CityModel</a></li>
+              <li><a href="module-Portfolio.html">Portfolio</a></li>
+              <li>
+                <a href="module-Portfolio-CameraLogger.html">CameraLogger</a>
+              </li>
+              <li><a href="module-Portfolio-CameraRig.html">CameraRig</a></li>
+              <li><a href="module-Portfolio-Computer.html">Computer</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="core" id="main-content-wrapper">
+        <div class="content">
+          <header class="page-title">
+            <p>Source</p>
+            <h1>portfolio.jsx</h1>
+          </header>
 
-
-
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
+          <section>
+            <article>
+              <pre class="prettyprint source linenums"><code>/**
  * @module Portfolio
  * @category Scenes
  * @description Manages the main 3D portfolio scene, including the smooth camera transition
@@ -97,6 +98,7 @@
  */
 
 import { Suspense } from "react";
+import { Loader } from "./Components/overlays.jsx";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import {
   Html,
@@ -206,7 +208,7 @@ function Computer() {
   /** @type {String} */
   const iframeSrc =
     location.state?.iframeUrl ||
-    "https://bolajiadewal3.github.io/Celestaris/Portfolio";
+    "https://bolajiadewal3.github.io/Celestaris/Portfolio/";
 
   /**
    * Calculates the geometric center of the screen mesh.
@@ -388,12 +390,12 @@ useGLTF.preload(`${import.meta.env.BASE_URL}Computer/Monitor2.glb`);
 export default function Portfolio() {
   return (
     &lt;div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-      &lt;Canvas
-        dpr={[1, 1.5]}
-        gl={{ powerPreference: "high-performance", antialias: false }}
-        camera={{ position: [10, 10, 20], fov: 50 }}
-      >
-        &lt;Suspense fallback={&lt;Html center>Loading Experience...&lt;/Html>}>
+      &lt;Suspense fallback={&lt;Loader />}>
+        &lt;Canvas
+          dpr={[1, 1.5]}
+          gl={{ powerPreference: "high-performance", antialias: false }}
+          camera={{ position: [10, 10, 20], fov: 50 }}
+        >
           &lt;CameraRig />
           &lt;ambientLight intensity={0.5} />
           &lt;Environment preset="city" />
@@ -409,28 +411,22 @@ export default function Portfolio() {
             &lt;Noise opacity={0.05} />
             &lt;Vignette eskil={false} offset={0.1} darkness={1.1} />
           &lt;/EffectComposer>
-        &lt;/Suspense>
-      &lt;/Canvas>
+        &lt;/Canvas>
+      &lt;/Suspense>
     &lt;/div>
   );
 }
 </code></pre>
-        </article>
-    </section>
-
-
-
-
-            </div>
-            
+            </article>
+          </section>
         </div>
-        <div id="side-nav" class="side-nav">
-        </div>
+      </div>
+      <div id="side-nav" class="side-nav"></div>
     </div>
-<script src="scripts/app.min.js"></script>
-<script>PR.prettyPrint();</script>
-<script src="scripts/linenumber.js"> </script>
-
-
-</body>
+    <script src="scripts/app.min.js"></script>
+    <script>
+      PR.prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
 </html>

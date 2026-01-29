@@ -4,7 +4,7 @@
  * @description The high-performance urban landing page.
  */
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame, useThree, useLoader } from "@react-three/fiber";
 import { Sky, OrbitControls } from "@react-three/drei";
 import { Suspense, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
@@ -23,7 +23,7 @@ import poetryData from "./Data/Poetry.json";
 import dissertationData from "./Data/Dissertation.json";
 import miscData from "./Data/Miscellaneous.json";
 
-import { StartScreen, Overlay, Loader } from "./Components/overlays.jsx";
+import { Overlay, Loader } from "./Components/overlays.jsx";
 import { GlowingTextBanner, SmallTextBanner } from "./Components/texts.jsx";
 import {
   InitialCameraAnimation,
@@ -37,56 +37,26 @@ import { degreesToRadians } from "./utils"; // Utility function for cleaner rota
  * @component
  * @category 3D Assets
  */
-function CityModel({ onLoad }) {
-  const group = useRef();
+function CityModel() {
+  // useLoader automatically "suspends" this component
+  const materials = useLoader(MTLLoader, "./City/cityMAT.mtl");
+  const obj = useLoader(OBJLoader, "./City/city.obj", (loader) => {
+    materials.preload();
+    loader.setMaterials(materials);
+  });
 
+  // Apply shadows/settings after loading
   useEffect(() => {
-    const mtlLoader = new MTLLoader();
-
-    mtlLoader.load("./City/cityMAT.mtl", (materials) => {
-      materials.preload();
-
-      const objLoader = new OBJLoader();
-      objLoader.setMaterials(materials);
-
-      objLoader.load("./City/city.obj", (obj) => {
-        obj.scale.set(0.15, 0.15, 0.15);
-        obj.position.set(70, 0, -65);
-
-        obj.traverse((child) => {
-          if (child.isMesh) {
-            child.castShadow = true;
-            child.receiveShadow = true;
-            child.material.side = THREE.FrontSide;
-          }
-        });
-
-        group.current?.add(obj);
-        onLoad();
-      });
-    });
-
-    return () => {
-      if (group.current) {
-        group.current.children.forEach((obj) => {
-          group.current.remove(obj);
-
-          obj.traverse((child) => {
-            if (child.geometry) child.geometry.dispose();
-
-            if (child.material) {
-              const materials = Array.isArray(child.material)
-                ? child.material
-                : [child.material];
-              materials.forEach((m) => m.dispose());
-            }
-          });
-        });
+    obj.traverse((child) => {
+      if (child.isMesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+        child.material.side = THREE.FrontSide;
       }
-    };
-  }, [onLoad]);
+    });
+  }, [obj]);
 
-  return <group ref={group} />;
+  return <primitive object={obj} scale={0.15} position={[70, 0, -65]} />;
 }
 
 /**

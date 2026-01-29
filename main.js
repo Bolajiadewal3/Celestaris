@@ -479,9 +479,66 @@ $72d2bfc3e95efd9e$exports = JSON.parse("{\"projects\":[{\"title\":\"Music\",\"ab
 
 
 
+
 var $919cea3b052cd76d$import_meta = Object.assign(Object.create(null), {
     url: "file:///src/Components/overlays.jsx"
 });
+function $919cea3b052cd76d$export$3b0d6d7590275603() {
+    const { progress: progress } = (0, $8I7SX$reactthreedrei.useProgress)();
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("div", {
+        style: {
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            background: "#fff",
+            zIndex: 2000,
+            color: "black",
+            fontFamily: "sans-serif"
+        },
+        children: [
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
+                style: {
+                    fontSize: "2rem",
+                    marginBottom: "20px",
+                    letterSpacing: "0.2em"
+                },
+                children: "LOADING EXPERIENCE"
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
+                style: {
+                    width: "200px",
+                    height: "2px",
+                    background: "#333"
+                },
+                children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
+                    style: {
+                        width: `${progress}%`,
+                        height: "100%",
+                        background: "#6a0dad",
+                        transition: "width 0.3s ease"
+                    }
+                })
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("div", {
+                style: {
+                    marginTop: "10px",
+                    fontSize: "0.8rem",
+                    opacity: 0.5
+                },
+                children: [
+                    Math.round(progress),
+                    "%"
+                ]
+            })
+        ]
+    });
+}
 function $919cea3b052cd76d$export$a1909b6cc88e74a({ onStart: onStart, visible: visible }) {
     const styles = (0, $8I7SX$reactspringweb.useSpring)({
         opacity: visible ? 1 : 0,
@@ -918,47 +975,33 @@ function $8c8a4d7c0a98efcd$export$c9fcf1a7df975d78(degrees) {
  * CityModel manages the complex OBJ/MTL loading and asset disposal.
  * @component
  * @category 3D Assets
- */ function $9e79c54aa8a563fd$var$CityModel({ onLoad: onLoad }) {
-    const group = (0, $8I7SX$react.useRef)();
+ */ function $9e79c54aa8a563fd$var$CityModel() {
+    // useLoader automatically "suspends" this component
+    const materials = (0, $8I7SX$reactthreefiber.useLoader)((0, $8I7SX$threestdlib.MTLLoader), "./City/cityMAT.mtl");
+    const obj = (0, $8I7SX$reactthreefiber.useLoader)((0, $8I7SX$threestdlib.OBJLoader), "./City/city.obj", (loader)=>{
+        materials.preload();
+        loader.setMaterials(materials);
+    });
+    // Apply shadows/settings after loading
     (0, $8I7SX$react.useEffect)(()=>{
-        const mtlLoader = new (0, $8I7SX$threestdlib.MTLLoader)();
-        mtlLoader.load("./City/cityMAT.mtl", (materials)=>{
-            materials.preload();
-            const objLoader = new (0, $8I7SX$threestdlib.OBJLoader)();
-            objLoader.setMaterials(materials);
-            objLoader.load("./City/city.obj", (obj)=>{
-                obj.scale.set(0.15, 0.15, 0.15);
-                obj.position.set(70, 0, -65);
-                obj.traverse((child)=>{
-                    if (child.isMesh) {
-                        child.castShadow = true;
-                        child.receiveShadow = true;
-                        child.material.side = $8I7SX$three.FrontSide;
-                    }
-                });
-                group.current?.add(obj);
-                onLoad();
-            });
+        obj.traverse((child)=>{
+            if (child.isMesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                child.material.side = $8I7SX$three.FrontSide;
+            }
         });
-        return ()=>{
-            if (group.current) group.current.children.forEach((obj)=>{
-                group.current.remove(obj);
-                obj.traverse((child)=>{
-                    if (child.geometry) child.geometry.dispose();
-                    if (child.material) {
-                        const materials = Array.isArray(child.material) ? child.material : [
-                            child.material
-                        ];
-                        materials.forEach((m)=>m.dispose());
-                    }
-                });
-            });
-        };
     }, [
-        onLoad
+        obj
     ]);
-    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("group", {
-        ref: group
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("primitive", {
+        object: obj,
+        scale: 0.15,
+        position: [
+            70,
+            0,
+            -65
+        ]
     });
 }
 /**
@@ -1074,300 +1117,288 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
                 onClick: resetOrbit,
                 children: "Return"
             }),
-            !cameraAnimationDone && started && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
-                style: {
-                    position: "absolute",
-                    inset: 0,
-                    zIndex: 100,
-                    pointerEvents: "all"
-                }
-            }),
-            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$a1909b6cc88e74a), {
-                onStart: ()=>{
-                    startAudio();
-                    setStarted(true);
-                },
-                visible: !started || !cityLoaded
-            }),
             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$c6fdb837b070b4ff), {
                 isActive: isOverlayActive,
                 onClose: toggleOverlay,
                 items: overlayContent
             }),
-            started && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreefiber.Canvas), {
-                shadows: true,
-                camera: {
-                    position: [
-                        0,
-                        70,
-                        500
-                    ],
-                    fov: 50
-                },
-                onCreated: ({ scene: scene })=>{
-                    scene.fog = new $8I7SX$three.Fog(new $8I7SX$three.Color("#6a0dad"), 0, 1600);
-                },
-                dpr: [
-                    1,
-                    1.5
-                ],
-                gl: {
-                    antialias: true
-                },
-                performance: {
-                    min: 0.8
-                },
-                children: [
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.OrbitControls), {
-                        ref: controlsRef,
-                        target: [
-                            0,
-                            0,
-                            0
-                        ],
-                        enablePan: false,
-                        maxPolarAngle: Math.PI / 2,
-                        minDistance: 10,
-                        maxDistance: 220,
-                        enabled: controlsEnabled
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $dcb2f366e2a78e3e$export$c96ae4a4d477a88c), {
-                        onComplete: ()=>{
-                            setControlsEnabled(true);
-                            setcameraAnimationDone(true);
-                        }
-                    }),
-                    goToSmallText && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $dcb2f366e2a78e3e$export$9a088e97127c2f51), {
-                        anchor: smallTextAnchor,
-                        lookat: smallTextLookAt,
-                        onComplete: ()=>{
-                            setGoToSmallText(false);
-                            setShowExitButton(true);
-                        },
-                        controlsRef: controlsRef
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$82fb00ee8a55bec7), {
-                        title: "About Me",
-                        text: "24 Year Old Software Engineer, Creative & National American Football Player",
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$react.Suspense), {
+                fallback: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$3b0d6d7590275603), {}),
+                children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreefiber.Canvas), {
+                    shadows: true,
+                    camera: {
                         position: [
-                            -40,
-                            -8.5,
-                            90
-                        ],
-                        rotation: [
                             0,
-                            (0, $8c8a4d7c0a98efcd$export$c9fcf1a7df975d78)(-13),
-                            0
+                            70,
+                            500
                         ],
-                        width: 17,
-                        isOpen: openBannerId === "1",
-                        onOpen: ()=>setOpenBannerId("1"),
-                        onClick: ()=>{
-                            setSmallTextAnchor([
-                                -49,
-                                3,
-                                132
-                            ]);
-                            setSmallTextLookAt([
+                        fov: 50
+                    },
+                    onCreated: ({ scene: scene })=>{
+                        scene.fog = new $8I7SX$three.Fog(new $8I7SX$three.Color("#6a0dad"), 0, 1600);
+                    },
+                    dpr: [
+                        1,
+                        1.5
+                    ],
+                    gl: {
+                        antialias: true
+                    },
+                    performance: {
+                        min: 0.8
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.OrbitControls), {
+                            ref: controlsRef,
+                            target: [
+                                0,
+                                0,
+                                0
+                            ],
+                            enablePan: false,
+                            maxPolarAngle: Math.PI / 2,
+                            minDistance: 10,
+                            maxDistance: 220,
+                            enabled: controlsEnabled
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $dcb2f366e2a78e3e$export$c96ae4a4d477a88c), {
+                            onComplete: ()=>{
+                                setControlsEnabled(true);
+                                setcameraAnimationDone(true);
+                            }
+                        }),
+                        goToSmallText && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $dcb2f366e2a78e3e$export$9a088e97127c2f51), {
+                            anchor: smallTextAnchor,
+                            lookat: smallTextLookAt,
+                            onComplete: ()=>{
+                                setGoToSmallText(false);
+                                setShowExitButton(true);
+                            },
+                            controlsRef: controlsRef
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$82fb00ee8a55bec7), {
+                            title: "About Me",
+                            text: "24 Year Old Software Engineer, Creative & National American Football Player",
+                            position: [
                                 -40,
                                 -8.5,
                                 90
-                            ]);
-                            setGoToSmallText(true);
-                            setControlsEnabled(false);
-                        }
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$82fb00ee8a55bec7), {
-                        title: "Education",
-                        text: "University of Nottingham - BSc Computer Science\nUniversity of Nottingham - MSc Information Systems & Operations Management\nUniversity of Arizona - MS Information Science: Human Centered Computing",
-                        position: [
-                            80,
-                            -8.5,
-                            142
-                        ],
-                        rotation: [
-                            0,
-                            (0, $8c8a4d7c0a98efcd$export$c9fcf1a7df975d78)(-1.5),
-                            0
-                        ],
-                        width: 30,
-                        isOpen: openBannerId === "2",
-                        onOpen: ()=>setOpenBannerId("2"),
-                        onClick: ()=>{
-                            setSmallTextAnchor([
-                                83,
-                                2,
-                                186
-                            ]);
-                            setSmallTextLookAt([
+                            ],
+                            rotation: [
+                                0,
+                                (0, $8c8a4d7c0a98efcd$export$c9fcf1a7df975d78)(-13),
+                                0
+                            ],
+                            width: 17,
+                            isOpen: openBannerId === "1",
+                            onOpen: ()=>setOpenBannerId("1"),
+                            onClick: ()=>{
+                                setSmallTextAnchor([
+                                    -49,
+                                    3,
+                                    132
+                                ]);
+                                setSmallTextLookAt([
+                                    -40,
+                                    -8.5,
+                                    90
+                                ]);
+                                setGoToSmallText(true);
+                                setControlsEnabled(false);
+                            }
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$82fb00ee8a55bec7), {
+                            title: "Education",
+                            text: "University of Nottingham - BSc Computer Science\nUniversity of Nottingham - MSc Information Systems & Operations Management\nUniversity of Arizona - MS Information Science: Human Centered Computing",
+                            position: [
                                 80,
                                 -8.5,
+                                142
+                            ],
+                            rotation: [
+                                0,
+                                (0, $8c8a4d7c0a98efcd$export$c9fcf1a7df975d78)(-1.5),
                                 0
-                            ]);
-                            setGoToSmallText(true);
-                            setControlsEnabled(false);
-                        }
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$82fb00ee8a55bec7), {
-                        title: "Contact Me",
-                        text: "bolajidgs@gmail.com\nmadewale@arizona.edu\n@bolaji.ad",
-                        position: [
-                            62.5,
-                            -8.5,
-                            -135
-                        ],
-                        rotation: [
-                            0,
-                            (0, $8c8a4d7c0a98efcd$export$c9fcf1a7df975d78)(177),
-                            0
-                        ],
-                        width: 30,
-                        isOpen: openBannerId === "3",
-                        onOpen: ()=>setOpenBannerId("3"),
-                        onClick: ()=>{
-                            setSmallTextAnchor([
-                                65,
-                                2,
-                                -176
-                            ]);
-                            setSmallTextLookAt([
+                            ],
+                            width: 30,
+                            isOpen: openBannerId === "2",
+                            onOpen: ()=>setOpenBannerId("2"),
+                            onClick: ()=>{
+                                setSmallTextAnchor([
+                                    83,
+                                    2,
+                                    186
+                                ]);
+                                setSmallTextLookAt([
+                                    80,
+                                    -8.5,
+                                    0
+                                ]);
+                                setGoToSmallText(true);
+                                setControlsEnabled(false);
+                            }
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$82fb00ee8a55bec7), {
+                            title: "Contact Me",
+                            text: "bolajidgs@gmail.com\nmadewale@arizona.edu\n@bolaji.ad",
+                            position: [
                                 62.5,
                                 -8.5,
                                 -135
-                            ]);
-                            setGoToSmallText(true);
-                            setControlsEnabled(false);
-                        }
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
-                        text: "Projects",
-                        position: [
-                            -70,
-                            30,
-                            -30
-                        ],
-                        onClick: ()=>openOverlay("projects")
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
-                        text: "Dissertation",
-                        position: [
-                            70,
-                            40,
-                            -50
-                        ],
-                        onClick: ()=>openOverlay("dissertation")
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
-                        text: "Poetry",
-                        position: [
-                            50,
-                            40,
-                            60
-                        ],
-                        rotation: [
-                            0,
-                            Math.PI * 1.5,
-                            0
-                        ],
-                        onClick: ()=>openOverlay("poetry")
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
-                        text: "Miscellaneous",
-                        position: [
-                            -60,
-                            20,
-                            75
-                        ],
-                        rotation: [
-                            0,
-                            Math.PI / 2,
-                            0
-                        ],
-                        onClick: ()=>openOverlay("miscellaneous")
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($9e79c54aa8a563fd$var$CameraLight, {}),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("ambientLight", {
-                        intensity: 0.1
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("directionalLight", {
-                        position: [
-                            5,
-                            35,
-                            5
-                        ],
-                        intensity: 1.0,
-                        castShadow: true,
-                        "shadow-mapSize-width": 512,
-                        "shadow-mapSize-height": 512,
-                        "shadow-camera-near": 1,
-                        "shadow-camera-far": 200,
-                        "shadow-camera-left": -100,
-                        "shadow-camera-right": 100,
-                        "shadow-camera-top": 100,
-                        "shadow-camera-bottom": -100,
-                        "shadow-bias": -0.005
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
-                        position: [
-                            0,
-                            10,
-                            0
-                        ],
-                        children: [
-                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("sphereGeometry", {
-                                args: [
+                            ],
+                            rotation: [
+                                0,
+                                (0, $8c8a4d7c0a98efcd$export$c9fcf1a7df975d78)(177),
+                                0
+                            ],
+                            width: 30,
+                            isOpen: openBannerId === "3",
+                            onOpen: ()=>setOpenBannerId("3"),
+                            onClick: ()=>{
+                                setSmallTextAnchor([
+                                    65,
                                     2,
-                                    32,
-                                    32
-                                ]
-                            }),
-                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("meshStandardMaterial", {
-                                color: "red"
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Sky), {
-                        distance: 450000,
-                        sunPosition: [
-                            100,
-                            10,
-                            100
-                        ],
-                        inclination: 0.49,
-                        azimuth: 0.25
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($9e79c54aa8a563fd$var$CityModel, {
-                        onLoad: ()=>setCityLoaded(true)
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreepostprocessing.EffectComposer), {
-                        enabled: !isOverlayActive,
-                        children: [
-                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.HueSaturation), {
-                                hue: 0.1,
-                                saturation: 0.2
-                            }),
-                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.BrightnessContrast), {
-                                brightness: 0.05,
-                                contrast: 0.2
-                            }),
-                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Bloom), {
-                                intensity: 3,
-                                luminanceThreshold: 0.05,
-                                luminanceSmoothing: 0.1
-                            }),
-                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.DepthOfField), {
-                                focusDistance: 5,
-                                focalLength: 10,
-                                bokehScale: 2
-                            }),
-                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Vignette), {
-                                eskil: false,
-                                offset: 0.1,
-                                darkness: 0.4
-                            })
-                        ]
-                    })
-                ]
+                                    -176
+                                ]);
+                                setSmallTextLookAt([
+                                    62.5,
+                                    -8.5,
+                                    -135
+                                ]);
+                                setGoToSmallText(true);
+                                setControlsEnabled(false);
+                            }
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
+                            text: "Projects",
+                            position: [
+                                -70,
+                                30,
+                                -30
+                            ],
+                            onClick: ()=>openOverlay("projects")
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
+                            text: "Dissertation",
+                            position: [
+                                70,
+                                40,
+                                -50
+                            ],
+                            onClick: ()=>openOverlay("dissertation")
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
+                            text: "Poetry",
+                            position: [
+                                50,
+                                40,
+                                60
+                            ],
+                            rotation: [
+                                0,
+                                Math.PI * 1.5,
+                                0
+                            ],
+                            onClick: ()=>openOverlay("poetry")
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
+                            text: "Miscellaneous",
+                            position: [
+                                -60,
+                                20,
+                                75
+                            ],
+                            rotation: [
+                                0,
+                                Math.PI / 2,
+                                0
+                            ],
+                            onClick: ()=>openOverlay("miscellaneous")
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($9e79c54aa8a563fd$var$CameraLight, {}),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("ambientLight", {
+                            intensity: 0.1
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("directionalLight", {
+                            position: [
+                                5,
+                                35,
+                                5
+                            ],
+                            intensity: 1.0,
+                            castShadow: true,
+                            "shadow-mapSize-width": 512,
+                            "shadow-mapSize-height": 512,
+                            "shadow-camera-near": 1,
+                            "shadow-camera-far": 200,
+                            "shadow-camera-left": -100,
+                            "shadow-camera-right": 100,
+                            "shadow-camera-top": 100,
+                            "shadow-camera-bottom": -100,
+                            "shadow-bias": -0.005
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
+                            position: [
+                                0,
+                                10,
+                                0
+                            ],
+                            children: [
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("sphereGeometry", {
+                                    args: [
+                                        2,
+                                        32,
+                                        32
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("meshStandardMaterial", {
+                                    color: "red"
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Sky), {
+                            distance: 450000,
+                            sunPosition: [
+                                100,
+                                10,
+                                100
+                            ],
+                            inclination: 0.49,
+                            azimuth: 0.25
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($9e79c54aa8a563fd$var$CityModel, {
+                            onLoad: ()=>setCityLoaded(true)
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreepostprocessing.EffectComposer), {
+                            enabled: !isOverlayActive,
+                            children: [
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.HueSaturation), {
+                                    hue: 0.1,
+                                    saturation: 0.2
+                                }),
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.BrightnessContrast), {
+                                    brightness: 0.05,
+                                    contrast: 0.2
+                                }),
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Bloom), {
+                                    intensity: 3,
+                                    luminanceThreshold: 0.05,
+                                    luminanceSmoothing: 0.1
+                                }),
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.DepthOfField), {
+                                    focusDistance: 5,
+                                    focalLength: 10,
+                                    bokehScale: 2
+                                }),
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Vignette), {
+                                    eskil: false,
+                                    offset: 0.1,
+                                    darkness: 0.4
+                                })
+                            ]
+                        })
+                    ]
+                })
             })
         ]
     });
@@ -1380,6 +1411,7 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
  * @description Manages the main 3D portfolio scene, including the smooth camera transition
  * from the world view to the computer terminal.
  */ 
+
 
 
 
@@ -1634,28 +1666,25 @@ function $a0362f18e412ef3b$export$2e2bcd8739ae039() {
             height: "100vh",
             position: "relative"
         },
-        children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreefiber.Canvas), {
-            dpr: [
-                1,
-                1.5
-            ],
-            gl: {
-                powerPreference: "high-performance",
-                antialias: false
-            },
-            camera: {
-                position: [
-                    10,
-                    10,
-                    20
+        children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$react.Suspense), {
+            fallback: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$3b0d6d7590275603), {}),
+            children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreefiber.Canvas), {
+                dpr: [
+                    1,
+                    1.5
                 ],
-                fov: 50
-            },
-            children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$react.Suspense), {
-                fallback: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Html), {
-                    center: true,
-                    children: "Loading Experience..."
-                }),
+                gl: {
+                    powerPreference: "high-performance",
+                    antialias: false
+                },
+                camera: {
+                    position: [
+                        10,
+                        10,
+                        20
+                    ],
+                    fov: 50
+                },
                 children: [
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($a0362f18e412ef3b$var$CameraRig, {}),
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("ambientLight", {

@@ -95,7 +95,9 @@ body.settings_page_sharing ul.services-hidden {
   padding: 3px 9px 4px 11px;
   border-radius: 4px;
   background: #fff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.12);
 }
 
 #available-services .service .options-left,
@@ -106,7 +108,9 @@ body.settings_page_sharing ul.services-hidden {
 
 #available-services .service:hover,
 #enabled-services .service:hover {
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.22);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.22),
+    0 0 0 1px rgba(0, 0, 0, 0.22);
 }
 
 #available-services .service.share-deprecated,
@@ -172,7 +176,8 @@ li.service.share-facebook span::before {
   content: "\f203";
 }
 
-li.service.share-press-this span::before { /* Fixme: remove this button in favor of reblog */
+li.service.share-press-this span::before {
+  /* Fixme: remove this button in favor of reblog */
   content: "\f205";
 }
 
@@ -279,7 +284,7 @@ body.settings_page_sharing .utility {
   font-size: 10px;
 }
 
-body.settings_page_sharing .advanced input[type=submit] {
+body.settings_page_sharing .advanced input[type="submit"] {
   float: right;
   margin-top: 10px;
   margin-left: 10px;
@@ -327,7 +332,8 @@ body.settings_page_sharing .advanced input[type=submit] {
 }
 
 .preview-digg .option-smart-on {
-  background: url(https://bolajiadewal3.github.io/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-digg.png) no-repeat top right;
+  background: url(/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-digg.png)
+    no-repeat top right;
   background-size: 76px 17px;
   width: 76px;
   height: 17px;
@@ -335,7 +341,8 @@ body.settings_page_sharing .advanced input[type=submit] {
 }
 
 .preview-facebook .option-smart-on {
-  background: url(https://bolajiadewal3.github.io/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-like.png) no-repeat top right;
+  background: url(/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-like.png)
+    no-repeat top right;
   background-size: 85px 20px;
   width: 85px;
   height: 20px;
@@ -344,35 +351,40 @@ body.settings_page_sharing .advanced input[type=submit] {
 
 .preview-twitter .option-smart-on,
 .preview-x .option-smart-on {
-  background: url(https://bolajiadewal3.github.io/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-x.png) no-repeat top right;
+  background: url(/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-x.png)
+    no-repeat top right;
   background-size: 60px 20px;
   width: 60px;
   height: 20px;
 }
 
 .preview-linkedin .option-smart-on {
-  background: url(https://bolajiadewal3.github.io/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/linkedin-smart.png) no-repeat top center;
+  background: url(/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/linkedin-smart.png)
+    no-repeat top center;
   background-size: 99px 18px;
   width: 99px;
   height: 20px;
 }
 
 .preview-tumblr .option-smart-on {
-  background: url(https://bolajiadewal3.github.io/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-tumblr.png) no-repeat top right;
+  background: url(/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-tumblr.png)
+    no-repeat top right;
   background-size: 62px 20px;
   width: 62px;
   height: 20px;
 }
 
 .preview-pinterest .option-smart-on {
-  background: url(https://bolajiadewal3.github.io/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-pinterest.png) no-repeat top right;
+  background: url(/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-pinterest.png)
+    no-repeat top right;
   background-size: 39px 20px;
   width: 39px;
   height: 20px;
 }
 
 .preview-pocket .option-smart-on {
-  background: url(https://bolajiadewal3.github.io/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-pocket.png) no-repeat top right;
+  background: url(/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-pocket.png)
+    no-repeat top right;
   background-size: 60px 20px;
   width: 60px;
   height: 20px;
@@ -388,26 +400,26 @@ body.settings_page_sharing .advanced input[type=submit] {
 
 @media (min-resolution: 120dpi) {
   .preview-digg .option-smart-on {
-    background-image: url(https://bolajiadewal3.github.io/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-digg@2x.png);
+    background-image: url(/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-digg@2x.png);
   }
   .preview-facebook .option-smart-on {
-    background-image: url(https://bolajiadewal3.github.io/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-like@2x.png);
+    background-image: url(/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-like@2x.png);
   }
   .preview-twitter .option-smart-on,
   .preview-x .option-smart-on {
-    background-image: url(https://bolajiadewal3.github.io/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-x@2x.png);
+    background-image: url(/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-x@2x.png);
   }
   .preview-linkedin .option-smart-on {
-    background-image: url(https://bolajiadewal3.github.io/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/linkedin-smart@2x.png);
+    background-image: url(/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/linkedin-smart@2x.png);
   }
   .preview-tumblr .option-smart-on {
-    background-image: url(https://bolajiadewal3.github.io/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-tumblr@2x.png);
+    background-image: url(/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-tumblr@2x.png);
   }
   .preview-pinterest .option-smart-on {
-    background-image: url(https://bolajiadewal3.github.io/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-pinterest@2x.png);
+    background-image: url(/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-pinterest@2x.png);
   }
   .preview-pocket .option-smart-on {
-    background-image: url(https://bolajiadewal3.github.io/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-pocket@2x.png);
+    background-image: url(/Celestaris/Portfolio/wp-content/plugins/jetpack/modules/sharedaddy/images/smart-pocket@2x.png);
   }
 }
 /**
