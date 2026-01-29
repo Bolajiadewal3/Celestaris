@@ -3,6 +3,19 @@ import { useTrail, animated, useSpring } from "@react-spring/web";
 
 import { useNavigate } from "react-router-dom";
 
+import { useProgress } from "@react-three/drei";
+
+function Loader() {
+  const { progress } = useProgress();
+  return (
+    <div className="loading-container">
+      <h1>LOADING CITY</h1>
+      <div className="progress-bar" style={{ width: `${progress}%` }} />
+      <p>{Math.round(progress)}%</p>
+    </div>
+  );
+}
+
 function StartScreen({ onStart, visible }) {
   const styles = useSpring({
     opacity: visible ? 1 : 0,
@@ -198,4 +211,4 @@ function Overlay({ isActive, onClose, items = [] }) {
   );
 }
 
-export { StartScreen, Overlay };
+export { StartScreen, Overlay, Loader };

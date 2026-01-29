@@ -6,7 +6,7 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Sky, OrbitControls } from "@react-three/drei";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OBJLoader, MTLLoader } from "three-stdlib";
 import {
@@ -23,7 +23,7 @@ import poetryData from "./Data/Poetry.json";
 import dissertationData from "./Data/Dissertation.json";
 import miscData from "./Data/Miscellaneous.json";
 
-import { StartScreen, Overlay } from "./Components/overlays.jsx";
+import { StartScreen, Overlay, Loader } from "./Components/overlays.jsx";
 import { GlowingTextBanner, SmallTextBanner } from "./Components/texts.jsx";
 import {
   InitialCameraAnimation,
@@ -219,33 +219,13 @@ export default function App() {
         </button>
       )}
 
-      {/* Prevents interaction until camera animation finishes */}
-      {!cameraAnimationDone && started && (
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            zIndex: 100,
-            pointerEvents: "all",
-          }}
-        />
-      )}
-
-      <StartScreen
-        onStart={() => {
-          startAudio();
-          setStarted(true);
-        }}
-        visible={!started || !cityLoaded}
-      />
-
       <Overlay
         isActive={isOverlayActive}
         onClose={toggleOverlay}
         items={overlayContent}
       />
 
-      {started && (
+      <Suspense fallback={<Loader />}>
         <Canvas
           shadows
           camera={{ position: [0, 70, 500], fov: 50 }}
@@ -411,7 +391,7 @@ export default function App() {
             <Vignette eskil={false} offset={0.1} darkness={0.4} />
           </EffectComposer>
         </Canvas>
-      )}
+      </Suspense>
     </div>
   );
 }
