@@ -91,11 +91,13 @@
         <article>
             <pre class="prettyprint source linenums"><code>/**
  * @module Portfolio
+ * @category Scenes
  * @description Manages the main 3D portfolio scene, including the smooth camera transition
  * from the world view to the computer terminal.
  */
 
 import { Suspense } from "react";
+import { Loader } from "./Components/overlays.jsx";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import {
   Html,
@@ -121,6 +123,7 @@ const buttonSound = new Audio("./Computer/button_click.mp3");
 /**
  * Handles the cinematic smooth camera transition on mount.
  * @component
+ * @category Camera Logic
  * @description
  * Uses `useFrame` to linearly interpolate (lerp) the camera from its global position
  * to a specific focus point in front of the monitor. Once the camera is within
@@ -129,21 +132,18 @@ const buttonSound = new Audio("./Computer/button_click.mp3");
 function CameraRig() {
   const [active, setActive] = useState(true);
 
-  /** @type {THREE.Vector3} Target coordinates for the camera focus point */
+  /** @type {THREE.Vector3} */
+  // Target coordinates for the camera focus point
   const target = useMemo(() => new THREE.Vector3(0, 0.75, 2.5), []);
-  const tempVec = useMemo(() => new THREE.Vector3(), []);
 
   useFrame((state) => {
     if (!active) return;
-
-    // Smoothly moves camera to target position using a lerp factor of 0.05
+    // LERP (Linear Interpolation) for smooth "Premium" feel
     state.camera.position.lerp(target, 0.03);
     state.camera.lookAt(0, 1, -4.5);
 
-    // Disables the animation once the camera is close enough to the target
     if (state.camera.position.distanceTo(target) &lt; 0.1) {
       setActive(false);
-      console.log("Animation complete.");
     }
   });
 
@@ -153,9 +153,8 @@ function CameraRig() {
 /**
  * Utility developer component for coordinate mapping.
  * @component
- * @description
- * Listens for a 'Q' keypress and logs the current camera Position and Rotation to the console.
- * Essential for precisely placing 3D objects like buttons and labels within the scene.
+ * @category Developer Tools
+ * @description Listens for a 'Q' keypress and logs the current camera Position/Rotation.
  */
 function CameraLogger() {
   const { camera } = useThree();
@@ -168,10 +167,10 @@ function CameraLogger() {
 
         console.log("--- Camera Coordinates ---");
         console.log(
-          `Position: [${x.toFixed(2)}, ${y.toFixed(2)}, ${z.toFixed(2)}]`
+          `Position: [${x.toFixed(2)}, ${y.toFixed(2)}, ${z.toFixed(2)}]`,
         );
         console.log(
-          `Rotation: [${rx.toFixed(2)}, ${ry.toFixed(2)}, ${rz.toFixed(2)}]`
+          `Rotation: [${rx.toFixed(2)}, ${ry.toFixed(2)}, ${rz.toFixed(2)}]`,
         );
       }
     };
@@ -186,33 +185,32 @@ function CameraLogger() {
 /**
  * The 3D Computer terminal assembly.
  * @component
+ * @category Interactive Objects
  * @description
  * Renders a GLTF monitor model with interactive hardware buttons and an embedded HTML screen.
- * Includes CRT post-processing effects (scanlines, flicker) and dynamic tooltip positioning.
  */
 function Computer() {
-  /** @type {String|null} State to track which button is currently being hovered */
+  /** @type {String|null} */
+  // State to track which button is currently being hovered
   const [hoveredText, setHoveredText] = useState(null);
 
-  /** @type {Boolean} Controls the visibility of CRT scanlines and flicker overlays */
+  /** @type {Boolean} */
+  // Controls the visibility of CRT scanlines and flicker overlays
   const [showEffects, setShowEffects] = useState(true);
 
   const { scene, nodes } = useGLTF(
-    `${import.meta.env.BASE_URL}Computer/Monitor2.glb`
+    `${import.meta.env.BASE_URL}Computer/Monitor2.glb`,
   );
   const location = useLocation();
   const navigate = useNavigate();
 
-  /** @type {String} The URL to be rendered within the monitor's screen iframe */
+  /** @type {String} */
   const iframeSrc =
     location.state?.iframeUrl ||
-    "https://bolajiadewal3.github.io/Celestaris/Portfolio";
+    "https://bolajiadewal3.github.io/Celestaris/Portfolio/";
 
   /**
    * Calculates the geometric center of the screen mesh.
-   * @description
-   * This is necessary because the GLTF mesh might have its origin at a corner or hinge.
-   * Calculating the bounding box center allows the HTML screen to be perfectly centered.
    * @returns {Array&lt;number>} [x, y, z] offset relative to the mesh position.
    */
   const centerOffset = useMemo(() => {
@@ -386,17 +384,17 @@ useGLTF.preload(`${import.meta.env.BASE_URL}Computer/Monitor2.glb`);
 /**
  * Main Portfolio Entry Point.
  * @component
- * @returns {JSX.Element} The full Canvas-based 3D environment.
+ * @category Scenes
  */
 export default function Portfolio() {
   return (
     &lt;div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-      &lt;Canvas
-        dpr={[1, 1.5]}
-        gl={{ powerPreference: "high-performance", antialias: false }}
-        camera={{ position: [10, 10, 20], fov: 50 }}
-      >
-        &lt;Suspense fallback={&lt;Html center>Loading Experience...&lt;/Html>}>
+      &lt;Suspense fallback={&lt;Loader />}>
+        &lt;Canvas
+          dpr={[1, 1.5]}
+          gl={{ powerPreference: "high-performance", antialias: false }}
+          camera={{ position: [10, 10, 20], fov: 50 }}
+        >
           &lt;CameraRig />
           &lt;ambientLight intensity={0.5} />
           &lt;Environment preset="city" />
@@ -412,8 +410,8 @@ export default function Portfolio() {
             &lt;Noise opacity={0.05} />
             &lt;Vignette eskil={false} offset={0.1} darkness={1.1} />
           &lt;/EffectComposer>
-        &lt;/Suspense>
-      &lt;/Canvas>
+        &lt;/Canvas>
+      &lt;/Suspense>
     &lt;/div>
   );
 }
