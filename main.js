@@ -702,7 +702,7 @@ function $919cea3b052cd76d$export$c6fdb837b070b4ff({ isActive: isActive, onClose
                                     const fullUrl = `${$919cea3b052cd76d$import_meta.env.BASE_URL}${item.siteLink}`;
                                     console.log("Passing to iframe:", fullUrl);
                                     // 2. Navigate using the INTERNAL path only.
-                                    navigate(`${$919cea3b052cd76d$import_meta.env.BASE_URL}Computer`, {
+                                    navigate(`/Computer`, {
                                         state: {
                                             iframeUrl: fullUrl
                                         }
@@ -971,14 +971,17 @@ function $8c8a4d7c0a98efcd$export$c9fcf1a7df975d78(degrees) {
 }
 
 
+var $9e79c54aa8a563fd$import_meta = Object.assign(Object.create(null), {
+    url: "file:///src/city.jsx"
+});
 /**
  * CityModel manages the complex OBJ/MTL loading and asset disposal.
  * @component
  * @category 3D Assets
  */ function $9e79c54aa8a563fd$var$CityModel() {
     // useLoader automatically "suspends" this component
-    const materials = (0, $8I7SX$reactthreefiber.useLoader)((0, $8I7SX$threestdlib.MTLLoader), "./City/cityMAT.mtl");
-    const obj = (0, $8I7SX$reactthreefiber.useLoader)((0, $8I7SX$threestdlib.OBJLoader), "./City/city.obj", (loader)=>{
+    const materials = (0, $8I7SX$reactthreefiber.useLoader)((0, $8I7SX$threestdlib.MTLLoader), `${$9e79c54aa8a563fd$import_meta.env.BASE_URL}City/cityMAT.mtl`);
+    const obj = (0, $8I7SX$reactthreefiber.useLoader)((0, $8I7SX$threestdlib.OBJLoader), `${$9e79c54aa8a563fd$import_meta.env.BASE_URL}City/city.obj`, (loader)=>{
         materials.preload();
         loader.setMaterials(materials);
     });
@@ -1090,7 +1093,7 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
    */ const audioRef = (0, $8I7SX$react.useRef)(null);
     const startAudio = ()=>{
         if (!audioStarted) {
-            const audio = new Audio("./City/cityAMBIENCE.mp3");
+            const audio = new Audio(`${$9e79c54aa8a563fd$import_meta.env.BASE_URL}City/cityAMBIENCE.mp3`);
             audio.loop = true;
             audioRef.current = audio;
             audio.play();
@@ -1366,9 +1369,7 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
                             inclination: 0.49,
                             azimuth: 0.25
                         }),
-                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($9e79c54aa8a563fd$var$CityModel, {
-                            onLoad: ()=>setCityLoaded(true)
-                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($9e79c54aa8a563fd$var$CityModel, {}),
                         /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreepostprocessing.EffectComposer), {
                             enabled: !isOverlayActive,
                             children: [
@@ -1482,7 +1483,9 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
     const { scene: scene, nodes: nodes } = (0, $8I7SX$reactthreedrei.useGLTF)(`${$a0362f18e412ef3b$import_meta.env.BASE_URL}Computer/Monitor2.glb`);
     const location = (0, $8I7SX$reactrouterdom.useLocation)();
     const navigate = (0, $8I7SX$reactrouterdom.useNavigate)();
-    /** @type {String} */ const iframeSrc = location.state?.iframeUrl || "https://bolajiadewal3.github.io/Celestaris/Portfolio/";
+    /** @type {String} */ const iframeSrc = `${location.state?.iframeUrl}` || `${$a0362f18e412ef3b$import_meta.env.BASE_URL}Portfolio/index.html`;
+    //const iframeSrc = `${import.meta.env.BASE_URL}Portfolio/index.html`;
+    console.log(`The imported iframe site is: ${iframeSrc}`);
     /**
    * Calculates the geometric center of the screen mesh.
    * @returns {Array<number>} [x, y, z] offset relative to the mesh position.
@@ -1639,7 +1642,8 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
                         children: [
                             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("iframe", {
                                 src: iframeSrc,
-                                className: "monitor-iframe"
+                                className: "monitor-iframe",
+                                sandbox: "allow-same-origin allow-scripts allow-forms allow-popups"
                             }),
                             showEffects && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactjsxruntime.Fragment), {
                                 children: [

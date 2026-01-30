@@ -158,7 +158,7 @@ function Computer() {
         scale={nodes.Button.scale}
         onClick={() => {
           playButton();
-          navigate(`${import.meta.env.BASE_URL}Documentation`);
+          navigate(`Documentation`);
         }}
         onPointerOver={() => {
           setHoveredText("Site Documentation");
