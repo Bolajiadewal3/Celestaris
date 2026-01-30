@@ -158,7 +158,7 @@ function Computer() {
         scale={nodes.Button.scale}
         onClick={() => {
           playButton();
-          navigate(`Documentation`);
+          navigate(`/Documentation`);
         }}
         onPointerOver={() => {
           setHoveredText("Site Documentation");
