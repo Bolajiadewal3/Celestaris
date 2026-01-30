@@ -205,10 +205,10 @@ function Computer() {
   const navigate = useNavigate();
 
   /** @type {String} */
-  const iframeSrc =
-    `${location.state?.iframeUrl}` ||
-    `${import.meta.env.BASE_URL}Portfolio/index.html`;
-  //const iframeSrc = `${import.meta.env.BASE_URL}Portfolio/index.html`;
+  //const iframeSrc =
+  // `${location.state?.iframeUrl}` ||
+  //  `${import.meta.env.BASE_URL}Portfolio/index.html`;
+  const iframeSrc = `${import.meta.env.BASE_URL}Portfolio/index.html`;
 
   console.log(`The imported iframe site is: ${iframeSrc}`);
 
