@@ -1525,7 +1525,7 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
                 scale: nodes.Button.scale,
                 onClick: ()=>{
                     playButton();
-                    navigate(`Documentation`);
+                    navigate(`/Documentation`);
                 },
                 onPointerOver: ()=>{
                     setHoveredText("Site Documentation");
