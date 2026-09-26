@@ -1,77 +1,117 @@
+/**
+ * The setup of the JSX application and its navigation system
+ * @module Setup
+ * @function
+ * @category Setup
+ * @returns {void}
+ */
 import { createRoot } from "react-dom/client";
-import React from "react";
-import App from "./city.jsx";
-import Section0 from "./Poetry/section0.jsx"; // HTML-based poetry site
-import ExistentialPoetry from "./Poetry/existentialPoetry.jsx"; // HTML-based poetry site
-
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import Portfolio from "./portfolio.jsx";
-import Documentation from "./documentation.jsx";
 
+import City from "./city.jsx";
+import Portfolio from "./portfolio.jsx";
+import NHS from "./nhs.jsx";
+import Documentation from "./documentation.jsx";
+import Population from "./population.jsx";
+
+import { preloadAllSFX } from "./audioManager.js";
+
+/**
+ * Handles redirecting to the correct web pages
+ * @function
+ * @type {function}
+ * @returns {null}
+ */
 const RedirectHandler = () => {
+  /**
+   * Allows for site navigation
+   * @function
+   * @type {useNavigate}
+   */
   const navigate = useNavigate();
+
+  /**
+   * Retrieves the current page location
+   * @function
+   * @type {useLocation}
+   */
   const location = useLocation();
 
+  /**
+   * Handles redirect logic
+   * @function
+   * @type {useEffect}
+   */
   useEffect(() => {
+    // Check for the legacy ?path= param OR a direct URL hit
     const searchParams = new URLSearchParams(location.search);
-    const redirectPath = searchParams.get("path");
+    const redirectParam = searchParams.get("path");
+    const currentPath = location.pathname;
 
-    console.log("Raw Path:", redirectPath);
-    console.log("Current Path:", location.pathname);
+    const basename = "/Celestaris";
+    // Determine the path we are dealing with
+    let pathToCheck = redirectParam
+      ? decodeURIComponent(redirectParam)
+      : currentPath;
 
-    if (redirectPath) {
-      try {
-        let decodedPath = decodeURIComponent(redirectPath);
-        console.log("Decoded Path:", decodedPath);
+    // Remove basename to analyze the internal route
+    if (pathToCheck.startsWith(basename)) {
+      pathToCheck = pathToCheck.substring(basename.length);
+    }
 
-        const basename = "/Celestaris";
-        if (decodedPath.startsWith(basename)) {
-          decodedPath = decodedPath.substring(basename.length);
-        }
+    // Identify WordPress content
+    const isWP =
+      pathToCheck.toLowerCase().includes("portfolio") ||
+      pathToCheck.toLowerCase().includes("pages");
 
-        const isWordPressPath = decodedPath.toLowerCase().includes("portfolio");
+    if (isWP) {
+      // Ensure it ends in index.html for static serving
+      const cleanPath = pathToCheck.endsWith("index.html")
+        ? pathToCheck
+        : `${pathToCheck}/index.html`;
 
-        if (isWordPressPath) {
-          // Redirect the PARENT window to /Computer
-          // and pass the deep link via state so the iframe can find it
-          console.log("Redirecting WP path to Computer route:", decodedPath);
-          navigate("/Computer", {
-            replace: true,
-            state: { iframeUrl: `${basename}${decodedPath}` },
-          });
-          return;
-        }
-
-        const targetPath = decodedPath || "/";
-
-        if (targetPath !== location.pathname) {
-          console.log("Clean Navigation to:", targetPath);
-          navigate(targetPath, { replace: true });
-        }
-      } catch (error) {
-        console.error("Error decoding path:", error);
-      }
+      console.log("Routing WP to Computer:", cleanPath);
+      navigate("/Computer", {
+        replace: true,
+        state: { iframeUrl: `${basename}${cleanPath}` },
+      });
     }
   }, [location, navigate]);
 
   return null;
 };
 
+preloadAllSFX();
+
+/**
+ * Renders the JSX site
+ * @function
+ * @type {createRoot}
+ * @returns {void}
+ */
 createRoot(document.getElementById("root")).render(
   <BrowserRouter basename="/Celestaris">
     <RedirectHandler />
 
     <Routes>
-      <Route path="/" element={<App />} />
+      <Route path="/" element={<City />} />
       <Route path="/Computer" element={<Portfolio />} />
       <Route path="/Documentation" element={<Documentation />} />
+      <Route path="/Population" element={<Population />} />
+      <Route path="/NHS" element={<NHS />} />
 
+      {/** 
       <Route path="/Poetry/section0" element={<Section0 />} />
       <Route path="/Poetry/existentialPoetry" element={<ExistentialPoetry />} />
+      */}
     </Routes>
   </BrowserRouter>,
 );
-console.log("HAPPENED !!");
+console.log("The site has loaded !!");

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>nhs.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <script src="scripts/commonNav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">nhs.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module NHS
+ * @category Scenes
+ * @description Case study to showcase data visualisation with NHS data
+ */
+
+import { useMemo, useState, useRef, Suspense } from "react";
+import * as THREE from "three";
+import { Canvas, useLoader } from "@react-three/fiber";
+import * as d3 from "d3";
+import { Loader, AudioButton } from "./Components/overlays.jsx";
+import { OrbitControls } from "@react-three/drei";
+
+const CENTER = [-3.44, 55.36];
+
+const createRegionShape = (feature) => {
+  if (!feature.geometry) return [];
+  const type = feature.geometry.type;
+  const coords = feature.geometry.coordinates;
+
+  const processPolygon = (polygonCoords) => {
+    const shape = new THREE.Shape();
+    polygonCoords[0].forEach((coord, i) => {
+      // DO NOT subtract CENTER here. Keep raw coordinates.
+      const x = coord[0];
+      const y = coord[1];
+      if (i === 0) shape.moveTo(x, y);
+      else shape.lineTo(x, y);
+    });
+    return shape;
+  };
+
+  if (type === "Polygon") return [processPolygon(coords)];
+  if (type === "MultiPolygon")
+    return coords.map((poly) => processPolygon(poly));
+  return [];
+};
+
+function UKDashboard({ regionsGeoJson, locationsCsvUrl }) {
+  const rawGeoJson = useLoader(THREE.FileLoader, regionsGeoJson);
+  const rawCsv = useLoader(THREE.FileLoader, locationsCsvUrl);
+
+  const regionsData = useMemo(() => JSON.parse(rawGeoJson), [rawGeoJson]);
+  const locations = useMemo(() => d3.csvParse(rawCsv), [rawCsv]);
+
+  const regionMeshes = useMemo(() => {
+    return regionsData.features.map((feature, idx) => {
+      const shapes = createRegionShape(feature);
+      return {
+        id: feature.properties.areacd || idx,
+        name: feature.properties.areanm,
+        shapes: shapes,
+      };
+    });
+  }, [regionsData]);
+
+  return (
+    &lt;group scale={25}>
+      {/* THE MAP LAYER */}
+      &lt;group
+        position={[-CENTER[0], 0, CENTER[1]]}
+        rotation={[-Math.PI / 2, 0, 0]}
+      >
+        {" "}
+        &lt;group>
+          {regionMeshes.map((region) =>
+            region.shapes.map((shape, i) => (
+              &lt;mesh key={`${region.id}-${i}`} position={[0, 0, 0]}>
+                &lt;extrudeGeometry
+                  args={[shape, { depth: 0.2, bevelEnabled: false }]}
+                />
+                &lt;meshStandardMaterial
+                  color="#005EB8" // NHS Blue
+                  transparent
+                  opacity={0.55}
+                  emissive="#6a0dad"
+                  emissiveIntensity={0.3}
+                  side={THREE.DoubleSide}
+                />
+              &lt;/mesh>
+            )),
+          )}
+        &lt;/group>
+        {/* THE HOSPITAL LAYER */}
+        {locations.map((loc, i) => {
+          const lon = parseFloat(loc.Longitude);
+          const lat = parseFloat(loc.Latitude);
+          if (lat &lt; 49 || lat > 61 || lon &lt; -10 || lon > 3) return null;
+          return (
+            &lt;group key={i} position={[lon, lat, 0.2]}>
+              {" "}
+              {/* Glowing hospital marker */}
+              &lt;mesh>
+                &lt;sphereGeometry args={[0.03, 16, 16]} />
+                &lt;meshBasicMaterial color="#00f5d4" />
+              &lt;/mesh>
+              {/* Vertical data pillar */}
+              &lt;mesh position={[0, 0, 1]} rotation={[Math.PI / 2, 0, 0]}>
+                {" "}
+                &lt;cylinderGeometry args={[0.02, 0.02, 2]} />
+                &lt;meshBasicMaterial color="#00f5d4" transparent opacity={0.3} />
+              &lt;/mesh>
+            &lt;/group>
+          );
+        })}
+      &lt;/group>
+    &lt;/group>
+  );
+}
+
+/**
+ * Main application component rendering a Three.js city scene,
+ * interactive UI overlays, banners, and ambient experience.
+ *
+ * @component
+ * @returns {JSX.Element}
+ */
+export default function NHS() {
+  // UI states
+  const [controlsEnabled, setControlsEnabled] = useState(true);
+
+  // Camera/interaction state
+  const controlsRef = useRef();
+
+  /**
+   * Toggles the overlay and OrbitControls simultaneously.
+   */
+  const toggleOverlay = () => {
+    setOverlayActive((prev) => {
+      const newState = !prev;
+      if (controlsRef.current) {
+        controlsRef.current.enabled = !newState;
+      }
+      return newState;
+    });
+  };
+
+  /**
+   * Starts city background audio on first interaction.
+   */
+
+  const audioRef = useRef(null);
+
+  return (
+    &lt;div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+      &lt;AudioButton
+        url={`${import.meta.env.BASE_URL}NHS/hospital_ambience.mp3`}
+      >&lt;/AudioButton>
+
+      &lt;Suspense fallback={&lt;Loader />}>
+        &lt;Canvas
+          shadows
+          camera={{ position: [0, 330, 140], fov: 50, near: 1, far: 5000 }}
+          dpr={[1, 1.5]}
+          gl={{ antialias: true }}
+          performance={{ min: 0.8 }}
+        >
+          &lt;UKDashboard
+            regionsGeoJson={`${import.meta.env.BASE_URL}NHS/unitedkingdom.geojson`}
+            locationsCsvUrl={`${import.meta.env.BASE_URL}NHS/hospital_locations_england.csv`}
+          >&lt;/UKDashboard>
+
+          {/* User controls */}
+          &lt;OrbitControls
+            ref={controlsRef}
+            target={[0, 0, 0]}
+            enablePan={false}
+            maxPolarAngle={Math.PI / 2}
+            minDistance={10}
+            maxDistance={4000}
+            enabled={controlsEnabled}
+          />
+          {/* Lighting */}
+          {/*&lt;CameraLight />*/}
+          &lt;ambientLight intensity={0.8} />
+          &lt;directionalLight position={[300, 300, 300]} intensity={3} />
+          {/* Center */}
+          &lt;mesh position={[5, 0, -2]}>
+            &lt;sphereGeometry args={[2, 32, 32]} />
+            &lt;meshStandardMaterial color="red" />
+          &lt;/mesh>
+
+          &lt;color attach="background" args={["#ffffff"]} />
+        &lt;/Canvas>
+      &lt;/Suspense>
+    &lt;/div>
+  );
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Sep 23 2026 13:41:33 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+    <link type="text/css" rel="stylesheet" href="docs-style.css">
+    
+    <script src="docs-style.js"></script>
+    
+</body>
+</html>

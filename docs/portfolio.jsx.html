@@ -1,88 +1,46 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Celestaris Documentation portfolio.jsx</title>
-
-  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="./build/entry.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
-  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
-  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
-  <link type="text/css" rel="stylesheet" href="">
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-  
+    
+    <meta charset="utf-8">
+    <title>portfolio.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <script src="scripts/commonNav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<body>
 
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
+<label for="nav-trigger" class="overlay"></label>
 
-<body class="layout small-header">
-    <div id="stickyNavbarOverlay"></div>
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">portfolio.jsx</h1>
     
 
-<div class="top-nav">
-    <div class="inner">
-        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
-        <div class="logo">
-            
-             
-                <a href="index.html">
-                    <h1 class="navbar-item">Celestaris Engine Docs</h1>
-                </a>
-            
-        </div>
-        <div class="menu">
-            
-            <div class="navigation">
-                <a
-                    href="index.html"
-                    class="link"
-                >
-                    Documentation
-                </a>
-                
-                
-                
-            </div>
-        </div>
-    </div>
-</div>
-    <div id="main">
-        <div
-            class="sidebar "
-            id="sidebarNav"
-        >
-            
-            <nav>
-                
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="module-City.html">City</a></li><li><a href="module-City-CameraLight.html">CameraLight</a></li><li><a href="module-City-CityModel.html">CityModel</a></li><li><a href="module-Portfolio.html">Portfolio</a></li><li><a href="module-Portfolio-CameraLogger.html">CameraLogger</a></li><li><a href="module-Portfolio-CameraRig.html">CameraRig</a></li><li><a href="module-Portfolio-Computer.html">Computer</a></li></ul></div>
-                
-            </nav>
-        </div>
-        <div class="core" id="main-content-wrapper">
-            <div class="content">
-                <header class="page-title">
-                    <p>Source</p>
-                    <h1>portfolio.jsx</h1>
-                </header>
-                
+    
 
 
 
@@ -92,58 +50,49 @@
             <pre class="prettyprint source linenums"><code>/**
  * @module Portfolio
  * @category Scenes
- * @description Manages the main 3D portfolio scene, including the smooth camera transition
- * from the world view to the computer terminal.
+ * @description The computer portfolio scene, with static wordpress showcased via a computer model
  */
 
 import { Suspense } from "react";
 import { Loader } from "./Components/overlays.jsx";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import {
-  Html,
-  OrbitControls,
-  Environment,
-  ContactShadows,
-} from "@react-three/drei";
+import { Html, Environment } from "@react-three/drei";
 import * as THREE from "three";
 import { useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  Vignette,
-  Bloom,
-  EffectComposer,
-  Noise,
-} from "@react-three/postprocessing";
+import { Vignette, EffectComposer, Noise } from "@react-three/postprocessing";
+import { AudioButton } from "./Components/overlays.jsx";
 
-const clickSound = new Audio("./Computer/mouse_click.mp3");
+//const clickSound = new Audio("./Computer/mouse_click.mp3");
 const buttonSound = new Audio("./Computer/button_click.mp3");
 
 /**
- * Handles the cinematic smooth camera transition on mount.
+ * Orchestrates a cinematic smooth camera transition on component mount.
  * @component
  * @category Camera Logic
- * @description
- * Uses `useFrame` to linearly interpolate (lerp) the camera from its global position
- * to a specific focus point in front of the monitor. Once the camera is within
- * a threshold distance, the animation "disengages" to allow for other interactions.
+ * @param {Object} props
+ * @param {function} props.onComplete - Callback executed when the camera reaches the focus threshold.
  */
-function CameraRig() {
+function CameraRig({ onComplete }) {
   const [active, setActive] = useState(true);
 
-  /** @type {THREE.Vector3} */
-  // Target coordinates for the camera focus point
+  /** * Target coordinates for the camera focus point in front of the monitor.
+   * @type {THREE.Vector3}
+   * @inner
+   * @memberof CameraRig
+   */
   const target = useMemo(() => new THREE.Vector3(0, 0.75, 2.5), []);
 
   useFrame((state) => {
     if (!active) return;
-    // LERP (Linear Interpolation) for smooth "Premium" feel
     state.camera.position.lerp(target, 0.03);
     state.camera.lookAt(0, 1, -4.5);
 
     if (state.camera.position.distanceTo(target) &lt; 0.1) {
       setActive(false);
+      if (onComplete) onComplete();
     }
   });
 
@@ -151,20 +100,26 @@ function CameraRig() {
 }
 
 /**
- * Utility developer component for coordinate mapping.
+ * Debugging tool to map 3D coordinates via keyboard input.
  * @component
  * @category Developer Tools
- * @description Listens for a 'Q' keypress and logs the current camera Position/Rotation.
+ * @description Listens for 'Q' keypress to log the current camera Position/Rotation to the console.
  */
 function CameraLogger() {
+  /**
+   * Retrieves the 3D scene's camera
+   * @type {JSX.camera}
+   */
   const { camera } = useThree();
 
   useEffect(() => {
+    /** If the Q key is pressed at any point */
     const handleKeyDown = (event) => {
       if (event.key.toLowerCase() === "q") {
         const { x, y, z } = camera.position;
         const { x: rx, y: ry, z: rz } = camera.rotation;
 
+        /** Print the camera's position and rotation strictly to two decimal places */
         console.log("--- Camera Coordinates ---");
         console.log(
           `Position: [${x.toFixed(2)}, ${y.toFixed(2)}, ${z.toFixed(2)}]`,
@@ -175,6 +130,7 @@ function CameraLogger() {
       }
     };
 
+    /** Ensures that the event listener is active and also cleaned up on removal of this function */
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [camera]);
@@ -183,38 +139,72 @@ function CameraLogger() {
 }
 
 /**
- * The 3D Computer terminal assembly.
+ * The interactive 3D monitor assembly.
  * @component
  * @category Interactive Objects
- * @description
- * Renders a GLTF monitor model with interactive hardware buttons and an embedded HTML screen.
+ * @description Renders a GLTF monitor with hardware buttons and an embedded HTML/Iframe screen.
+ * @param {Object} props
+ * @param {function} props.onReady - Triggered when the initial boot sequence/animation is complete.
  */
-function Computer() {
-  /** @type {String|null} */
-  // State to track which button is currently being hovered
+function Computer({ onReady }) {
+  /** * Text label currently displayed on the hardware button tooltip.
+   * @type {string|null}
+   * @inner
+   * @memberof Computer
+   */
   const [hoveredText, setHoveredText] = useState(null);
 
-  /** @type {Boolean} */
-  // Controls the visibility of CRT scanlines and flicker overlays
+  /** * Toggle state for CRT scanlines and flicker overlays.
+   * @type {boolean}
+   * @inner
+   * @memberof Computer
+   */
   const [showEffects, setShowEffects] = useState(true);
 
-  const { scene, nodes } = useGLTF(
-    `${import.meta.env.BASE_URL}Computer/Monitor2.glb`,
-  );
+  /**
+   * Retrieves the current page location
+   * @function
+   * @type {useLocation}
+   */
   const location = useLocation();
+
+  /**
+   * Allows for site navigation
+   * @function
+   * @type {useNavigate}
+   */
   const navigate = useNavigate();
 
-  /** @type {String} */
+  /** * Toggle state for CRT scanlines and flicker overlays.
+   * @type {boolean}
+   * @inner
+   * @memberof Computer
+   */
+  const [shouldLoadIframe, setShouldLoadIframe] = useState(false);
+
+  /** * The resolved URL for the internal terminal iframe.
+   * @type {string}
+   * @inner
+   * @memberof Computer
+   */
   const iframeSrc =
     `${location.state?.iframeUrl}` ||
     `${import.meta.env.BASE_URL}Portfolio/index.html`;
-  //const iframeSrc = `${import.meta.env.BASE_URL}Portfolio/index.html`;
-
-  console.log(`The imported iframe site is: ${iframeSrc}`);
 
   /**
-   * Calculates the geometric center of the screen mesh.
-   * @returns {Array&lt;number>} [x, y, z] offset relative to the mesh position.
+   * Retrieve's the computer model .GLB
+   * @function
+   * @type {useGLTF}
+   */
+  const { scene, nodes } = useGLTF(
+    `${import.meta.env.BASE_URL}Computer/Monitor2.glb`,
+  );
+
+  /**
+   * Calculates the geometric center of the screen mesh for precise HTML overlay alignment.
+   * @type {number[]}
+   * @inner
+   * @memberof Computer
    */
   const centerOffset = useMemo(() => {
     if (!nodes.Screen) return [0, 0, 0];
@@ -228,6 +218,12 @@ function Computer() {
     ];
   }, [nodes]);
 
+  /**
+   * Triggers the mechanical button click sound effect.
+   * @function
+   * @inner
+   * @memberof Computer
+   */
   const playButton = () => {
     buttonSound.currentTime = 0;
     buttonSound.play();
@@ -237,13 +233,19 @@ function Computer() {
     &lt;group>
       {/* The static Monitor model */}
       &lt;primitive object={scene} />
+      &lt;CameraRig
+        onComplete={() => {
+          setShouldLoadIframe(true);
+          onReady;
+        }}
+      />
 
       {/* HARDWARE BUTTON: Site Documentation (Blue) */}
       &lt;mesh
         position={[
           nodes.Button.position.x - 0.17,
           nodes.Button.position.y,
-          nodes.Button.position.z + 0.027,
+          nodes.Button.position.z + 0.009,
         ]}
         rotation={nodes.Button.rotation}
         scale={nodes.Button.scale}
@@ -296,7 +298,7 @@ function Computer() {
 
       &lt;mesh
         position={[
-          nodes.Button.position.x + 0.15,
+          nodes.Button.position.x + 0.17,
           nodes.Button.position.y,
           nodes.Button.position.z,
         ]}
@@ -304,14 +306,10 @@ function Computer() {
         scale={nodes.Button.scale}
         onClick={() => {
           playButton();
-          if (document.referrer) {
-            window.location.href = document.referrer;
-          } else {
-            window.location.assign("/Celestaris/");
-          }
+          navigate("/", { replace: true });
         }}
         onPointerOver={() => {
-          setHoveredText("Go to Last Page");
+          setHoveredText("Back to Home");
           document.body.style.cursor = "pointer";
         }}
         onPointerOut={() => {
@@ -331,8 +329,8 @@ function Computer() {
       {hoveredText &amp;&amp; (
         &lt;Html
           position={[
-            nodes.Button.position.x + 0.075,
-            nodes.Button.position.y + 0.2,
+            nodes.Button.position.x + 0.0,
+            nodes.Button.position.y + 0.15,
             nodes.Button.position.z,
           ]}
           center
@@ -349,10 +347,11 @@ function Computer() {
         scale={nodes.Screen.scale}
       >
         &lt;Html
+          occlude={false}
           transform
           rotation-order="YXZ"
           position={[
-            centerOffset[0] + 0.09,
+            centerOffset[0] + 0.2,
             centerOffset[1],
             centerOffset[2] - 0.05,
           ]}
@@ -367,11 +366,11 @@ function Computer() {
               showEffects ? "effects-active" : ""
             }`}
           >
-            &lt;iframe
-              src={iframeSrc}
-              className="monitor-iframe"
-              sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-            />
+            {shouldLoadIframe ? (
+              &lt;iframe src={iframeSrc} className="monitor-iframe" />
+            ) : (
+              &lt;div className="loading-placeholder">Booting Terminal...&lt;/div>
+            )}
 
             {showEffects &amp;&amp; (
               &lt;>
@@ -389,34 +388,41 @@ function Computer() {
 useGLTF.preload(`${import.meta.env.BASE_URL}Computer/Monitor2.glb`);
 
 /**
- * Main Portfolio Entry Point.
+ * Main Portfolio Scene Entry Point.
  * @component
  * @category Scenes
+ * @description Orchestrates the 3D Canvas, environment lighting, and post-processing effects.
+ * @returns {JSX.Element} The full-screen 3D computer portfolio.
  */
 export default function Portfolio() {
+  const [isReady, setIsReady] = useState(false);
   return (
     &lt;div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+      &lt;AudioButton
+        url={`${import.meta.env.BASE_URL}Computer/office_ambience.mp3`}
+      >&lt;/AudioButton>
+      {/** The custom loading page screen from OVERLAYS */}
       &lt;Suspense fallback={&lt;Loader />}>
+        {/** The 3D scene with computer present */}
         &lt;Canvas
           dpr={[1, 1.5]}
           gl={{ powerPreference: "high-performance", antialias: false }}
           camera={{ position: [10, 10, 20], fov: 50 }}
         >
-          &lt;CameraRig />
           &lt;ambientLight intensity={0.5} />
           &lt;Environment preset="city" />
-          &lt;Computer />
+          &lt;Computer onReady={() => setIsReady(true)} />
           &lt;CameraLogger />
 
           &lt;group>
             &lt;gridHelper args={[10, 10]} />
           &lt;/group>
-
-          &lt;EffectComposer>
-            &lt;Bloom intensity={1.5} mipmapBlur />
-            &lt;Noise opacity={0.05} />
-            &lt;Vignette eskil={false} offset={0.1} darkness={1.1} />
-          &lt;/EffectComposer>
+          {isReady &amp;&amp; (
+            &lt;EffectComposer>
+              &lt;Noise opacity={0.05} />
+              &lt;Vignette eskil={false} offset={0.1} darkness={1.1} />
+            &lt;/EffectComposer>
+          )}
         &lt;/Canvas>
       &lt;/Suspense>
     &lt;/div>
@@ -429,16 +435,29 @@ export default function Portfolio() {
 
 
 
-            </div>
-            
-        </div>
-        <div id="side-nav" class="side-nav">
-        </div>
-    </div>
-<script src="scripts/app.min.js"></script>
-<script>PR.prettyPrint();</script>
-<script src="scripts/linenumber.js"> </script>
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Sep 23 2026 13:41:33 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
 
 
+<script src="scripts/collapse.js" defer></script>
+
+
+    <link type="text/css" rel="stylesheet" href="docs-style.css">
+    
+    <script src="docs-style.js"></script>
+    
 </body>
 </html>

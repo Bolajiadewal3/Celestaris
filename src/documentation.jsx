@@ -4,11 +4,12 @@
  * @description Technical showcase featuring an interactive 3D tablet.
  */
 
-import { React, Suspense } from "react";
+import { Suspense } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { Loader } from "./Components/overlays.jsx";
 import { Html, Environment, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
+import { useNavigate } from "react-router-dom";
 import { useMemo, useState } from "react";
 import {
   Vignette,
@@ -17,17 +18,52 @@ import {
   Noise,
 } from "@react-three/postprocessing";
 
+/**
+ * Creates the tablet that the documentation is embedded on
+ * @component
+ * @category 3D Objects
+ * @description
+ * Creates a tablet that then displays the static documentation site
+ * @returns {JSX.Element}
+ */
 function Tablet() {
+  /** * Text label currently displayed on the hardware button tooltip.
+   * @type {string|null}
+   * @inner
+   * @memberof Tablet
+   */
+  const [hoveredText, setHoveredText] = useState(null);
+  /**
+   * Allows for site navigation
+   * @function
+   * @type {useNavigate}
+   */
+  const navigate = useNavigate();
+
+  /**
+   * Navigates back to home when pressed
+   * @function
+   * @type {function}
+   */
+  const handleHomeClick = () => {
+    navigate(`/`);
+  };
   return (
     <group position={[0, 1.5, -4]} rotation={[-Math.PI / 10, 0, 0]}>
-      {/* 1. The Tablet Shell */}
+      {/* The TABLET */}
       <mesh castShadow>
         {/* Dimensions: 3.2 units wide, 5 units tall */}
-        <boxGeometry args={[3.2, 5, 0.15]} />
+        <boxGeometry args={[3.5, 5.5, 0.15]} />
         <meshStandardMaterial color="#111" roughness={0.2} />
       </mesh>
 
-      {/* 2. The Screen */}
+      {hoveredText && (
+        <Html position={[0.0, -2.0, 0.0]} center distanceFactor={6}>
+          <div className="monitor-tooltip">{hoveredText}</div>
+        </Html>
+      )}
+
+      {/* The SCREEN */}
       <Html
         transform
         occlude="blending"
@@ -42,6 +78,22 @@ function Tablet() {
           />
         </div>
       </Html>
+      <mesh
+        position={[0, -2.5, 0.08]}
+        onClick={handleHomeClick}
+        onPointerOver={() => {
+          setHoveredText("Return to Home");
+          document.body.style.cursor = "pointer";
+        }}
+        onPointerOut={() => {
+          setHoveredText(null);
+          document.body.style.cursor = "auto";
+        }}
+      >
+        {/* The HOME BUTTON */}
+        <circleGeometry args={[0.15, 32]} />
+        <meshStandardMaterial color="#F22" />
+      </mesh>
     </group>
   );
 }
@@ -80,10 +132,19 @@ function CameraRig() {
   );
 }
 
+/**
+ * Main documentation compenent rendering the tablet with inlay documentation
+ *
+ * @default
+ * @component
+ * @returns {JSX.Element}
+ */
 export default function Documentation() {
   return (
     <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+      {/** The custom loading page screen from OVERLAYS */}
       <Suspense fallback={<Loader />}>
+        {/** The 3D scene with tablet present */}
         <Canvas
           dpr={[1, 1.5]}
           gl={{ powerPreference: "high-performance", antialias: false }}

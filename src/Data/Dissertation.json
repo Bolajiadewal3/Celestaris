@@ -1,15 +1,10 @@
 {
-    "projects": [
-      {
-        "title": "Master's I Thesis",
-        "abstract": "",
-        "siteLink": "projects/MISC/poetry/section0.html"
-      },
-      {
-        "title": "Master's II Thesis",
-        "abstract": "",
-        "siteLink": "projects/MISC/music/music.html"
-      }
-    ]
-  }
-  
+  "projects": [
+    {
+      "title": "The National Football League: A case study assessing the impact of website design methodology on Information System learnability",
+      "abstract": "An attempted synthesis of Business Analytics and the Sporting world; unifying the two concepts to form an investigation into how the design of systems (i.e. Human Computer Interaction choices) can influence the retention and understanding of abstract / niche information",
+      "siteLink": "",
+      "WIP": "Yes"
+    }
+  ]
+}

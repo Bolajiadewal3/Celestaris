@@ -10,11 +10,12 @@ var $8I7SX$reactjsxruntime = require("react/jsx-runtime");
 var $8I7SX$reactthreefiber = require("@react-three/fiber");
 var $8I7SX$reactthreedrei = require("@react-three/drei");
 var $8I7SX$three = require("three");
-var $8I7SX$threestdlib = require("three-stdlib");
 var $8I7SX$reactthreepostprocessing = require("@react-three/postprocessing");
 var $8I7SX$reactspringweb = require("@react-spring/web");
 var $8I7SX$reactrouterdom = require("react-router-dom");
 var $8I7SX$reactspringthree = require("@react-spring/three");
+var $8I7SX$d3 = require("d3");
+var $8I7SX$r3fglobe = require("r3f-globe");
 
 
 function $parcel$interopDefault(a) {
@@ -452,30 +453,51 @@ $99e5c865b19c7c75$exports["default"] = $99e5c865b19c7c75$var$_default;
  * @module City
  * @category Scenes
  * @description The high-performance urban landing page.
+ * ![City.png](The city model as it appears on the site)
+ * ![City2.png](The city model as it appears on the site)
  */ 
 
 
 
 
 
-
 var $c899916b68c87ba7$exports = {};
-$c899916b68c87ba7$exports = JSON.parse('{"projects":[{"title":"NIKE","abstract":"This report examines Nike\'s branding strategy and its successful transition into the e-business domain. Employing the brand equity model and the customer decision journey framework, the study dissects Nike\u2019s marketing efforts, including sports sponsorships and ambassadorships. It evaluates Nike\'s ability to create positive brand perceptions, fostering customer loyalty and increasing market share. The analysis highlights potential pitfalls, such as over-dependence on ambassadors and brand diversification risks, while offering recommendations for bolstering brand equity and exploring untapped markets.","siteLink":"Portfolio/research-projects/nike-2/","model":"/files/bia/nike.glb"},{"title":"Uber","abstract":"The paper explores Uber\'s application of machine learning to enhance its customer experience, focusing on improving the pickup process. It introduces an improved pickup quality metric that incorporates active, passive, and third-party signals to minimize delays and enhance user satisfaction. Additionally, the study examines strategies to refine time estimation accuracy, reduce driver loops, and optimize user interaction. The integration of advanced AI platforms, such as Horovod and Michelangelo, demonstrates Uber\u2019s commitment to leveraging data for operational efficiency and user-centric innovations.","siteLink":"Pages/BIA/uber/uber.html","website":"https://aremuart.wordpress.com/research-projects/uber/","private":"yes","model":"/files/bia/uber.glb"},{"title":"Amazon","abstract":"This evaluation analyzes Amazon.com\'s usability through heuristic evaluations and user journey assessments. Highlighting its strengths in navigation, search efficiency, and aesthetics, the paper also identifies areas for improvement, such as limited accessibility options and insufficient error diagnostics. Proposed redesigns incorporate better visual hierarchy, enhanced color contrast, and streamlined accessibility features to improve customer experience. The study concludes that while Amazon excels in creating a user-friendly platform, addressing minor usability flaws could further optimize the e-commerce giant\u2019s performance.","siteLink":"Pages/BIA/amazon/amazon.html","website":"https://aremuart.wordpress.com/research-projects/amazon/","private":"yes","model":"/files/bia/amazon.glb"}]}');
+$c899916b68c87ba7$exports = JSON.parse('{"projects":[{"title":"NIKE","abstract":"This report examines Nike\'s branding strategy and its successful transition into the e-business domain. Employing the brand equity model and the customer decision journey framework, the study dissects Nike\u2019s marketing efforts, including sports sponsorships and ambassadorships. It evaluates Nike\'s ability to create positive brand perceptions, fostering customer loyalty and increasing market share. The analysis highlights potential pitfalls, such as over-dependence on ambassadors and brand diversification risks, while offering recommendations for bolstering brand equity and exploring untapped markets.","siteLink":"Portfolio/research-projects/nike-2/"},{"title":"Uber","abstract":"The paper explores Uber\'s application of machine learning to enhance its customer experience, focusing on improving the pickup process. It introduces an improved pickup quality metric that incorporates active, passive, and third-party signals to minimize delays and enhance user satisfaction. Additionally, the study examines strategies to refine time estimation accuracy, reduce driver loops, and optimize user interaction. The integration of advanced AI platforms, such as Horovod and Michelangelo, demonstrates Uber\u2019s commitment to leveraging data for operational efficiency and user-centric innovations.","siteLink":"Portfolio/research-projects/uber/","WIP":"Yes"},{"title":"Amazon","abstract":"This evaluation analyzes Amazon.com\'s usability through heuristic evaluations and user journey assessments. Highlighting its strengths in navigation, search efficiency, and aesthetics, the paper also identifies areas for improvement, such as limited accessibility options and insufficient error diagnostics. Proposed redesigns incorporate better visual hierarchy, enhanced color contrast, and streamlined accessibility features to improve customer experience. The study concludes that while Amazon excels in creating a user-friendly platform, addressing minor usability flaws could further optimize the e-commerce giant\u2019s performance.","siteLink":"Portfolio/research-projects/amazon/","WIP":"Yes"}]}');
 
 
 var $c5214312cc917dc2$exports = {};
-$c5214312cc917dc2$exports = JSON.parse("{\"projects\":[{\"title\":\"Gothic\",\"abstract\":\"Gothic poems inspired by Victorian Romantics and Gothic writers\",\"website\":\"https://aremuart.wordpress.com/poetry/gothics/\",\"siteLink\":\"Portfolio/poetry/gothic/\"},{\"title\":\"Existential\",\"abstract\":\"An assortment of existential poems - aimed at the contemplative and inward-thinkers\",\"navigation\":\"/Celestaris/Poetry/existentialPoetry\",\"website\":\"https://aremuart.wordpress.com/poetry/existentialists/\",\"siteLink\":\"Portfolio/poetry/existentialists/\"},{\"title\":\"Poetry Anthology: Canto I\",\"abstract\":\"Serentiy, Silence and Salutation\",\"navigation\":\"/Celestaris/Poetry/section0\",\"siteLink\":\"Portfolio/poetry/lux/section0\"},{\"title\":\"Poetry Anthology: Canto II\",\"abstract\":\"Tabula Lux\",\"navigation\":\"/Celestaris/Poetry/section1\",\"siteLink\":\"Portfolio/poetry/lux/section1\"}]}");
+$c5214312cc917dc2$exports = JSON.parse("{\"projects\":[{\"title\":\"Gothic\",\"abstract\":\"Gothic poems inspired by Victorian Romantics and Gothic writers\",\"website\":\"https://aremuart.wordpress.com/poetry/gothics/\",\"siteLink\":\"Portfolio/poetry/gothic/\",\"WIP\":\"Yes\"},{\"title\":\"Existential\",\"abstract\":\"An assortment of existential poems - aimed at the contemplative and inward-thinkers\",\"navigation\":\"/Celestaris/Poetry/existentialPoetry\",\"website\":\"https://aremuart.wordpress.com/poetry/existentialists/\",\"siteLink\":\"Portfolio/poetry/existentialists/\",\"WIP\":\"Yes\"},{\"title\":\"Poetry Anthology: Canto I\",\"abstract\":\"Serentiy, Silence and Salutation\",\"navigation\":\"/Celestaris/Poetry/section0\",\"siteLink\":\"Portfolio/poetry/lux/section0\",\"WIP\":\"Yes\"},{\"title\":\"Poetry Anthology: Canto II\",\"abstract\":\"Tabula Lux\",\"navigation\":\"/Celestaris/Poetry/section1\",\"siteLink\":\"Portfolio/poetry/lux/section1\",\"WIP\":\"Yes\"}]}");
 
 
 var $5f275980e24e53b6$exports = {};
-$5f275980e24e53b6$exports = JSON.parse("{\"projects\":[{\"title\":\"Master's I Thesis\",\"abstract\":\"\",\"siteLink\":\"projects/MISC/poetry/section0.html\"},{\"title\":\"Master's II Thesis\",\"abstract\":\"\",\"siteLink\":\"projects/MISC/music/music.html\"}]}");
+$5f275980e24e53b6$exports = JSON.parse("{\"projects\":[{\"title\":\"The National Football League: A case study assessing the impact of website design methodology on Information System learnability\",\"abstract\":\"An attempted synthesis of Business Analytics and the Sporting world; unifying the two concepts to form an investigation into how the design of systems (i.e. Human Computer Interaction choices) can influence the retention and understanding of abstract / niche information\",\"siteLink\":\"\",\"WIP\":\"Yes\"}]}");
 
 
 var $72d2bfc3e95efd9e$exports = {};
-$72d2bfc3e95efd9e$exports = JSON.parse("{\"projects\":[{\"title\":\"Music\",\"abstract\":\"Music released under the artist name: AREMU\",\"website\":\"https://linktr.ee/ar3mu\",\"external\":\"Yes\",\"model\":\"/files/misc/vinyl.glb\"},{\"title\":\"Profile\",\"abstract\":\"Profile page with useful links\",\"website\":\"https://linktr.ee/bolajiadewale\",\"external\":\"Yes\",\"model\":\"/files/misc/books.glb\"}]}");
+$72d2bfc3e95efd9e$exports = JSON.parse("{\"projects\":[{\"title\":\"Music\",\"abstract\":\"All music released under the artist name: AREMU\",\"website\":\"https://linktr.ee/ar3mu\",\"external\":\"Yes\",\"model\":\"/files/misc/vinyl.glb\"},{\"title\":\"Profile\",\"abstract\":\"Profile page with useful links\",\"website\":\"https://linktr.ee/bolajiadewale\",\"external\":\"Yes\",\"model\":\"/files/misc/books.glb\"}]}");
 
 
+var $a470e25448b54df9$exports = {};
+$a470e25448b54df9$exports = JSON.parse("{\"projects\":[{\"title\":\"\",\"abstract\":\"\",\"siteLink\":\"Portfolio/research-projects/nike-2/\",\"WIP\":\"Yes\"}]}");
 
+
+var $33d99ab8c635f77f$exports = {};
+$33d99ab8c635f77f$exports = JSON.parse("{\"projects\":[{\"title\":\"\",\"abstract\":\"\",\"siteLink\":\"Portfolio/research-projects/nike-2/\",\"WIP\":\"Yes\"}]}");
+
+
+var $0337a43b1bf22104$exports = {};
+$0337a43b1bf22104$exports = JSON.parse("{\"projects\":[{\"title\":\"S E R E N I T Y\",\"abstract\":\"My first fully-fledged EP\",\"website\":\"https://open.spotify.com/album/785WraoWzcgxA8h1QUCVvU?si=p_DV9NB-ThudCruT2Rvn9Q\",\"external\":\"Yes\"},{\"title\":\"P R O S E\",\"abstract\":\"My first commercial release\",\"website\":\"https://open.spotify.com/album/4b9is3K20OWiLPrTxCEZMr?si=IU3rP9dkSHGd1TkCh9Em9Q\",\"external\":\"Yes\"}]}");
+
+
+var $e355f84da0148888$exports = {};
+$e355f84da0148888$exports = JSON.parse("{\"projects\":[{\"title\":\"NHS\",\"abstract\":\"A data-driven demo rendering the United Kingdom and the location of its National Healthcare facilites\",\"internalLink\":\"NHS\"},{\"title\":\"Population\",\"abstract\":\"A 3-Dimensional demo of the 3Globe React Fiber integration\",\"internalLink\":\"Population\"}]}");
+
+
+/**
+ * @fileoverview A nunber of functions to assist in the displaying of overlays on the screen
+ * @category Utility
+ * @description Various overlay rendering functions
+ */ 
 
 
 
@@ -483,9 +505,16 @@ $72d2bfc3e95efd9e$exports = JSON.parse("{\"projects\":[{\"title\":\"Music\",\"ab
 var $919cea3b052cd76d$import_meta = Object.assign(Object.create(null), {
     url: "file:///src/Components/overlays.jsx"
 });
-function $919cea3b052cd76d$export$3b0d6d7590275603() {
-    const { progress: progress } = (0, $8I7SX$reactthreedrei.useProgress)();
-    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("div", {
+/**
+ * Allows for a loading screen at the start of a page that waits for the assets to load
+ * @function
+ * @category Loading
+ */ function $919cea3b052cd76d$export$3b0d6d7590275603() {
+    /**
+   * Variable that tracks the current progress on asset loading on the page
+   * @type {useProgress}
+   */ const { progress: progress } = (0, $8I7SX$reactthreedrei.useProgress)();
+    return /* The white background */ /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("div", {
         style: {
             position: "fixed",
             top: 0,
@@ -539,7 +568,12 @@ function $919cea3b052cd76d$export$3b0d6d7590275603() {
         ]
     });
 }
-function $919cea3b052cd76d$export$a1909b6cc88e74a({ onStart: onStart, visible: visible }) {
+/**
+ * Allows for a custom start screen with a button to start the experience; assets load on click and the page is not revealed until assets fully loaded
+ * @function
+ * @category Loading
+ * @deprecated use Loader() instead
+ */ function $919cea3b052cd76d$export$a1909b6cc88e74a({ onStart: onStart, visible: visible }) {
     const styles = (0, $8I7SX$reactspringweb.useSpring)({
         opacity: visible ? 1 : 0,
         pointerEvents: visible ? "auto" : "none",
@@ -590,17 +624,29 @@ function $919cea3b052cd76d$export$a1909b6cc88e74a({ onStart: onStart, visible: v
         ]
     });
 }
-function $919cea3b052cd76d$export$c6fdb837b070b4ff({ isActive: isActive, onClose: onClose, items: items = [] }) {
-    const [hovered, setHovered] = (0, $8I7SX$react.useState)(false);
-    const navigate = (0, $8I7SX$reactrouterdom.useNavigate)();
-    const overlaySpring = (0, $8I7SX$reactspringweb.useSpring)({
+/**
+ * Displays a html/css overlay over the 3D scene; that is populated with JSON data as text; includes a return to scene and internal navigation buttons
+ * @function
+ * @category Overlay
+ */ function $919cea3b052cd76d$export$c6fdb837b070b4ff({ isActive: isActive, onClose: onClose, items: items = [] }) {
+    /**
+   * Allows for internal navigation of the page
+   * @type {useNavigate}
+   */ const navigate = (0, $8I7SX$reactrouterdom.useNavigate)();
+    /**
+   * Fades in and out the overlay
+   * @type {useSpring}
+   */ const overlaySpring = (0, $8I7SX$reactspringweb.useSpring)({
         opacity: isActive ? 1 : 0,
         config: {
             tension: 220,
             friction: 50
         }
     });
-    const trail = (0, $8I7SX$reactspringweb.useTrail)(Array.isArray(items) ? items.length : 0, {
+    /**
+   * Allows for animations in sequence of a list/array of elements - applies a CSS animation transform to have the different elements slide in from the right of the screen and slide back out later
+   * @type {useTrail}
+   */ const trail = (0, $8I7SX$reactspringweb.useTrail)(Array.isArray(items) ? items.length : 0, {
         from: {
             transform: "translateX(200%)",
             opacity: 0
@@ -616,54 +662,27 @@ function $919cea3b052cd76d$export$c6fdb837b070b4ff({ isActive: isActive, onClose
             delay: 100
         }
     });
-    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactspringweb.animated).div, {
+    return(//Animated element that allows for the useSpring and useTrail to work
+    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactspringweb.animated).div, {
+        className: "jsonOverlay",
         style: {
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background: "rgba(0, 0, 0, 0.9)",
             pointerEvents: isActive ? "auto" : "none",
-            opacity: overlaySpring.opacity,
-            zIndex: 10,
-            display: "flex",
-            justifyContent: "flexStart",
-            alignItems: "center",
-            flexDirection: "column",
-            overflowX: "hidden",
-            overflowY: "auto"
+            opacity: overlaySpring.opacity
         },
         children: [
             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
                 className: "normalExitButton",
-                style: {
-                    position: "fixed",
-                    top: "20px",
-                    left: "20px",
-                    color: "white",
-                    fontSize: "30px",
-                    fontWeight: "bold",
-                    zIndex: 20
-                },
                 onClick: onClose,
                 children: "Exit"
             }),
             trail.map((style, index)=>{
                 const item = items[index];
-                const isExternal = Boolean(item.website);
-                const isNavigable = Boolean(item.navigation);
-                return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactspringweb.animated).div, {
+                //const isExternal = Boolean(item.website);
+                //const isNavigable = Boolean(item.navigation);
+                return(// The individual items pulled from the JSON
+                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactspringweb.animated).div, {
+                    className: "jsonOverlayItems",
                     style: {
-                        ...style,
-                        width: "80%",
-                        height: "auto",
-                        background: "#222",
-                        color: "#fff",
-                        padding: "20px",
-                        marginBottom: "15px",
-                        marginTop: "15px",
-                        borderRadius: "12px",
                         transform: style.transform
                     },
                     children: [
@@ -674,63 +693,154 @@ function $919cea3b052cd76d$export$c6fdb837b070b4ff({ isActive: isActive, onClose
                             },
                             children: item.title
                         }),
-                        /*
-            !isNavigable ? (
-              <a
-                href={
-                  item.website
-                    ? item.website // External website
-                    : `${import.meta.env.BASE_URL}${item.siteLink}` // Internal page
-                }
-              >
-                Go To
-              </a>
-            ) : 
-          */ /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("a", {
-                            onClick: /*item.private
-                    ? (ev) => {
-                        ev.preventDefault();
-                        this.props.onClick(ev);
-                        console.log("SHOULDNT BE HERE");
-                      }*/ item.external ? ()=>{
+                        !item.WIP && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("a", {
+                            className: "goToComputerButton",
+                            onClick: // A conditional on whether the JSON of the item has the property EXTERNAL (denoting an external website link)
+                            item.external ? ()=>{
                                 window.location.href = item.website;
                             } : ()=>{
-                                console.log("HERE");
+                                //console.log("HERE");
+                                // If a site link is found; pass that page to the IFRAME on the COMPUTER page; to be rendered within the static wordpress site
                                 if (item.siteLink) {
-                                    console.log("HERE2");
-                                    // 1. Create the full URL for the iframe to consume
-                                    const fullUrl = `${$919cea3b052cd76d$import_meta.env.BASE_URL}${item.siteLink}`;
-                                    console.log("Passing to iframe:", fullUrl);
-                                    // 2. Navigate using the INTERNAL path only.
+                                    const fullUrl = `${$919cea3b052cd76d$import_meta.env.BASE_URL}${item.siteLink}index.html`;
+                                    //console.log("Passing to iframe:", fullUrl);
+                                    // Passing site link through the COMPUTER page's IFRAME
                                     navigate(`/Computer`, {
                                         state: {
                                             iframeUrl: fullUrl
                                         }
                                     });
-                                } else {
-                                    console.log("SHOULD BE MOVING HERE");
-                                    navigate(item.navigation);
-                                }
+                                } else //console.log("SHOULD BE MOVING HERE");
+                                // Navigate to the page specified
+                                navigate(item.internalLink);
                             },
                             children: "Go To"
+                        }),
+                        " ",
+                        item.WIP && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("a", {
+                            className: "workInProgressButton",
+                            children: "W I P"
                         }),
                         /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("p", {
                             children: item.abstract
                         })
                     ]
-                }, index);
+                }, index));
             })
         ]
+    }));
+}
+function $919cea3b052cd76d$export$b20d2d957c657ed9({ url: url }) {
+    const [playing, setPlaying] = (0, $8I7SX$react.useState)(false);
+    const audioRef = (0, $8I7SX$react.useRef)(null);
+    // This effect handles stopping the audio if the component unmounts
+    // or if the URL changes (page navigation)
+    (0, $8I7SX$react.useEffect)(()=>{
+        return ()=>{
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current = null;
+            }
+        };
+    }, [
+        url
+    ]);
+    const toggleAudio = ()=>{
+        if (!audioRef.current) {
+            audioRef.current = new Audio(url);
+            audioRef.current.loop = true;
+        }
+        if (playing) audioRef.current.pause();
+        else audioRef.current.play().catch((err)=>console.error("Audio blocked:", err));
+        setPlaying(!playing);
+    };
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("button", {
+        onClick: toggleAudio,
+        className: "OverlayButton",
+        style: {
+            position: "fixed",
+            bottom: "20px",
+            left: "20px",
+            zIndex: 2000,
+            padding: "10px 20px",
+            background: "rgba(0, 0, 0, 0.7)",
+            color: "white",
+            border: "1px solid #6a0dad",
+            borderRadius: "2px",
+            cursor: "pointer",
+            fontFamily: "monospace",
+            backdropFilter: "blur(10px)",
+            textTransform: "uppercase"
+        },
+        children: playing ? "\uD83D\uDD0A Mute" : "\uD83D\uDD08 Play Ambience"
+    });
+}
+function $919cea3b052cd76d$export$be31ffb534e4b03d({ showHeadings: showHeadings, setShowHeadings: setShowHeadings }) {
+    const toggleHeadings = ()=>{
+        // This toggles the boolean to its opposite value
+        setShowHeadings((prev)=>!prev);
+    };
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("button", {
+        onClick: toggleHeadings,
+        className: "OverlayButton",
+        style: {
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            zIndex: 2000,
+            padding: "10px 20px",
+            background: "rgba(0, 0, 0, 0.7)",
+            color: "white",
+            border: "1px solid #6a0dad",
+            borderRadius: "2px",
+            cursor: "pointer",
+            fontFamily: "monospace",
+            backdropFilter: "blur(10px)",
+            textTransform: "uppercase"
+        },
+        children: showHeadings ? "Hide Headings" : "Show Headings"
+    });
+}
+function $919cea3b052cd76d$export$c75d6b34c1d7db44() {
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("a", {
+        className: "OverlayButton",
+        style: {
+            position: "fixed",
+            top: "20px",
+            right: "20px",
+            zIndex: 2000,
+            padding: "10px 20px",
+            background: "rgba(0, 0, 0, 0.7)",
+            color: "white",
+            border: "1px solid #6a0dad",
+            borderRadius: "2px",
+            cursor: "pointer",
+            fontFamily: "monospace",
+            backdropFilter: "blur(10px)",
+            textTransform: "uppercase"
+        },
+        href: `${$919cea3b052cd76d$import_meta.env.BASE_URL}Resume.pdf`,
+        target: "_blank",
+        rel: "noopener noreferrer",
+        children: "Resume"
     });
 }
 
 
+/**
+ * @fileoverview A nunber of functions to assist in the displaying of text throughout the portfolio
+ * @category Utility
+ * @description Various text rendering functions
+ */ 
 
 
 
 
-
-function $66a61f0af1aeb748$export$c877ad22df1c64d6({ text: text = "Projects", position: position = [
+/**
+ * Creates a white bordered banner of glowing gold text; that turns red on hover
+ * @function
+ * @category Text
+ */ function $66a61f0af1aeb748$export$c877ad22df1c64d6({ text: text = "Projects", position: position = [
     0,
     5,
     0
@@ -739,11 +849,14 @@ function $66a61f0af1aeb748$export$c877ad22df1c64d6({ text: text = "Projects", po
     0,
     0
 ], onClick: onClick }) {
-    const [hovered, setHovered] = (0, $8I7SX$react.useState)(false);
-    const textWidth = text.length * 5; // Estimate; adjust based on font
+    /**
+   * State to track whether the text is being actively hovered over
+   * @type {boolean}
+   */ const [hovered, setHovered] = (0, $8I7SX$react.useState)(false);
+    const textWidth = text.length * 4.5;
     const padding = 2;
     const boxWidth = textWidth + padding;
-    const boxHeight = 13.5;
+    const boxHeight = 12;
     return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("group", {
         position: position,
         rotation: rotation,
@@ -769,7 +882,7 @@ function $66a61f0af1aeb748$export$c877ad22df1c64d6({ text: text = "Projects", po
                 ]
             }),
             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Text), {
-                fontSize: 10,
+                fontSize: 8,
                 style: {
                     fontFamily: "Arial",
                     fontWeight: "bold"
@@ -785,7 +898,62 @@ function $66a61f0af1aeb748$export$c877ad22df1c64d6({ text: text = "Projects", po
         ]
     });
 }
-function $66a61f0af1aeb748$export$82fb00ee8a55bec7({ title: title = "SMALL TEXT", text: text = "text", position: position = [
+function $66a61f0af1aeb748$export$c70aacca60c78502({ text: text = "Group", position: position = [
+    0,
+    8,
+    0
+], rotation: rotation = [
+    0,
+    0,
+    0
+] }) {
+    const textWidth = text.length * 9;
+    const padding = 2;
+    const boxWidth = textWidth + padding;
+    const boxHeight = 20;
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("group", {
+        position: position,
+        rotation: rotation,
+        children: [
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
+                children: [
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("planeGeometry", {
+                        args: [
+                            boxWidth,
+                            boxHeight
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("meshBasicMaterial", {
+                        transparent: true,
+                        opacity: 0
+                    }),
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Edges), {
+                        scale: 1.01,
+                        children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("lineBasicMaterial", {
+                            color: "#fff"
+                        })
+                    })
+                ]
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Text), {
+                fontSize: 15,
+                style: {
+                    fontFamily: "Arial",
+                    fontWeight: "bold"
+                },
+                color: "#fff",
+                anchorX: "center",
+                anchorY: "middle",
+                children: text
+            })
+        ]
+    });
+}
+/**
+ * Creates a white bordered banner of white text, with a grey background and glowing orange box to open it; that can be placed on scene objects and tracks if its being viewed
+ * @function
+ * @category Text
+ */ function $66a61f0af1aeb748$export$82fb00ee8a55bec7({ title: title = "SMALL TEXT", text: text = "text", position: position = [
     0,
     10,
     0
@@ -794,14 +962,19 @@ function $66a61f0af1aeb748$export$82fb00ee8a55bec7({ title: title = "SMALL TEXT"
     0,
     0
 ], width: width = 10, onClick: onClick, isOpen: isOpen, onOpen: onOpen }) {
-    const textWidth = text.length * 1.1; // Estimate; adjust based on font
     const padding = 0.3;
     const boxWidth = width + padding;
     const boxHeight = 10;
-    console.log(isOpen);
-    console.log(onOpen);
-    const [open, setOpen] = (0, $8I7SX$react.useState)(false);
-    const { scale: scale, box: box } = (0, $8I7SX$reactspringweb.useSpring)({
+    //console.log(isOpen);
+    //console.log(onOpen);
+    /**
+   * State to track whether the text is being viewed currently
+   * @type {boolean}
+   */ const [open, setOpen] = (0, $8I7SX$react.useState)(false);
+    /**
+   * Animation effect to have the text box expand open and close shut on enter and exit, respectively
+   * @type {useSpring}
+   */ const { scale: scale, box: box } = (0, $8I7SX$reactspringweb.useSpring)({
         scale: isOpen ? 1 : 0,
         box: isOpen ? 0 : 1,
         config: {
@@ -825,7 +998,7 @@ function $66a61f0af1aeb748$export$82fb00ee8a55bec7({ title: title = "SMALL TEXT"
                     onClick();
                     onOpen();
                     setOpen(true);
-                    console.log(open);
+                //console.log(open);
                 },
                 children: [
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("boxGeometry", {
@@ -837,7 +1010,8 @@ function $66a61f0af1aeb748$export$82fb00ee8a55bec7({ title: title = "SMALL TEXT"
                     }),
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("meshStandardMaterial", {
                         color: "orange",
-                        emissive: "orange"
+                        emissive: "orange",
+                        emissiveIntensity: 4
                     })
                 ]
             }),
@@ -845,6 +1019,11 @@ function $66a61f0af1aeb748$export$82fb00ee8a55bec7({ title: title = "SMALL TEXT"
                 scale: scale,
                 children: [
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
+                        position: [
+                            0,
+                            0,
+                            -0.1
+                        ],
                         children: [
                             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("planeGeometry", {
                                 args: [
@@ -853,14 +1032,14 @@ function $66a61f0af1aeb748$export$82fb00ee8a55bec7({ title: title = "SMALL TEXT"
                                 ]
                             }),
                             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("meshBasicMaterial", {
+                                color: "#050505",
                                 transparent: true,
-                                opacity: 0
+                                opacity: 0.85
                             }),
                             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Edges), {
-                                scale: 1.002,
-                                threshold: 15,
+                                scale: 1,
                                 children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("lineBasicMaterial", {
-                                    color: "#000000",
+                                    color: "#ffffff",
                                     toneMapped: false
                                 })
                             })
@@ -869,34 +1048,46 @@ function $66a61f0af1aeb748$export$82fb00ee8a55bec7({ title: title = "SMALL TEXT"
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Text), {
                         maxWidth: width,
                         fontSize: 1.6,
-                        color: "black",
+                        color: "white",
+                        style: {
+                            fontFamily: "Orbitron",
+                            fontWeight: "bold"
+                        },
                         anchorX: "center",
-                        anchorY: "center",
-                        textAlign: "center",
+                        anchorY: "middle",
                         position: [
                             0,
-                            5,
-                            1
+                            3.5,
+                            0.1
                         ],
-                        strokeWidth: 0.5,
-                        strokeColor: "black",
-                        children: title
+                        outlineWidth: 0.1,
+                        outlineColor: "#aaa",
+                        children: title.toUpperCase()
                     }),
                     /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Text), {
-                        maxWidth: width,
-                        fontSize: 1.0,
-                        color: "black",
+                        maxWidth: width - 1,
+                        fontSize: 0.7,
+                        color: "#dddddd",
                         anchorX: "center",
-                        anchorY: "center",
+                        anchorY: "top",
                         textAlign: "center",
                         position: [
                             0,
-                            2.5,
-                            1
+                            1.5,
+                            0.1
                         ],
-                        strokeWidth: 0.5,
-                        strokeColor: "black",
+                        lineHeight: 1.4,
                         children: text
+                    }),
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Text), {
+                        fontSize: 0.5,
+                        color: "#AAAAAA",
+                        position: [
+                            0,
+                            -3.5,
+                            0.1
+                        ],
+                        children: '(Click "Return" to close)'
                     })
                 ]
             })
@@ -966,7 +1157,11 @@ function $dcb2f366e2a78e3e$export$9a088e97127c2f51({ anchor: anchor, lookat: loo
 }
 
 
-function $8c8a4d7c0a98efcd$export$c9fcf1a7df975d78(degrees) {
+/**
+ * Utility function to convert DEGREES to RADIANS; for easier expression of rotations
+ * @function
+ * @category Utility
+ */ function $8c8a4d7c0a98efcd$export$c9fcf1a7df975d78(degrees) {
     return degrees * Math.PI / 180;
 }
 
@@ -978,41 +1173,47 @@ var $9e79c54aa8a563fd$import_meta = Object.assign(Object.create(null), {
  * CityModel manages the complex OBJ/MTL loading and asset disposal.
  * @component
  * @category 3D Assets
+ * @returns {JSX.primitive}
  */ function $9e79c54aa8a563fd$var$CityModel() {
-    // useLoader automatically "suspends" this component
-    const materials = (0, $8I7SX$reactthreefiber.useLoader)((0, $8I7SX$threestdlib.MTLLoader), `${$9e79c54aa8a563fd$import_meta.env.BASE_URL}City/cityMAT.mtl`);
-    const obj = (0, $8I7SX$reactthreefiber.useLoader)((0, $8I7SX$threestdlib.OBJLoader), `${$9e79c54aa8a563fd$import_meta.env.BASE_URL}City/city.obj`, (loader)=>{
-        materials.preload();
-        loader.setMaterials(materials);
-    });
-    // Apply shadows/settings after loading
-    (0, $8I7SX$react.useEffect)(()=>{
-        obj.traverse((child)=>{
-            if (child.isMesh) {
-                child.castShadow = true;
-                child.receiveShadow = true;
-                child.material.side = $8I7SX$three.FrontSide;
-            }
-        });
+    /**
+   * The compressed scene model .GLB file
+   * @type {useGLTF}
+   */ const { scene: scene } = (0, $8I7SX$reactthreedrei.useGLTF)(`${$9e79c54aa8a563fd$import_meta.env.BASE_URL}City/city-v2.glb`, "https://www.gstatic.com/draco/versioned/decoders/1.5.5/");
+    /** A traversal of the model's elements that clear geometries and materials from memory on cleanup */ (0, $8I7SX$react.useEffect)(()=>{
+        return ()=>{
+            scene.traverse((child)=>{
+                if (child.isMesh) {
+                    child.geometry.dispose();
+                    if (child.material.isMaterial) child.material.dispose();
+                }
+            });
+        };
     }, [
-        obj
+        scene
     ]);
-    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("primitive", {
-        object: obj,
+    return /** The scene object; it has shadows enabled */ /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("primitive", {
+        object: scene,
         scale: 0.15,
         position: [
             70,
             0,
             -65
-        ]
+        ],
+        castShadow: true,
+        receiveShadow: true
     });
 }
+/**
+ * Preloads the city model in memory
+ * @function
+ * @category 3D Assets
+ */ (0, $8I7SX$reactthreedrei.useGLTF).preload(`${$9e79c54aa8a563fd$import_meta.env.BASE_URL}City/city-v2.glb`);
 /**
  * CameraLight attaches a spotlight that follows the camera's position,
  * simulating a light source that moves with the viewer.
  *
  * @component
- * @returns {JSX.Element} - A spotlight that follows the camera
+ * @returns {JSX.spotLight} - A spotlight that follows the camera
  */ function $9e79c54aa8a563fd$var$CameraLight() {
     const { camera: camera } = (0, $8I7SX$reactthreefiber.useThree)(); // Access the main camera from the scene
     const lightRef = (0, $8I7SX$react.useRef)(); // Reference to the spotlight
@@ -1023,8 +1224,8 @@ var $9e79c54aa8a563fd$import_meta = Object.assign(Object.create(null), {
     return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("spotLight", {
         ref: lightRef,
         intensity: 10,
-        angle: 0.4,
-        penumbra: 0.5,
+        angle: 0.8,
+        penumbra: 0.6,
         distance: 300,
         decay: 0.6,
         castShadow: true
@@ -1035,19 +1236,15 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
     const [controlsEnabled, setControlsEnabled] = (0, $8I7SX$react.useState)(false);
     const [isOverlayActive, setOverlayActive] = (0, $8I7SX$react.useState)(false);
     const [overlayContent, setOverlayContent] = (0, $8I7SX$react.useState)([]);
-    const [started, setStarted] = (0, $8I7SX$react.useState)(false);
+    //const [started, setStarted] = useState(false);
     const [openBannerId, setOpenBannerId] = (0, $8I7SX$react.useState)(null);
     const [cameraAnimationDone, setcameraAnimationDone] = (0, $8I7SX$react.useState)(null);
-    const [cityLoaded, setCityLoaded] = (0, $8I7SX$react.useState)(false);
+    //const [cityLoaded, setCityLoaded] = useState(false);
     const [audioStarted, setAudioStarted] = (0, $8I7SX$react.useState)(false);
     const [initialAnimation, setInitialAnimation] = (0, $8I7SX$react.useState)(false); // Unused?
     // Camera/interaction state
     const controlsRef = (0, $8I7SX$react.useRef)();
-    const [currentCameraPos, setCurrentCameraPos] = (0, $8I7SX$react.useState)([
-        0,
-        0,
-        0
-    ]); // Reserved
+    //const [currentCameraPos, setCurrentCameraPos] = useState([0, 0, 0]); // Reserved
     const [goToSmallText, setGoToSmallText] = (0, $8I7SX$react.useState)(false);
     const [smallTextAnchor, setSmallTextAnchor] = (0, $8I7SX$react.useState)([
         0,
@@ -1060,8 +1257,11 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
         0
     ]);
     const [showExitButton, setShowExitButton] = (0, $8I7SX$react.useState)(false);
+    const [showBigHeadings, setShowBigHeadings] = (0, $8I7SX$react.useState)(true);
     /**
    * Returns camera to initial view and re-enables controls after interacting with banners.
+   * @function
+   * @returns {void}
    */ const resetOrbit = ()=>{
         setOpenBannerId(null);
         controlsRef.current.target.copy(new $8I7SX$three.Vector3(0, 0, 0));
@@ -1070,6 +1270,8 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
     };
     /**
    * Toggles the overlay and OrbitControls simultaneously.
+   * @function
+   * @returns {boolean}
    */ const toggleOverlay = ()=>{
         setOverlayActive((prev)=>{
             const newState = !prev;
@@ -1079,19 +1281,43 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
     };
     /**
    * Opens a specific overlay content section (projects, poetry, etc.).
-   *
+   * @function
    * @param {string} type - The type of content to open in the overlay.
    */ const openOverlay = (type)=>{
-        if (type === "projects") setOverlayContent((0, (/*@__PURE__*/$parcel$interopDefault($c899916b68c87ba7$exports))).projects);
-        else if (type === "dissertation") setOverlayContent((0, (/*@__PURE__*/$parcel$interopDefault($5f275980e24e53b6$exports))).projects);
-        else if (type === "miscellaneous") setOverlayContent((0, (/*@__PURE__*/$parcel$interopDefault($72d2bfc3e95efd9e$exports))).projects);
-        else if (type === "poetry") setOverlayContent((0, (/*@__PURE__*/$parcel$interopDefault($c5214312cc917dc2$exports))).projects);
+        switch(type){
+            case "dissertation":
+                console.log((0, (/*@__PURE__*/$parcel$interopDefault($5f275980e24e53b6$exports))).projects);
+                setOverlayContent((0, (/*@__PURE__*/$parcel$interopDefault($5f275980e24e53b6$exports))).projects);
+                break;
+            case "dissertation2":
+                setOverlayContent((0, (/*@__PURE__*/$parcel$interopDefault($33d99ab8c635f77f$exports))).projects);
+                break;
+            case "miscellaneous":
+                setOverlayContent((0, (/*@__PURE__*/$parcel$interopDefault($72d2bfc3e95efd9e$exports))).projects);
+                break;
+            case "poetry":
+                setOverlayContent((0, (/*@__PURE__*/$parcel$interopDefault($c5214312cc917dc2$exports))).projects);
+                break;
+            case "business":
+                setOverlayContent((0, (/*@__PURE__*/$parcel$interopDefault($c899916b68c87ba7$exports))).projects);
+                break;
+            case "hci":
+                setOverlayContent((0, (/*@__PURE__*/$parcel$interopDefault($a470e25448b54df9$exports))).projects);
+                break;
+            case "music":
+                setOverlayContent((0, (/*@__PURE__*/$parcel$interopDefault($0337a43b1bf22104$exports))).projects);
+                break;
+            case "showcase":
+                setOverlayContent((0, (/*@__PURE__*/$parcel$interopDefault($e355f84da0148888$exports))).projects);
+                break;
+        }
         setOverlayActive(true);
     };
+    const audioRef = (0, $8I7SX$react.useRef)(null);
     /**
    * Starts city background audio on first interaction.
-   */ const audioRef = (0, $8I7SX$react.useRef)(null);
-    const startAudio = ()=>{
+   * @deprecated use imported method from OVERLAYS
+   */ const startAudio = ()=>{
         if (!audioStarted) {
             const audio = new Audio(`${$9e79c54aa8a563fd$import_meta.env.BASE_URL}City/cityAMBIENCE.mp3`);
             audio.loop = true;
@@ -1108,7 +1334,9 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
             }
         };
     }, []);
-    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("div", {
+    /**
+   * The entire landing page
+   */ return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("div", {
         style: {
             width: "100vw",
             height: "100vh",
@@ -1119,6 +1347,14 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
                 className: "smallTextButton",
                 onClick: resetOrbit,
                 children: "Return"
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$b20d2d957c657ed9), {
+                url: `${$9e79c54aa8a563fd$import_meta.env.BASE_URL}City/cityAMBIENCE.mp3`
+            }),
+            !isOverlayActive && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$c75d6b34c1d7db44), {}),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$be31ffb534e4b03d), {
+                showHeadings: showBigHeadings,
+                setShowHeadings: setShowBigHeadings
             }),
             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$c6fdb837b070b4ff), {
                 isActive: isOverlayActive,
@@ -1138,7 +1374,7 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
                         fov: 50
                     },
                     onCreated: ({ scene: scene })=>{
-                        scene.fog = new $8I7SX$three.Fog(new $8I7SX$three.Color("#6a0dad"), 0, 1600);
+                        scene.fog = new $8I7SX$three.Fog(new $8I7SX$three.Color("#0a0a1a"), 200, 1200);
                     },
                     dpr: [
                         1,
@@ -1181,7 +1417,7 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
                         }),
                         /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$82fb00ee8a55bec7), {
                             title: "About Me",
-                            text: "24 Year Old Software Engineer, Creative & National American Football Player",
+                            text: "25 Year Old Software & Data Engineer, Creative & National American Football Player",
                             position: [
                                 -40,
                                 -8.5,
@@ -1211,8 +1447,39 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
                             }
                         }),
                         /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$82fb00ee8a55bec7), {
+                            title: "Areas of Expertise",
+                            text: "+ UI / UX\n+ Information Systems\n+ Data Visualisation\n+ Full-Stack Development",
+                            position: [
+                                -59.6,
+                                -8.5,
+                                162.9
+                            ],
+                            rotation: [
+                                0,
+                                (0, $8c8a4d7c0a98efcd$export$c9fcf1a7df975d78)(0),
+                                0
+                            ],
+                            width: 17,
+                            isOpen: openBannerId === "4",
+                            onOpen: ()=>setOpenBannerId("4"),
+                            onClick: ()=>{
+                                setSmallTextAnchor([
+                                    -60,
+                                    -7,
+                                    210
+                                ]);
+                                setSmallTextLookAt([
+                                    -60,
+                                    -2,
+                                    170
+                                ]);
+                                setGoToSmallText(true);
+                                setControlsEnabled(false);
+                            }
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$82fb00ee8a55bec7), {
                             title: "Education",
-                            text: "University of Nottingham - BSc Computer Science\nUniversity of Nottingham - MSc Information Systems & Operations Management\nUniversity of Arizona - MS Information Science: Human Centered Computing",
+                            text: "University of Nottingham - BSc (Hons) Computer Science [ 2019 - 2022 ]\nUniversity of Nottingham - MSc Information Systems & Operations Management [ 2022 - 2023 ]\nUniversity of Arizona - MS Information Science: Human Centered Computing [ 2024 & 2026 ]",
                             position: [
                                 80,
                                 -8.5,
@@ -1272,17 +1539,57 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
                                 setControlsEnabled(false);
                             }
                         }),
-                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
-                            text: "Projects",
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$82fb00ee8a55bec7), {
+                            title: "What Am I working On ?",
+                            text: "(1) My Second Dissertation\n(2) Professional American Football\n(3) My first two EPs\n(4) This Portfolio",
                             position: [
-                                -70,
-                                30,
-                                -30
+                                61,
+                                50,
+                                -98.5
                             ],
-                            onClick: ()=>openOverlay("projects")
+                            rotation: [
+                                0,
+                                (0, $8c8a4d7c0a98efcd$export$c9fcf1a7df975d78)(180),
+                                0
+                            ],
+                            width: 25,
+                            isOpen: openBannerId === "5",
+                            onOpen: ()=>setOpenBannerId("5"),
+                            onClick: ()=>{
+                                setSmallTextAnchor([
+                                    60,
+                                    49,
+                                    -140
+                                ]);
+                                setSmallTextLookAt([
+                                    60,
+                                    49,
+                                    -120
+                                ]);
+                                setGoToSmallText(true);
+                                setControlsEnabled(false);
+                            }
                         }),
                         /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
-                            text: "Dissertation",
+                            text: "Business",
+                            position: [
+                                -70,
+                                40,
+                                -30
+                            ],
+                            onClick: ()=>openOverlay("business")
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
+                            text: "HCI",
+                            position: [
+                                -70,
+                                20,
+                                -30
+                            ],
+                            onClick: ()=>openOverlay("hci")
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
+                            text: "Dissertation I",
                             position: [
                                 70,
                                 40,
@@ -1291,10 +1598,19 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
                             onClick: ()=>openOverlay("dissertation")
                         }),
                         /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
+                            text: "Dissertation II",
+                            position: [
+                                70,
+                                20,
+                                -50
+                            ],
+                            onClick: ()=>openOverlay("dissertation2")
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
                             text: "Poetry",
                             position: [
                                 50,
-                                40,
+                                38,
                                 60
                             ],
                             rotation: [
@@ -1305,7 +1621,21 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
                             onClick: ()=>openOverlay("poetry")
                         }),
                         /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
-                            text: "Miscellaneous",
+                            text: "Music",
+                            position: [
+                                50,
+                                18,
+                                60
+                            ],
+                            rotation: [
+                                0,
+                                Math.PI * 1.5,
+                                0
+                            ],
+                            onClick: ()=>openOverlay("music")
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
+                            text: "Tech Showcase",
                             position: [
                                 -60,
                                 20,
@@ -1316,7 +1646,67 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
                                 Math.PI / 2,
                                 0
                             ],
+                            onClick: ()=>openOverlay("showcase")
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c877ad22df1c64d6), {
+                            text: "Links",
+                            position: [
+                                -60,
+                                0,
+                                75
+                            ],
+                            rotation: [
+                                0,
+                                Math.PI / 2,
+                                0
+                            ],
                             onClick: ()=>openOverlay("miscellaneous")
+                        }),
+                        showBigHeadings && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactjsxruntime.Fragment), {
+                            children: [
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c70aacca60c78502), {
+                                    text: "RESEARCH",
+                                    position: [
+                                        -70,
+                                        60,
+                                        -30
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c70aacca60c78502), {
+                                    text: "Academia",
+                                    position: [
+                                        70,
+                                        62,
+                                        -50
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c70aacca60c78502), {
+                                    text: "Creative",
+                                    position: [
+                                        50,
+                                        60,
+                                        60
+                                    ],
+                                    rotation: [
+                                        0,
+                                        Math.PI * 1.5,
+                                        0
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $66a61f0af1aeb748$export$c70aacca60c78502), {
+                                    text: "Miscellaneous",
+                                    position: [
+                                        -60,
+                                        40,
+                                        75
+                                    ],
+                                    rotation: [
+                                        0,
+                                        Math.PI / 2,
+                                        0
+                                    ]
+                                })
+                            ]
                         }),
                         /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($9e79c54aa8a563fd$var$CameraLight, {}),
                         /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("ambientLight", {
@@ -1359,15 +1749,11 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
                                 })
                             ]
                         }),
-                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Sky), {
-                            distance: 450000,
-                            sunPosition: [
-                                100,
-                                10,
-                                100
-                            ],
-                            inclination: 0.49,
-                            azimuth: 0.25
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("color", {
+                            attach: "background",
+                            args: [
+                                "#0a0a1a"
+                            ]
                         }),
                         /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($9e79c54aa8a563fd$var$CityModel, {}),
                         /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreepostprocessing.EffectComposer), {
@@ -1386,16 +1772,898 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
                                     luminanceThreshold: 0.05,
                                     luminanceSmoothing: 0.1
                                 }),
-                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.DepthOfField), {
-                                    focusDistance: 5,
-                                    focalLength: 10,
-                                    bokehScale: 2
-                                }),
                                 /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Vignette), {
                                     eskil: false,
                                     offset: 0.1,
-                                    darkness: 0.4
+                                    darkness: 0.7
                                 })
+                            ]
+                        })
+                    ]
+                })
+            })
+        ]
+    });
+}
+
+
+/**
+ * @module Documentation
+ * @category Scenes
+ * @description Technical showcase featuring an interactive 3D tablet.
+ */ 
+
+
+
+
+
+
+
+var $3a805d76f32be13e$import_meta = Object.assign(Object.create(null), {
+    url: "file:///src/documentation.jsx"
+});
+/**
+ * Creates the tablet that the documentation is embedded on
+ * @component
+ * @category 3D Objects
+ * @description
+ * Creates a tablet that then displays the static documentation site
+ * @returns {JSX.Element}
+ */ function $3a805d76f32be13e$var$Tablet() {
+    /**
+   * Allows for site navigation
+   * @function
+   * @type {useNavigate}
+   */ const navigate = (0, $8I7SX$reactrouterdom.useNavigate)();
+    /**
+   * Navigates back to home when pressed
+   * @function
+   * @type {function}
+   */ const handleHomeClick = ()=>{
+        navigate(`/`);
+    };
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("group", {
+        position: [
+            0,
+            1.5,
+            -4
+        ],
+        rotation: [
+            -Math.PI / 10,
+            0,
+            0
+        ],
+        children: [
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
+                castShadow: true,
+                children: [
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("boxGeometry", {
+                        args: [
+                            3.5,
+                            5.5,
+                            0.15
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("meshStandardMaterial", {
+                        color: "#111",
+                        roughness: 0.2
+                    })
+                ]
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Html), {
+                transform: true,
+                occlude: "blending",
+                distanceFactor: 2,
+                position: [
+                    0,
+                    0,
+                    0.08
+                ],
+                children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
+                    className: "tablet-screen",
+                    children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("iframe", {
+                        className: "tablet-iframe",
+                        src: `${$3a805d76f32be13e$import_meta.env.BASE_URL}docs/index.html`,
+                        title: "Documentation"
+                    })
+                })
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
+                position: [
+                    0,
+                    -2.5,
+                    0.08
+                ],
+                onClick: handleHomeClick,
+                onPointerOver: ()=>document.body.style.cursor = "pointer",
+                onPointerOut: ()=>document.body.style.cursor = "auto",
+                children: [
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("circleGeometry", {
+                        args: [
+                            0.15,
+                            32
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("meshStandardMaterial", {
+                        color: "#F22"
+                    })
+                ]
+            })
+        ]
+    });
+}
+function $3a805d76f32be13e$var$CameraRig() {
+    const { camera: camera } = (0, $8I7SX$reactthreefiber.useThree)();
+    const [active, setActive] = (0, $8I7SX$react.useState)(true);
+    // 1. Create the target as a Vector3 object so distanceTo works correctly
+    const target = (0, $8I7SX$react.useMemo)(()=>new $8I7SX$three.Vector3(0, 0.75, 2.5), []);
+    const tempVec = (0, $8I7SX$react.useMemo)(()=>new $8I7SX$three.Vector3(), []);
+    (0, $8I7SX$reactthreefiber.useFrame)((state)=>{
+        if (!active) return;
+        // 2. Smoothly move toward the target
+        // Increased speed slightly to 0.05 for a better feel
+        state.camera.position.lerp(target, 0.03);
+        // 3. Keep eyes on the monitor
+        state.camera.lookAt(0, 1, -4.5);
+        // 4. Correct distance check (Vector3 vs Vector3)
+        if (state.camera.position.distanceTo(target) < 0.1) {
+            setActive(false);
+            console.log("Animation complete. OrbitControls engaged.");
+        }
+    });
+    return(// Attach a pointLight directly to the camera
+    // This light moves wherever the camera moves
+    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("primitive", {
+        object: camera,
+        children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("pointLight", {
+            intensity: 3,
+            distance: 20,
+            color: "white"
+        })
+    }));
+}
+function $3a805d76f32be13e$export$2e2bcd8739ae039() {
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
+        style: {
+            width: "100vw",
+            height: "100vh",
+            position: "relative"
+        },
+        children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$react.Suspense), {
+            fallback: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$3b0d6d7590275603), {}),
+            children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreefiber.Canvas), {
+                dpr: [
+                    1,
+                    1.5
+                ],
+                gl: {
+                    powerPreference: "high-performance",
+                    antialias: false
+                },
+                camera: {
+                    position: [
+                        10,
+                        10,
+                        20
+                    ],
+                    fov: 50
+                },
+                children: [
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($3a805d76f32be13e$var$CameraRig, {}),
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("ambientLight", {
+                        intensity: 0.5
+                    }),
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Environment), {
+                        preset: "city"
+                    }),
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.ContactShadows), {
+                        position: [
+                            0,
+                            -0.8,
+                            0
+                        ],
+                        opacity: 0.4,
+                        scale: 10,
+                        blur: 2,
+                        far: 0.8
+                    }),
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("pointLight", {
+                        position: [
+                            2,
+                            2,
+                            2
+                        ],
+                        intensity: 1.5,
+                        color: "#ff00ff"
+                    }),
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($3a805d76f32be13e$var$Tablet, {}),
+                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreepostprocessing.EffectComposer), {
+                        children: [
+                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Bloom), {
+                                luminanceThreshold: 1,
+                                intensity: 1.5,
+                                levels: 9,
+                                mipmapBlur: true
+                            }),
+                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Noise), {
+                                opacity: 0.05
+                            }),
+                            " ",
+                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Vignette), {
+                                eskil: false,
+                                offset: 0.1,
+                                darkness: 1.1
+                            })
+                        ]
+                    })
+                ]
+            })
+        })
+    });
+}
+
+
+/**
+ * @module NHS
+ * @category Scenes
+ * @description Case study to showcase data visualisation with NHS data
+ */ 
+
+
+
+
+
+
+var $5786b60eebf519eb$import_meta = Object.assign(Object.create(null), {
+    url: "file:///src/nhs.jsx"
+});
+const $5786b60eebf519eb$var$CENTER = [
+    -3.44,
+    55.36
+];
+const $5786b60eebf519eb$var$createRegionShape = (feature)=>{
+    if (!feature.geometry) return [];
+    const type = feature.geometry.type;
+    const coords = feature.geometry.coordinates;
+    const processPolygon = (polygonCoords)=>{
+        const shape = new $8I7SX$three.Shape();
+        polygonCoords[0].forEach((coord, i)=>{
+            // DO NOT subtract CENTER here. Keep raw coordinates.
+            const x = coord[0];
+            const y = coord[1];
+            if (i === 0) shape.moveTo(x, y);
+            else shape.lineTo(x, y);
+        });
+        return shape;
+    };
+    if (type === "Polygon") return [
+        processPolygon(coords)
+    ];
+    if (type === "MultiPolygon") return coords.map((poly)=>processPolygon(poly));
+    return [];
+};
+function $5786b60eebf519eb$var$UKDashboard({ regionsGeoJson: regionsGeoJson, locationsCsvUrl: locationsCsvUrl }) {
+    const rawGeoJson = (0, $8I7SX$reactthreefiber.useLoader)($8I7SX$three.FileLoader, regionsGeoJson);
+    const rawCsv = (0, $8I7SX$reactthreefiber.useLoader)($8I7SX$three.FileLoader, locationsCsvUrl);
+    const regionsData = (0, $8I7SX$react.useMemo)(()=>JSON.parse(rawGeoJson), [
+        rawGeoJson
+    ]);
+    const locations = (0, $8I7SX$react.useMemo)(()=>$8I7SX$d3.csvParse(rawCsv), [
+        rawCsv
+    ]);
+    const regionMeshes = (0, $8I7SX$react.useMemo)(()=>{
+        return regionsData.features.map((feature, idx)=>{
+            const shapes = $5786b60eebf519eb$var$createRegionShape(feature);
+            return {
+                id: feature.properties.areacd || idx,
+                name: feature.properties.areanm,
+                shapes: shapes
+            };
+        });
+    }, [
+        regionsData
+    ]);
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("group", {
+        scale: 25,
+        children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("group", {
+            position: [
+                -$5786b60eebf519eb$var$CENTER[0],
+                0,
+                $5786b60eebf519eb$var$CENTER[1]
+            ],
+            rotation: [
+                -Math.PI / 2,
+                0,
+                0
+            ],
+            children: [
+                " ",
+                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("group", {
+                    children: regionMeshes.map((region)=>region.shapes.map((shape, i)=>/*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
+                                position: [
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                children: [
+                                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("extrudeGeometry", {
+                                        args: [
+                                            shape,
+                                            {
+                                                depth: 0.2,
+                                                bevelEnabled: false
+                                            }
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("meshStandardMaterial", {
+                                        color: "#005EB8" // NHS Blue
+                                        ,
+                                        transparent: true,
+                                        opacity: 0.55,
+                                        emissive: "#6a0dad",
+                                        emissiveIntensity: 0.3,
+                                        side: $8I7SX$three.DoubleSide
+                                    })
+                                ]
+                            }, `${region.id}-${i}`)))
+                }),
+                locations.map((loc, i)=>{
+                    const lon = parseFloat(loc.Longitude);
+                    const lat = parseFloat(loc.Latitude);
+                    if (lat < 49 || lat > 61 || lon < -10 || lon > 3) return null;
+                    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("group", {
+                        position: [
+                            lon,
+                            lat,
+                            0.2
+                        ],
+                        children: [
+                            " ",
+                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
+                                children: [
+                                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("sphereGeometry", {
+                                        args: [
+                                            0.03,
+                                            16,
+                                            16
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("meshBasicMaterial", {
+                                        color: "#00f5d4"
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
+                                position: [
+                                    0,
+                                    0,
+                                    1
+                                ],
+                                rotation: [
+                                    Math.PI / 2,
+                                    0,
+                                    0
+                                ],
+                                children: [
+                                    " ",
+                                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("cylinderGeometry", {
+                                        args: [
+                                            0.02,
+                                            0.02,
+                                            2
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("meshBasicMaterial", {
+                                        color: "#00f5d4",
+                                        transparent: true,
+                                        opacity: 0.3
+                                    })
+                                ]
+                            })
+                        ]
+                    }, i);
+                })
+            ]
+        })
+    });
+}
+function $5786b60eebf519eb$export$2e2bcd8739ae039() {
+    // UI states
+    const [controlsEnabled, setControlsEnabled] = (0, $8I7SX$react.useState)(true);
+    // Camera/interaction state
+    const controlsRef = (0, $8I7SX$react.useRef)();
+    /**
+   * Toggles the overlay and OrbitControls simultaneously.
+   */ const toggleOverlay = ()=>{
+        setOverlayActive((prev)=>{
+            const newState = !prev;
+            if (controlsRef.current) controlsRef.current.enabled = !newState;
+            return newState;
+        });
+    };
+    /**
+   * Starts city background audio on first interaction.
+   */ const audioRef = (0, $8I7SX$react.useRef)(null);
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("div", {
+        style: {
+            width: "100vw",
+            height: "100vh",
+            position: "relative"
+        },
+        children: [
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$b20d2d957c657ed9), {
+                url: `${$5786b60eebf519eb$import_meta.env.BASE_URL}NHS/hospital_ambience.mp3`
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$react.Suspense), {
+                fallback: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$3b0d6d7590275603), {}),
+                children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreefiber.Canvas), {
+                    shadows: true,
+                    camera: {
+                        position: [
+                            0,
+                            330,
+                            140
+                        ],
+                        fov: 50,
+                        near: 1,
+                        far: 5000
+                    },
+                    dpr: [
+                        1,
+                        1.5
+                    ],
+                    gl: {
+                        antialias: true
+                    },
+                    performance: {
+                        min: 0.8
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($5786b60eebf519eb$var$UKDashboard, {
+                            regionsGeoJson: `${$5786b60eebf519eb$import_meta.env.BASE_URL}NHS/unitedkingdom.geojson`,
+                            locationsCsvUrl: `${$5786b60eebf519eb$import_meta.env.BASE_URL}NHS/hospital_locations_england.csv`
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.OrbitControls), {
+                            ref: controlsRef,
+                            target: [
+                                0,
+                                0,
+                                0
+                            ],
+                            enablePan: false,
+                            maxPolarAngle: Math.PI / 2,
+                            minDistance: 10,
+                            maxDistance: 4000,
+                            enabled: controlsEnabled
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("ambientLight", {
+                            intensity: 0.8
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("directionalLight", {
+                            position: [
+                                300,
+                                300,
+                                300
+                            ],
+                            intensity: 3
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
+                            position: [
+                                5,
+                                0,
+                                -2
+                            ],
+                            children: [
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("sphereGeometry", {
+                                    args: [
+                                        2,
+                                        32,
+                                        32
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("meshStandardMaterial", {
+                                    color: "red"
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("color", {
+                            attach: "background",
+                            args: [
+                                "#ffffff"
+                            ]
+                        })
+                    ]
+                })
+            })
+        ]
+    });
+}
+
+
+/**
+ * @module Population
+ * @category Scenes
+ * @description The high-performance urban landing page.
+ */ 
+
+
+
+
+
+
+var $35b197c452fc46d2$import_meta = Object.assign(Object.create(null), {
+    url: "file:///src/population.jsx"
+});
+/*
+const continentsGeoJson = await fetch(
+  `${import.meta.env.BASE_URL}Population/world.geojson`,
+).then((res) => res.json());
+
+
+
+const continentsSet = new Set(
+  continentsGeoJson.features.map((f) => f.properties),
+);
+console.log(continentsSet);
+*/ const $35b197c452fc46d2$var$continentsGeoJson = await fetch(`${$35b197c452fc46d2$import_meta.env.BASE_URL}Population/continentsSmall.geo.json`).then((res)=>res.json());
+/**
+ * GlobeModel manages the complex OBJ/MTL loading and asset disposal.
+ * @component
+ * @type {function}
+ * @category 3D Assets
+ * @returns {JSX.Element}
+ */ function $35b197c452fc46d2$var$GlobeModel({ continents: continents, setHoverData: setHoverData, colorMode: colorMode }) {
+    const globeTexture = (0, $8I7SX$reactthreedrei.useTexture)("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
+    const continentColors = (0, $8I7SX$react.useMemo)(()=>({
+            Africa: "#FF595E",
+            Asia: "#FFCA3A",
+            Europe: "#8AC926",
+            "North America": "#1982C4",
+            "South America": "#6A4C93",
+            Oceania: "#FF924C",
+            Antarctica: "#F8F9FA"
+        }), []);
+    const countryPalette = [
+        "#FF595E",
+        "#FFCA3A",
+        "#8AC926",
+        "#1982C4",
+        "#6A4C93",
+        "#FF924C",
+        "#00F5D4",
+        "#F15BB5",
+        "#00BBF9",
+        "#FEE440",
+        "#310A31",
+        "#84DCC6",
+        "#A5ffd6"
+    ];
+    // TO DO: FIND WAY TO PULL REAL WORLD DATA FOR POPULATION VALUES
+    const continentPopulation = (0, $8I7SX$react.useMemo)(()=>({
+            Africa: 1550000000,
+            Asia: 4835000000,
+            Europe: 744000000,
+            "North America": 617000000,
+            "South America": 438000000,
+            Oceania: 46000000
+        }), []);
+    /**
+   * Ensures that the world updates whenever the data changes
+   * @function
+   * @type {useMemo}
+   * @returns {function}
+   */ const processedData = (0, $8I7SX$react.useMemo)(()=>{
+        if (!continents) return [];
+        return continents.features.map((f)=>{
+            const continent = f.properties.continent;
+            return {
+                ...f,
+                continent: continent,
+                population: continentPopulation[continent] ?? 0,
+                colorIndex: f.properties.mapcolor13 || f.properties.mapcolor7 || 0
+            };
+        });
+    }, [
+        continents,
+        continentPopulation
+    ]);
+    /**
+   * Returns differing colours based on the position of the country in the country array
+   * @function
+   * @type {function}
+   * @returns {function}
+   */ const getPolygonColor = (d)=>{
+        if (colorMode === "none") return "rgba(106, 13, 173, 0.1)"; // Ghostly purple
+        if (colorMode === "country") return countryPalette[d.colorIndex % countryPalette.length];
+        return continentColors[d.continent] || "#999"; // Default fallback colour
+    };
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, ($parcel$interopDefault($8I7SX$r3fglobe))), {
+        // Globe Settings
+        globeImageUrl: globeTexture.image.src,
+        showAtmosphere: true,
+        atmosphereColor: "skyblue",
+        atmosphereAltitude: 0.5,
+        // Polygon Layer
+        polygonsData: processedData,
+        polygonGeoJsonGeometry: "geometry",
+        polygonCapColor: getPolygonColor,
+        polygonSideColor: ()=>"rgba(255, 255, 255, 0.1)",
+        polygonStrokeColor: ()=>colorMode === "none" ? "#6a0dad" : "#111",
+        polygonAltitude: 0.01,
+        polygonsTransitionDuration: 400,
+        // Interaction
+        onHover: (hoverObj, hoverData)=>{
+            if (hoverData) {
+                const name = hoverData.continent; // Using the mapped key
+                const contPopRaw = continentPopulation[name] || 0; // Raw continent population number
+                const countryPopRaw = hoverData.properties.pop_est || 0; // Raw country population number
+                setHoverData({
+                    continentName: name,
+                    continentPopulation: contPopRaw,
+                    countryName: hoverData.properties.formal_en,
+                    countryPopulation: countryPopRaw,
+                    countryPopulationYear: hoverData.properties.pop_year
+                });
+                document.body.style.cursor = "pointer";
+            } else {
+                setHoverData(null);
+                document.body.style.cursor = "default";
+            }
+        }
+    });
+}
+/**
+ * Allows for displaying country information when hovering over the globe
+ *
+ * @component
+ * @returns {JSX.Element} - A tooltip for information on countries
+ */ const $35b197c452fc46d2$var$GlobeTooltip = ({ data: data })=>{
+    if (!data) return null;
+    const percentage = data.continentPopulation > 0 ? data.countryPopulation / data.continentPopulation * 100 : 0;
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("div", {
+        style: {
+            position: "fixed",
+            top: "20px",
+            left: "20px",
+            zIndex: 2000,
+            padding: "10px 20px",
+            background: "rgba(0, 0, 0, 0.7)",
+            color: "white",
+            border: "1px solid #6a0dad",
+            borderRadius: "2px",
+            fontFamily: "monospace",
+            fontSize: "clamp(8px, 0.7vw, 12px)",
+            backdropFilter: "blur(10px)",
+            textTransform: "uppercase"
+        },
+        children: [
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("h1", {
+                children: [
+                    "Country: ",
+                    data.countryName
+                ]
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("p", {
+                children: [
+                    "Population: ",
+                    data.countryPopulation.toLocaleString()
+                ]
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("p", {
+                children: [
+                    "Year of Census: ",
+                    data.countryPopulationYear
+                ]
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("hr", {}),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("p", {
+                children: [
+                    "Continent: ",
+                    data.continentName
+                ]
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("p", {
+                children: [
+                    "Continent's Population: ",
+                    data.continentPopulation.toLocaleString()
+                ]
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("hr", {}),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("p", {
+                children: [
+                    "Share of Continent Population: ",
+                    percentage.toFixed(2),
+                    "%"
+                ]
+            })
+        ]
+    });
+};
+/**
+ * Allows for changing the display mode of the globe
+ *
+ * @component
+ * @returns {JSX.Element} - A visualisation changing panel
+ */ const $35b197c452fc46d2$var$ColorControls = ({ currentMode: currentMode, setMode: setMode })=>{
+    const modes = [
+        {
+            id: "none",
+            label: "Wireframe / Ghost"
+        },
+        {
+            id: "continent",
+            label: "By Continent"
+        },
+        {
+            id: "country",
+            label: "By Country"
+        }
+    ];
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("div", {
+        style: {
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            zIndex: 2000,
+            background: "rgba(0,0,0,0.8)",
+            padding: "10px",
+            border: "1px solid #6a0dad",
+            fontFamily: "monospace",
+            color: "white",
+            display: "flex",
+            flexDirection: "column",
+            gap: "5px"
+        },
+        children: [
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
+                style: {
+                    fontSize: "10px",
+                    marginBottom: "5px",
+                    opacity: 0.7
+                },
+                children: "VISUALISATION MODE"
+            }),
+            modes.map((m)=>/*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("button", {
+                    onClick: ()=>setMode(m.id),
+                    style: {
+                        background: currentMode === m.id ? "#6a0dad" : "transparent",
+                        color: "white",
+                        border: "1px solid #6a0dad",
+                        cursor: "pointer",
+                        padding: "5px 10px",
+                        textAlign: "left",
+                        textTransform: "uppercase",
+                        fontSize: "11px"
+                    },
+                    children: m.label
+                }, m.id))
+        ]
+    });
+};
+function $35b197c452fc46d2$export$2e2bcd8739ae039() {
+    // UI states
+    const [controlsEnabled, setControlsEnabled] = (0, $8I7SX$react.useState)(true);
+    const [isOverlayActive, setOverlayActive] = (0, $8I7SX$react.useState)(false);
+    const [hoverData, setHoverData] = (0, $8I7SX$react.useState)(null);
+    const [colorMode, setColorMode] = (0, $8I7SX$react.useState)("continent");
+    // Camera/interaction state
+    const controlsRef = (0, $8I7SX$react.useRef)();
+    const [showExitButton, setShowExitButton] = (0, $8I7SX$react.useState)(false);
+    /**
+   * Returns camera to initial view and re-enables controls after interacting with banners.
+   */ const resetOrbit = ()=>{
+        setOpenBannerId(null);
+        controlsRef.current.target.copy(new $8I7SX$three.Vector3(0, 0, 0));
+        setShowExitButton(false);
+        setControlsEnabled(true);
+    };
+    const audioRef = (0, $8I7SX$react.useRef)(null);
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("div", {
+        style: {
+            width: "100vw",
+            height: "100vh",
+            position: "relative"
+        },
+        children: [
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($35b197c452fc46d2$var$GlobeTooltip, {
+                data: hoverData
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($35b197c452fc46d2$var$ColorControls, {
+                currentMode: colorMode,
+                setMode: setColorMode
+            }),
+            showExitButton && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("button", {
+                className: "smallTextButton",
+                onClick: resetOrbit,
+                children: "Return"
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$b20d2d957c657ed9), {
+                url: `${$35b197c452fc46d2$import_meta.env.BASE_URL}Population/nature_ambience.mp3`
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$react.Suspense), {
+                fallback: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$3b0d6d7590275603), {}),
+                children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreefiber.Canvas), {
+                    shadows: true,
+                    camera: {
+                        position: [
+                            0,
+                            70,
+                            400
+                        ],
+                        fov: 50,
+                        near: 1,
+                        far: 5000
+                    },
+                    dpr: [
+                        1,
+                        1.5
+                    ],
+                    gl: {
+                        antialias: true
+                    },
+                    performance: {
+                        min: 0.8
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.OrbitControls), {
+                            ref: controlsRef,
+                            target: [
+                                0,
+                                0,
+                                0
+                            ],
+                            enablePan: false,
+                            maxPolarAngle: Math.PI / 2,
+                            minDistance: 10,
+                            maxDistance: 4000,
+                            enabled: controlsEnabled
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("ambientLight", {
+                            intensity: 0.8
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("directionalLight", {
+                            position: [
+                                300,
+                                300,
+                                300
+                            ],
+                            intensity: 3
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
+                            position: [
+                                5,
+                                0,
+                                -2
+                            ],
+                            children: [
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("sphereGeometry", {
+                                    args: [
+                                        2,
+                                        32,
+                                        32
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("meshStandardMaterial", {
+                                    color: "red"
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("group", {
+                            position: [
+                                0,
+                                0,
+                                0
+                            ],
+                            children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($35b197c452fc46d2$var$GlobeModel, {
+                                continents: $35b197c452fc46d2$var$continentsGeoJson,
+                                setHoverData: setHoverData,
+                                colorMode: colorMode
+                            })
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("color", {
+                            attach: "background",
+                            args: [
+                                "#ffffff"
                             ]
                         })
                     ]
@@ -1409,8 +2677,7 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
 /**
  * @module Portfolio
  * @category Scenes
- * @description Manages the main 3D portfolio scene, including the smooth camera transition
- * from the world view to the computer terminal.
+ * @description The computer portfolio scene, with static wordpress showcased via a computer model
  */ 
 
 
@@ -1422,47 +2689,66 @@ function $9e79c54aa8a563fd$export$2e2bcd8739ae039() {
 var $a0362f18e412ef3b$import_meta = Object.assign(Object.create(null), {
     url: "file:///src/portfolio.jsx"
 });
-const $a0362f18e412ef3b$var$clickSound = new Audio("./Computer/mouse_click.mp3");
+//const clickSound = new Audio("./Computer/mouse_click.mp3");
 const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3");
 /**
  * Handles the cinematic smooth camera transition on mount.
  * @component
+ * @param {function} onComplete - the function to be called once the linear interpolation is finished
  * @category Camera Logic
  * @description
  * Uses `useFrame` to linearly interpolate (lerp) the camera from its global position
  * to a specific focus point in front of the monitor. Once the camera is within
  * a threshold distance, the animation "disengages" to allow for other interactions.
- */ function $a0362f18e412ef3b$var$CameraRig() {
+ * @returns {null}
+ */ function $a0362f18e412ef3b$var$CameraRig({ onComplete: onComplete }) {
     const [active, setActive] = (0, $8I7SX$react.useState)(true);
     /** @type {THREE.Vector3} */ // Target coordinates for the camera focus point
     const target = (0, $8I7SX$react.useMemo)(()=>new $8I7SX$three.Vector3(0, 0.75, 2.5), []);
-    (0, $8I7SX$reactthreefiber.useFrame)((state)=>{
+    /**
+   * Linearly interpolates the cameras position and rotation to simulate a rig animation
+   * @function
+   * @param {RootState} state
+   * @type {useFrame}
+   */ (0, $8I7SX$reactthreefiber.useFrame)((state)=>{
         if (!active) return;
-        // LERP (Linear Interpolation) for smooth "Premium" feel
         state.camera.position.lerp(target, 0.03);
         state.camera.lookAt(0, 1, -4.5);
-        if (state.camera.position.distanceTo(target) < 0.1) setActive(false);
+        if (state.camera.position.distanceTo(target) < 0.1) {
+            setActive(false);
+            if (onComplete) onComplete();
+        }
     });
     return null;
 }
 /**
  * Utility developer component for coordinate mapping.
  * @component
- * @category Developer Tools
+ * @category Developer
  * @description Listens for a 'Q' keypress and logs the current camera Position/Rotation.
+ * @returns {null}
  */ function $a0362f18e412ef3b$var$CameraLogger() {
-    const { camera: camera } = (0, $8I7SX$reactthreefiber.useThree)();
-    (0, $8I7SX$react.useEffect)(()=>{
-        const handleKeyDown = (event)=>{
+    /**
+   * Retrieves the 3D scene's camera
+   * @function
+   * @type {useThree}
+   */ const { camera: camera } = (0, $8I7SX$reactthreefiber.useThree)();
+    /**
+   * A tool to check if a key has been pressed
+   * @function
+   * @type {useEffect}
+   * @returns {function}
+   */ (0, $8I7SX$react.useEffect)(()=>{
+        /** If the Q key is pressed at any point */ const handleKeyDown = (event)=>{
             if (event.key.toLowerCase() === "q") {
                 const { x: x, y: y, z: z } = camera.position;
                 const { x: rx, y: ry, z: rz } = camera.rotation;
-                console.log("--- Camera Coordinates ---");
+                /** Print the camera's position and rotation strictly to two decimal places */ console.log("--- Camera Coordinates ---");
                 console.log(`Position: [${x.toFixed(2)}, ${y.toFixed(2)}, ${z.toFixed(2)}]`);
                 console.log(`Rotation: [${rx.toFixed(2)}, ${ry.toFixed(2)}, ${rz.toFixed(2)}]`);
             }
         };
-        window.addEventListener("keydown", handleKeyDown);
+        /** Ensures that the event listener is active and also cleaned up on removal of this function */ window.addEventListener("keydown", handleKeyDown);
         return ()=>window.removeEventListener("keydown", handleKeyDown);
     }, [
         camera
@@ -1472,22 +2758,38 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
 /**
  * The 3D Computer terminal assembly.
  * @component
- * @category Interactive Objects
+ * @category Interactive gects
  * @description
  * Renders a GLTF monitor model with interactive hardware buttons and an embedded HTML screen.
- */ function $a0362f18e412ef3b$var$Computer() {
+ * @returns {JSX.Element}
+ */ function $a0362f18e412ef3b$var$Computer({ onReady: onReady }) {
     /** @type {String|null} */ // State to track which button is currently being hovered
     const [hoveredText, setHoveredText] = (0, $8I7SX$react.useState)(null);
-    /** @type {Boolean} */ // Controls the visibility of CRT scanlines and flicker overlays
+    /** @type {Boolean|null} */ // Controls the visibility of CRT scanlines and flicker overlays
     const [showEffects, setShowEffects] = (0, $8I7SX$react.useState)(true);
-    const { scene: scene, nodes: nodes } = (0, $8I7SX$reactthreedrei.useGLTF)(`${$a0362f18e412ef3b$import_meta.env.BASE_URL}Computer/Monitor2.glb`);
-    const location = (0, $8I7SX$reactrouterdom.useLocation)();
-    const navigate = (0, $8I7SX$reactrouterdom.useNavigate)();
+    /** @type {Boolean|null} */ const [shouldLoadIframe, setShouldLoadIframe] = (0, $8I7SX$react.useState)(false);
+    /**
+   * Retrieve's the computer model .GLB
+   * @function
+   * @type {useGLTF}
+   */ const { scene: scene, nodes: nodes } = (0, $8I7SX$reactthreedrei.useGLTF)(`${$a0362f18e412ef3b$import_meta.env.BASE_URL}Computer/Monitor2.glb`);
+    /**
+   * Retrieves the current page location
+   * @function
+   * @type {useLocation}
+   */ const location = (0, $8I7SX$reactrouterdom.useLocation)();
+    /**
+   * Allows for site navigation
+   * @function
+   * @type {useNavigate}
+   */ const navigate = (0, $8I7SX$reactrouterdom.useNavigate)();
     /** @type {String} */ const iframeSrc = `${location.state?.iframeUrl}` || `${$a0362f18e412ef3b$import_meta.env.BASE_URL}Portfolio/index.html`;
     //const iframeSrc = `${import.meta.env.BASE_URL}Portfolio/index.html`;
-    console.log(`The imported iframe site is: ${iframeSrc}`);
+    //console.log(`The should be showing iframe site is: ${iframeSrc}`);
     /**
-   * Calculates the geometric center of the screen mesh.
+   * Calculates the geometric center of the screen mesh
+   * @function
+   * @type {useMemo}
    * @returns {Array<number>} [x, y, z] offset relative to the mesh position.
    */ const centerOffset = (0, $8I7SX$react.useMemo)(()=>{
         if (!nodes.Screen) return [
@@ -1506,7 +2808,12 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
     }, [
         nodes
     ]);
-    const playButton = ()=>{
+    /**
+   * Makes sound on button press
+   * @function
+   * @type {function}
+   * @returns {void}
+   */ const playButton = ()=>{
         $a0362f18e412ef3b$var$buttonSound.currentTime = 0;
         $a0362f18e412ef3b$var$buttonSound.play();
     };
@@ -1514,6 +2821,12 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
         children: [
             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("primitive", {
                 object: scene
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($a0362f18e412ef3b$var$CameraRig, {
+                onComplete: ()=>{
+                    setShouldLoadIframe(true);
+                    onReady;
+                }
             }),
             /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("mesh", {
                 position: [
@@ -1585,8 +2898,9 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
                 scale: nodes.Button.scale,
                 onClick: ()=>{
                     playButton();
-                    if (document.referrer) window.location.href = document.referrer;
-                    else window.location.assign("/Celestaris/");
+                    navigate("/", {
+                        replace: true
+                    });
                 },
                 onPointerOver: ()=>{
                     setHoveredText("Go to Last Page");
@@ -1626,6 +2940,7 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
                 rotation: nodes.Screen.rotation,
                 scale: nodes.Screen.scale,
                 children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Html), {
+                    occlude: false,
                     transform: true,
                     "rotation-order": "YXZ",
                     position: [
@@ -1640,10 +2955,12 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
                     children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("div", {
                         className: `screen-container ${showEffects ? "effects-active" : ""}`,
                         children: [
-                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("iframe", {
+                            shouldLoadIframe ? /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("iframe", {
                                 src: iframeSrc,
-                                className: "monitor-iframe",
-                                sandbox: "allow-same-origin allow-scripts allow-forms allow-popups"
+                                className: "monitor-iframe"
+                            }) : /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
+                                className: "loading-placeholder",
+                                children: "Booting Terminal..."
                             }),
                             showEffects && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactjsxruntime.Fragment), {
                                 children: [
@@ -1664,68 +2981,71 @@ const $a0362f18e412ef3b$var$buttonSound = new Audio("./Computer/button_click.mp3
 }
 (0, $8I7SX$reactthreedrei.useGLTF).preload(`${$a0362f18e412ef3b$import_meta.env.BASE_URL}Computer/Monitor2.glb`);
 function $a0362f18e412ef3b$export$2e2bcd8739ae039() {
-    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("div", {
+    const [isReady, setIsReady] = (0, $8I7SX$react.useState)(false);
+    return /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)("div", {
         style: {
             width: "100vw",
             height: "100vh",
             position: "relative"
         },
-        children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$react.Suspense), {
-            fallback: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$3b0d6d7590275603), {}),
-            children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreefiber.Canvas), {
-                dpr: [
-                    1,
-                    1.5
-                ],
-                gl: {
-                    powerPreference: "high-performance",
-                    antialias: false
-                },
-                camera: {
-                    position: [
-                        10,
-                        10,
-                        20
+        children: [
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$b20d2d957c657ed9), {
+                url: `${$a0362f18e412ef3b$import_meta.env.BASE_URL}Computer/office_ambience.mp3`
+            }),
+            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$react.Suspense), {
+                fallback: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $919cea3b052cd76d$export$3b0d6d7590275603), {}),
+                children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreefiber.Canvas), {
+                    dpr: [
+                        1,
+                        1.5
                     ],
-                    fov: 50
-                },
-                children: [
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($a0362f18e412ef3b$var$CameraRig, {}),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("ambientLight", {
-                        intensity: 0.5
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Environment), {
-                        preset: "city"
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($a0362f18e412ef3b$var$Computer, {}),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($a0362f18e412ef3b$var$CameraLogger, {}),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("group", {
-                        children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("gridHelper", {
-                            args: [
-                                10,
-                                10
+                    gl: {
+                        powerPreference: "high-performance",
+                        antialias: false
+                    },
+                    camera: {
+                        position: [
+                            10,
+                            10,
+                            20
+                        ],
+                        fov: 50
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("ambientLight", {
+                            intensity: 0.5
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreedrei.Environment), {
+                            preset: "city"
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($a0362f18e412ef3b$var$Computer, {
+                            onReady: ()=>setIsReady(true)
+                        }),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)($a0362f18e412ef3b$var$CameraLogger, {}),
+                        /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("group", {
+                            children: /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)("gridHelper", {
+                                args: [
+                                    10,
+                                    10
+                                ]
+                            })
+                        }),
+                        isReady && /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreepostprocessing.EffectComposer), {
+                            children: [
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Noise), {
+                                    opacity: 0.05
+                                }),
+                                /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Vignette), {
+                                    eskil: false,
+                                    offset: 0.1,
+                                    darkness: 1.1
+                                })
                             ]
                         })
-                    }),
-                    /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsxs)((0, $8I7SX$reactthreepostprocessing.EffectComposer), {
-                        children: [
-                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Bloom), {
-                                intensity: 1.5,
-                                mipmapBlur: true
-                            }),
-                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Noise), {
-                                opacity: 0.05
-                            }),
-                            /*#__PURE__*/ (0, $8I7SX$reactjsxruntime.jsx)((0, $8I7SX$reactthreepostprocessing.Vignette), {
-                                eskil: false,
-                                offset: 0.1,
-                                darkness: 1.1
-                            })
-                        ]
-                    })
-                ]
+                    ]
+                })
             })
-        })
+        ]
     });
 }
 
@@ -1735,9 +3055,16 @@ window.vueComponents = {};
 window.React = (0, ($parcel$interopDefault($8I7SX$react)));
 window.ReactDOM = (0, ($parcel$interopDefault($8I7SX$reactdom)));
 window.ReactWrapper = (0, (/*@__PURE__*/$parcel$interopDefault($99e5c865b19c7c75$exports)));
-reactComponents['App'] = (0, $9e79c54aa8a563fd$export$2e2bcd8739ae039);
-reactComponents['App'] = (0, $9e79c54aa8a563fd$export$2e2bcd8739ae039);
-reactComponents['App'] = (0, $9e79c54aa8a563fd$export$2e2bcd8739ae039);
+reactComponents['City'] = (0, $9e79c54aa8a563fd$export$2e2bcd8739ae039);
+reactComponents['City'] = (0, $9e79c54aa8a563fd$export$2e2bcd8739ae039);
+reactComponents['City'] = (0, $9e79c54aa8a563fd$export$2e2bcd8739ae039);
+reactComponents['Documentation'] = (0, $3a805d76f32be13e$export$2e2bcd8739ae039);
+reactComponents['Documentation'] = (0, $3a805d76f32be13e$export$2e2bcd8739ae039);
+reactComponents['NHS'] = (0, $5786b60eebf519eb$export$2e2bcd8739ae039);
+reactComponents['Population'] = (0, $35b197c452fc46d2$export$2e2bcd8739ae039);
+reactComponents['Population'] = (0, $35b197c452fc46d2$export$2e2bcd8739ae039);
+reactComponents['Population'] = (0, $35b197c452fc46d2$export$2e2bcd8739ae039);
+reactComponents['Population'] = (0, $35b197c452fc46d2$export$2e2bcd8739ae039);
 reactComponents['Portfolio'] = (0, $a0362f18e412ef3b$export$2e2bcd8739ae039);
 reactComponents['Portfolio'] = (0, $a0362f18e412ef3b$export$2e2bcd8739ae039);
 reactComponents['Portfolio'] = (0, $a0362f18e412ef3b$export$2e2bcd8739ae039);

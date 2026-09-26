@@ -1,29 +1,9 @@
 {
   "projects": [
     {
-      "title": "Gothic",
-      "abstract": "Gothic poems inspired by Victorian Romantics and Gothic writers",
-      "website": "https://aremuart.wordpress.com/poetry/gothics/",
-      "siteLink": "Portfolio/poetry/gothic/"
-    },
-    {
-      "title": "Existential",
-      "abstract": "An assortment of existential poems - aimed at the contemplative and inward-thinkers",
-      "navigation": "/Celestaris/Poetry/existentialPoetry",
-      "website": "https://aremuart.wordpress.com/poetry/existentialists/",
-      "siteLink": "Portfolio/poetry/existentialists/"
-    },
-    {
-      "title": "Poetry Anthology: Canto I",
-      "abstract": "Serentiy, Silence and Salutation",
-      "navigation": "/Celestaris/Poetry/section0",
-      "siteLink": "Portfolio/poetry/lux/section0"
-    },
-    {
-      "title": "Poetry Anthology: Canto II",
-      "abstract": "Tabula Lux",
-      "navigation": "/Celestaris/Poetry/section1",
-      "siteLink": "Portfolio/poetry/lux/section1"
+      "title": "Poetry by AREMU",
+      "abstract": "The collected poems written by myself in the last three years",
+      "siteLink": "https://aremu.art#poetry"
     }
   ]
 }

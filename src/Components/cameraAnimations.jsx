@@ -1,7 +1,18 @@
+/**
+ * @module Components
+ * @category Utility
+ * @description Various camera animation functions
+ */
+
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
+/**
+ * Uses a linear interpolation to zoom the camera in on launch
+ * @function
+ * @category Camera
+ */
 function InitialCameraAnimation({ onComplete }) {
   const { camera } = useThree();
   const targetPosition = new THREE.Vector3(0, 35, 150); // Final resting position
@@ -23,6 +34,11 @@ function InitialCameraAnimation({ onComplete }) {
   return null;
 }
 
+/**
+ * Uses an animation to point the camera at a small text box
+ * @function
+ * @category Camera
+ */
 function SmallTextCameraAnimation({ anchor, lookat, onComplete, controlsRef }) {
   const { camera } = useThree();
   const targetPosition = new THREE.Vector3(...anchor);

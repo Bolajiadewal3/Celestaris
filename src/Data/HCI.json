@@ -1,0 +1,9 @@
+{
+  "projects": [
+    {
+      "title": "ThreeJS and Web Design",
+      "abstract": "A short exploration of how ThreeJS can be used to create interactive web experiences",
+      "WIP": "Yes"
+    }
+  ]
+}

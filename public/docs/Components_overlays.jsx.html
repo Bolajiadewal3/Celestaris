@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Components/overlays.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <script src="scripts/commonNav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Components/overlays.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Components
+ * @category Utility
+ * @description Various overlay rendering functions
+ */
+import { useState, useRef, useEffect } from "react";
+import { useTrail, animated, useSpring } from "@react-spring/web";
+import { useNavigate } from "react-router-dom";
+import { useProgress } from "@react-three/drei";
+
+/**
+ * Allows for a loading screen at the start of a page that waits for the assets to load
+ * @function
+ * @category Loading
+ */
+function Loader() {
+  /**
+   * Variable that tracks the current progress on asset loading on the page
+   * @type {useProgress}
+   */
+  const { progress } = useProgress();
+
+  return (
+    /* The white background */
+    &lt;div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "#fff",
+        zIndex: 2000,
+        color: "black",
+        fontFamily: "sans-serif",
+      }}
+    >
+      {/* The "Loading Experience" prompt for the user */}
+      &lt;div
+        style={{
+          fontSize: "2rem",
+          marginBottom: "20px",
+          letterSpacing: "0.2em",
+        }}
+      >
+        LOADING EXPERIENCE
+      &lt;/div>
+
+      {/* A % bar that tracks and displays the current load progress */}
+      &lt;div style={{ width: "200px", height: "2px", background: "#333" }}>
+        &lt;div
+          style={{
+            width: `${progress}%`,
+            height: "100%",
+            background: "#6a0dad",
+            transition: "width 0.3s ease",
+          }}
+        />
+      &lt;/div>
+
+      {/* The numerical display of the load % */}
+      &lt;div style={{ marginTop: "10px", fontSize: "0.8rem", opacity: 0.5 }}>
+        {Math.round(progress)}%
+      &lt;/div>
+    &lt;/div>
+  );
+}
+
+/**
+ * Allows for a custom start screen with a button to start the experience; assets load on click and the page is not revealed until assets fully loaded
+ * @function
+ * @category Loading
+ * @deprecated use Loader() instead
+ */
+function StartScreen({ onStart, visible }) {
+  const styles = useSpring({
+    opacity: visible ? 1 : 0,
+    pointerEvents: visible ? "auto" : "none",
+    config: { duration: 500 },
+  });
+
+  return (
+    &lt;animated.div
+      style={{
+        ...styles,
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundColor: "black",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 20,
+      }}
+    >
+      &lt;button
+        id="startButton"
+        style={{
+          padding: "20px 40px",
+          fontSize: "42px",
+          fontWeight: "bold",
+          borderRadius: "12px",
+
+          fontFamily: "Orbitron, sans-serif",
+        }}
+        onClick={onStart}
+      >
+        By MOBOLAJI ADEWALE
+      &lt;/button>
+
+      &lt;div
+        id="hintText"
+        style={{
+          position: "absolute",
+          bottom: "2%",
+          padding: "20px 40px",
+          fontSize: "15px",
+          borderRadius: "1px",
+          color: "white",
+          fontFamily: "Orbitron, sans-serif",
+        }}
+      >
+        HINT: Find the glowing orbs and press them to learn more about me
+      &lt;/div>
+    &lt;/animated.div>
+  );
+}
+
+/**
+ * Displays a html/css overlay over the 3D scene; that is populated with JSON data as text; includes a return to scene and internal navigation buttons
+ * @function
+ * @category Overlay
+ */
+function Overlay({ isActive, onClose, items = [] }) {
+  /**
+   * Allows for internal navigation of the page
+   * @type {useNavigate}
+   */
+  const navigate = useNavigate();
+
+  /**
+   * Fades in and out the overlay
+   * @type {useSpring}
+   */
+  const overlaySpring = useSpring({
+    opacity: isActive ? 1 : 0,
+    config: { tension: 220, friction: 50 },
+  });
+
+  /**
+   * Allows for animations in sequence of a list/array of elements - applies a CSS animation transform to have the different elements slide in from the right of the screen and slide back out later
+   * @type {useTrail}
+   */
+  const trail = useTrail(Array.isArray(items) ? items.length : 0, {
+    from: { transform: "translateX(200%)", opacity: 0 },
+    to: {
+      transform: isActive ? "translateX(0%)" : "translateX(100%)",
+      opacity: isActive ? 1 : 0,
+    },
+    config: { mass: 1, tension: 150, friction: 100, delay: 100 },
+  });
+
+  return (
+    //Animated element that allows for the useSpring and useTrail to work
+    &lt;animated.div
+      className="jsonOverlay"
+      style={{
+        pointerEvents: isActive ? "auto" : "none",
+        opacity: overlaySpring.opacity,
+      }}
+    >
+      {/* Exit button for the overlay menu */}
+      &lt;div className="normalExitButton" onClick={onClose}>
+        Exit
+      &lt;/div>
+
+      {/* The JSON imported items that slide in from the right */}
+      {trail.map((style, index) => {
+        const item = items[index];
+        //const isExternal = Boolean(item.website);
+        //const isNavigable = Boolean(item.navigation);
+
+        return (
+          // The individual items pulled from the JSON
+          &lt;animated.div
+            key={index}
+            className="jsonOverlayItems"
+            style={{
+              transform: style.transform,
+            }}
+          >
+            {/* The TITLE of the item */}
+            &lt;h2 style={{ fontSize: "20px", marginBottom: "10px" }}>
+              {item.title}
+            &lt;/h2>
+            {!item.WIP &amp;&amp; (
+              &lt;a
+                className="goToComputerButton a_1"
+                onClick={
+                  // A conditional on whether the JSON of the item has the property EXTERNAL (denoting an external website link)
+                  item.external
+                    ? // If an external link exists - go to that page
+                      () => {
+                        window.location.href = item.website;
+                      }
+                    : // If an internal link is present instead; let the react-router handle the navigation
+                      () => {
+                        //console.log("HERE");
+
+                        // If a site link is found; pass that page to the IFRAME on the COMPUTER page; to be rendered within the static wordpress site
+                        if (item.siteLink) {
+                          const fullUrl = `${import.meta.env.BASE_URL}${
+                            item.siteLink
+                          }index.html`;
+
+                          //console.log("Passing to iframe:", fullUrl);
+
+                          // Passing site link through the COMPUTER page's IFRAME
+                          navigate(`/Computer`, {
+                            state: { iframeUrl: fullUrl },
+                          });
+                        } else {
+                          //console.log("SHOULD BE MOVING HERE");
+
+                          // Navigate to the page specified
+                          navigate(item.internalLink);
+                        }
+                      }
+                }
+              >
+                Go To
+              &lt;/a>
+            )}{" "}
+            {item.WIP &amp;&amp; &lt;a className="workInProgressButton a_1">W I P&lt;/a>}
+            {/* The MAIN BODY text of the item */}
+            &lt;p>{item.abstract}&lt;/p>
+          &lt;/animated.div>
+        );
+      })}
+    &lt;/animated.div>
+  );
+}
+
+/**
+ * Displays an audio toggle
+ * @function
+ * @category Button
+ */
+function AudioButton({ url }) {
+  const [playing, setPlaying] = useState(false);
+  const audioRef = useRef(null);
+
+  // This effect handles stopping the audio if the component unmounts
+  // or if the URL changes (page navigation)
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, [url]);
+
+  const toggleAudio = () => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio(url);
+      audioRef.current.loop = true;
+    }
+
+    if (playing) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current
+        .play()
+        .catch((err) => console.error("Audio blocked:", err));
+    }
+    setPlaying(!playing);
+  };
+
+  return (
+    &lt;button
+      style={{
+        left: "20px",
+        bottom: "20px",
+        position: "fixed",
+      }}
+      onClick={toggleAudio}
+      className="overlayButton"
+    >
+      {playing ? "🔊 Mute" : "🔈 Play Ambience"}
+    &lt;/button>
+  );
+}
+
+/**
+ * Displays a headings toggle
+ * @function
+ * @category Button
+ */
+function HeadingsButton({ showHeadings, setShowHeadings }) {
+  const toggleHeadings = () => {
+    // This toggles the boolean to its opposite value
+    setShowHeadings((prev) => !prev);
+  };
+
+  return (
+    &lt;button
+      style={{
+        right: "20px",
+        bottom: "20px",
+        position: "fixed",
+      }}
+      onClick={toggleHeadings}
+      className="overlayButton"
+    >
+      {showHeadings ? "Hide Headings" : "Show Headings"}
+    &lt;/button>
+  );
+}
+
+/**
+ * Displays a documentation navigation button
+ * @function
+ * @category Button
+ */
+function DocumentationButton() {
+  const navigate = useNavigate();
+
+  return (
+    &lt;button
+      style={{
+        left: "20px",
+        top: "20px",
+        position: "fixed",
+      }}
+      onClick={() => {
+        navigate("/Documentation");
+      }}
+      className="overlayButton"
+    >
+      Documentation
+    &lt;/button>
+  );
+}
+
+/**
+ * Displays a resume navigation button
+ * @function
+ * @category Button
+ */
+function ResumeButton() {
+  return (
+    &lt;a
+      style={{
+        right: "20px",
+        top: "20px",
+        position: "fixed",
+      }}
+      className="overlayButton"
+      href={`${import.meta.env.BASE_URL}Resume.pdf`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Resume
+    &lt;/a>
+  );
+}
+
+export {
+  StartScreen,
+  Overlay,
+  Loader,
+  AudioButton,
+  HeadingsButton,
+  ResumeButton,
+  DocumentationButton,
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sat Feb 14 2026 20:33:53 GMT+0000 (Greenwich Mean Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+    <link type="text/css" rel="stylesheet" href="docs-style.css">
+    
+    <script src="docs-style.js"></script>
+    
+</body>
+</html>

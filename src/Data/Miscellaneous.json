@@ -2,17 +2,13 @@
   "projects": [
     {
       "title": "Music",
-      "abstract": "Music released under the artist name: AREMU",
-      "website": "https://linktr.ee/ar3mu",
-      "external": "Yes",
-      "model": "/files/misc/vinyl.glb"
+      "abstract": "All music released under the artist name: AREMU",
+      "siteLink": "https://linktr.ee/ar3mu"
     },
     {
       "title": "Profile",
       "abstract": "Profile page with useful links",
-      "website": "https://linktr.ee/bolajiadewale",
-      "external": "Yes",
-      "model": "/files/misc/books.glb"
+      "siteLink": "https://linktr.ee/bolajiadewale"
     }
   ]
 }

@@ -1,0 +1,14 @@
+{
+  "projects": [
+    {
+      "title": "NHS",
+      "abstract": "A data-driven demo rendering the United Kingdom and the location of its National Healthcare facilites",
+      "internalLink": "NHS"
+    },
+    {
+      "title": "Population",
+      "abstract": "A 3-Dimensional demo of the 3Globe React Fiber integration",
+      "internalLink": "Population"
+    }
+  ]
+}
