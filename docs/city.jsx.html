@@ -1,88 +1,46 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Celestaris Documentation city.jsx</title>
-
-  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="./build/entry.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
-  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
-  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
-  <link type="text/css" rel="stylesheet" href="">
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-  
+    
+    <meta charset="utf-8">
+    <title>city.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <script src="scripts/commonNav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<body>
 
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
+<label for="nav-trigger" class="overlay"></label>
 
-<body class="layout small-header">
-    <div id="stickyNavbarOverlay"></div>
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">city.jsx</h1>
     
 
-<div class="top-nav">
-    <div class="inner">
-        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
-        <div class="logo">
-            
-             
-                <a href="index.html">
-                    <h1 class="navbar-item">Celestaris Engine Docs</h1>
-                </a>
-            
-        </div>
-        <div class="menu">
-            
-            <div class="navigation">
-                <a
-                    href="index.html"
-                    class="link"
-                >
-                    Documentation
-                </a>
-                
-                
-                
-            </div>
-        </div>
-    </div>
-</div>
-    <div id="main">
-        <div
-            class="sidebar "
-            id="sidebarNav"
-        >
-            
-            <nav>
-                
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="module-City.html">City</a></li><li><a href="module-City-CameraLight.html">CameraLight</a></li><li><a href="module-City-CityModel.html">CityModel</a></li><li><a href="module-Portfolio.html">Portfolio</a></li><li><a href="module-Portfolio-CameraLogger.html">CameraLogger</a></li><li><a href="module-Portfolio-CameraRig.html">CameraRig</a></li><li><a href="module-Portfolio-Computer.html">Computer</a></li></ul></div>
-                
-            </nav>
-        </div>
-        <div class="core" id="main-content-wrapper">
-            <div class="content">
-                <header class="page-title">
-                    <p>Source</p>
-                    <h1>city.jsx</h1>
-                </header>
-                
+    
 
 
 
@@ -93,15 +51,17 @@
  * @module City
  * @category Scenes
  * @description The high-performance urban landing page.
+ * * TEST
+ * ![City View](City.png)
+ * ![City View 2](City2.png)
+ *
  */
 
-import { Canvas, useFrame, useThree, useLoader } from "@react-three/fiber";
-import { Sky, OrbitControls } from "@react-three/drei";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 import { Suspense, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { OBJLoader, MTLLoader } from "three-stdlib";
 import {
-  DepthOfField,
   Vignette,
   Bloom,
   BrightnessContrast,
@@ -113,49 +73,84 @@ import projectData from "./Data/Business Intelligence &amp; Analytics.json";
 import poetryData from "./Data/Poetry.json";
 import dissertationData from "./Data/Dissertation.json";
 import miscData from "./Data/Miscellaneous.json";
+import hciData from "./Data/HCI.json";
+import dissertationData2 from "./Data/Dissertation2.json";
+import musicData from "./Data/Music.json";
+import showcaseData from "./Data/Showcase.json";
 
-import { Overlay, Loader } from "./Components/overlays.jsx";
-import { GlowingTextBanner, SmallTextBanner } from "./Components/texts.jsx";
+import {
+  Overlay,
+  Loader,
+  AudioButton,
+  HeadingsButton,
+  ResumeButton,
+  DocumentationButton,
+} from "./Components/overlays.jsx";
+import {
+  GlowingTextBanner,
+  SmallTextBanner,
+  LargeGroupText,
+} from "./Components/texts.jsx";
 import {
   InitialCameraAnimation,
   SmallTextCameraAnimation,
 } from "./Components/cameraAnimations.jsx";
 
-import { degreesToRadians } from "./utils"; // Utility function for cleaner rotation input
+import { degreesToRadians } from "./utils";
 
 /**
  * CityModel manages the complex OBJ/MTL loading and asset disposal.
  * @component
  * @category 3D Assets
+ * @returns {JSX.primitive}
  */
 function CityModel() {
-  // useLoader automatically "suspends" this component
-  const materials = useLoader(MTLLoader, "./City/cityMAT.mtl");
-  const obj = useLoader(OBJLoader, "./City/city.obj", (loader) => {
-    materials.preload();
-    loader.setMaterials(materials);
-  });
+  /**
+   * The compressed scene model .GLB file
+   * @type {useGLTF}
+   */
+  const { scene } = useGLTF(
+    `${import.meta.env.BASE_URL}City/city-v2.glb`,
+    "https://www.gstatic.com/draco/versioned/decoders/1.5.5/",
+  );
 
-  // Apply shadows/settings after loading
+  /** A traversal of the model's elements that clear geometries and materials from memory on cleanup */
   useEffect(() => {
-    obj.traverse((child) => {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-        child.material.side = THREE.FrontSide;
-      }
-    });
-  }, [obj]);
+    return () => {
+      scene.traverse((child) => {
+        if (child.isMesh) {
+          child.geometry.dispose();
+          if (child.material.isMaterial) child.material.dispose();
+        }
+      });
+    };
+  }, [scene]);
 
-  return &lt;primitive object={obj} scale={0.15} position={[70, 0, -65]} />;
+  return (
+    /** The scene object; it has shadows enabled */
+    &lt;primitive
+      object={scene}
+      scale={0.15}
+      position={[70, 0, -65]}
+      castShadow
+      receiveShadow
+    />
+  );
 }
+
+/**
+ * Preloads the city model in memory
+ * @function
+ * @category 3D Assets
+ */
+useGLTF.preload(`${import.meta.env.BASE_URL}City/city-v2.glb`);
 
 /**
  * CameraLight attaches a spotlight that follows the camera's position,
  * simulating a light source that moves with the viewer.
  *
  * @component
- * @returns {JSX.Element} - A spotlight that follows the camera
+ * @returns {JSX.spotLight} - A spotlight that follows the camera
  */
 function CameraLight() {
   const { camera } = useThree(); // Access the main camera from the scene
@@ -171,12 +166,12 @@ function CameraLight() {
   return (
     &lt;spotLight
       ref={lightRef}
-      intensity={10} // Brightness of the light
-      angle={0.4} // Cone spread angle
-      penumbra={0.5} // Softness of the light edge
-      distance={300} // How far the light reaches
-      decay={0.6} // Light intensity falloff
-      castShadow // Enable shadow casting
+      intensity={10}
+      angle={0.8}
+      penumbra={0.6}
+      distance={300}
+      decay={0.6}
+      castShadow
     />
   );
 }
@@ -185,31 +180,36 @@ function CameraLight() {
  * Main application component rendering a Three.js city scene,
  * interactive UI overlays, banners, and ambient experience.
  *
+ * @default
  * @component
  * @returns {JSX.Element}
  */
-export default function App() {
+export default function City() {
   // UI states
   const [controlsEnabled, setControlsEnabled] = useState(false);
   const [isOverlayActive, setOverlayActive] = useState(false);
   const [overlayContent, setOverlayContent] = useState([]);
-  const [started, setStarted] = useState(false);
+  //const [started, setStarted] = useState(false);
   const [openBannerId, setOpenBannerId] = useState(null);
   const [cameraAnimationDone, setcameraAnimationDone] = useState(null);
-  const [cityLoaded, setCityLoaded] = useState(false);
+  //const [cityLoaded, setCityLoaded] = useState(false);
   const [audioStarted, setAudioStarted] = useState(false);
   const [initialAnimation, setInitialAnimation] = useState(false); // Unused?
 
   // Camera/interaction state
   const controlsRef = useRef();
-  const [currentCameraPos, setCurrentCameraPos] = useState([0, 0, 0]); // Reserved
+  //const [currentCameraPos, setCurrentCameraPos] = useState([0, 0, 0]); // Reserved
   const [goToSmallText, setGoToSmallText] = useState(false);
   const [smallTextAnchor, setSmallTextAnchor] = useState([0, 0, 0]);
   const [smallTextLookAt, setSmallTextLookAt] = useState([0, 0, 0]);
   const [showExitButton, setShowExitButton] = useState(false);
 
+  const [showBigHeadings, setShowBigHeadings] = useState(true);
+
   /**
    * Returns camera to initial view and re-enables controls after interacting with banners.
+   * @function
+   * @returns {void}
    */
   const resetOrbit = () => {
     setOpenBannerId(null);
@@ -220,6 +220,8 @@ export default function App() {
 
   /**
    * Toggles the overlay and OrbitControls simultaneously.
+   * @function
+   * @returns {boolean}
    */
   const toggleOverlay = () => {
     setOverlayActive((prev) => {
@@ -233,28 +235,58 @@ export default function App() {
 
   /**
    * Opens a specific overlay content section (projects, poetry, etc.).
-   *
+   * @function
    * @param {string} type - The type of content to open in the overlay.
    */
   const openOverlay = (type) => {
-    if (type === "projects") setOverlayContent(projectData.projects);
-    else if (type === "dissertation")
-      setOverlayContent(dissertationData.projects);
-    else if (type === "miscellaneous") setOverlayContent(miscData.projects);
-    else if (type === "poetry") setOverlayContent(poetryData.projects);
+    switch (type) {
+      case "dissertation":
+        console.log(dissertationData.projects);
+        setOverlayContent(dissertationData.projects);
+        break;
+      case "dissertation2":
+        setOverlayContent(dissertationData2.projects);
+        break;
+
+      case "miscellaneous":
+        setOverlayContent(miscData.projects);
+        break;
+
+      case "poetry":
+        setOverlayContent(poetryData.projects);
+        break;
+
+      case "business":
+        setOverlayContent(projectData.projects);
+        break;
+
+      case "hci":
+        setOverlayContent(hciData.projects);
+        break;
+
+      case "music":
+        setOverlayContent(musicData.projects);
+        break;
+
+      case "showcase":
+        setOverlayContent(showcaseData.projects);
+        break;
+    }
 
     setOverlayActive(true);
   };
 
-  /**
-   * Starts city background audio on first interaction.
-   */
-
   const audioRef = useRef(null);
 
+  /**
+   * Starts city background audio on first interaction.
+   * @deprecated use imported method from OVERLAYS
+   */
   const startAudio = () => {
     if (!audioStarted) {
-      const audio = new Audio("./City/cityAMBIENCE.mp3");
+      const audio = new Audio(
+        `${import.meta.env.BASE_URL}City/cityAMBIENCE.mp3`,
+      );
       audio.loop = true;
       audioRef.current = audio;
 
@@ -272,26 +304,48 @@ export default function App() {
     };
   }, []);
 
+  /**
+   * The entire landing page
+   */
   return (
     &lt;div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+      {/** UI button to return to free roam after viewing a SMALLTEXTBANNER */}
       {showExitButton &amp;&amp; (
         &lt;button className="smallTextButton" onClick={resetOrbit}>
           Return
         &lt;/button>
       )}
 
+      {/** UI button start and stop AUDIO */}
+      &lt;AudioButton
+        url={`${import.meta.env.BASE_URL}City/cityAMBIENCE.mp3`}
+      >&lt;/AudioButton>
+
+      {!isOverlayActive &amp;&amp; &lt;ResumeButton>&lt;/ResumeButton>}
+      {!isOverlayActive &amp;&amp; &lt;DocumentationButton>&lt;/DocumentationButton>}
+
+      {!isOverlayActive &amp;&amp; (
+        &lt;HeadingsButton
+          showHeadings={showBigHeadings}
+          setShowHeadings={setShowBigHeadings}
+        >&lt;/HeadingsButton>
+      )}
+
+      {/** UI overlay that pulls JSON data to display */}
       &lt;Overlay
         isActive={isOverlayActive}
         onClose={toggleOverlay}
         items={overlayContent}
       />
 
+      {/** The custom loading page screen from OVERLAYS */}
       &lt;Suspense fallback={&lt;Loader />}>
+        {/** The 3D scene with dark grey background */}
         &lt;Canvas
           shadows
           camera={{ position: [0, 70, 500], fov: 50 }}
           onCreated={({ scene }) => {
-            scene.fog = new THREE.Fog(new THREE.Color("#6a0dad"), 0, 1600);
+            scene.fog = new THREE.Fog(new THREE.Color("#0a0a1a"), 200, 1200);
           }}
           dpr={[1, 1.5]}
           gl={{ antialias: true }}
@@ -307,7 +361,6 @@ export default function App() {
             maxDistance={220}
             enabled={controlsEnabled}
           />
-
           {/* One-time zoom-in on startup */}
           &lt;InitialCameraAnimation
             onComplete={() => {
@@ -315,8 +368,7 @@ export default function App() {
               setcameraAnimationDone(true);
             }}
           />
-
-          {/* Camera transition to small text UI */}
+          {/* Camera transition to SMALLTEXTBANNER */}
           {goToSmallText &amp;&amp; (
             &lt;SmallTextCameraAnimation
               anchor={smallTextAnchor}
@@ -328,11 +380,10 @@ export default function App() {
               controlsRef={controlsRef}
             />
           )}
-
-          {/* Small Text UI Banners */}
+          {/* Small Text UI Banner - ABOUT ME */}
           &lt;SmallTextBanner
             title="About Me"
-            text="24 Year Old Software Engineer, Creative &amp; National American Football Player"
+            text="25 Year Old Software &amp; Data Engineer, Creative &amp; National American Football Player"
             position={[-40, -8.5, 90]}
             rotation={[0, degreesToRadians(-13), 0]}
             width={17}
@@ -346,12 +397,35 @@ export default function App() {
             }}
           />
 
+          {/* Small Text UI Banner - AREAS OF EXPERTISE */}
+          &lt;SmallTextBanner
+            title="Areas of Expertise"
+            text={
+              "+ UI / UX\n" +
+              "+ Information Systems\n" +
+              "+ Data Visualisation\n" +
+              "+ Full-Stack Development"
+            }
+            position={[-59.6, -8.5, 162.9]}
+            rotation={[0, degreesToRadians(0), 0]}
+            width={17}
+            isOpen={openBannerId === "4"}
+            onOpen={() => setOpenBannerId("4")}
+            onClick={() => {
+              setSmallTextAnchor([-60, -7, 210]);
+              setSmallTextLookAt([-60, -2, 170]);
+              setGoToSmallText(true);
+              setControlsEnabled(false);
+            }}
+          />
+
+          {/* Small Text UI Banner - EDUCATION */}
           &lt;SmallTextBanner
             title="Education"
             text={
-              "University of Nottingham - BSc Computer Science\n" +
-              "University of Nottingham - MSc Information Systems &amp; Operations Management\n" +
-              "University of Arizona - MS Information Science: Human Centered Computing"
+              "University of Nottingham - BSc (Hons) Computer Science [ 2019 - 2022 ]\n" +
+              "University of Nottingham - MSc Information Systems &amp; Operations Management [ 2022 - 2023 ]\n" +
+              "University of Arizona - MS Information Science: Human Centered Computing [ 2024 &amp; 2026 ]"
             }
             position={[80, -8.5, 142]}
             rotation={[0, degreesToRadians(-1.5), 0]}
@@ -366,6 +440,7 @@ export default function App() {
             }}
           />
 
+          {/* Small Text UI Banner - CONTACT ME */}
           &lt;SmallTextBanner
             title="Contact Me"
             text={"bolajidgs@gmail.com\nmadewale@arizona.edu\n@bolaji.ad"}
@@ -382,31 +457,96 @@ export default function App() {
             }}
           />
 
-          {/* Section portals */}
-          &lt;GlowingTextBanner
-            text="Projects"
-            position={[-70, 30, -30]}
-            onClick={() => openOverlay("projects")}
+          {/* Small Text UI Banner - WHAT AM I WORKING ON */}
+          &lt;SmallTextBanner
+            title="What Am I working On ?"
+            text={
+              "(1) My Second Dissertation\n" +
+              "(2) Professional American Football\n" +
+              "(3) My first two EPs\n" +
+              "(4) This Portfolio"
+            }
+            position={[61, 50, -98.5]}
+            rotation={[0, degreesToRadians(180), 0]}
+            width={25}
+            isOpen={openBannerId === "5"}
+            onOpen={() => setOpenBannerId("5")}
+            onClick={() => {
+              setSmallTextAnchor([60, 49, -140]);
+              setSmallTextLookAt([60, 49, -120]);
+              setGoToSmallText(true);
+              setControlsEnabled(false);
+            }}
           />
+
+          {/* Section Text - PROJECTS */}
           &lt;GlowingTextBanner
-            text="Dissertation"
+            text="Business"
+            position={[-70, 40, -30]}
+            onClick={() => openOverlay("business")}
+          />
+
+          &lt;GlowingTextBanner
+            text={"HCI"}
+            position={[-70, 20, -30]}
+            onClick={() => openOverlay("hci")}
+          />
+          {/* Section Text - DISSERTATION */}
+          &lt;GlowingTextBanner
+            text="Dissertation I"
             position={[70, 40, -50]}
             onClick={() => openOverlay("dissertation")}
           />
           &lt;GlowingTextBanner
+            text="Dissertation II"
+            position={[70, 20, -50]}
+            onClick={() => openOverlay("dissertation2")}
+          />
+          {/* Section Text - POETRY */}
+          &lt;GlowingTextBanner
             text="Poetry"
-            position={[50, 40, 60]}
+            position={[50, 38, 60]}
             rotation={[0, Math.PI * 1.5, 0]}
             onClick={() => openOverlay("poetry")}
           />
           &lt;GlowingTextBanner
-            text="Miscellaneous"
+            text="Music"
+            position={[50, 18, 60]}
+            rotation={[0, Math.PI * 1.5, 0]}
+            onClick={() => openOverlay("music")}
+          />
+          {/* Section Text - MISCELLANEOUS */}
+          &lt;GlowingTextBanner
+            text="Tech Showcase"
             position={[-60, 20, 75]}
+            rotation={[0, Math.PI / 2, 0]}
+            onClick={() => openOverlay("showcase")}
+          />
+          &lt;GlowingTextBanner
+            text="Links"
+            position={[-60, 0, 75]}
             rotation={[0, Math.PI / 2, 0]}
             onClick={() => openOverlay("miscellaneous")}
           />
 
-          {/* Lighting */}
+          {showBigHeadings &amp;&amp; (
+            &lt;>
+              &lt;LargeGroupText text="RESEARCH" position={[-70, 60, -30]} />
+              &lt;LargeGroupText text="Academia" position={[70, 62, -50]} />
+              &lt;LargeGroupText
+                text="Creative"
+                position={[50, 60, 60]}
+                rotation={[0, Math.PI * 1.5, 0]}
+              />
+              &lt;LargeGroupText
+                text="Miscellaneous"
+                position={[-60, 40, 75]}
+                rotation={[0, Math.PI / 2, 0]}
+              />
+            &lt;/>
+          )}
+
+          {/* CAMERA, AMBIENT and DIRECTIONAL lighting */}
           &lt;CameraLight />
           &lt;ambientLight intensity={0.1} />
           &lt;directionalLight
@@ -423,23 +563,16 @@ export default function App() {
             shadow-camera-bottom={-100}
             shadow-bias={-0.005}
           />
-
-          {/* Example object */}
+          {/* Orb at CENTER of model */}
           &lt;mesh position={[0, 10, 0]}>
             &lt;sphereGeometry args={[2, 32, 32]} />
             &lt;meshStandardMaterial color="red" />
           &lt;/mesh>
-
-          &lt;Sky
-            distance={450000}
-            sunPosition={[100, 10, 100]}
-            inclination={0.49}
-            azimuth={0.25}
-          />
-
-          &lt;CityModel onLoad={() => setCityLoaded(true)} />
-
-          {/* Visual postprocessing */}
+          {/* The consistent BACKGROUND of the scene */}
+          &lt;color attach="background" args={["#0a0a1a"]} />
+          {/* The imported .GLB CITY MODEL */}
+          &lt;CityModel />
+          {/* Visual Post-Processing */}
           &lt;EffectComposer enabled={!isOverlayActive}>
             &lt;HueSaturation hue={0.1} saturation={0.2} />
             &lt;BrightnessContrast brightness={0.05} contrast={0.2} />
@@ -448,8 +581,8 @@ export default function App() {
               luminanceThreshold={0.05}
               luminanceSmoothing={0.1}
             />
-            &lt;DepthOfField focusDistance={5} focalLength={10} bokehScale={2} />
-            &lt;Vignette eskil={false} offset={0.1} darkness={0.4} />
+            {/*&lt;DepthOfField focusDistance={5} focalLength={10} bokehScale={2} />*/}
+            &lt;Vignette eskil={false} offset={0.1} darkness={0.7} />
           &lt;/EffectComposer>
         &lt;/Canvas>
       &lt;/Suspense>
@@ -463,16 +596,29 @@ export default function App() {
 
 
 
-            </div>
-            
-        </div>
-        <div id="side-nav" class="side-nav">
-        </div>
-    </div>
-<script src="scripts/app.min.js"></script>
-<script>PR.prettyPrint();</script>
-<script src="scripts/linenumber.js"> </script>
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sat Feb 14 2026 20:33:53 GMT+0000 (Greenwich Mean Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
 
 
+<script src="scripts/collapse.js" defer></script>
+
+
+    <link type="text/css" rel="stylesheet" href="docs-style.css">
+    
+    <script src="docs-style.js"></script>
+    
 </body>
 </html>

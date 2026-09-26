@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>population.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <script src="scripts/commonNav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">population.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Population
+ * @category Scenes
+ * @description The high-performance urban landing page.
+ */
+
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { OrbitControls, useTexture } from "@react-three/drei";
+import { Suspense, useRef, useState } from "react";
+import * as THREE from "three";
+import { Loader, AudioButton } from "./Components/overlays.jsx";
+import R3fGlobe from "r3f-globe";
+import { useMemo } from "react";
+
+/**
+ * Fetches the continents geography JSON
+ * @type {Object}
+ */
+const continentsGeoJson = await fetch(
+  `${import.meta.env.BASE_URL}Population/continentsSmall.geo.json`,
+).then((res) => res.json());
+
+/**
+ * Loads the base globe texture image.
+ * @type {Object}
+ * @property {Object} image - The image source object.
+ * @property {string} image.src - The resolved URL path to the globe texture.
+ */
+const globeTexture = useTexture(
+  "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg",
+);
+
+/**
+ * Stores the colours for continents
+ * @type {Object&lt;string, string>}
+ */
+const continentColors = useMemo(
+  () => ({
+    Africa: "#FF595E",
+    Asia: "#FFCA3A",
+    Europe: "#8AC926",
+    "North America": "#1982C4",
+    "South America": "#6A4C93",
+    Oceania: "#FF924C",
+    Antarctica: "#F8F9FA",
+  }),
+  [],
+);
+
+/**
+ * Stores the colours for countries
+ * @type {string[]}
+ */
+const countryPalette = [
+  "#FF595E",
+  "#FFCA3A",
+  "#8AC926",
+  "#1982C4",
+  "#6A4C93",
+  "#FF924C",
+  "#00F5D4",
+  "#F15BB5",
+  "#00BBF9",
+  "#FEE440",
+  "#310A31",
+  "#84DCC6",
+  "#A5ffd6",
+];
+
+/**
+ * Stores the colours for continents
+ * @type {Object&lt;string, number>}
+ */
+const continentPopulation = useMemo(
+  () => ({
+    Africa: 1550000000,
+    Asia: 4835000000,
+    Europe: 744000000,
+    "North America": 617000000,
+    "South America": 438000000,
+    Oceania: 46000000,
+  }),
+  [],
+);
+
+/**
+ * GlobeModel manages the complex OBJ/MTL loading and asset disposal.
+ * @function GlobeModel
+ * @component
+ * @param {Object} props
+ * @param {Object} props.continents
+ * @param {function(Object): void} props.setHoverData
+ * @param {String} props.colorMode - 'None' | 'Country' | 'Continent'
+ * @category 3D Assets
+ * @returns {JSX.Element}
+ */
+function GlobeModel({ continents, setHoverData, colorMode }) {
+  /**
+   * @typedef {Object} ProcessedContinent
+   * @property {string} continent - The name of the continent.
+   * @property {number} population - The total population from the mapping.
+   * @property {number} colorIndex - The map color identifier.
+   */
+  /**
+   * The processed GeoJSON features ready for 3D rendering.
+   * @type {ProcessedContinent[]}
+   * @inner
+   */
+  const processedData = useMemo(() => {
+    if (!continents) return [];
+    return continents.features.map((f) => {
+      const continent = f.properties.continent;
+      return {
+        ...f,
+        continent,
+        population: continentPopulation[continent] ?? 0,
+        colorIndex: f.properties.mapcolor13 || f.properties.mapcolor7 || 0,
+      };
+    });
+  }, [continents, continentPopulation]);
+
+  /**
+   * Determines the hex or rgba color for a country based on the current colorMode.
+   * @function
+   * @param {Object} d - The processed country/continent data object.
+   * @param {number} d.colorIndex - Index used for the country palette.
+   * @param {string} d.continent - Continent name used for the continent palette.
+   * @inner
+   * @returns {string} A CSS-compatible color string (hex, rgb, or rgba).
+   */
+  const getPolygonColor = (d) => {
+    if (colorMode === "none") return "rgba(106, 13, 173, 0.1)"; // Ghostly purple
+
+    if (colorMode === "country") {
+      return countryPalette[d.colorIndex % countryPalette.length];
+    }
+
+    return continentColors[d.continent] || "#999"; // Default fallback colour
+  };
+
+  return (
+    &lt;R3fGlobe
+      // Globe Settings
+      globeImageUrl={globeTexture.image.src}
+      showAtmosphere={true}
+      atmosphereColor="skyblue"
+      atmosphereAltitude={0.5}
+      // Polygon Layer
+      polygonsData={processedData}
+      polygonGeoJsonGeometry="geometry"
+      polygonCapColor={getPolygonColor}
+      polygonSideColor={() => "rgba(255, 255, 255, 0.1)"}
+      polygonStrokeColor={() => (colorMode === "none" ? "#6a0dad" : "#111")}
+      polygonAltitude={0.01}
+      polygonsTransitionDuration={400}
+      // Interaction
+      onHover={(hoverObj, hoverData) => {
+        if (hoverData) {
+          const name = hoverData.continent; // Using the mapped key
+          const contPopRaw = continentPopulation[name] || 0; // Raw continent population number
+          const countryPopRaw = hoverData.properties.pop_est || 0; // Raw country population number
+
+          setHoverData({
+            continentName: name,
+            continentPopulation: contPopRaw,
+            countryName: hoverData.properties.formal_en,
+            countryPopulation: countryPopRaw,
+            countryPopulationYear: hoverData.properties.pop_year,
+          });
+          document.body.style.cursor = "pointer";
+        } else {
+          setHoverData(null);
+          document.body.style.cursor = "default";
+        }
+      }}
+    />
+  );
+}
+
+/**
+ * @typedef {Object} TooltipData
+ * @property {string} countryName - The name of the hovered country.
+ * @property {number} countryPopulation - The population count for the country.
+ * @property {number|string} countryPopulationYear - The census or estimate year for the country data.
+ * @property {string} continentName - The name of the continent.
+ * @property {number} continentPopulation - The total population count for the continent.
+ */
+
+/**
+ * A fixed-position UI overlay that displays demographic statistics.
+ * * Calculated values include the percentage share of the continent's
+ * total population held by the specific country.
+ * * @component
+ * @category UI Components
+ * @param {Object} props - Component properties.
+ * @param {TooltipData} props.data - The data object containing country and continent metrics.
+ * @returns {JSX.Element|null} A styled HTML div overlay or null if no data is present.
+ */
+const GlobeTooltip = ({ data }) => {
+  if (!data) return null;
+
+  const percentage =
+    data.continentPopulation > 0
+      ? (data.countryPopulation / data.continentPopulation) * 100
+      : 0;
+  return (
+    &lt;div
+      style={{
+        position: "fixed",
+        top: "20px",
+        left: "20px",
+        zIndex: 2000,
+        padding: "10px 20px",
+        background: "rgba(0, 0, 0, 0.7)",
+        color: "white",
+        border: "1px solid #6a0dad",
+        borderRadius: "2px",
+        fontFamily: "monospace",
+        fontSize: "clamp(8px, 0.7vw, 12px)",
+        backdropFilter: "blur(10px)",
+        textTransform: "uppercase",
+      }}
+    >
+      &lt;h1>Country: {data.countryName}&lt;/h1>
+      &lt;p>Population: {data.countryPopulation.toLocaleString()}&lt;/p>
+      &lt;p>Year of Census: {data.countryPopulationYear}&lt;/p>
+      &lt;hr>&lt;/hr>
+      &lt;p>Continent: {data.continentName}&lt;/p>
+      &lt;p>Continent's Population: {data.continentPopulation.toLocaleString()}&lt;/p>
+      &lt;hr>&lt;/hr>
+      &lt;p>Share of Continent Population: {percentage.toFixed(2)}%&lt;/p>
+    &lt;/div>
+  );
+};
+
+/**
+ * A fixed UI panel providing buttons to toggle between globe visualization modes.
+ * * @component
+ * @category UI Components
+ * @param {Object} props - Component properties.
+ * @param {'none' | 'continent' | 'country'} props.currentMode - The currently active visualization strategy.
+ * @param {function} props.setMode - State setter function to update the active mode.
+ * @returns {JSX.Element} A styled overlay with mode-switching buttons.
+ */
+const ColorControls = ({ currentMode, setMode }) => {
+  const modes = [
+    { id: "none", label: "Wireframe / Ghost" },
+    { id: "continent", label: "By Continent" },
+    { id: "country", label: "By Country" },
+  ];
+
+  return (
+    &lt;div
+      style={{
+        position: "fixed",
+        bottom: "20px",
+        right: "20px",
+        zIndex: 2000,
+        background: "rgba(0,0,0,0.8)",
+        padding: "10px",
+        border: "1px solid #6a0dad",
+        fontFamily: "monospace",
+        color: "white",
+        display: "flex",
+        flexDirection: "column",
+        gap: "5px",
+      }}
+    >
+      &lt;div style={{ fontSize: "10px", marginBottom: "5px", opacity: 0.7 }}>
+        VISUALISATION MODE
+      &lt;/div>
+      {modes.map((m) => (
+        &lt;button
+          key={m.id}
+          onClick={() => setMode(m.id)}
+          style={{
+            background: currentMode === m.id ? "#6a0dad" : "transparent",
+            color: "white",
+            border: "1px solid #6a0dad",
+            cursor: "pointer",
+            padding: "5px 10px",
+            textAlign: "left",
+            textTransform: "uppercase",
+            fontSize: "11px",
+          }}
+        >
+          {m.label}
+        &lt;/button>
+      ))}
+    &lt;/div>
+  );
+};
+
+/**
+ * The primary application component for the Population Globe visualization.
+ * * Orchestrates the 3D R3F Canvas, environmental lighting, and the integration
+ * between GeoJSON data and interactive UI overlays like tooltips and controls.
+ * * @component
+ * @category Main Application
+ * @returns {JSX.Element} The full-screen interactive globe application.
+ */
+export default function Population() {
+  // UI states
+  const [controlsEnabled, setControlsEnabled] = useState(true);
+  const [hoverData, setHoverData] = useState(null);
+  const [colorMode, setColorMode] = useState("continent");
+
+  // Camera/interaction state
+  const controlsRef = useRef();
+
+  return (
+    &lt;div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+      &lt;GlobeTooltip data={hoverData} />
+      &lt;ColorControls currentMode={colorMode} setMode={setColorMode} />
+
+      {showExitButton &amp;&amp; (
+        &lt;button className="smallTextButton" onClick={resetOrbit}>
+          Return
+        &lt;/button>
+      )}
+
+      &lt;AudioButton
+        url={`${import.meta.env.BASE_URL}Population/nature_ambience.mp3`}
+      >&lt;/AudioButton>
+
+      &lt;Suspense fallback={&lt;Loader />}>
+        &lt;Canvas
+          shadows
+          camera={{ position: [0, 70, 400], fov: 50, near: 1, far: 5000 }}
+          dpr={[1, 1.5]}
+          gl={{ antialias: true }}
+          performance={{ min: 0.8 }}
+        >
+          {/* User controls */}
+          &lt;OrbitControls
+            ref={controlsRef}
+            target={[0, 0, 0]}
+            enablePan={false}
+            maxPolarAngle={Math.PI / 2}
+            minDistance={10}
+            maxDistance={4000}
+            enabled={controlsEnabled}
+          />
+          {/* Lighting */}
+          {/*&lt;CameraLight />*/}
+          &lt;ambientLight intensity={0.8} />
+          &lt;directionalLight position={[300, 300, 300]} intensity={3} />
+          {/* Center */}
+          &lt;mesh position={[5, 0, -2]}>
+            &lt;sphereGeometry args={[2, 32, 32]} />
+            &lt;meshStandardMaterial color="red" />
+          &lt;/mesh>
+          &lt;group position={[0, 0, 0]}>
+            &lt;GlobeModel
+              continents={continentsGeoJson}
+              setHoverData={setHoverData}
+              colorMode={colorMode}
+            />
+          &lt;/group>
+          &lt;color attach="background" args={["#ffffff"]} />
+        &lt;/Canvas>
+      &lt;/Suspense>
+    &lt;/div>
+  );
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sat Feb 14 2026 20:33:53 GMT+0000 (Greenwich Mean Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+    <link type="text/css" rel="stylesheet" href="docs-style.css">
+    
+    <script src="docs-style.js"></script>
+    
+</body>
+</html>

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap');
 .bd__button {
   padding: 10px 0;
   text-align: right;
@@ -11,3 +12,6 @@
 .bd__button > a:hover {
   color: #798897;
 }
+* { font-family: 'Orbitron', sans-serif !important; }
+
+* { font-family: 'Orbitron', sans-serif !important; }

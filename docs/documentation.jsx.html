@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>documentation.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <script src="scripts/commonNav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">documentation.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Documentation
+ * @category Scenes
+ * @description Technical showcase featuring an interactive 3D tablet.
+ */
+
+import { Suspense } from "react";
+import { Canvas, useThree, useFrame } from "@react-three/fiber";
+import { Loader } from "./Components/overlays.jsx";
+import { Html, Environment, ContactShadows } from "@react-three/drei";
+import * as THREE from "three";
+import { useNavigate } from "react-router-dom";
+import { useMemo, useState } from "react";
+import {
+  Vignette,
+  Bloom,
+  EffectComposer,
+  Noise,
+} from "@react-three/postprocessing";
+
+/**
+ * Creates the tablet that the documentation is embedded on
+ * @component
+ * @category 3D Objects
+ * @description
+ * Creates a tablet that then displays the static documentation site
+ * @returns {JSX.Element}
+ */
+function Tablet() {
+  /**
+   * Allows for site navigation
+   * @function
+   * @type {useNavigate}
+   */
+  const navigate = useNavigate();
+
+  /**
+   * Navigates back to home when pressed
+   * @function
+   * @type {function}
+   */
+  const handleHomeClick = () => {
+    navigate(`/`);
+  };
+  return (
+    &lt;group position={[0, 1.5, -4]} rotation={[-Math.PI / 10, 0, 0]}>
+      {/* The TABLET */}
+      &lt;mesh castShadow>
+        {/* Dimensions: 3.2 units wide, 5 units tall */}
+        &lt;boxGeometry args={[3.5, 5.5, 0.15]} />
+        &lt;meshStandardMaterial color="#111" roughness={0.2} />
+      &lt;/mesh>
+
+      {/* The SCREEN */}
+      &lt;Html
+        transform
+        occlude="blending"
+        distanceFactor={2}
+        position={[0, 0, 0.08]}
+      >
+        &lt;div className="tablet-screen">
+          &lt;iframe
+            className="tablet-iframe"
+            src={`${import.meta.env.BASE_URL}docs/index.html`}
+            title="Documentation"
+          />
+        &lt;/div>
+      &lt;/Html>
+      &lt;mesh
+        position={[0, -2.5, 0.08]}
+        onClick={handleHomeClick}
+        onPointerOver={() => (document.body.style.cursor = "pointer")}
+        onPointerOut={() => (document.body.style.cursor = "auto")}
+      >
+        {/* The HOME BUTTON */}
+        &lt;circleGeometry args={[0.15, 32]} />
+        &lt;meshStandardMaterial color="#F22" />
+      &lt;/mesh>
+    &lt;/group>
+  );
+}
+
+function CameraRig() {
+  const { camera } = useThree();
+  const [active, setActive] = useState(true);
+
+  // 1. Create the target as a Vector3 object so distanceTo works correctly
+  const target = useMemo(() => new THREE.Vector3(0, 0.75, 2.5), []);
+  const tempVec = useMemo(() => new THREE.Vector3(), []);
+
+  useFrame((state) => {
+    if (!active) return;
+
+    // 2. Smoothly move toward the target
+    // Increased speed slightly to 0.05 for a better feel
+    state.camera.position.lerp(target, 0.03);
+
+    // 3. Keep eyes on the monitor
+    state.camera.lookAt(0, 1, -4.5);
+
+    // 4. Correct distance check (Vector3 vs Vector3)
+    if (state.camera.position.distanceTo(target) &lt; 0.1) {
+      setActive(false);
+      console.log("Animation complete. OrbitControls engaged.");
+    }
+  });
+
+  return (
+    // Attach a pointLight directly to the camera
+    // This light moves wherever the camera moves
+    &lt;primitive object={camera}>
+      &lt;pointLight intensity={3} distance={20} color="white" />
+    &lt;/primitive>
+  );
+}
+
+/**
+ * Main documentation compenent rendering the tablet with inlay documentation
+ *
+ * @default
+ * @component
+ * @returns {JSX.Element}
+ */
+export default function Documentation() {
+  return (
+    &lt;div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+      {/** The custom loading page screen from OVERLAYS */}
+      &lt;Suspense fallback={&lt;Loader />}>
+        {/** The 3D scene with tablet present */}
+        &lt;Canvas
+          dpr={[1, 1.5]}
+          gl={{ powerPreference: "high-performance", antialias: false }}
+          camera={{ position: [10, 10, 20], fov: 50 }}
+        >
+          &lt;CameraRig />
+          &lt;ambientLight intensity={0.5} />
+          &lt;Environment preset="city" />
+          &lt;ContactShadows
+            position={[0, -0.8, 0]}
+            opacity={0.4}
+            scale={10}
+            blur={2}
+            far={0.8}
+          />
+          &lt;pointLight position={[2, 2, 2]} intensity={1.5} color="#ff00ff" />
+          &lt;Tablet />
+
+          &lt;EffectComposer>
+            &lt;Bloom
+              luminanceThreshold={1}
+              intensity={1.5}
+              levels={9}
+              mipmapBlur
+            />
+            &lt;Noise opacity={0.05} /> {/* Adds a subtle cinematic grain */}
+            &lt;Vignette eskil={false} offset={0.1} darkness={1.1} />
+          &lt;/EffectComposer>
+        &lt;/Canvas>
+      &lt;/Suspense>
+    &lt;/div>
+  );
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sat Feb 14 2026 20:33:53 GMT+0000 (Greenwich Mean Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+    <link type="text/css" rel="stylesheet" href="docs-style.css">
+    
+    <script src="docs-style.js"></script>
+    
+</body>
+</html>

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap');
 /* Tomorrow Theme */
 /* Original theme - https://github.com/chriskempson/tomorrow-theme */
 /* Pretty printing styles. Used with prettify.js. */
@@ -130,3 +131,7 @@ li.L5,
 li.L7,
 li.L9 {
   /* */ }
+
+* { font-family: 'Orbitron', sans-serif !important; }
+
+* { font-family: 'Orbitron', sans-serif !important; }
