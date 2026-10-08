@@ -23,16 +23,15 @@ const buttonSound = new Audio("./Computer/button_click.mp3");
  * Orchestrates a cinematic smooth camera transition on component mount.
  * @component
  * @category Camera Logic
- * @param {Object} props
- * @param {function} props.onComplete - Callback executed when the camera reaches the focus threshold.
+ * @param props
+ * @param props.onComplete - Callback executed when the camera reaches the focus threshold.
  */
 function CameraRig({ onComplete }) {
   const [active, setActive] = useState(true);
 
-  /** * Target coordinates for the camera focus point in front of the monitor.
-   * @type {THREE.Vector3}
+  /**
+   * Target coordinates for the camera focus point in front of the monitor.
    * @inner
-   * @memberof CameraRig
    */
   const target = useMemo(() => new THREE.Vector3(0, 0.75, 2.5), []);
 
@@ -59,12 +58,14 @@ function CameraRig({ onComplete }) {
 function CameraLogger() {
   /**
    * Retrieves the 3D scene's camera
-   * @type {JSX.camera}
    */
   const { camera } = useThree();
 
   useEffect(() => {
-    /** If the Q key is pressed at any point */
+    /**
+     * If the Q key is pressed at any point
+     * @param event
+     */
     const handleKeyDown = (event) => {
       if (event.key.toLowerCase() === "q") {
         const { x, y, z } = camera.position;
@@ -94,49 +95,41 @@ function CameraLogger() {
  * @component
  * @category Interactive Objects
  * @description Renders a GLTF monitor with hardware buttons and an embedded HTML/Iframe screen.
- * @param {Object} props
- * @param {function} props.onReady - Triggered when the initial boot sequence/animation is complete.
+ * @param props
+ * @param props.onReady - Triggered when the initial boot sequence/animation is complete.
  */
 function Computer({ onReady }) {
-  /** * Text label currently displayed on the hardware button tooltip.
-   * @type {string|null}
+  /**
+   * Text label currently displayed on the hardware button tooltip.
    * @inner
-   * @memberof Computer
    */
   const [hoveredText, setHoveredText] = useState(null);
 
-  /** * Toggle state for CRT scanlines and flicker overlays.
-   * @type {boolean}
+  /**
+   * Toggle state for CRT scanlines and flicker overlays.
    * @inner
-   * @memberof Computer
    */
   const [showEffects, setShowEffects] = useState(true);
 
   /**
    * Retrieves the current page location
-   * @function
-   * @type {useLocation}
    */
   const location = useLocation();
 
   /**
    * Allows for site navigation
-   * @function
-   * @type {useNavigate}
    */
   const navigate = useNavigate();
 
-  /** * Toggle state for CRT scanlines and flicker overlays.
-   * @type {boolean}
+  /**
+   * Toggle state for CRT scanlines and flicker overlays.
    * @inner
-   * @memberof Computer
    */
   const [shouldLoadIframe, setShouldLoadIframe] = useState(false);
 
-  /** * The resolved URL for the internal terminal iframe.
-   * @type {string}
+  /**
+   * The resolved URL for the internal terminal iframe.
    * @inner
-   * @memberof Computer
    */
   const iframeSrc =
     `${location.state?.iframeUrl}` ||
@@ -144,8 +137,6 @@ function Computer({ onReady }) {
 
   /**
    * Retrieve's the computer model .GLB
-   * @function
-   * @type {useGLTF}
    */
   const { scene, nodes } = useGLTF(
     `${import.meta.env.BASE_URL}Computer/Monitor2.glb`,
@@ -153,9 +144,7 @@ function Computer({ onReady }) {
 
   /**
    * Calculates the geometric center of the screen mesh for precise HTML overlay alignment.
-   * @type {number[]}
    * @inner
-   * @memberof Computer
    */
   const centerOffset = useMemo(() => {
     if (!nodes.Screen) return [0, 0, 0];
@@ -171,9 +160,7 @@ function Computer({ onReady }) {
 
   /**
    * Triggers the mechanical button click sound effect.
-   * @function
    * @inner
-   * @memberof Computer
    */
   const playButton = () => {
     buttonSound.currentTime = 0;
@@ -343,7 +330,7 @@ useGLTF.preload(`${import.meta.env.BASE_URL}Computer/Monitor2.glb`);
  * @component
  * @category Scenes
  * @description Orchestrates the 3D Canvas, environment lighting, and post-processing effects.
- * @returns {JSX.Element} The full-screen 3D computer portfolio.
+ * @returns The full-screen 3D computer portfolio.
  */
 export default function Portfolio() {
   const [isReady, setIsReady] = useState(false);

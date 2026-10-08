@@ -9517,7 +9517,7 @@ async function convertValueToCoords(state, options) {
   const crossAxisMulti = rtl && isVertical ? -1 : 1;
   const rawValue = floating_ui_utils_evaluate(options, state);
 
-  // eslint-disable-next-line prefer-const
+   
   let {
     mainAxis,
     crossAxis,
@@ -13738,7 +13738,7 @@ var incorrectImportAlarm = function incorrectImportAlarm(element, index, childre
   }
 };
 
-/* eslint-disable no-fallthrough */
+ 
 
 function emotion_cache_browser_esm_prefix(value, length) {
   switch (hash(value, length)) {
@@ -32019,7 +32019,7 @@ function Dashicon({
   const iconClass = ["dashicon", "dashicons", "dashicons-" + icon, className].filter(Boolean).join(" ");
   const sizeStyles = (
     // using `!=` to catch both 20 and "20"
-    // eslint-disable-next-line eqeqeq
+     
     20 != size ? {
       fontSize: `${size}px`,
       width: `${size}px`,
@@ -44303,7 +44303,7 @@ function useCompositeState(legacyStateOptions = {}) {
     loop: focusLoop = false,
     wrap: focusWrap = false,
     shift: focusShift = false,
-    // eslint-disable-next-line camelcase
+     
     unstable_virtual: virtualFocus
   } = legacyStateOptions;
   return {
@@ -46835,7 +46835,7 @@ const formatRelative = (token, _date, _baseDate, _options) =>
   formatRelativeLocale[token];
 
 ;// ./node_modules/date-fns/locale/_lib/buildLocalizeFn.mjs
-/* eslint-disable no-unused-vars */
+ 
 
 /**
  * The localize function argument callback which allows to convert raw value to

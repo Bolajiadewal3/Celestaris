@@ -481,7 +481,7 @@
 
 			// Add new posts to the postflair object
 			if ( 'object' === typeof response.postflair && 'object' === typeof WPCOM_sharing_counts ) {
-				WPCOM_sharing_counts = self.extend( WPCOM_sharing_counts, response.postflair ); // eslint-disable-line no-global-assign
+				WPCOM_sharing_counts = self.extend( WPCOM_sharing_counts, response.postflair );  
 			}
 
 			// Render the results
@@ -748,7 +748,7 @@
 			maxFactor = 0;
 
 		// xor - check if the state has changed
-		// eslint-disable-next-line no-bitwise
+		 
 		if ( previousFullScrenState ^ currentFullScreenState ) {
 			// If we just switched to/from fullscreen,
 			// don't do the div clearing/caching or the

@@ -51,7 +51,7 @@ window.jetpackModules.models = ( function ( window, $, Backbone ) {
 				const cmpret = 'reverse' === m_sort.data( 'sort-order' ) ? -1 : 1;
 
 				items.sort( ( a, b ) =>
-					// eslint-disable-next-line no-nested-ternary
+					 
 					a[ key ] > b[ key ] ? cmpret : a[ key ] < b[ key ] ? -cmpret : 0
 				);
 			}

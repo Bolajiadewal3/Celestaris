@@ -18,7 +18,7 @@ import { store as globalStylesStore } from './src/store';
 import './editor.scss';
 
 // Global data passed from PHP.
-const { PLUGIN_NAME } = JETPACK_GLOBAL_STYLES_EDITOR_CONSTANTS; // eslint-disable-line no-undef
+const { PLUGIN_NAME } = JETPACK_GLOBAL_STYLES_EDITOR_CONSTANTS;  
 
 registerDOMUpdater( [ FONT_BASE, FONT_HEADINGS ], storeSelect( globalStylesStore ).getOption );
 

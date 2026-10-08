@@ -24,26 +24,21 @@ import {
  * @category 3D Objects
  * @description
  * Creates a tablet that then displays the static documentation site
- * @returns {JSX.Element}
+ * @returns {JSX.Element} The tablet mesh with embedded documentation.
  */
 function Tablet() {
-  /** * Text label currently displayed on the hardware button tooltip.
-   * @type {string|null}
+  /**
+   * Text label currently displayed on the hardware button tooltip.
    * @inner
-   * @memberof Tablet
    */
   const [hoveredText, setHoveredText] = useState(null);
   /**
    * Allows for site navigation
-   * @function
-   * @type {useNavigate}
    */
   const navigate = useNavigate();
 
   /**
    * Navigates back to home when pressed
-   * @function
-   * @type {function}
    */
   const handleHomeClick = () => {
     navigate(`/`);
@@ -98,6 +93,9 @@ function Tablet() {
   );
 }
 
+/**
+ *
+ */
 function CameraRig() {
   const { camera } = useThree();
   const [active, setActive] = useState(true);
@@ -134,10 +132,9 @@ function CameraRig() {
 
 /**
  * Main documentation compenent rendering the tablet with inlay documentation
- *
  * @default
  * @component
- * @returns {JSX.Element}
+ * @returns {JSX.Element} The main documentation scene with the tablet and camera rig.
  */
 export default function Documentation() {
   return (

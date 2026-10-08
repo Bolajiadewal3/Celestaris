@@ -426,7 +426,7 @@
     return refObject;
   }
 
-  var isArrayImpl = Array.isArray; // eslint-disable-next-line no-redeclare
+  var isArrayImpl = Array.isArray;  
 
   function isArray(a) {
     return isArrayImpl(a);
@@ -592,7 +592,7 @@
             }
           }
 
-        // eslint-disable-next-line no-fallthrough
+         
       }
     }
 
@@ -2505,7 +2505,7 @@
   function markTaskErrored(task, ms) {
   }
 
-  /* eslint-disable no-var */
+   
   var getCurrentTime;
   var hasPerformanceNow = typeof performance === 'object' && typeof performance.now === 'function';
 
@@ -3168,7 +3168,7 @@
 
         {
           if (!didWarnNoAwaitAct && typeof Promise !== 'undefined') {
-            // eslint-disable-next-line no-undef
+             
             Promise.resolve().then(function () {}).then(function () {
               if (!wasAwaited) {
                 didWarnNoAwaitAct = true;

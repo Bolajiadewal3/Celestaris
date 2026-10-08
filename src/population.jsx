@@ -14,7 +14,6 @@ import { useMemo } from "react";
 
 /**
  * Fetches the continents geography JSON
- * @type {Object}
  */
 const continentsGeoJson = await fetch(
   `${import.meta.env.BASE_URL}Population/continentsSmall.geo.json`,
@@ -22,7 +21,6 @@ const continentsGeoJson = await fetch(
 
 /**
  * Stores the colours for countries
- * @type {string[]}
  */
 const countryPalette = [
   "#FF595E",
@@ -42,19 +40,17 @@ const countryPalette = [
 
 /**
  * GlobeModel manages the complex OBJ/MTL loading and asset disposal.
- * @function GlobeModel
  * @component
- * @param {Object} props
- * @param {Object} props.continents
- * @param {function(Object): void} props.setHoverData
- * @param {String} props.colorMode - 'None' | 'Country' | 'Continent'
+ * @param props
+ * @param props.continents
+ * @param props.setHoverData
+ * @param props.colorMode - 'None' | 'Country' | 'Continent'
  * @category 3D Assets
- * @returns {JSX.Element}
+ * @returns {JSX.Element} The 3D globe model with interactive features.
  */
 function GlobeModel({ continents, setHoverData, colorMode }) {
   /**
    * Stores the colours for continents
-   * @type {Object<string, string>}
    */
   const continentColors = useMemo(
     () => ({
@@ -71,7 +67,6 @@ function GlobeModel({ continents, setHoverData, colorMode }) {
 
   /**
    * Stores the colours for continents
-   * @type {Object<string, number>}
    */
   const continentPopulation = useMemo(
     () => ({
@@ -86,22 +81,19 @@ function GlobeModel({ continents, setHoverData, colorMode }) {
   );
   /**
    * Loads the base globe texture image.
-   * @type {Object}
-   * @property {Object} image - The image source object.
-   * @property {string} image.src - The resolved URL path to the globe texture.
+   * image - The image source object.
+   * image.src - The resolved URL path to the globe texture.
    */
   const globeTexture = useTexture(
     "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg",
   );
   /**
-   * @typedef {Object} ProcessedContinent
-   * @property {string} continent - The name of the continent.
-   * @property {number} population - The total population from the mapping.
-   * @property {number} colorIndex - The map color identifier.
+   * continent - The name of the continent.
+   * population - The total population from the mapping.
+   * colorIndex - The map color identifier.
    */
   /**
    * The processed GeoJSON features ready for 3D rendering.
-   * @type {ProcessedContinent[]}
    * @inner
    */
   const processedData = useMemo(() => {
@@ -119,12 +111,11 @@ function GlobeModel({ continents, setHoverData, colorMode }) {
 
   /**
    * Determines the hex or rgba color for a country based on the current colorMode.
-   * @function
-   * @param {Object} d - The processed country/continent data object.
-   * @param {number} d.colorIndex - Index used for the country palette.
-   * @param {string} d.continent - Continent name used for the continent palette.
+   * @param d - The processed country/continent data object.
+   * @param d.colorIndex - Index used for the country palette.
+   * @param d.continent - Continent name used for the continent palette.
    * @inner
-   * @returns {string} A CSS-compatible color string (hex, rgb, or rgba).
+   * @returns A CSS-compatible color string (hex, rgb, or rgba).
    */
   const getPolygonColor = (d) => {
     if (colorMode === "none") return "rgba(106, 13, 173, 0.1)"; // Ghostly purple
@@ -176,23 +167,22 @@ function GlobeModel({ continents, setHoverData, colorMode }) {
 }
 
 /**
- * @typedef {Object} TooltipData
- * @property {string} countryName - The name of the hovered country.
- * @property {number} countryPopulation - The population count for the country.
- * @property {number|string} countryPopulationYear - The census or estimate year for the country data.
- * @property {string} continentName - The name of the continent.
- * @property {number} continentPopulation - The total population count for the continent.
+ * countryName - The name of the hovered country.
+ * countryPopulation - The population count for the country.
+ * countryPopulationYear - The census or estimate year for the country data.
+ * continentName - The name of the continent.
+ * continentPopulation - The total population count for the continent.
  */
 
 /**
  * A fixed-position UI overlay that displays demographic statistics.
- * * Calculated values include the percentage share of the continent's
+ * Calculated values include the percentage share of the continent's
  * total population held by the specific country.
- * * @component
+ * @component
  * @category UI Components
- * @param {Object} props - Component properties.
- * @param {TooltipData} props.data - The data object containing country and continent metrics.
- * @returns {JSX.Element|null} A styled HTML div overlay or null if no data is present.
+ * @param props - Component properties.
+ * @param props.data - The data object containing country and continent metrics.
+ * @returns A styled HTML div overlay or null if no data is present.
  */
 const GlobeTooltip = ({ data }) => {
   if (!data) return null;
@@ -233,12 +223,12 @@ const GlobeTooltip = ({ data }) => {
 
 /**
  * A fixed UI panel providing buttons to toggle between globe visualization modes.
- * * @component
+ * @component
  * @category UI Components
- * @param {Object} props - Component properties.
- * @param {'none' | 'continent' | 'country'} props.currentMode - The currently active visualization strategy.
- * @param {function} props.setMode - State setter function to update the active mode.
- * @returns {JSX.Element} A styled overlay with mode-switching buttons.
+ * @param props - Component properties.
+ * @param props.currentMode - The currently active visualization strategy.
+ * @param props.setMode - State setter function to update the active mode.
+ * @returns A styled overlay with mode-switching buttons.
  */
 const ColorControls = ({ currentMode, setMode }) => {
   const modes = [
@@ -291,11 +281,11 @@ const ColorControls = ({ currentMode, setMode }) => {
 
 /**
  * The primary application component for the Population Globe visualization.
- * * Orchestrates the 3D R3F Canvas, environmental lighting, and the integration
+ * Orchestrates the 3D R3F Canvas, environmental lighting, and the integration
  * between GeoJSON data and interactive UI overlays like tooltips and controls.
- * * @component
+ * @component
  * @category Main Application
- * @returns {JSX.Element} The full-screen interactive globe application.
+ * @returns The full-screen interactive globe application.
  */
 export default function Population() {
   // UI states

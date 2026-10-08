@@ -1,5 +1,4 @@
 /**
- * @module Components
  * @category Utility
  * @description Various text rendering functions
  */
@@ -7,10 +6,14 @@ import { Text, Edges } from "@react-three/drei";
 import { useState } from "react";
 import { useSpring } from "@react-spring/web";
 import { a } from "@react-spring/three";
-
+import { useAchievementStore } from "../Store/useAchievementStore";
 /**
  * Creates a white bordered banner of glowing gold text; that turns red on hover
- * @function
+ * @param root0
+ * @param root0.text
+ * @param root0.position
+ * @param root0.rotation
+ * @param root0.onClick
  * @category Text
  */
 function GlowingTextBanner({
@@ -21,7 +24,6 @@ function GlowingTextBanner({
 }) {
   /**
    * State to track whether the text is being actively hovered over
-   * @type {boolean}
    */
   const [hovered, setHovered] = useState(false);
 
@@ -60,7 +62,10 @@ function GlowingTextBanner({
 
 /**
  * Creates a white bordered banner of glowing white text; to denote overarching groups
- * @function
+ * @param root0
+ * @param root0.text
+ * @param root0.position
+ * @param root0.rotation
  * @category Text
  */
 function LargeGroupText({
@@ -100,10 +105,20 @@ function LargeGroupText({
 
 /**
  * Creates a white bordered banner of white text, with a grey background and glowing orange box to open it; that can be placed on scene objects and tracks if its being viewed
- * @function
+ * @param root0
+ * @param root0.id
+ * @param root0.title
+ * @param root0.text
+ * @param root0.position
+ * @param root0.rotation
+ * @param root0.width
+ * @param root0.onClick
+ * @param root0.isOpen
+ * @param root0.onOpen
  * @category Text
  */
 function SmallTextBanner({
+  id,
   title = "SMALL TEXT",
   text = "text",
   position = [0, 10, 0],
@@ -120,15 +135,32 @@ function SmallTextBanner({
   //console.log(isOpen);
   //console.log(onOpen);
 
+  const discoverNode = useAchievementStore((state) => state.discoverNode);
+
   /**
    * State to track whether the text is being viewed currently
-   * @type {boolean}
    */
   const [open, setOpen] = useState(false);
 
   /**
+   *  Handles the click event on the glowing box, registering the banner as discovered and triggering any additional actions passed via props
+   * @param e
+   */
+  const handleClick = (e) => {
+    e.stopPropagation(); // Prevent the click event from piercing through to geometry behind the banner
+
+    // Register the banner as discovered
+    discoverNode(id);
+
+    // Fire your existing camera animation and overlay logic
+    if (onClick) onClick();
+    if (onOpen) onOpen();
+    if (setOpen) setOpen();
+
+  };
+
+  /**
    * Animation effect to have the text box expand open and close shut on enter and exit, respectively
-   * @type {useSpring}
    */
   const { scale, box } = useSpring({
     scale: isOpen ? 1 : 0,
@@ -143,11 +175,8 @@ function SmallTextBanner({
       <a.mesh
         scale={box}
         position={[0, 10, -3]}
-        onClick={() => {
-          onClick();
-          onOpen();
-          setOpen(true);
-          //console.log(open);
+        onClick={(e) => {
+          handleClick(e);
         }}
       >
         <boxGeometry args={[3, 3, 3]} />

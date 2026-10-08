@@ -173,7 +173,7 @@ const PaypalExpressCheckout = {
 					};
 
 					return new paypal.Promise( function ( resolve, reject ) {
-						// eslint-disable-next-line no-undef
+						 
 						jQuery
 							.post( PaypalExpressCheckout.getCreatePaymentEndpoint( blogId ), payload )
 							.done( function ( paymentResponse ) {
@@ -209,7 +209,7 @@ const PaypalExpressCheckout = {
 						env: env,
 					};
 					return new paypal.Promise( function ( resolve, reject ) {
-						// eslint-disable-next-line no-undef
+						 
 						jQuery
 							.post(
 								PaypalExpressCheckout.getExecutePaymentEndpoint( blogId, onAuthData.paymentID ),

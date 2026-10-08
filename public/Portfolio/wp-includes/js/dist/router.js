@@ -781,7 +781,7 @@ var readOnly =  false ? 0 : function (obj) {
 
 function warning(cond, message) {
   if (!cond) {
-    // eslint-disable-next-line no-console
+     
     if (typeof console !== 'undefined') console.warn(message);
 
     try {
@@ -790,7 +790,7 @@ function warning(cond, message) {
       // This error is thrown as a convenience so you can more easily
       // find the source for a warning that appears in the console by
       // enabling "pause on exceptions" in your JavaScript debugger.
-      throw new Error(message); // eslint-disable-next-line no-empty
+      throw new Error(message);  
     } catch (e) {}
   }
 }

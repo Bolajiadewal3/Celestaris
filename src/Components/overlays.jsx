@@ -1,8 +1,9 @@
 /**
- * @module Components
  * @category Utility
  * @description Various overlay rendering functions
  */
+
+
 import { useState, useRef, useEffect } from "react";
 import { useTrail, animated, useSpring } from "@react-spring/web";
 import { useNavigate } from "react-router-dom";
@@ -11,14 +12,15 @@ import { playSFX } from "../audioManager.js";
 
 import ReactMarkdown from "react-markdown";
 /**
- * Allows for a loading screen at the start of a page that waits for the assets to load
- * @function
+ * Shows asset-loading progress while a scene's suspended assets load.
  * @category Loading
+ * @returns The loading screen and progress indicator.
  */
 function Loader() {
+
+
   /**
    * Variable that tracks the current progress on asset loading on the page
-   * @type {useProgress}
    */
   const { progress } = useProgress();
 
@@ -76,7 +78,9 @@ function Loader() {
 
 /**
  * Allows for a custom start screen with a button to start the experience; assets load on click and the page is not revealed until assets fully loaded
- * @function
+ * @param root0 
+ * @param root0.onStart
+ * @param root0.visible
  * @category Loading
  * @deprecated use Loader() instead
  */
@@ -136,16 +140,26 @@ function StartScreen({ onStart, visible }) {
   );
 }
 
-/**
- * Displays a html/css overlay over the 3D scene; that is populated with JSON data as text; includes a return to scene and internal navigation buttons
- * @function
- * @category Overlay
- */
+
+
 
 /**
- * Displays a html/css overlay over the 3D scene; that is populated with JSON data as text; includes a return to scene and internal navigation buttons
- * @function
+ * An entry displayed in the scene's project and content overlay.
+ * title - The entry title.
+ * [abstract] - Short description shown in the list and as a detail fallback.
+ * [siteLink] - External destination opened from the list.
+ * [markdown] - Markdown file or URL loaded for the detail view.
+ * [iframeUrl] - Embedded page shown in the detail view.
+ * [WIP] - Whether the entry is marked as work in progress.
+ */
+/**
+ * Displays a selectable list of content and renders the selected Markdown or embedded page.
  * @category Overlay
+ * @param props - Overlay state and content.
+ * @param props.isActive - Whether the overlay is visible and interactive.
+ * @param props.onClose - Called when the visitor exits the overlay.
+ * @param [props.items] - Entries available in the list view.
+ * @returns The animated list or selected content view.
  */
 function Overlay({ isActive, onClose, items = [] }) {
   const navigate = useNavigate();
@@ -182,12 +196,19 @@ function Overlay({ isActive, onClose, items = [] }) {
     config: { mass: 1, tension: 150, friction: 100, delay: 100 },
   });
 
+  /**
+   * Opens the markdown content for the selected item.
+   * @param item
+   */
   const handleOpenMarkdown = (item) => {
     playSFX("overlay_wipe", 0.3);
 
-    wipeApi.start({
+    const _anim = wipeApi.start({
       from: { transform: "translateX(100%)" },
       to: { transform: "translateX(0%)" },
+      /**
+       * Called when the animation completes.
+       */
       onRest: async () => {
         setSelectedItem(item);
         setViewMode("detail");
@@ -219,33 +240,48 @@ function Overlay({ isActive, onClose, items = [] }) {
 
         setIsLoadingContent(false);
 
-        wipeApi.start({
+        const _anim = wipeApi.start({
           to: { transform: "translateX(-100%)" },
+          /**
+           *
+           */
           onRest: () => wipeApi.set({ transform: "translateX(100%)" }),
         });
       },
     });
   };
 
+  /**
+   * Handles the back to list action.
+   */
   const handleBackToList = () => {
     playSFX("overlay_wipe", 0.3);
 
-    wipeApi.start({
+    const _anim = wipeApi.start({
       from: { transform: "translateX(100%)" },
       to: { transform: "translateX(0%)" },
+      /**
+       *
+       */
       onRest: () => {
         setViewMode("list");
         setSelectedItem(null);
         setMarkdownContent("");
 
-        wipeApi.start({
+        const _anim2 = wipeApi.start({
           to: { transform: "translateX(-100%)" },
+          /**
+           *
+           */
           onRest: () => wipeApi.set({ transform: "translateX(100%)" }),
         });
       },
     });
   };
 
+  /**
+   * Closes all overlays and resets the view.
+   */
   const handleCloseAll = () => {
     setViewMode("list");
     setSelectedItem(null);
@@ -253,8 +289,12 @@ function Overlay({ isActive, onClose, items = [] }) {
     onClose();
   };
 
-  // Compact, highly responsive typography mapping for markdown
   const markdownComponents = {
+    /**
+     * Renders an h1 heading.
+     * @param root0
+     * @param root0.children
+     */
     h1: ({ children }) => (
       <h1
         style={{
@@ -267,6 +307,11 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       </h1>
     ),
+    /**
+     * Renders an h2 heading.
+     * @param root0
+     * @param root0.children
+     */
     h2: ({ children }) => (
       <h2
         style={{
@@ -279,6 +324,11 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       </h2>
     ),
+    /**
+     * Renders an h3 heading.
+     * @param root0
+     * @param root0.children
+     */
     h3: ({ children }) => (
       <h3
         style={{
@@ -291,6 +341,11 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       </h3>
     ),
+    /**
+     * Renders a paragraph.
+     * @param root0
+     * @param root0.children
+     */
     p: ({ children }) => (
       <p
         style={{
@@ -303,6 +358,11 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       </p>
     ),
+    /**
+     * Renders a list item.
+     * @param root0
+     * @param root0.children
+     */
     li: ({ children }) => (
       <li
         style={{
@@ -315,6 +375,11 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       </li>
     ),
+    /**
+     * Renders inline code.
+     * @param root0
+     * @param root0.children
+     */
     code: ({ children }) => (
       <code
         style={{
@@ -543,9 +608,11 @@ function Overlay({ isActive, onClose, items = [] }) {
 }
 
 /**
- * Displays an audio toggle
- * @function
+ * Toggles looping ambient audio for the current scene.
  * @category Button
+ * @param props
+ * @param props.url - Audio file URL to play.
+ * @returns The play or mute button.
  */
 function AudioButton({ url }) {
   const [playing, setPlaying] = useState(false);
@@ -562,6 +629,9 @@ function AudioButton({ url }) {
     };
   }, [url]);
 
+  /**
+   *
+   */
   const toggleAudio = () => {
     if (!audioRef.current) {
       audioRef.current = new Audio(url);
@@ -594,11 +664,17 @@ function AudioButton({ url }) {
 }
 
 /**
- * Displays a headings toggle
- * @function
+ * Toggles visibility of the scene's large headings.
  * @category Button
+ * @param props
+ * @param props.showHeadings - Whether headings are currently visible.
+ * @param props.setShowHeadings - React state setter for heading visibility.
+ * @returns The show/hide headings button.
  */
 function HeadingsButton({ showHeadings, setShowHeadings }) {
+  /**
+   *
+   */
   const toggleHeadings = () => {
     // This toggles the boolean to its opposite value
     setShowHeadings((prev) => !prev);
@@ -618,12 +694,6 @@ function HeadingsButton({ showHeadings, setShowHeadings }) {
     </button>
   );
 }
-
-/**
- * Displays a documentation navigation button
- * @function
- * @category Button
- */
 
 /*
 function DocumentationButton() {
@@ -646,6 +716,13 @@ function DocumentationButton() {
   );
 }*/
 
+/**
+ * Opens the documentation content from the current scene.
+ * @category Button
+ * @param props
+ * @param props.onClick - Callback that opens the documentation content.
+ * @returns The documentation button.
+ */
 function DocumentationButton({ onClick }) {
   return (
     <button
@@ -663,9 +740,9 @@ function DocumentationButton({ onClick }) {
 }
 
 /**
- * Displays a resume navigation button
- * @function
+ * Opens the resume PDF in a separate browser tab.
  * @category Button
+ * @returns The resume link.
  */
 function ResumeButton() {
   return (

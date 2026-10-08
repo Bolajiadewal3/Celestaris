@@ -957,7 +957,7 @@ showdown.helper.encodeEmailAddress = function (mail) {
 showdown.helper.padEnd = function padEnd (str, targetLength, padString) {
   'use strict';
   /*jshint bitwise: false*/
-  // eslint-disable-next-line space-infix-ops
+   
   targetLength = targetLength>>0; //floor if number or convert non-number to 0;
   /*jshint bitwise: true*/
   padString = String(padString || ' ');
@@ -9842,9 +9842,9 @@ function createLogger() {
     return log;
   }
   return {
-    // eslint-disable-next-line no-console
+     
     error: createLogHandler(console.error),
-    // eslint-disable-next-line no-console
+     
     warning: createLogHandler(console.warn),
     getItems() {
       return [];

@@ -236,7 +236,7 @@ var makeBuiltIn = module.exports = function (value, name, options) {
 };
 
 // add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
-// eslint-disable-next-line no-extend-native -- required
+ 
 Function.prototype.toString = makeBuiltIn(function toString() {
   return isCallable(this) && getInternalState(this).source || inspectSource(this);
 }, 'toString');
@@ -272,7 +272,7 @@ var fails = __webpack_require__(3);
 module.exports = !fails(function () {
   // eslint-disable-next-line es/no-function-prototype-bind -- safe
   var test = (function () { /* empty */ }).bind();
-  // eslint-disable-next-line no-prototype-builtins -- safe
+   
   return typeof test != 'function' || test.hasOwnProperty('prototype');
 });
 
@@ -456,11 +456,11 @@ module.exports =
   // eslint-disable-next-line es/no-global-this -- safe
   check(typeof globalThis == 'object' && globalThis) ||
   check(typeof window == 'object' && window) ||
-  // eslint-disable-next-line no-restricted-globals -- safe
+   
   check(typeof self == 'object' && self) ||
   check(typeof global == 'object' && global) ||
   check(typeof this == 'object' && this) ||
-  // eslint-disable-next-line no-new-func -- fallback
+   
   (function () { return this; })() || Function('return this')();
 
 
@@ -519,11 +519,11 @@ var getterFor = function (TYPE) {
 
 if (NATIVE_WEAK_MAP || shared.state) {
   var store = shared.state || (shared.state = new WeakMap());
-  /* eslint-disable no-self-assign -- prototype methods protection */
+   
   store.get = store.get;
   store.has = store.has;
   store.set = store.set;
-  /* eslint-enable no-self-assign -- prototype methods protection */
+   
   set = function (it, metadata) {
     if (store.has(it)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
     metadata.facade = it;
@@ -1369,7 +1369,7 @@ var split = uncurryThis(''.split);
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
 module.exports = fails(function () {
   // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
-  // eslint-disable-next-line no-prototype-builtins -- safe
+   
   return !$Object('z').propertyIsEnumerable(0);
 }) ? function (it) {
   return classof(it) === 'String' ? split(it, '') : $Object(it);
@@ -1523,10 +1523,10 @@ var createMethod = function (IS_INCLUDES) {
     var index = toAbsoluteIndex(fromIndex, length);
     var value;
     // Array#includes uses SameValueZero equality algorithm
-    // eslint-disable-next-line no-self-compare -- NaN check
+     
     if (IS_INCLUDES && el !== el) while (length > index) {
       value = O[index++];
-      // eslint-disable-next-line no-self-compare -- NaN check
+       
       if (value !== value) return true;
     // Array#indexOf ignores holes, Array#includes - not
     } else for (;length > index; index++) {
@@ -1577,7 +1577,7 @@ var trunc = __webpack_require__(67);
 // https://tc39.es/ecma262/#sec-tointegerorinfinity
 module.exports = function (argument) {
   var number = +argument;
-  // eslint-disable-next-line no-self-compare -- NaN check
+   
   return number !== number || number === 0 ? 0 : trunc(number);
 };
 
@@ -1840,7 +1840,7 @@ module.exports = function (name) {
       return globalThis.process.getBuiltinModule(name);
     } catch (error) { /* empty */ }
     try {
-      // eslint-disable-next-line no-new-func -- safe
+       
       return Function('return require("' + name + '")')();
     } catch (error) { /* empty */ }
   }
@@ -2548,7 +2548,7 @@ module.exports = function ($this, dummy, Wrapper) {
 
 "use strict";
 
-/* eslint-disable no-proto -- safe */
+ 
 var uncurryThisAccessor = __webpack_require__(52);
 var isObject = __webpack_require__(21);
 var requireObjectCoercible = __webpack_require__(11);

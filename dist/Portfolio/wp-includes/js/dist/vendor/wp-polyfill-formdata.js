@@ -1,7 +1,7 @@
 /* formdata-polyfill. MIT License. Jimmy Wärting <https://jimmy.warting.se/opensource> */
 
 /* global FormData self Blob File */
-/* eslint-disable no-inner-declarations */
+ 
 
 if (typeof Blob !== 'undefined' && (typeof FormData === 'undefined' || !FormData.prototype.keys)) {
   const global = typeof globalThis === 'object'
@@ -39,7 +39,7 @@ if (typeof Blob !== 'undefined' && (typeof FormData === 'undefined' || !FormData
 
   // Fix so you can construct your own File
   try {
-    new File([], '') // eslint-disable-line
+    new File([], '')  
   } catch (a) {
     global.File = function File (b, d, c) {
       const blob = new Blob(b, c || {})

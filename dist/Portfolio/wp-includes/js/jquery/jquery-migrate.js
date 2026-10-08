@@ -14,7 +14,7 @@
 	} else if ( typeof module === "object" && module.exports ) {
 
 		// Node/CommonJS
-		// eslint-disable-next-line no-undef
+		 
 		module.exports = factory( require( "jquery" ), window );
 	} else {
 

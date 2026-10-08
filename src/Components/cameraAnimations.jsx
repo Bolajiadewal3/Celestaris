@@ -10,7 +10,8 @@ import * as THREE from "three";
 
 /**
  * Uses a linear interpolation to zoom the camera in on launch
- * @function
+ * @param root0
+ * @param root0.onComplete
  * @category Camera
  */
 function InitialCameraAnimation({ onComplete }) {
@@ -36,7 +37,11 @@ function InitialCameraAnimation({ onComplete }) {
 
 /**
  * Uses an animation to point the camera at a small text box
- * @function
+ * @param root0
+ * @param root0.anchor
+ * @param root0.lookat
+ * @param root0.onComplete
+ * @param root0.controlsRef
  * @category Camera
  */
 function SmallTextCameraAnimation({ anchor, lookat, onComplete, controlsRef }) {

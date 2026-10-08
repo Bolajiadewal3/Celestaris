@@ -432,8 +432,8 @@ function sprintf( string, args ) {
 
 		if ( name !== undefined ) {
 			// If it's a named argument, use name.
-			if ( args[ 0 ] && typeof args[ 0 ] === 'object' &&
-					args[ 0 ].hasOwnProperty( name ) ) {
+			if ( args[ 0 ] && typeof args[ 0 ] === 'object'
+					&& args[ 0 ].hasOwnProperty( name ) ) {
 				value = args[ 0 ][ name ];
 			}
 		} else {
@@ -856,8 +856,8 @@ module.exports = function(val, options) {
     return options.long ? fmtLong(val) : fmtShort(val);
   }
   throw new Error(
-    'val is not a non-empty string or a valid number. val=' +
-      JSON.stringify(val)
+    'val is not a non-empty string or a valid number. val='
+      + JSON.stringify(val)
   );
 };
 
@@ -1043,7 +1043,7 @@ module.exports = function defineDataProperty(
 		});
 	} else if (loose || (!nonEnumerable && !nonWritable && !nonConfigurable)) {
 		// must fall back to [[Set]], and was not explicitly asked to make non-enumerable, non-writable, or non-configurable
-		obj[property] = value; // eslint-disable-line no-param-reassign
+		obj[property] = value;  
 	} else {
 		throw new $SyntaxError('This environment does not support defining a property as non-configurable, non-writable, or non-enumerable.');
 	}
@@ -1254,8 +1254,8 @@ Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
 
 EventEmitter.init = function() {
 
-  if (this._events === undefined ||
-      this._events === Object.getPrototypeOf(this)._events) {
+  if (this._events === undefined
+      || this._events === Object.getPrototypeOf(this)._events) {
     this._events = Object.create(null);
     this._eventsCount = 0;
   }
@@ -1359,8 +1359,8 @@ function _addListener(target, type, listener, prepend) {
   } else {
     if (typeof existing === 'function') {
       // Adding the second element, need to change to array.
-      existing = events[type] =
-        prepend ? [listener, existing] : [existing, listener];
+      existing = events[type]
+        = prepend ? [listener, existing] : [existing, listener];
       // If we've already got an array, just append.
     } else if (prepend) {
       existing.unshift(listener);
@@ -1373,11 +1373,11 @@ function _addListener(target, type, listener, prepend) {
     if (m > 0 && existing.length > m && !existing.warned) {
       existing.warned = true;
       // No error code for this since it is a Warning
-      // eslint-disable-next-line no-restricted-syntax
-      var w = new Error('Possible EventEmitter memory leak detected. ' +
-                          existing.length + ' ' + String(type) + ' listeners ' +
-                          'added. Use emitter.setMaxListeners() to ' +
-                          'increase limit');
+       
+      var w = new Error('Possible EventEmitter memory leak detected. '
+                          + existing.length + ' ' + String(type) + ' listeners '
+                          + 'added. Use emitter.setMaxListeners() to '
+                          + 'increase limit');
       w.name = 'MaxListenersExceededWarning';
       w.emitter = target;
       w.type = type;
@@ -1395,8 +1395,8 @@ EventEmitter.prototype.addListener = function addListener(type, listener) {
 
 EventEmitter.prototype.on = EventEmitter.prototype.addListener;
 
-EventEmitter.prototype.prependListener =
-    function prependListener(type, listener) {
+EventEmitter.prototype.prependListener
+    = function prependListener(type, listener) {
       return _addListener(this, type, listener, true);
     };
 
@@ -1424,16 +1424,16 @@ EventEmitter.prototype.once = function once(type, listener) {
   return this;
 };
 
-EventEmitter.prototype.prependOnceListener =
-    function prependOnceListener(type, listener) {
+EventEmitter.prototype.prependOnceListener
+    = function prependOnceListener(type, listener) {
       checkListener(listener);
       this.prependListener(type, _onceWrap(this, type, listener));
       return this;
     };
 
 // Emits a 'removeListener' event if and only if the listener was removed.
-EventEmitter.prototype.removeListener =
-    function removeListener(type, listener) {
+EventEmitter.prototype.removeListener
+    = function removeListener(type, listener) {
       var list, events, position, i, originalListener;
 
       checkListener(listener);
@@ -1486,8 +1486,8 @@ EventEmitter.prototype.removeListener =
 
 EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
 
-EventEmitter.prototype.removeAllListeners =
-    function removeAllListeners(type) {
+EventEmitter.prototype.removeAllListeners
+    = function removeAllListeners(type) {
       var listeners, events, i;
 
       events = this._events;
@@ -1550,8 +1550,8 @@ function _listeners(target, type, unwrap) {
   if (typeof evlistener === 'function')
     return unwrap ? [evlistener.listener || evlistener] : [evlistener];
 
-  return unwrap ?
-    unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
+  return unwrap
+    ? unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
 }
 
 EventEmitter.prototype.listeners = function listeners(type) {
@@ -1855,7 +1855,7 @@ var $URIError = __webpack_require__(2140);
 
 var $Function = Function;
 
-// eslint-disable-next-line consistent-return
+ 
 var getEvalledConstructor = function (expressionSyntax) {
 	try {
 		return $Function('"use strict"; return (' + expressionSyntax + ').constructor;')();
@@ -1877,7 +1877,7 @@ var throwTypeError = function () {
 var ThrowTypeError = $gOPD
 	? (function () {
 		try {
-			// eslint-disable-next-line no-unused-expressions, no-caller, no-restricted-properties
+			 
 			arguments.callee; // IE 8 does not throw here
 			return throwTypeError;
 		} catch (calleeThrows) {
@@ -1896,7 +1896,7 @@ var hasProto = __webpack_require__(6869)();
 
 var getProto = Object.getPrototypeOf || (
 	hasProto
-		? function (x) { return x.__proto__; } // eslint-disable-line no-proto
+		? function (x) { return x.__proto__; }  
 		: null
 );
 
@@ -1927,7 +1927,7 @@ var INTRINSICS = {
 	'%encodeURI%': encodeURI,
 	'%encodeURIComponent%': encodeURIComponent,
 	'%Error%': $Error,
-	'%eval%': eval, // eslint-disable-line no-eval
+	'%eval%': eval,  
 	'%EvalError%': $EvalError,
 	'%Float32Array%': typeof Float32Array === 'undefined' ? undefined : Float32Array,
 	'%Float64Array%': typeof Float64Array === 'undefined' ? undefined : Float64Array,
@@ -1976,7 +1976,7 @@ var INTRINSICS = {
 
 if (getProto) {
 	try {
-		null.error; // eslint-disable-line no-unused-expressions
+		null.error;  
 	} catch (e) {
 		// https://github.com/tc39/proposal-shadowrealm/pull/384#issuecomment-1364264229
 		var errorProto = getProto(getProto(e));
@@ -2331,7 +2331,7 @@ module.exports = function hasSymbols() {
 
 	var symVal = 42;
 	obj[sym] = symVal;
-	for (sym in obj) { return false; } // eslint-disable-line no-restricted-syntax, no-unreachable-loop
+	for (sym in obj) { return false; }  
 	if (typeof Object.keys === 'function' && Object.keys(obj).length !== 0) { return false; }
 
 	if (typeof Object.getOwnPropertyNames === 'function' && Object.getOwnPropertyNames(obj).length !== 0) { return false; }
@@ -2668,10 +2668,10 @@ function toHex(msg) {
 exports.toHex = toHex;
 
 function htonl(w) {
-  var res = (w >>> 24) |
-            ((w >>> 8) & 0xff00) |
-            ((w << 8) & 0xff0000) |
-            ((w & 0xff) << 24);
+  var res = (w >>> 24)
+            | ((w >>> 8) & 0xff00)
+            | ((w << 8) & 0xff0000)
+            | ((w & 0xff) << 24);
   return res >>> 0;
 }
 exports.htonl = htonl;
@@ -3138,9 +3138,9 @@ var toStringTag = typeof Symbol === 'function' && Symbol.toStringTag && (typeof 
 var isEnumerable = Object.prototype.propertyIsEnumerable;
 
 var gPO = (typeof Reflect === 'function' ? Reflect.getPrototypeOf : Object.getPrototypeOf) || (
-    [].__proto__ === Array.prototype // eslint-disable-line no-proto
+    [].__proto__ === Array.prototype  
         ? function (O) {
-            return O.__proto__; // eslint-disable-line no-proto
+            return O.__proto__;  
         }
         : null
 );
@@ -3524,7 +3524,7 @@ function inspectString(str, opts) {
         var trailer = '... ' + remaining + ' more character' + (remaining > 1 ? 's' : '');
         return inspectString($slice.call(str, 0, opts.maxStringLength), opts) + trailer;
     }
-    // eslint-disable-next-line no-control-regex
+     
     var s = $replace.call($replace.call(str, /(['\\])/g, '\\$1'), /[\x00-\x1f]/g, lowbyte);
     return wrapQuotes(s, 'single', opts);
 }
@@ -3603,12 +3603,12 @@ function arrObjKeys(obj, inspect) {
         }
     }
 
-    for (var key in obj) { // eslint-disable-line no-restricted-syntax
-        if (!has(obj, key)) { continue; } // eslint-disable-line no-restricted-syntax, no-continue
-        if (isArr && String(Number(key)) === key && key < obj.length) { continue; } // eslint-disable-line no-restricted-syntax, no-continue
+    for (var key in obj) {  
+        if (!has(obj, key)) { continue; }  
+        if (isArr && String(Number(key)) === key && key < obj.length) { continue; }  
         if (hasShammedSymbols && symMap['$' + key] instanceof Symbol) {
             // this is to prevent shammed Symbols, which are stored as strings, from being included in the string key section
-            continue; // eslint-disable-line no-restricted-syntax, no-continue
+            continue;  
         } else if ($test.call(/[^\w$]/, key)) {
             xs.push(inspect(key, obj) + ': ' + inspect(obj[key], obj));
         } else {
@@ -3910,7 +3910,7 @@ var normalizeParseOptions = function normalizeParseOptions(opts) {
         comma: typeof opts.comma === 'boolean' ? opts.comma : defaults.comma,
         decoder: typeof opts.decoder === 'function' ? opts.decoder : defaults.decoder,
         delimiter: typeof opts.delimiter === 'string' || utils.isRegExp(opts.delimiter) ? opts.delimiter : defaults.delimiter,
-        // eslint-disable-next-line no-implicit-coercion, no-extra-parens
+         
         depth: (typeof opts.depth === 'number' || opts.depth === false) ? +opts.depth : defaults.depth,
         ignoreQueryPrefix: opts.ignoreQueryPrefix === true,
         interpretNumericEntities: typeof opts.interpretNumericEntities === 'boolean' ? opts.interpretNumericEntities : defaults.interpretNumericEntities,
@@ -4615,7 +4615,7 @@ var $mapHas = callBound('Map.prototype.has', true);
 * That node is also moved to the head of the list, so that if it's accessed again we don't need to traverse the whole list. By doing so, all the recently used nodes can be accessed relatively quickly.
 */
 /** @type {import('.').listGetNode} */
-var listGetNode = function (list, key) { // eslint-disable-line consistent-return
+var listGetNode = function (list, key) {  
 	/** @type {typeof list | NonNullable<(typeof list)['next']>} */
 	var prev = list;
 	/** @type {(typeof list)['next']} */
@@ -4623,9 +4623,9 @@ var listGetNode = function (list, key) { // eslint-disable-line consistent-retur
 	for (; (curr = prev.next) !== null; prev = curr) {
 		if (curr.key === key) {
 			prev.next = curr.next;
-			// eslint-disable-next-line no-extra-parens
+			 
 			curr.next = /** @type {NonNullable<typeof list.next>} */ (list.next);
-			list.next = curr; // eslint-disable-line no-param-reassign
+			list.next = curr;  
 			return curr;
 		}
 	}
@@ -4643,7 +4643,7 @@ var listSet = function (objects, key, value) {
 		node.value = value;
 	} else {
 		// Prepend the new node to the beginning of the list
-		objects.next = /** @type {import('.').ListNode<typeof value>} */ ({ // eslint-disable-line no-param-reassign, no-extra-parens
+		objects.next = /** @type {import('.').ListNode<typeof value>} */ ({  
 			key: key,
 			next: objects.next,
 			value: value
@@ -4668,7 +4668,7 @@ module.exports = function getSideChannel() {
 				throw new $TypeError('Side channel does not contain ' + inspect(key));
 			}
 		},
-		get: function (key) { // eslint-disable-line consistent-return
+		get: function (key) {  
 			if ($WeakMap && key && (typeof key === 'object' || typeof key === 'function')) {
 				if ($wm) {
 					return $weakMapGet($wm, key);
@@ -4678,7 +4678,7 @@ module.exports = function getSideChannel() {
 					return $mapGet($m, key);
 				}
 			} else {
-				if ($o) { // eslint-disable-line no-lonely-if
+				if ($o) {  
 					return listGet($o, key);
 				}
 			}
@@ -4693,7 +4693,7 @@ module.exports = function getSideChannel() {
 					return $mapHas($m, key);
 				}
 			} else {
-				if ($o) { // eslint-disable-line no-lonely-if
+				if ($o) {  
 					return listHas($o, key);
 				}
 			}
@@ -4873,22 +4873,22 @@ Tannin.prototype.getPluralForm = function( domain, n ) {
 		config = this.data[ domain ][ '' ];
 
 		pf = (
-			config[ 'Plural-Forms' ] ||
-			config[ 'plural-forms' ] ||
+			config[ 'Plural-Forms' ]
+			|| config[ 'plural-forms' ]
 			// Ignore reason: As known, there's no way to document the empty
 			// string property on a key to guarantee this as metadata.
 			// @ts-ignore
-			config.plural_forms
+			|| config.plural_forms
 		);
 
 		if ( typeof pf !== 'function' ) {
 			plural = getPluralExpression(
-				config[ 'Plural-Forms' ] ||
-				config[ 'plural-forms' ] ||
+				config[ 'Plural-Forms' ]
+				|| config[ 'plural-forms' ]
 				// Ignore reason: As known, there's no way to document the empty
 				// string property on a key to guarantee this as metadata.
 				// @ts-ignore
-				config.plural_forms
+				|| config.plural_forms
 			);
 
 			pf = (0,_tannin_plural_forms__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .A)( plural );
@@ -5073,7 +5073,7 @@ function applyFlags(flagsString, modificationMethod) {
     const enabled = !/^-/.test(flagRaw);
     if (configData.features) {
       configData.features[flag] = enabled;
-      // eslint-disable-next-line no-console
+       
       console.log('%cConfig flag %s via %s: %s', 'font-weight: bold;', enabled ? 'enabled' : 'disabled', modificationMethod, flag);
     }
   });
@@ -5144,7 +5144,7 @@ const config = data => key => {
   // display console error only in a browser
   // (not in tests, for example)
   if (true) {
-    // eslint-disable-next-line no-console
+     
     console.error('%cCore Error: ' + `%cCould not find config value for key %c${key}%c. ` + 'Please make sure that if you need it then it has a default value assigned in ' + '%cconfig/_shared.json' + '%c.', 'color: red; font-size: 120%',
     // error prefix
     'color: black;',
@@ -6439,7 +6439,7 @@ function createActions(clientCreds) {
     });
     const globalStylesUrl = theme?._links?.['wp:user-global-styles']?.[0]?.href;
     if (globalStylesUrl) {
-      // eslint-disable-next-line no-useless-escape
+       
       const match = globalStylesUrl.match(/global-styles\/(?<id>[\/\w-]+)/);
       if (match && match.groups) {
         return match.groups.id;
@@ -7446,11 +7446,11 @@ const isNewSite = state => !!state.newSite.data;
 const getSite = (state, siteId) => {
   return (
     // Try matching numeric site ID
-    state.sites[siteId] ||
+    state.sites[siteId]
     // Then try matching primary domain
-    Object.values(state.sites).find(site => site && new URL(site.URL).host === siteId) ||
+    || Object.values(state.sites).find(site => site && new URL(site.URL).host === siteId)
     // Then try matching second domain
-    Object.values(state.sites).find(site => site?.options?.unmapped_url && new URL(site.options.unmapped_url).host === siteId)
+    || Object.values(state.sites).find(site => site?.options?.unmapped_url && new URL(site.options.unmapped_url).host === siteId)
   );
 };
 const getSiteIdBySlug = (_, slug) => {
@@ -8288,7 +8288,7 @@ function createFormatter() {
   async function geolocateCurrencySymbol() {
     const geoData = await globalThis.fetch?.(geolocationEndpointUrl).then(response => response.json()).catch(error => {
       // Do nothing if the fetch fails.
-      // eslint-disable-next-line no-console
+       
       console.warn('Fetching geolocation for format-currency failed.', error);
     });
     if (!containsGeolocationCountry(geoData)) {
@@ -8464,7 +8464,7 @@ function createFormatter() {
   }
   function getValidCurrency(code) {
     if (!doesCurrencyExist(code)) {
-      // eslint-disable-next-line no-console
+       
       console.warn(`getCurrencyObject was called with a non-existent currency "${code}"; falling back to ${fallbackCurrency}`);
       return fallbackCurrency;
     }
@@ -8580,7 +8580,7 @@ function getCachedFormatter({
     return formatter;
   } catch (error) {
     // If the locale is invalid, creating the NumberFormat will throw.
-    // eslint-disable-next-line no-console
+     
     console.warn(`formatCurrency was called with a non-existent locale "${locale}"; falling back to ${fallbackLocale}`);
     return getCachedFormatter({
       locale: fallbackLocale,
@@ -8629,13 +8629,13 @@ function prepareNumberForFormatting(number,
 // of what precision is requested for display!
 currencyPrecision, options) {
   if (isNaN(number)) {
-    // eslint-disable-next-line no-console
+     
     console.warn('formatCurrency was called with NaN');
     number = 0;
   }
   if (options.isSmallestUnit) {
     if (!Number.isInteger(number)) {
-      // eslint-disable-next-line no-console
+       
       console.warn('formatCurrency was called with isSmallestUnit and a float which will be rounded', number);
       number = Math.round(number);
     }
@@ -9453,7 +9453,7 @@ const postStrings = (() => {
  */
 const supportsFileConstructor = (() => {
   try {
-    // eslint-disable-next-line no-new
+     
     new window.File(['a'], 'test.jpg', {
       type: 'image/jpeg'
     });
@@ -9977,14 +9977,14 @@ function useColors() {
 
   // Is webkit? http://stackoverflow.com/a/16459606/376773
   // document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
-  return typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance ||
+  return typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance
   // Is firebug? http://stackoverflow.com/a/398120/376773
-   true && window.console && (window.console.firebug || window.console.exception && window.console.table) ||
+   || true && window.console && (window.console.firebug || window.console.exception && window.console.table)
   // Is firefox >= v31?
   // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
-  typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31 ||
+  || typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31
   // Double check webkit in userAgent just in case we are in a worker
-  typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
+  || typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
 }
 
 /**
@@ -11287,9 +11287,9 @@ var _assertString = _interopRequireDefault(__webpack_require__(8354));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* eslint-disable no-control-regex */
+ 
 var ascii = /^[\x00-\x7F]+$/;
-/* eslint-enable no-control-regex */
+ 
 
 function isAscii(str) {
   (0, _assertString.default)(str);
@@ -11574,7 +11574,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-/* eslint-disable prefer-rest-params */
+ 
 function isByteLength(str, options) {
   (0, _assertString.default)(str);
   var min;
@@ -12152,9 +12152,9 @@ var default_email_options = {
   host_blacklist: [],
   host_whitelist: []
 };
-/* eslint-disable max-len */
+ 
 
-/* eslint-disable no-control-regex */
+ 
 
 var splitNameAddress = /^([^\x00-\x1F\x7F-\x9F\cX]+)</i;
 var emailUserPart = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~]+$/i;
@@ -12163,9 +12163,9 @@ var quotedEmailUser = /^([\s\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e
 var emailUserUtf8Part = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\u00A1-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+$/i;
 var quotedEmailUserUtf8 = /^([\s\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|(\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*$/i;
 var defaultMaxEmailLength = 254;
-/* eslint-enable max-len */
+ 
 
-/* eslint-enable no-control-regex */
+ 
 
 /**
  * Validate display name according to the RFC2822: https://tools.ietf.org/html/rfc2822#appendix-A.1.2
@@ -13454,12 +13454,12 @@ var _assertString = _interopRequireDefault(__webpack_require__(8354));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* eslint-disable max-len */
+ 
 // from http://goo.gl/0ejHHW
 var iso8601 = /^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-3])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/; // same as above, except with a strict 'T' separator between date and time
 
 var iso8601StrictSeparator = /^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-3])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T]((([01]\d|2[0-3])((:?)[0-5]\d)?|24:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/;
-/* eslint-enable max-len */
+ 
 
 var isValidDate = function isValidDate(str) {
   // str must have passed the ISO8601 check
@@ -13832,7 +13832,7 @@ var validators = {
       var xdata = new Date(yyyy, mm - 1, dd);
 
       if (xdata > new Date()) {
-        return false; // eslint-disable-next-line max-len
+        return false;  
       } else if (xdata.getFullYear() === yyyy && xdata.getMonth() === mm - 1 && xdata.getDate() === dd) {
         return true;
       }
@@ -14227,7 +14227,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-/* eslint-disable prefer-rest-params */
+ 
 function isLength(str, options) {
   (0, _assertString.default)(str);
   var min;
@@ -14813,13 +14813,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // NB :
 //   Subtype length must not exceed 100 characters.
 //   This rule does not comply to the RFC specs (what is the max length ?).
-var mimeTypeSimple = /^(application|audio|font|image|message|model|multipart|text|video)\/[a-zA-Z0-9\.\-\+_]{1,100}$/i; // eslint-disable-line max-len
+var mimeTypeSimple = /^(application|audio|font|image|message|model|multipart|text|video)\/[a-zA-Z0-9\.\-\+_]{1,100}$/i;  
 // Handle "charset" in "text/*"
 
-var mimeTypeText = /^text\/[a-zA-Z0-9\.\-\+]{1,100};\s?charset=("[a-zA-Z0-9\.\-\+\s]{0,70}"|[a-zA-Z0-9\.\-\+]{0,70})(\s?\([a-zA-Z0-9\.\-\+\s]{1,20}\))?$/i; // eslint-disable-line max-len
+var mimeTypeText = /^text\/[a-zA-Z0-9\.\-\+]{1,100};\s?charset=("[a-zA-Z0-9\.\-\+\s]{0,70}"|[a-zA-Z0-9\.\-\+]{0,70})(\s?\([a-zA-Z0-9\.\-\+\s]{1,20}\))?$/i;  
 // Handle "boundary" in "multipart/*"
 
-var mimeTypeMultipart = /^multipart\/[a-zA-Z0-9\.\-\+]{1,100}(;\s?(boundary|charset)=("[a-zA-Z0-9\.\-\+\s]{0,70}"|[a-zA-Z0-9\.\-\+]{0,70})(\s?\([a-zA-Z0-9\.\-\+\s]{1,20}\))?){0,2}$/i; // eslint-disable-line max-len
+var mimeTypeMultipart = /^multipart\/[a-zA-Z0-9\.\-\+]{1,100}(;\s?(boundary|charset)=("[a-zA-Z0-9\.\-\+\s]{0,70}"|[a-zA-Z0-9\.\-\+]{0,70})(\s?\([a-zA-Z0-9\.\-\+\s]{1,20}\))?){0,2}$/i;  
 
 function isMimeType(str) {
   (0, _assertString.default)(str);
@@ -14847,7 +14847,7 @@ var _assertString = _interopRequireDefault(__webpack_require__(8354));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* eslint-disable max-len */
+ 
 var phones = {
   'am-AM': /^(\+?374|0)((10|[9|7][0-9])\d{6}$|[2-4]\d{7}$)/,
   'ar-AE': /^((\+?971)|0)?5[024568]\d{7}$/,
@@ -15006,7 +15006,7 @@ var phones = {
   'ar-EH': /^(\+?212|0)[\s\-]?(5288|5289)[\s\-]?\d{5}$/,
   'fa-AF': /^(\+93|0)?(2{1}[0-8]{1}|[3-5]{1}[0-4]{1})(\d{7})$/
 };
-/* eslint-enable max-len */
+ 
 // aliases
 
 phones['en-CA'] = phones['en-US'];
@@ -15106,9 +15106,9 @@ var _assertString = _interopRequireDefault(__webpack_require__(8354));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* eslint-disable no-control-regex */
+ 
 var multibyte = /[^\x00-\x7F]/;
-/* eslint-enable no-control-regex */
+ 
 
 function isMultibyte(str) {
   (0, _assertString.default)(str);
@@ -18893,9 +18893,9 @@ module.exports = window["wp"]["i18n"];
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
 /******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
+/******/ 			var getter = module && module.__esModule
+/******/ 				? () => (module['default'])
+/******/ 				: () => (module);
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};

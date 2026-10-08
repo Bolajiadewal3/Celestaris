@@ -243,7 +243,7 @@ function resolveIfNotPlainOrUrl(relUrl, parentUrl) {
   if (hIdx + qIdx > -2) {
     parentUrl = parentUrl.slice(
       0,
-      // eslint-disable-next-line no-nested-ternary
+       
       hIdx === -1 ? qIdx : qIdx === -1 || qIdx > hIdx ? hIdx : qIdx
     );
   }

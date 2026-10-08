@@ -48,25 +48,28 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @module Components
  * @category Utility
  * @description Various overlay rendering functions
  */
+
+
 import { useState, useRef, useEffect } from "react";
 import { useTrail, animated, useSpring } from "@react-spring/web";
 import { useNavigate } from "react-router-dom";
 import { useProgress } from "@react-three/drei";
+import { playSFX } from "../audioManager.js";
 
 import ReactMarkdown from "react-markdown";
 /**
- * Allows for a loading screen at the start of a page that waits for the assets to load
- * @function
+ * Shows asset-loading progress while a scene's suspended assets load.
  * @category Loading
+ * @returns The loading screen and progress indicator.
  */
 function Loader() {
+
+
   /**
    * Variable that tracks the current progress on asset loading on the page
-   * @type {useProgress}
    */
   const { progress } = useProgress();
 
@@ -78,7 +81,7 @@ function Loader() {
         top: 0,
         left: 0,
         width: "100vw",
-        height: "100vh",
+        height: "100dvh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -95,6 +98,8 @@ function Loader() {
           fontSize: "2rem",
           marginBottom: "20px",
           letterSpacing: "0.2em",
+          marginRight: "-0.2em", // Offsets the letter-spacing on the last letter
+          textAlign: "center",
         }}
       >
         LOADING EXPERIENCE
@@ -122,7 +127,9 @@ function Loader() {
 
 /**
  * Allows for a custom start screen with a button to start the experience; assets load on click and the page is not revealed until assets fully loaded
- * @function
+ * @param root0 
+ * @param root0.onStart
+ * @param root0.visible
  * @category Loading
  * @deprecated use Loader() instead
  */
@@ -182,16 +189,26 @@ function StartScreen({ onStart, visible }) {
   );
 }
 
-/**
- * Displays a html/css overlay over the 3D scene; that is populated with JSON data as text; includes a return to scene and internal navigation buttons
- * @function
- * @category Overlay
- */
+
+
 
 /**
- * Displays a html/css overlay over the 3D scene; that is populated with JSON data as text; includes a return to scene and internal navigation buttons
- * @function
+ * An entry displayed in the scene's project and content overlay.
+ * title - The entry title.
+ * [abstract] - Short description shown in the list and as a detail fallback.
+ * [siteLink] - External destination opened from the list.
+ * [markdown] - Markdown file or URL loaded for the detail view.
+ * [iframeUrl] - Embedded page shown in the detail view.
+ * [WIP] - Whether the entry is marked as work in progress.
+ */
+/**
+ * Displays a selectable list of content and renders the selected Markdown or embedded page.
  * @category Overlay
+ * @param props - Overlay state and content.
+ * @param props.isActive - Whether the overlay is visible and interactive.
+ * @param props.onClose - Called when the visitor exits the overlay.
+ * @param [props.items] - Entries available in the list view.
+ * @returns The animated list or selected content view.
  */
 function Overlay({ isActive, onClose, items = [] }) {
   const navigate = useNavigate();
@@ -200,6 +217,14 @@ function Overlay({ isActive, onClose, items = [] }) {
   const [selectedItem, setSelectedItem] = useState(null);
   const [markdownContent, setMarkdownContent] = useState("");
   const [isLoadingContent, setIsLoadingContent] = useState(false);
+
+  const scrollContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+  }, [isActive, viewMode, selectedItem]);
 
   const overlaySpring = useSpring({
     opacity: isActive ? 1 : 0,
@@ -220,17 +245,26 @@ function Overlay({ isActive, onClose, items = [] }) {
     config: { mass: 1, tension: 150, friction: 100, delay: 100 },
   });
 
+  /**
+   * Opens the markdown content for the selected item.
+   * @param item
+   */
   const handleOpenMarkdown = (item) => {
-    setIsLoadingContent(true);
-    wipeApi.start({
+    playSFX("overlay_wipe", 0.3);
+
+    const _anim = wipeApi.start({
       from: { transform: "translateX(100%)" },
       to: { transform: "translateX(0%)" },
+      /**
+       * Called when the animation completes.
+       */
       onRest: async () => {
         setSelectedItem(item);
         setViewMode("detail");
+        setIsLoadingContent(true);
+
         if (item.markdown) {
           try {
-            // Resolves relative path against Vite's public base URL
             const cleanPath = item.markdown.replace(/^\//, "");
             const filePath = item.markdown.startsWith("http")
               ? item.markdown
@@ -254,35 +288,159 @@ function Overlay({ isActive, onClose, items = [] }) {
         }
 
         setIsLoadingContent(false);
-        wipeApi.start({
+
+        const _anim = wipeApi.start({
           to: { transform: "translateX(-100%)" },
+          /**
+           *
+           */
           onRest: () => wipeApi.set({ transform: "translateX(100%)" }),
         });
       },
     });
   };
 
+  /**
+   * Handles the back to list action.
+   */
   const handleBackToList = () => {
-    wipeApi.start({
+    playSFX("overlay_wipe", 0.3);
+
+    const _anim = wipeApi.start({
       from: { transform: "translateX(100%)" },
       to: { transform: "translateX(0%)" },
+      /**
+       *
+       */
       onRest: () => {
         setViewMode("list");
         setSelectedItem(null);
         setMarkdownContent("");
-        wipeApi.start({
+
+        const _anim2 = wipeApi.start({
           to: { transform: "translateX(-100%)" },
+          /**
+           *
+           */
           onRest: () => wipeApi.set({ transform: "translateX(100%)" }),
         });
       },
     });
   };
 
+  /**
+   * Closes all overlays and resets the view.
+   */
   const handleCloseAll = () => {
     setViewMode("list");
     setSelectedItem(null);
     setMarkdownContent("");
     onClose();
+  };
+
+  const markdownComponents = {
+    /**
+     * Renders an h1 heading.
+     * @param root0
+     * @param root0.children
+     */
+    h1: ({ children }) => (
+      &lt;h1
+        style={{
+          fontSize: "clamp(1.05rem, 0.85rem + 1vw, 1.6rem)",
+          color: "#a855f7",
+          marginTop: "1em",
+          marginBottom: "0.5em",
+        }}
+      >
+        {children}
+      &lt;/h1>
+    ),
+    /**
+     * Renders an h2 heading.
+     * @param root0
+     * @param root0.children
+     */
+    h2: ({ children }) => (
+      &lt;h2
+        style={{
+          fontSize: "clamp(0.95rem, 0.75rem + 0.8vw, 1.3rem)",
+          color: "#d8b4fe",
+          marginTop: "0.8em",
+          marginBottom: "0.4em",
+        }}
+      >
+        {children}
+      &lt;/h2>
+    ),
+    /**
+     * Renders an h3 heading.
+     * @param root0
+     * @param root0.children
+     */
+    h3: ({ children }) => (
+      &lt;h3
+        style={{
+          fontSize: "clamp(0.85rem, 0.7rem + 0.5vw, 1.1rem)",
+          color: "#e9d5ff",
+          marginTop: "0.6em",
+          marginBottom: "0.3em",
+        }}
+      >
+        {children}
+      &lt;/h3>
+    ),
+    /**
+     * Renders a paragraph.
+     * @param root0
+     * @param root0.children
+     */
+    p: ({ children }) => (
+      &lt;p
+        style={{
+          fontSize: "clamp(0.75rem, 0.68rem + 0.35vw, 0.95rem)",
+          lineHeight: "1.55",
+          color: "#e2e8f0",
+          marginBottom: "0.8em",
+        }}
+      >
+        {children}
+      &lt;/p>
+    ),
+    /**
+     * Renders a list item.
+     * @param root0
+     * @param root0.children
+     */
+    li: ({ children }) => (
+      &lt;li
+        style={{
+          fontSize: "clamp(0.75rem, 0.68rem + 0.35vw, 0.95rem)",
+          lineHeight: "1.5",
+          color: "#cbd5e1",
+          marginBottom: "0.3em",
+        }}
+      >
+        {children}
+      &lt;/li>
+    ),
+    /**
+     * Renders inline code.
+     * @param root0
+     * @param root0.children
+     */
+    code: ({ children }) => (
+      &lt;code
+        style={{
+          fontSize: "clamp(0.7rem, 0.65rem + 0.25vw, 0.85rem)",
+          backgroundColor: "rgba(255,255,255,0.1)",
+          padding: "2px 5px",
+          borderRadius: "4px",
+        }}
+      >
+        {children}
+      &lt;/code>
+    ),
   };
 
   return (
@@ -292,19 +450,21 @@ function Overlay({ isActive, onClose, items = [] }) {
         pointerEvents: isActive ? "auto" : "none",
         opacity: overlaySpring.opacity,
         position: "fixed",
-        top: "1vh",
+        top: "1dvh",
         left: "1vw",
         width: "98vw",
-        height: "98vh",
+        height: "98dvh",
         border: "3px solid #6a0dad",
         borderRadius: "16px",
         backgroundColor: "rgba(15, 15, 15, 0.95)",
-        overflow: "hidden", // Keeps the purple wipe inside rounded corners
+        overflow: "hidden",
         boxSizing: "border-box",
+        backdropFilter: isActive ? "blur(12px)" : "none",
+        WebkitBackdropFilter: isActive ? "blur(12px)" : "none",
         zIndex: 1000,
       }}
     >
-      {/* Purple Screen Wipe Panel */}
+      {/* Screen Wipe */}
       &lt;animated.div
         style={{
           ...wipeStyle,
@@ -319,35 +479,46 @@ function Overlay({ isActive, onClose, items = [] }) {
         }}
       />
 
-      {/* Exit / Back Button (Stays pinned top-left above everything) */}
+      {/* Exit / Back Button (Smaller footprint on small screens) */}
       &lt;div
         className="normalExitButton"
-        onClick={viewMode === "detail" ? handleBackToList : handleCloseAll}
+        onClick={() => {
+          playSFX(viewMode === "detail" ? "exit_click" : "overlay_close", 0.3);
+          if (viewMode === "detail") {
+            handleBackToList();
+          } else {
+            handleCloseAll();
+          }
+        }}
         style={{
           position: "absolute",
-          top: "20px",
-          left: "20px",
+          top: "12px",
+          left: "12px",
           zIndex: 100,
+          fontSize: "clamp(0.75rem, 0.65rem + 0.35vw, 0.9rem)",
+          padding: "5px 12px",
         }}
       >
         {viewMode === "detail" ? "← Back" : "Exit"}
       &lt;/div>
 
-      {/* Inner Container: Restores flexbox layout &amp; creates clearance for Exit button */}
+      {/* Inner Scroll Container */}
       &lt;div
+        ref={scrollContainerRef}
         style={{
           width: "100%",
           height: "100%",
           overflowY: "auto",
+          overflowX: "hidden",
           boxSizing: "border-box",
-          paddingTop: "80px", // Pushes option boxes down below Exit button
-          paddingLeft: "60px", // Prevents boxes from going too far left
-          paddingRight: "40px",
-          paddingBottom: "40px",
+          paddingTop: "clamp(48px, 6vh, 70px)", // Dynamic height adjustment for mobile landscape
+          paddingLeft: "clamp(8px, 1.5vw, 32px)", // Tight margins allow maximum card width
+          paddingRight: "clamp(8px, 1.5vw, 32px)",
+          paddingBottom: "24px",
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-end", // Keeps option cards right-aligned (adjust to 'flex-start' or 'center' if preferred)
-          gap: "20px", // Spacing between item boxes
+          alignItems: "center",
+          gap: "12px",
         }}
       >
         {viewMode === "list" ? (
@@ -360,47 +531,74 @@ function Overlay({ isActive, onClose, items = [] }) {
                 className="jsonOverlayItems"
                 style={{
                   transform: style.transform,
-                  width: "100%", // Ensures items respect the inner container padding
-                  //maxWidth: "900px", // Keeps individual cards contained nicely
+                  width: "100%",
+                  maxWidth: "1100px", // Allows cards to span wider on landscape/wide displays
+                  boxSizing: "border-box",
+                  padding: "clamp(10px, 2vw, 20px)", // Tightened interior padding
                 }}
               >
-                &lt;h2 style={{ fontSize: "20px", marginBottom: "10px" }}>
+                {/* Responsive Card Title */}
+                &lt;h2
+                  style={{
+                    fontSize: "clamp(0.95rem, 0.75rem + 0.75vw, 1.35rem)",
+                    marginBottom: "6px",
+                    lineHeight: "1.25",
+                    wordWrap: "break-word",
+                    overflowWrap: "anywhere",
+                  }}
+                >
                   {item.title}
                 &lt;/h2>
-                &lt;a
-                  className="goToComputerButton a_1"
-                  style={{ marginRight: "10px" }}
-                  onClick={() => handleOpenMarkdown(item)}
+
+                &lt;div style={{ marginBottom: "8px" }}>
+                  {item.siteLink ? (
+                    &lt;a
+                      className="goToComputerButton a_1"
+                      style={{
+                        marginRight: "10px",
+                        cursor: "pointer",
+                        fontSize: "clamp(0.7rem, 0.65rem + 0.3vw, 0.85rem)",
+                        display: "inline-block",
+                        padding: "4px 10px",
+                        textDecoration: "none",
+                      }}
+                      href={item.siteLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        playSFX("button_click", 0.3); // Optional: play a click SFX
+                      }}
+                    >
+                      Go to
+                    &lt;/a>
+                  ) : (
+                    &lt;a
+                      className="goToComputerButton a_1"
+                      style={{
+                        marginRight: "10px",
+                        cursor: "pointer",
+                        fontSize: "clamp(0.7rem, 0.65rem + 0.3vw, 0.85rem)",
+                        display: "inline-block",
+                        padding: "4px 10px",
+                      }}
+                      onClick={() => handleOpenMarkdown(item)}
+                    >
+                      {item.WIP ? "W I P" : "Read"}
+                    &lt;/a>
+                  )}
+                &lt;/div>
+
+                {/* Scaled Down Abstract Text */}
+                &lt;p
+                  style={{
+                    fontSize: "clamp(0.75rem, 0.68rem + 0.35vw, 0.925rem)",
+                    lineHeight: "1.45",
+                    opacity: 0.9,
+                  }}
                 >
-                  {item.WIP ? "W I P" : "Read"}
-                &lt;/a>
-                {/*!item.WIP &amp;&amp; (
-                  &lt;a
-                    className="goToComputerButton a_1"
-                    onClick={
-                      item.external
-                        ? () => {
-                            window.location.href = item.website;
-                          }
-                        : () => {
-                            if (item.siteLink) {
-                              const fullUrl = `${import.meta.env.BASE_URL}${
-                                item.siteLink
-                              }index.html`;
-                              navigate(`/Computer`, {
-                                state: { iframeUrl: fullUrl },
-                              });
-                            } else {
-                              navigate(item.internalLink);
-                            }
-                          }
-                    }
-                  >
-                    Go To
-                  &lt;/a>
-                )*/}{" "}
-                {/*item.WIP &amp;&amp; &lt;a className="workInProgressButton a_1">W I P&lt;/a>*/}
-                &lt;p>{item.abstract}&lt;/p>
+                  {item.abstract}
+                &lt;/p>
               &lt;/animated.div>
             );
           })
@@ -409,42 +607,47 @@ function Overlay({ isActive, onClose, items = [] }) {
           &lt;div
             style={{
               color: "white",
-              lineHeight: "1.6",
               width: "100%",
-              maxWidth: "800px",
+              maxWidth: "1000px",
               margin: "0 auto",
-              height: "calc(100% - 20px)",
               display: "flex",
               flexDirection: "column",
+              boxSizing: "border-box",
             }}
           >
             &lt;h1
               style={{
                 fontFamily: "Orbitron, sans-serif",
                 color: "#6a0dad",
-                marginBottom: "20px",
+                marginBottom: "12px",
+                fontSize: "clamp(1.1rem, 0.85rem + 1vw, 1.75rem)",
+                lineHeight: "1.2",
+                wordWrap: "break-word",
               }}
             >
               {selectedItem?.title}
             &lt;/h1>
+
             {selectedItem?.iframeUrl ? (
-              /* Render embedded HTML documentation directly */
               &lt;iframe
                 src={`${import.meta.env.BASE_URL}${selectedItem.iframeUrl}`}
                 title={selectedItem.title}
                 style={{
                   width: "100%",
-                  flex: 1 /* Automatically stretches to fill full height */,
+                  height: "65dvh",
                   border: "1px solid rgba(106, 13, 173, 0.4)",
                   borderRadius: "8px",
                   backgroundColor: "#fff",
                 }}
               />
             ) : isLoadingContent ? (
-              &lt;p style={{ color: "#aaa" }}>Loading document...&lt;/p>
+              &lt;p style={{ color: "#aaa", fontSize: "0.8rem" }}>
+                Loading document...
+              &lt;/p>
             ) : (
-              /* Render standard Markdown */
-              &lt;ReactMarkdown>{markdownContent}&lt;/ReactMarkdown>
+              &lt;ReactMarkdown components={markdownComponents}>
+                {markdownContent}
+              &lt;/ReactMarkdown>
             )}
           &lt;/div>
         )}
@@ -454,9 +657,11 @@ function Overlay({ isActive, onClose, items = [] }) {
 }
 
 /**
- * Displays an audio toggle
- * @function
+ * Toggles looping ambient audio for the current scene.
  * @category Button
+ * @param props
+ * @param props.url - Audio file URL to play.
+ * @returns The play or mute button.
  */
 function AudioButton({ url }) {
   const [playing, setPlaying] = useState(false);
@@ -473,6 +678,9 @@ function AudioButton({ url }) {
     };
   }, [url]);
 
+  /**
+   *
+   */
   const toggleAudio = () => {
     if (!audioRef.current) {
       audioRef.current = new Audio(url);
@@ -505,11 +713,17 @@ function AudioButton({ url }) {
 }
 
 /**
- * Displays a headings toggle
- * @function
+ * Toggles visibility of the scene's large headings.
  * @category Button
+ * @param props
+ * @param props.showHeadings - Whether headings are currently visible.
+ * @param props.setShowHeadings - React state setter for heading visibility.
+ * @returns The show/hide headings button.
  */
 function HeadingsButton({ showHeadings, setShowHeadings }) {
+  /**
+   *
+   */
   const toggleHeadings = () => {
     // This toggles the boolean to its opposite value
     setShowHeadings((prev) => !prev);
@@ -529,12 +743,6 @@ function HeadingsButton({ showHeadings, setShowHeadings }) {
     &lt;/button>
   );
 }
-
-/**
- * Displays a documentation navigation button
- * @function
- * @category Button
- */
 
 /*
 function DocumentationButton() {
@@ -557,6 +765,13 @@ function DocumentationButton() {
   );
 }*/
 
+/**
+ * Opens the documentation content from the current scene.
+ * @category Button
+ * @param props
+ * @param props.onClick - Callback that opens the documentation content.
+ * @returns The documentation button.
+ */
 function DocumentationButton({ onClick }) {
   return (
     &lt;button
@@ -574,9 +789,9 @@ function DocumentationButton({ onClick }) {
 }
 
 /**
- * Displays a resume navigation button
- * @function
+ * Opens the resume PDF in a separate browser tab.
  * @category Button
+ * @returns The resume link.
  */
 function ResumeButton() {
   return (
@@ -619,7 +834,7 @@ export {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Sep 23 2026 13:41:33 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Thu Oct 08 2026 21:41:55 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

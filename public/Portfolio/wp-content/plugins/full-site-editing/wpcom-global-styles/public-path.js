@@ -6,6 +6,6 @@
  * @see https://webpack.js.org/guides/public-path/#on-the-fly
  */
 if ( typeof window === 'object' && window.wpcomGlobalStyles?.assetsUrl ) {
-	// eslint-disable-next-line no-global-assign
+	 
 	__webpack_public_path__ = window.wpcomGlobalStyles.assetsUrl;
 }

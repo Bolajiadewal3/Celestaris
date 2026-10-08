@@ -2,7 +2,7 @@ import apiFetch from '@wordpress/api-fetch';
 import { register, createReduxStore } from '@wordpress/data';
 
 // Global data passed from PHP.
-const { STORE_NAME, REST_PATH } = JETPACK_GLOBAL_STYLES_EDITOR_CONSTANTS; // eslint-disable-line no-undef
+const { STORE_NAME, REST_PATH } = JETPACK_GLOBAL_STYLES_EDITOR_CONSTANTS;  
 
 let cache = {};
 let alreadyFetchedOptions = false;
@@ -64,7 +64,7 @@ export const store = createReduxStore( STORE_NAME, {
 	},
 
 	resolvers: {
-		// eslint-disable-next-line no-unused-vars
+		 
 		*getOption( key ) {
 			if ( alreadyFetchedOptions ) {
 				return; // do nothing

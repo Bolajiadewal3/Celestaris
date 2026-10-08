@@ -791,7 +791,7 @@ function _addListener(target, type, listener, prepend) {
     if (m > 0 && existing.length > m && !existing.warned) {
       existing.warned = true;
       // No error code for this since it is a Warning
-      // eslint-disable-next-line no-restricted-syntax
+       
       var w = new Error('Possible EventEmitter memory leak detected. ' +
                           existing.length + ' ' + String(type) + ' listeners ' +
                           'added. Use emitter.setMaxListeners() to ' +
@@ -1766,7 +1766,7 @@ const whatsNewQueryClient = new _tanstack_react_query__WEBPACK_IMPORTED_MODULE_0
  * @see https://webpack.js.org/guides/public-path/#on-the-fly
  */
 if ( true && window.whatsNewAssetsUrl) {
-  // eslint-disable-next-line no-global-assign
+   
   __webpack_require__.p = window.whatsNewAssetsUrl;
 }
 
@@ -3173,7 +3173,7 @@ const Guide = ({
 /* harmony import */ var _whats_new_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(736);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2559);
 
-/* eslint-disable no-restricted-imports */
+ 
 
 
 
@@ -3233,7 +3233,7 @@ const WhatsNewGuide = ({
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var wpcom_proxy_request__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1445);
 /* harmony import */ var _use_seen_whats_new_announcements_query__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2913);
-/* eslint-disable no-restricted-imports */
+ 
 
 
 
@@ -3295,7 +3295,7 @@ const useSeenWhatsNewAnnouncementsMutation = () => {
 /* unused harmony export useSeenWhatsNewAnnouncementsQuery */
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1455);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__);
-/* eslint-disable no-restricted-imports */
+ 
 
 
 
@@ -3334,7 +3334,7 @@ const useSeenWhatsNewAnnouncementsQuery = () => {
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1455);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var wpcom_proxy_request__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1445);
-/* eslint-disable no-restricted-imports */
+ 
 
 
 
@@ -3483,7 +3483,7 @@ const postStrings = (() => {
  */
 const supportsFileConstructor = (() => {
   try {
-    // eslint-disable-next-line no-new
+     
     new window.File(['a'], 'test.jpg', {
       type: 'image/jpeg'
     });
@@ -3991,7 +3991,7 @@ exports.colors = ['#0000CC', '#0000FF', '#0033CC', '#0033FF', '#0066CC', '#0066F
  * TODO: add a `localStorage` variable to explicitly enable/disable colors
  */
 
-// eslint-disable-next-line complexity
+ 
 function useColors() {
   // NB: In an Electron preload script, document will be defined but not fully
   // initialized. Since we know we're in Chrome, we'll just detect this case

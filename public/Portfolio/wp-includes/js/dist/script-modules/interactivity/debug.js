@@ -1805,7 +1805,7 @@ function toVdom(root) {
           if (attributeName === "data-wp-interactive") {
             island = true;
             const islandNamespace = (
-              // eslint-disable-next-line no-nested-ternary
+               
               typeof value === "string" ? value : typeof value?.namespace === "string" ? value.namespace : null
             );
             namespaces.push(islandNamespace);

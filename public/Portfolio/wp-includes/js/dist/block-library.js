@@ -18509,7 +18509,7 @@ function getHrefAndDestination(image, destination) {
     case DEPRECATED_LINK_DESTINATION_MEDIA:
       return {
         href: image?.source_url || image?.url,
-        // eslint-disable-line camelcase
+         
         linkDestination: LINK_DESTINATION_MEDIA
       };
     case DEPRECATED_LINK_DESTINATION_ATTACHMENT:
@@ -18520,7 +18520,7 @@ function getHrefAndDestination(image, destination) {
     case LINK_DESTINATION_MEDIA:
       return {
         href: image?.source_url || image?.url,
-        // eslint-disable-line camelcase
+         
         linkDestination: LINK_DESTINATION_MEDIA
       };
     case LINK_DESTINATION_ATTACHMENT:
@@ -19497,7 +19497,7 @@ function utils_getHrefAndDestination(image, galleryDestination, imageDestination
     case LINK_DESTINATION_MEDIA:
       return {
         href: image?.source_url || image?.url,
-        // eslint-disable-line camelcase
+         
         linkDestination: constants_LINK_DESTINATION_MEDIA,
         lightbox: lightboxSetting?.enabled ? { ...attributes?.lightbox, enabled: false } : void 0
       };
@@ -28803,7 +28803,7 @@ function edit_attributesFromMedia({
       mediaType = media.type;
     }
     if (mediaType === "image") {
-      src = media.sizes?.large?.url || // eslint-disable-next-line camelcase
+      src = media.sizes?.large?.url ||  
       media.media_details?.sizes?.large?.source_url;
     }
     let newHref = href;
@@ -30890,10 +30890,10 @@ function menuItemToBlockAttributes({
   title: menuItemTitleField,
   xfn,
   classes,
-  // eslint-disable-next-line camelcase
+   
   attr_title,
   object,
-  // eslint-disable-next-line camelcase
+   
   object_id,
   description,
   url,
@@ -30917,7 +30917,7 @@ function menuItemToBlockAttributes({
     ...classes?.length && classes.join(" ").trim() && {
       className: classes.join(" ").trim()
     },
-    /* eslint-disable camelcase */
+     
     ...attr_title?.length && {
       title: attr_title
     },
@@ -30927,7 +30927,7 @@ function menuItemToBlockAttributes({
         bindings: buildNavigationLinkEntityBinding(inferredKind)
       }
     },
-    /* eslint-enable camelcase */
+     
     ...description?.length && {
       description
     },

@@ -1,4 +1,7 @@
-// src/audioManager.js
+/**
+ * Loads and plays the site's short interface sound effects.
+ * @category Utility
+ */
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const soundBuffers = {};
 
@@ -11,7 +14,11 @@ const SFX_MANIFEST = {
   exit_click: `${import.meta.env.BASE_URL}Audio/Exit_Click.ogg`,
 };
 
-// Preload and decode all audio files into RAM on app launch
+/**
+ * Fetches and decodes each configured sound effect for later playback.
+ * Individual load failures are logged and do not reject the overall operation.
+ * @returns Resolves after all configured sounds have been attempted.
+ */
 export async function preloadAllSFX() {
   const loadPromises = Object.entries(SFX_MANIFEST).map(async ([key, path]) => {
     try {
@@ -26,7 +33,13 @@ export async function preloadAllSFX() {
   await Promise.all(loadPromises);
 }
 
-// Play sound from pre-decoded buffer with zero JS overhead
+/**
+ * Plays a previously loaded interface sound effect.
+ * Does nothing when the requested key has not loaded successfully.
+ * @param key - A key from the sound effect manifest.
+ * @param [volume] - Playback gain; 0 is silent and 1 is full volume.
+ * @returns Void
+ */
 export function playSFX(key, volume = 0.3) {
   if (!soundBuffers[key]) return;
 

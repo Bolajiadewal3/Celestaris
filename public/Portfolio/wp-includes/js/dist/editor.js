@@ -14594,7 +14594,7 @@ function CreateNewTemplateModal({ onClose }) {
                 placeholder: DEFAULT_TITLE,
                 disabled: isBusy,
                 help: (0,external_wp_i18n_namespaceObject.__)(
-                  // eslint-disable-next-line no-restricted-syntax -- 'sidebar' is a common web design term for layouts
+                   
                   'Describe the template, e.g. "Post with sidebar". A custom template can be manually applied to any post or page.'
                 )
               }
@@ -27017,7 +27017,7 @@ async function convertValueToCoords(state, options) {
   const crossAxisMulti = rtl && isVertical ? -1 : 1;
   const rawValue = floating_ui_utils_evaluate(options, state);
 
-  // eslint-disable-next-line prefer-const
+   
   let {
     mainAxis,
     crossAxis,
@@ -31088,7 +31088,7 @@ var term_data_default = {
     }
     return newValues;
   },
-  // eslint-disable-next-line no-unused-vars
+   
   setValues({ dispatch, context, bindings }) {
     return false;
   },

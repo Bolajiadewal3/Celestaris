@@ -1,4 +1,4 @@
-/* eslint-disable no-var */
+ 
 /* global jQuery */
 
 jQuery( document ).ready( function ( $ ) {

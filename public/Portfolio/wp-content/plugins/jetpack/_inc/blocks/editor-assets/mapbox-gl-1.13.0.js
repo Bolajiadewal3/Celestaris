@@ -5,7 +5,7 @@ typeof define === 'function' && define.amd ? define(factory) :
 (global = global || self, global.mapboxgl = factory());
 }(this, (function () { 'use strict';
 
-/* eslint-disable */
+ 
 
 var shared, worker, mapboxgl;
 // define gets called three times: one for each chunk. we rely on the order

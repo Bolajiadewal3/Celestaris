@@ -153,7 +153,7 @@ function makeIterator(next, thro, name) {
 function logError(error, _ref2) {
   var sagaStack = _ref2.sagaStack;
 
-  /*eslint-disable no-console*/
+   
   console.error(error);
   console.error(sagaStack);
 }
@@ -421,7 +421,7 @@ function take(patternOrChannel, multicastPattern) {
 
   if ((0,_redux_saga_is__WEBPACK_IMPORTED_MODULE_0__/* .pattern */ .T1)(patternOrChannel)) {
     if ((0,_redux_saga_is__WEBPACK_IMPORTED_MODULE_0__/* .notUndef */ .uQ)(multicastPattern)) {
-      /* eslint-disable no-console */
+       
       console.warn("take(pattern) takes one argument but two were provided. Consider passing an array for listening to several action types");
     }
 
@@ -439,7 +439,7 @@ function take(patternOrChannel, multicastPattern) {
 
   if ((0,_redux_saga_is__WEBPACK_IMPORTED_MODULE_0__/* .channel */ .Ix)(patternOrChannel)) {
     if ((0,_redux_saga_is__WEBPACK_IMPORTED_MODULE_0__/* .notUndef */ .uQ)(multicastPattern)) {
-      /* eslint-disable no-console */
+       
       console.warn("take(channel) takes one argument but two were provided. Second argument is ignored.");
     }
 
@@ -3566,11 +3566,11 @@ var legacy_createStore = (/* unused pure expression or super */ null && (createS
  * @returns {void}
  */
 function warning(message) {
-  /* eslint-disable no-console */
+   
   if (typeof console !== 'undefined' && typeof console.error === 'function') {
     console.error(message);
   }
-  /* eslint-enable no-console */
+   
 
 
   try {
@@ -3578,7 +3578,7 @@ function warning(message) {
     // "break on all exceptions" in your console,
     // it would pause the execution at this line.
     throw new Error(message);
-  } catch (e) {} // eslint-disable-line no-empty
+  } catch (e) {}  
 
 }
 

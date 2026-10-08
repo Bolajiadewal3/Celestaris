@@ -776,7 +776,7 @@ class LazyResult {
       }
     } catch (err) {
       /* c8 ignore next 3 */
-      // eslint-disable-next-line no-console
+       
       if (console && console.error) console.error(err)
     }
     return error
@@ -3103,7 +3103,7 @@ module.exports.createColors = create;
 /***/ ((module) => {
 
 "use strict";
-/* eslint-disable no-console */
+ 
 
 
 let printed = {}
@@ -32271,7 +32271,7 @@ const globalTips = [
 function Tips() {
   const [randomIndex] = (0,external_wp_element_namespaceObject.useState)(
     // Disable Reason: I'm not generating an HTML id.
-    // eslint-disable-next-line no-restricted-syntax
+     
     Math.floor(Math.random() * globalTips.length)
   );
   return /* @__PURE__ */ (0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_components_namespaceObject.Tip, { children: globalTips[randomIndex] });
@@ -38236,7 +38236,7 @@ function useTabNav() {
       }
     } else {
       const isBefore = (
-        // eslint-disable-next-line no-bitwise
+         
         event.target.compareDocumentPosition(canvasElement) & event.target.DOCUMENT_POSITION_FOLLOWING
       );
       const tabbables = external_wp_dom_namespaceObject.focus.tabbable.find(containerRef.current);
@@ -65829,7 +65829,7 @@ var incorrectImportAlarm = function incorrectImportAlarm(element, index, childre
   }
 };
 
-/* eslint-disable no-fallthrough */
+ 
 
 function emotion_cache_browser_esm_prefix(value, length) {
   switch (hash(value, length)) {
@@ -66146,7 +66146,7 @@ var createCache = function createCache(options) {
 /* harmony default export */ const emotion_cache_browser_esm = (createCache);
 
 ;// ./node_modules/@emotion/hash/dist/emotion-hash.esm.js
-/* eslint-disable */
+ 
 // Inspired by https://github.com/garycourt/murmurhash-js
 // Ported from https://github.com/aappleby/smhasher/blob/61a0530f28277f2e850bfc39600ce61d02b518de/src/MurmurHash2.cpp#L37-L86
 function murmur2(str) {

@@ -1,9 +1,6 @@
 /**
- * The setup of the JSX application and its navigation system
- * @module Setup
- * @function
+ * Starts the browser application and configures its client-side routes.
  * @category Setup
- * @returns {void}
  */
 import { createRoot } from "react-dom/client";
 import {
@@ -24,30 +21,22 @@ import Population from "./population.jsx";
 import { preloadAllSFX } from "./audioManager.js";
 
 /**
- * Handles redirecting to the correct web pages
- * @function
- * @type {function}
- * @returns {null}
+ * Redirects legacy WordPress URLs to the computer scene with the requested page embedded.
+ * @returns This component performs navigation in an effect and renders no UI.
  */
 const RedirectHandler = () => {
   /**
    * Allows for site navigation
-   * @function
-   * @type {useNavigate}
    */
   const navigate = useNavigate();
 
   /**
    * Retrieves the current page location
-   * @function
-   * @type {useLocation}
    */
   const location = useLocation();
 
   /**
    * Handles redirect logic
-   * @function
-   * @type {useEffect}
    */
   useEffect(() => {
     // Check for the legacy ?path= param OR a direct URL hit
@@ -91,9 +80,7 @@ const RedirectHandler = () => {
 preloadAllSFX();
 
 /**
- * Renders the JSX site
- * @function
- * @type {createRoot}
+ * Mounts the routed application in the page's root element.
  * @returns {void}
  */
 createRoot(document.getElementById("root")).render(
@@ -110,7 +97,7 @@ createRoot(document.getElementById("root")).render(
       {/** 
       <Route path="/Poetry/section0" element={<Section0 />} />
       <Route path="/Poetry/existentialPoetry" element={<ExistentialPoetry />} />
-      */}
+        */}
     </Routes>
   </BrowserRouter>,
 );

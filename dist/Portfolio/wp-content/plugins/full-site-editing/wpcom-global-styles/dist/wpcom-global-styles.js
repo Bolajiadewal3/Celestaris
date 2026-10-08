@@ -1065,7 +1065,7 @@ function _addListener(target, type, listener, prepend) {
     if (m > 0 && existing.length > m && !existing.warned) {
       existing.warned = true;
       // No error code for this since it is a Warning
-      // eslint-disable-next-line no-restricted-syntax
+       
       var w = new Error('Possible EventEmitter memory leak detected. ' +
                           existing.length + ' ' + String(type) + ' listeners ' +
                           'added. Use emitter.setMaxListeners() to ' +
@@ -2773,7 +2773,7 @@ function GlobalStylesNotices() {
  * @see https://webpack.js.org/guides/public-path/#on-the-fly
  */
 if ( true && window.wpcomGlobalStyles?.assetsUrl) {
-  // eslint-disable-next-line no-global-assign
+   
   __webpack_require__.p = window.wpcomGlobalStyles.assetsUrl;
 }
 
@@ -3977,7 +3977,7 @@ function applyFlags(flagsString, modificationMethod) {
     const enabled = !/^-/.test(flagRaw);
     if (configData.features) {
       configData.features[flag] = enabled;
-      // eslint-disable-next-line no-console
+       
       console.log('%cConfig flag %s via %s: %s', 'font-weight: bold;', enabled ? 'enabled' : 'disabled', modificationMethod, flag);
     }
   });
@@ -6289,7 +6289,7 @@ function applyTestFiltersToPlansList(planName, abtest, extraArgs = {}) {
   const updatePlanDescriptions = () => {};
   const updatePlanFeatures = () => {};
 
-  /* eslint-enable */
+   
 
   removeDisabledFeatures();
   updatePlanDescriptions();
@@ -6316,7 +6316,7 @@ function applyTestFiltersToProductsList(productName) {
   const updatePlanDescriptions = () => {};
   const updatePlanFeatures = () => {};
 
-  /* eslint-enable */
+   
 
   removeDisabledFeatures();
   updatePlanDescriptions();
@@ -6558,7 +6558,7 @@ const plansDescriptionHeadingComponent = {
     })
   }
 };
-/* eslint-enable */
+ 
 
 const getPlanFreeDetails = () => ({
   ...getDotcomPlanDetails(),
@@ -7825,7 +7825,7 @@ const config = data => key => {
   // display console error only in a browser
   // (not in tests, for example)
   if (true) {
-    // eslint-disable-next-line no-console
+     
     console.error('%cCore Error: ' + `%cCould not find config value for key %c${key}%c. ` + 'Please make sure that if you need it then it has a default value assigned in ' + '%cconfig/_shared.json' + '%c.', 'color: red; font-size: 120%',
     // error prefix
     'color: black;',
@@ -8776,7 +8776,7 @@ exports.colors = ['#0000CC', '#0000FF', '#0033CC', '#0033FF', '#0066CC', '#0066F
  * TODO: add a `localStorage` variable to explicitly enable/disable colors
  */
 
-// eslint-disable-next-line complexity
+ 
 function useColors() {
   // NB: In an Electron preload script, document will be defined but not fully
   // initialized. Since we know we're in Chrome, we'll just detect this case

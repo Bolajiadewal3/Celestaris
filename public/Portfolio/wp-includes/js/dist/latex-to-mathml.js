@@ -196,7 +196,7 @@ const protocolFromUrl = function(url) {
   // Check for possible leading protocol.
   // https://url.spec.whatwg.org/#url-parsing strips leading whitespace
   // (\x00) or C0 control (\x00-\x1F) characters.
-  // eslint-disable-next-line no-control-regex
+   
   const protocol = /^[\x00-\x20]*([^\\/#?]*?)(:|&#0*58|&#x0*3a|&colon)/i.exec(url);
   if (!protocol) {
     return "_relative";
@@ -2626,7 +2626,7 @@ defineFunction({
 
     if (mode === "math" && context.parser.settings.strict) {
       // LaTeX only writes a warning. It doesn't stop. We'll issue the same warning.
-      // eslint-disable-next-line no-console
+       
       console.log(`Temml parse error: Command ${context.funcName} is invalid in math mode.`);
     }
 
@@ -5090,7 +5090,7 @@ defineMacro(
 
 defineMacro(
   "\\Temml",
-  // eslint-disable-next-line max-len
+   
   "\\textrm{T}\\kern-0.2em\\lower{0.2em}{\\textrm{E}}\\kern-0.08em{\\textrm{M}\\kern-0.08em\\raise{0.2em}\\textrm{M}\\kern-0.08em\\textrm{L}}"
 );
 
@@ -5291,7 +5291,7 @@ defineMacro("\\incoh", `{\\mkern5mu\\rule{}{0.7em}\\mathrlap{\\smash{\\raise2mu{
 // chemstyle package
 defineMacro("\\standardstate", "\\text{\\tiny\\char`⦵}");
 
-﻿/* eslint-disable */
+﻿ 
 /* -*- Mode: JavaScript; indent-tabs-mode:nil; js-indent-level: 2 -*- */
 /* vim: set ts=2 et sw=2 tw=80: */
 
@@ -7011,7 +7011,7 @@ defineMacro("\\tripleDashBetweenDoubleLine", `\\kern0.075em\\mathrlap{\\mathrlap
   /** @param {string} a */
   function assertString(a) {}
 
-/* eslint-disable no-undef */
+ 
 
 //////////////////////////////////////////////////////////////////////
 // texvc.sty
@@ -7073,7 +7073,7 @@ defineMacro("\\supe", "\\supseteq");
 defineMacro("\\thetasym", "\\vartheta");
 defineMacro("\\weierp", "\\wp");
 
-/* eslint-disable no-undef */
+ 
 
 /****************************************************
  *
@@ -10441,7 +10441,7 @@ defineFunction({
   },
   handler: ({ breakOnTokenText, funcName, parser }, args) => {
     if (parser.settings.strict && parser.mode === "math") {
-      // eslint-disable-next-line no-console
+       
       console.log(`Temml strict-mode warning: Command ${funcName} is invalid in math mode.`);
     }
     const body = parser.parseExpression(false, breakOnTokenText, true);
@@ -11955,7 +11955,7 @@ class MacroExpander {
     }
 
     // This pathway is impossible.
-    throw new Error(); // eslint-disable-line no-unreachable
+    throw new Error();  
   }
 
   /**

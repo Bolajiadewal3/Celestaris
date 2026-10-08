@@ -202,7 +202,7 @@ function tabbable_find(context) {
 function findPrevious(element) {
   return filterTabbable(find(element.ownerDocument.body)).reverse().find(
     (focusable) => (
-      // eslint-disable-next-line no-bitwise
+       
       element.compareDocumentPosition(focusable) & element.DOCUMENT_POSITION_PRECEDING
     )
   );
@@ -210,7 +210,7 @@ function findPrevious(element) {
 function findNext(element) {
   return filterTabbable(find(element.ownerDocument.body)).find(
     (focusable) => (
-      // eslint-disable-next-line no-bitwise
+       
       element.compareDocumentPosition(focusable) & element.DOCUMENT_POSITION_FOLLOWING
     )
   );

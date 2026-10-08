@@ -13,11 +13,19 @@ import { OrbitControls } from "@react-three/drei";
 
 const CENTER = [-3.44, 55.36];
 
+/**
+ *
+ * @param feature
+ */
 const createRegionShape = (feature) => {
   if (!feature.geometry) return [];
   const type = feature.geometry.type;
   const coords = feature.geometry.coordinates;
 
+  /**
+   *
+   * @param polygonCoords
+   */
   const processPolygon = (polygonCoords) => {
     const shape = new THREE.Shape();
     polygonCoords[0].forEach((coord, i) => {
@@ -36,6 +44,12 @@ const createRegionShape = (feature) => {
   return [];
 };
 
+/**
+ *
+ * @param root0
+ * @param root0.regionsGeoJson
+ * @param root0.locationsCsvUrl
+ */
 function UKDashboard({ regionsGeoJson, locationsCsvUrl }) {
   const rawGeoJson = useLoader(THREE.FileLoader, regionsGeoJson);
   const rawCsv = useLoader(THREE.FileLoader, locationsCsvUrl);
@@ -111,9 +125,8 @@ function UKDashboard({ regionsGeoJson, locationsCsvUrl }) {
 /**
  * Main application component rendering a Three.js city scene,
  * interactive UI overlays, banners, and ambient experience.
- *
  * @component
- * @returns {JSX.Element}
+ * @returns {JSX.Element} The main application scene with 3D city, overlays, and audio.
  */
 export default function NHS() {
   // UI states
