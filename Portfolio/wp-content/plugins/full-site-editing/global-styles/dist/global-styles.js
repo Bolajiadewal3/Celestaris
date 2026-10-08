@@ -475,7 +475,7 @@ __("Your active theme doesn't support %s.", 'full-site-editing'), unsupportedFea
 const {
   STORE_NAME,
   REST_PATH
-} = JETPACK_GLOBAL_STYLES_EDITOR_CONSTANTS; // eslint-disable-line no-undef
+} = JETPACK_GLOBAL_STYLES_EDITOR_CONSTANTS;  
 
 let cache = {};
 let alreadyFetchedOptions = false;
@@ -531,7 +531,7 @@ const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.createReduxStore)(
     }
   },
   resolvers: {
-    // eslint-disable-next-line no-unused-vars
+     
     *getOption(key) {
       if (alreadyFetchedOptions) {
         return; // do nothing
@@ -780,7 +780,7 @@ __webpack_require__.r(__webpack_exports__);
 // Global data passed from PHP.
 const {
   PLUGIN_NAME
-} = JETPACK_GLOBAL_STYLES_EDITOR_CONSTANTS; // eslint-disable-line no-undef
+} = JETPACK_GLOBAL_STYLES_EDITOR_CONSTANTS;  
 
 (0,_src_dom_updater__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)([_src_constants__WEBPACK_IMPORTED_MODULE_3__/* .FONT_BASE */ .uI, _src_constants__WEBPACK_IMPORTED_MODULE_3__/* .FONT_HEADINGS */ .M0], (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.select)(_src_store__WEBPACK_IMPORTED_MODULE_6__/* .store */ .M).getOption);
 (0,_wordpress_plugins__WEBPACK_IMPORTED_MODULE_2__.registerPlugin)(PLUGIN_NAME, {

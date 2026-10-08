@@ -21,7 +21,7 @@
  */
 /* global ActiveXObject */
 
-/* eslint-disable */
+ 
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module.
@@ -48,7 +48,7 @@
 	}
 
 }(function ($) {
-/* eslint-enable */
+ 
 	'use strict';
 
 	/*
@@ -168,7 +168,7 @@
 		// IE requires javascript:false in https, but this breaks chrome >83 and goes against spec.
 		// Instead of using javascript:false always, let's only apply it for IE.
 		isMsie = /(MSIE|Trident)/.test(navigator.userAgent || '');
-		iframeSrc = (isMsie && /^https/i.test(window.location.href || '')) ? 'javascript:false' : 'about:blank'; // eslint-disable-line no-script-url
+		iframeSrc = (isMsie && /^https/i.test(window.location.href || '')) ? 'javascript:false' : 'about:blank';  
 
 		options = $.extend(true, {
 			url       : url,
@@ -651,7 +651,7 @@
 
 					} catch (e) {
 						log('Server abort: ', e, ' (', e.name, ')');
-						cb(SERVER_ABORT);				// eslint-disable-line callback-return
+						cb(SERVER_ABORT);				 
 						if (timeoutHandle) {
 							clearTimeout(timeoutHandle);
 						}
@@ -831,11 +831,11 @@
 						}
 
 					} else if (dt === 'xml' && !xhr.responseXML && xhr.responseText) {
-						xhr.responseXML = toXml(xhr.responseText);			// eslint-disable-line no-use-before-define
+						xhr.responseXML = toXml(xhr.responseText);			 
 					}
 
 					try {
-						data = httpData(xhr, dt, s);						// eslint-disable-line no-use-before-define
+						data = httpData(xhr, dt, s);						 
 
 					} catch (err) {
 						status = 'parsererror';
@@ -924,7 +924,7 @@
 			};
 			var parseJSON = $.parseJSON || function(s) {
 				/* jslint evil:true */
-				return window['eval']('(' + s + ')');			// eslint-disable-line dot-notation
+				return window['eval']('(' + s + ')');			 
 			};
 
 			var httpData = function(xhr, type, s) { // mostly lifted from jq1.4.4
@@ -1299,12 +1299,12 @@
 			successful = true;
 		}
 
-		/* eslint-disable no-mixed-operators */
+		 
 		if (successful && (!n || el.disabled || t === 'reset' || t === 'button' ||
 			(t === 'checkbox' || t === 'radio') && !el.checked ||
 			(t === 'submit' || t === 'image') && el.form && el.form.clk !== el ||
 			tag === 'select' && el.selectedIndex === -1)) {
-		/* eslint-enable no-mixed-operators */
+		 
 			return null;
 		}
 
@@ -1438,7 +1438,7 @@
 				return true;
 
 			case 'select':
-				el.find('option').each(function(i) {				// eslint-disable-line consistent-return
+				el.find('option').each(function(i) {				 
 					this.selected = this.defaultSelected;
 					if (this.defaultSelected && !el[0].multiple) {
 						el[0].selectedIndex = i;

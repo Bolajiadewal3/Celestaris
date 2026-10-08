@@ -329,7 +329,7 @@ module.exports = window["wp"]["i18n"];
  *
  * Released on: December 13, 2021
  */
-/* eslint-disable no-param-reassign */
+ 
 function isObject(obj) {
     return (obj !== null &&
         typeof obj === 'object' &&
@@ -837,7 +837,7 @@ class Swiper {
           el: containerEl
         });
         swipers.push(new Swiper(newParams));
-      }); // eslint-disable-next-line no-constructor-return
+      });  
 
       return swipers;
     } // Swiper Instance
@@ -973,7 +973,7 @@ class Swiper {
     if (swiper.params.init) {
       swiper.init();
     } // Return app instance
-    // eslint-disable-next-line no-constructor-return
+     
 
     return swiper;
   }
@@ -1063,7 +1063,7 @@ class Swiper {
         }
       }
     } else {
-      // eslint-disable-next-line
+       
       if (view === 'current') {
         for (let i = activeIndex + 1; i < slides.length; i += 1) {
           const slideInView = exact ? slidesGrid[i] + slidesSizesGrid[i] - slidesGrid[activeIndex] < swiperSize : slidesGrid[i] - slidesGrid[activeIndex] < swiperSize;
@@ -1130,7 +1130,7 @@ class Swiper {
     const swiper = this;
     const currentDirection = swiper.params.direction;
     if (!newDirection) {
-      // eslint-disable-next-line
+       
       newDirection = currentDirection === 'horizontal' ? 'vertical' : 'horizontal';
     }
     if (newDirection === currentDirection || newDirection !== 'horizontal' && newDirection !== 'vertical') {
@@ -1474,7 +1474,7 @@ Swiper.use([_modules_resize_resize_js__WEBPACK_IMPORTED_MODULE_6__/* ["default"]
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   A: () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* eslint-disable no-underscore-dangle */
+ 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   on(events, handler, priority) {
     const self = this;
@@ -1760,7 +1760,7 @@ function onScroll() {
     swiper.translate = -wrapperEl.scrollLeft;
   } else {
     swiper.translate = -wrapperEl.scrollTop;
-  } // eslint-disable-next-line
+  }  
 
   if (swiper.translate === 0) swiper.translate = 0;
   swiper.updateActiveIndex();
@@ -2014,7 +2014,7 @@ function onTouchMove(event) {
     if (swiper.isHorizontal() && touches.currentY === touches.startY || swiper.isVertical() && touches.currentX === touches.startX) {
       data.isScrolling = false;
     } else {
-      // eslint-disable-next-line
+       
       if (diffX * diffX + diffY * diffY >= 25) {
         touchAngle = Math.atan2(Math.abs(diffY), Math.abs(diffX)) * 180 / Math.PI;
         data.isScrolling = swiper.isHorizontal() ? touchAngle > params.touchAngle : 90 - touchAngle > params.touchAngle;
@@ -2178,7 +2178,7 @@ function onTouchStart(event) {
   if (!data.isTouchEvent && 'button' in e && e.button > 0) return;
   if (data.isTouched && data.isMoved) return; // change target el for shadow root component
 
-  const swipingClassHasValue = !!params.noSwipingClass && params.noSwipingClass !== ''; // eslint-disable-next-line
+  const swipingClassHasValue = !!params.noSwipingClass && params.noSwipingClass !== '';  
 
   const eventPath = event.composedPath ? event.composedPath() : event.path;
   if (swipingClassHasValue && e.target && e.target.shadowRoot && eventPath) {
@@ -2772,7 +2772,7 @@ function slideNext(speed = this.params.speed, runCallbacks = true, internal) {
   const increment = swiper.activeIndex < params.slidesPerGroupSkip ? 1 : perGroup;
   if (params.loop) {
     if (animating && params.loopPreventsSlide) return false;
-    swiper.loopFix(); // eslint-disable-next-line
+    swiper.loopFix();  
 
     swiper._clientLeft = swiper.$wrapperEl[0].clientLeft;
   }
@@ -2804,7 +2804,7 @@ function slidePrev(speed = this.params.speed, runCallbacks = true, internal) {
   if (!enabled) return swiper;
   if (params.loop) {
     if (animating && params.loopPreventsSlide) return false;
-    swiper.loopFix(); // eslint-disable-next-line
+    swiper.loopFix();  
 
     swiper._clientLeft = swiper.$wrapperEl[0].clientLeft;
   }
@@ -3694,7 +3694,7 @@ function updateClickedSlide(e) {
 function updateProgress(translate) {
   const swiper = this;
   if (typeof translate === 'undefined') {
-    const multiplier = swiper.rtlTranslate ? -1 : 1; // eslint-disable-next-line
+    const multiplier = swiper.rtlTranslate ? -1 : 1;  
 
     translate = swiper && swiper.translate && swiper.translate * multiplier || 0;
   }
@@ -3868,7 +3868,7 @@ function updateSlides() {
     if (gridEnabled) {
       swiper.grid.updateSlide(i, slide, slidesLength, getDirectionLabel);
     }
-    if (slide.css('display') === 'none') continue; // eslint-disable-line
+    if (slide.css('display') === 'none') continue;  
 
     if (params.slidesPerView === 'auto') {
       if (shouldResetSlideSize) {
@@ -3886,7 +3886,7 @@ function updateSlides() {
       if (params.roundLengths) {
         slideSize = swiper.isHorizontal() ? slide.outerWidth(true) : slide.outerHeight(true);
       } else {
-        // eslint-disable-next-line
+         
         const width = getDirectionPropertyValue(slideStyles, 'width');
         const paddingLeft = getDirectionPropertyValue(slideStyles, 'padding-left');
         const paddingRight = getDirectionPropertyValue(slideStyles, 'padding-right');
@@ -6226,7 +6226,7 @@ function History({
 /* harmony export */ });
 /* harmony import */ var ssr_window__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4620);
 /* harmony import */ var _shared_dom_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8978);
-/* eslint-disable consistent-return */
+ 
 
 
 function Keyboard({
@@ -6293,7 +6293,7 @@ function Keyboard({
       for (let i = 0; i < swiperCoord.length; i += 1) {
         const point = swiperCoord[i];
         if (point[0] >= 0 && point[0] <= windowWidth && point[1] >= 0 && point[1] <= windowHeight) {
-          if (point[0] === 0 && point[1] === 0) continue; // eslint-disable-line
+          if (point[0] === 0 && point[1] === 0) continue;  
 
           inView = true;
         }
@@ -6523,7 +6523,7 @@ function Lazy({
     for (let i = 0; i < swiperCoord.length; i += 1) {
       const point = swiperCoord[i];
       if (point[0] >= 0 && point[0] <= scrollElementWidth && point[1] >= 0 && point[1] <= scrollElementHeight) {
-        if (point[0] === 0 && point[1] === 0) continue; // eslint-disable-line
+        if (point[0] === 0 && point[1] === 0) continue;  
 
         inView = true;
       }
@@ -6846,7 +6846,7 @@ function removeSlide(slidesIndexes) {
 /* harmony import */ var ssr_window__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4620);
 /* harmony import */ var _shared_dom_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8978);
 /* harmony import */ var _shared_utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7859);
-/* eslint-disable consistent-return */
+ 
 
 
 
@@ -7334,7 +7334,7 @@ function Navigation({
   }
   on('init', () => {
     if (swiper.params.navigation.enabled === false) {
-      // eslint-disable-next-line
+       
       disable();
     } else {
       init();
@@ -7705,7 +7705,7 @@ function Pagination({
   }
   on('init', () => {
     if (swiper.params.pagination.enabled === false) {
-      // eslint-disable-next-line
+       
       disable();
     } else {
       init();
@@ -8218,7 +8218,7 @@ function Scrollbar({
   }
   on('init', () => {
     if (swiper.params.scrollbar.enabled === false) {
-      // eslint-disable-next-line
+       
       disable();
     } else {
       init();
@@ -8319,7 +8319,7 @@ function Thumb({
     if (swiper.params.loop) {
       let currentIndex = swiper.activeIndex;
       if (swiper.slides.eq(currentIndex).hasClass(swiper.params.slideDuplicateClass)) {
-        swiper.loopFix(); // eslint-disable-next-line
+        swiper.loopFix();  
 
         swiper._clientLeft = swiper.$wrapperEl[0].clientLeft;
         currentIndex = swiper.activeIndex;
@@ -8392,7 +8392,7 @@ function Thumb({
       let direction;
       if (thumbsSwiper.params.loop) {
         if (thumbsSwiper.slides.eq(currentThumbsIndex).hasClass(thumbsSwiper.params.slideDuplicateClass)) {
-          thumbsSwiper.loopFix(); // eslint-disable-next-line
+          thumbsSwiper.loopFix();  
 
           thumbsSwiper._clientLeft = thumbsSwiper.$wrapperEl[0].clientLeft;
           currentThumbsIndex = thumbsSwiper.activeIndex;
@@ -9278,7 +9278,7 @@ function Zoom({
 /* harmony export */   A: () => (/* binding */ classesToSelector)
 /* harmony export */ });
 function classesToSelector(classes = '') {
-  return `.${classes.trim().replace(/([\.:!\/])/g, '\\$1') // eslint-disable-line
+  return `.${classes.trim().replace(/([\.:!\/])/g, '\\$1')  
   .replace(/ /g, '.')}`;
 }
 
@@ -9568,7 +9568,7 @@ function calcDevice({
   };
   const screenWidth = window.screen.width;
   const screenHeight = window.screen.height;
-  const android = ua.match(/(Android);?[\s\/]+([\d.]+)?/); // eslint-disable-line
+  const android = ua.match(/(Android);?[\s\/]+([\d.]+)?/);  
 
   let ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
   const ipod = ua.match(/(iPod)(.*OS\s([\d_]+))?/);
@@ -9623,7 +9623,7 @@ function calcSupport() {
       let supportsPassive = false;
       try {
         const opts = Object.defineProperty({}, 'passive', {
-          // eslint-disable-next-line
+           
           get() {
             supportsPassive = true;
           }
@@ -9733,7 +9733,7 @@ function isObject(o) {
   return typeof o === 'object' && o !== null && o.constructor && Object.prototype.toString.call(o).slice(8, -1) === 'Object';
 }
 function isNode(node) {
-  // eslint-disable-next-line
+   
   if ( true && typeof window.HTMLElement !== 'undefined') {
     return node instanceof HTMLElement;
   }
@@ -9958,7 +9958,7 @@ _core_core_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .A.use(modules);
  */
 
 
-/* eslint-disable no-proto */
+ 
 function makeReactive(obj) {
   const proto = obj.__proto__;
   Object.defineProperty(obj, '__proto__', {
@@ -10005,7 +10005,7 @@ function toCamelCase(string) {
   return string.toLowerCase().replace(/-(.)/g, (match, group) => group.toUpperCase());
 }
 
-// eslint-disable-next-line
+ 
 
 function qsa(selector, context) {
   if (typeof selector !== 'string') {
@@ -10055,7 +10055,7 @@ function $(selector, context) {
 }
 $.fn = Dom7.prototype;
 
-// eslint-disable-next-line
+ 
 
 function addClass(...classes) {
   const classNames = arrayFlat(classes.map(c => c.split(' ')));
@@ -10168,7 +10168,7 @@ function removeData(key) {
 function dataset() {
   const el = this[0];
   if (!el) return undefined;
-  const dataset = {}; // eslint-disable-line
+  const dataset = {};  
 
   if (el.dataset) {
     for (const dataKey in el.dataset) {
@@ -10244,7 +10244,7 @@ function on(...args) {
       eventData.unshift(e);
     }
     if ($(target).is(targetSelector)) listener.apply(target, eventData);else {
-      const parents = $(target).parents(); // eslint-disable-line
+      const parents = $(target).parents();  
 
       for (let k = 0; k < parents.length; k += 1) {
         if ($(parents[k]).is(targetSelector)) listener.apply(parents[k], eventData);
@@ -10564,7 +10564,7 @@ function index() {
   let child = this[0];
   let i;
   if (child) {
-    i = 0; // eslint-disable-next-line
+    i = 0;  
 
     while ((child = child.previousSibling) !== null) {
       if (child.nodeType === 1) i += 1;
@@ -10680,7 +10680,7 @@ function nextAll(selector) {
   let el = this[0];
   if (!el) return $([]);
   while (el.nextElementSibling) {
-    const next = el.nextElementSibling; // eslint-disable-line
+    const next = el.nextElementSibling;  
 
     if (selector) {
       if ($(next).is(selector)) nextEls.push(next);
@@ -10708,7 +10708,7 @@ function prevAll(selector) {
   let el = this[0];
   if (!el) return $([]);
   while (el.previousElementSibling) {
-    const prev = el.previousElementSibling; // eslint-disable-line
+    const prev = el.previousElementSibling;  
 
     if (selector) {
       if ($(prev).is(selector)) prevEls.push(prev);
@@ -10721,7 +10721,7 @@ function siblings(selector) {
   return this.nextAll(selector).add(this.prevAll(selector));
 }
 function parent(selector) {
-  const parents = []; // eslint-disable-line
+  const parents = [];  
 
   for (let i = 0; i < this.length; i += 1) {
     if (this[i].parentNode !== null) {
@@ -10735,10 +10735,10 @@ function parent(selector) {
   return $(parents);
 }
 function parents(selector) {
-  const parents = []; // eslint-disable-line
+  const parents = [];  
 
   for (let i = 0; i < this.length; i += 1) {
-    let parent = this[i].parentNode; // eslint-disable-line
+    let parent = this[i].parentNode;  
 
     while (parent) {
       if (selector) {
@@ -10752,7 +10752,7 @@ function parents(selector) {
   return $(parents);
 }
 function closest(selector) {
-  let closest = this; // eslint-disable-line
+  let closest = this;  
 
   if (typeof selector === 'undefined') {
     return $([]);
@@ -10773,7 +10773,7 @@ function find(selector) {
   return $(foundElements);
 }
 function children(selector) {
-  const children = []; // eslint-disable-line
+  const children = [];  
 
   for (let i = 0; i < this.length; i += 1) {
     const childNodes = this[i].children;
@@ -10821,7 +10821,7 @@ function empty() {
   return this;
 }
 
-// eslint-disable-next-line
+ 
 
 function scrollTo(...args) {
   const window = getWindow();
@@ -10839,9 +10839,9 @@ function scrollTo(...args) {
     let maxLeft;
     let newTop;
     let newLeft;
-    let scrollTop; // eslint-disable-line
+    let scrollTop;  
 
-    let scrollLeft; // eslint-disable-line
+    let scrollLeft;  
 
     let animateTop = top > 0 || top === 0;
     let animateLeft = left > 0 || left === 0;
@@ -10934,7 +10934,7 @@ function scrollLeft(...args) {
   return dom.scrollTo(left, undefined, duration, easing, callback);
 }
 
-// eslint-disable-next-line
+ 
 
 function animate(initialProps, initialParams) {
   const window = getWindow();
@@ -11039,7 +11039,7 @@ function animate(initialProps, initialParams) {
           startTime = time;
         }
         if (params.progress) {
-          // eslint-disable-next-line
+           
           params.progress(els, Math.max(Math.min((time - startTime) / params.duration, 1), 0), startTime + params.duration - time < 0 ? 0 : startTime + params.duration - time, startTime);
         }
         elements.forEach(element => {

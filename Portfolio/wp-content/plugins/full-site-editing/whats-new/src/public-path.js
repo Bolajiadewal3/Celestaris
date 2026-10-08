@@ -6,6 +6,6 @@
  * @see https://webpack.js.org/guides/public-path/#on-the-fly
  */
 if ( typeof window === 'object' && window.whatsNewAssetsUrl ) {
-	// eslint-disable-next-line no-global-assign
+	 
 	__webpack_public_path__ = window.whatsNewAssetsUrl;
 }

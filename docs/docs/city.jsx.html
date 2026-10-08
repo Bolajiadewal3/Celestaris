@@ -51,10 +51,9 @@
  * @module City
  * @category Scenes
  * @description The high-performance urban landing page.
- * * TEST
+ * This module renders a 3D city scene using Three.js and React Three Fiber, complete with dynamic day-night cycles, weather effects, and interactive UI overlays. It includes features such as achievement tracking, audio management, and camera animations to enhance user experience.
  * ![City View](City.png)
  * ![City View 2](City2.png)
- *
  */
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
@@ -109,7 +108,7 @@ import { AchievementToast } from "./Components/achievementToast";
 import { useAchievementStore } from "./Store/useAchievementStore";
 import { useEnvironmentStore } from './Store/useEnvironmentStore'; 
 import { GrandUnlockModal } from "./Components/grandUnlockModal";
-import { applyCurvedWorld } from "./Shaders/curvedWorld";
+//import { applyCurvedWorld } from "./Shaders/curvedWorld";
 
 const IS_IOS =
   /iPad|iPhone|iPod/.test(navigator.userAgent) ||
@@ -119,6 +118,10 @@ if (IS_IOS &amp;&amp; typeof window !== "undefined") {
   window.createImageBitmap = undefined;
 }
 
+/**
+ * Applies a swaying effect to fauna objects in the scene.
+ * @param scene
+ */
 function useFaunaSway(scene) {
   const faunaMaterialRef = useRef(null);
 
@@ -140,7 +143,10 @@ function useFaunaSway(scene) {
         if (isFauna) {
           const geo = child.geometry;
 
-          // 1. Calculate relative height (0.0 at base to 1.0 at top) regardless of origin
+/**
+ * If the geometry doesn't already have a height attribute, compute it.
+ * This attribute is used to determine how much each vertex should sway based on its height.
+ */
           if (!geo.attributes.aHeight) {
             if (!geo.boundingBox) geo.computeBoundingBox();
 
@@ -160,7 +166,10 @@ function useFaunaSway(scene) {
             geo.setAttribute("aHeight", new THREE.BufferAttribute(heights, 1));
           }
 
-          // 2. Clone material once
+          /**
+           * If we haven't already created a dedicated material for fauna, clone the existing material.
+           * This ensures that all fauna objects share the same shader logic without affecting other materials in the scene.
+           */
           if (!singleFaunaMaterial) {
             const baseMaterial = Array.isArray(child.material)
               ? child.material[0]
@@ -169,6 +178,10 @@ function useFaunaSway(scene) {
             singleFaunaMaterial = baseMaterial.clone();
             singleFaunaMaterial.name = "DedicatedFaunaMaterial";
 
+            /**
+             * Modifies the vertex shader to add a swaying effect based on vertex height.
+             * @param shader
+             */
             singleFaunaMaterial.onBeforeCompile = (shader) => {
               shader.uniforms.uTime = { value: 0 };
               singleFaunaMaterial.userData.shader = shader;
@@ -210,17 +223,24 @@ function useFaunaSway(scene) {
   });
 }
 
-// Add this helper function outside and above your component
+
+
+/**
+ * Checks if the current device is a mobile device.
+ *  @returns {boolean} True if the device is mobile, false otherwise.
+ */
 const isMobileDevice = () => {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent,
   );
 };
 
+/**
+ * Renders the 3D city model with all its associated effects, including fauna swaying, day-night cycles, and weather effects.
+ */
 function CityModel() {
   /**
    * The compressed scene model .GLB file
-   * @type {useGLTF}
    */
   const { scene } = useGLTF(
     `${import.meta.env.BASE_URL}City/City 5.glb`,
@@ -233,14 +253,6 @@ function CityModel() {
     scene.traverse((child) => {
       if (child.isMesh &amp;&amp; child.material) {
 
-        /*const materials = Array.isArray(child.material) 
-          ? child.material 
-          : [child.material];
-
-        materials.forEach((mat) => {
-          applyCurvedWorld(mat, 0.0015); // Tune curvature strength here (e.g., 0.001 to 0.003)
-          mat.needsUpdate = true;
-        });*/
         const before = child.material;
         
 
@@ -259,7 +271,12 @@ function CityModel() {
           console.log(`${child.name}: MISSING normal attribute`);
         }
 
-        // --- 1. MOBILE-SPECIFIC FIXES ---
+        /**
+         * If the device is mobile, apply optimizations to reduce rendering load.
+         * This includes limiting emissive intensity and disabling shadows for certain objects.
+         * @param child - The current mesh being processed in the scene.
+         */
+
         if (isMobile) {
           if (child.material.emissiveIntensity > 1) {
             child.material.emissiveIntensity = 1;
@@ -278,10 +295,14 @@ function CityModel() {
           }
         }
 
+
+/**
+ * If the material is a window, make it slightly transparent and adjust its roughness and metalness for a more realistic appearance.
+ */
         if (child.material.name.includes("Window")) {
           child.material.transparent = true;
           child.material.opacity = 0.9;
-          child.material.depthWrite = false; // Fixes internal geometry clipping
+          child.material.depthWrite = false; 
 
           if (child.material.roughness !== undefined) {
             child.material.roughness = 0.6;
@@ -323,6 +344,11 @@ function CityModel() {
   );
 }
 
+/**
+ * Manages the day-night cycle for the 3D scene.
+ * @param root0
+ * @param root0.speed
+ */
 function DayNightCycle({ speed = 0.07 }) {
   const sunRef = useRef();
   const { manualTime, isOverriding } = useEnvironmentStore();
@@ -352,7 +378,7 @@ function DayNightCycle({ speed = 0.07 }) {
     const dayFog = new THREE.Color("#87ceeb");
     const nightFog = new THREE.Color("#0a0c16");
 
-    // 1. Move Sun in a sky arc
+    /** Update sun position */
     if (sunRef.current) {
       sunRef.current.position.x = Math.cos(elapsed) * 100;
       sunRef.current.position.y = timeFactor * 80;
@@ -421,7 +447,6 @@ function DayNightCycle({ speed = 0.07 }) {
 
 /**
  * Preloads the city model in memory
- * @function
  * @category 3D Assets
  */
 useGLTF.preload(`${import.meta.env.BASE_URL}City/city-v2.glb`);
@@ -429,9 +454,8 @@ useGLTF.preload(`${import.meta.env.BASE_URL}City/city-v2.glb`);
 /**
  * CameraLight attaches a spotlight that follows the camera's position,
  * simulating a light source that moves with the viewer.
- *
  * @component
- * @returns {JSX.spotLight} - A spotlight that follows the camera
+ * @returns - A spotlight that follows the camera
  */
 function CameraLight() {
   const { camera } = useThree(); // Access the main camera from the scene
@@ -460,36 +484,30 @@ function CameraLight() {
 /**
  * Main application component rendering a Three.js city scene,
  * interactive UI overlays, banners, and ambient experience.
- *
- * @default
- * @component
- * @returns {JSX.Element}
+ * @default 
+ * @component 
+ * @returns - The complete city landing page with 3D scene and UI
  */
 export default function City() {
   // UI states
   const [controlsEnabled, setControlsEnabled] = useState(false);
   const [isOverlayActive, setOverlayActive] = useState(false);
   const [overlayContent, setOverlayContent] = useState([]);
-  //const [started, setStarted] = useState(false);
   const [openBannerId, setOpenBannerId] = useState(null);
   const [cameraAnimationDone, setcameraAnimationDone] = useState(null);
-  //const [cityLoaded, setCityLoaded] = useState(false);
   const [audioStarted, setAudioStarted] = useState(false);
-  const [initialAnimation, setInitialAnimation] = useState(false); // Unused?
+  const [showBigHeadings, setShowBigHeadings] = useState(false);
+
 
   // Camera/interaction state
   const controlsRef = useRef();
-  //const [currentCameraPos, setCurrentCameraPos] = useState([0, 0, 0]); // Reserved
   const [goToSmallText, setGoToSmallText] = useState(false);
   const [smallTextAnchor, setSmallTextAnchor] = useState([0, 0, 0]);
   const [smallTextLookAt, setSmallTextLookAt] = useState([0, 0, 0]);
   const [showExitButton, setShowExitButton] = useState(false);
-
-  const [showBigHeadings, setShowBigHeadings] = useState(false);
-
+  
   /**
    * Returns camera to initial view and re-enables controls after interacting with banners.
-   * @function
    * @returns {void}
    */
   const resetOrbit = () => {
@@ -501,8 +519,7 @@ export default function City() {
 
   /**
    * Toggles the overlay and OrbitControls simultaneously.
-   * @function
-   * @returns {boolean}
+   * @returns {void}
    */
   const toggleOverlay = () => {
     setOverlayActive((prev) => {
@@ -516,7 +533,7 @@ export default function City() {
 
   /**
    * Opens a specific overlay content section (projects, poetry, etc.).
-   * @param {"dissertation"|"miscellaneous"|"poetry"|"business"|"hci"|"music"|"showcase"|"documentation"} type - The content section to show.
+   * @param type - The content section to show.
    * @returns {void}
    */
   const openOverlay = (type) => {
@@ -598,8 +615,12 @@ export default function City() {
       setShowModal(true);
     }
   }, [isFullyUnlocked]);
+
+
   /**
    * The entire landing page
+   * @param root0
+   * @param root0.scene
    */
   return (
     &lt;div style={{ width: "100vw", height: "100vh", position: "relative" }}>
@@ -663,6 +684,7 @@ export default function City() {
 
         {!isOverlayActive &amp;&amp; &lt;AchievementTracker />}
 
+        {/** Task reminder */}
         {!isOverlayActive &amp;&amp; !isFullyUnlocked &amp;&amp; (
           &lt;div
             style={{
@@ -994,7 +1016,7 @@ export default function City() {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Thu Oct 08 2026 16:06:28 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Thu Oct 08 2026 21:41:55 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

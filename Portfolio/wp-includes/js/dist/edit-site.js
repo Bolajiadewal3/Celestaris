@@ -279,7 +279,7 @@ module.exports = window["React"];
  */
 
 /* eslint eslint-comments/no-unlimited-disable: 0 */
-/* eslint-disable */
+ 
 /* pako 1.0.10 nodeca/pako */(function(f){if(true){module.exports=f()}else { var g; }})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c=undefined;if(!f&&c)return require(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u=undefined,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
   'use strict';
 
@@ -3580,7 +3580,7 @@ module.exports = window["React"];
 
   },{"./utils/common":1,"./utils/strings":2,"./zlib/constants":4,"./zlib/gzheader":6,"./zlib/inflate":8,"./zlib/messages":10,"./zlib/zstream":11}]},{},[])("/lib/inflate.js")
   });
-/* eslint-enable */
+ 
 
 
 /***/ }),
@@ -3931,7 +3931,7 @@ async function loadView(config) {
  */
 
 /* eslint eslint-comments/no-unlimited-disable: 0 */
-/* eslint-disable */
+ 
 (function(f){if(true){module.exports=f()}else { var g; }})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c=undefined;if(!f&&c)return require(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u=undefined,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 /* Copyright 2013 Google Inc. All Rights Reserved.
 
@@ -5938,7 +5938,7 @@ module.exports = require('./dec/decode').BrotliDecompressBuffer;
 
 },{"./dec/decode":3}]},{},[12])(12)
 });
-/* eslint-enable */
+ 
 
 
 /***/ }),
@@ -10306,7 +10306,7 @@ function WelcomeGuidePage() {
           content: /* @__PURE__ */ (0,external_ReactJSXRuntime_namespaceObject.jsxs)(external_ReactJSXRuntime_namespaceObject.Fragment, { children: [
             /* @__PURE__ */ (0,external_ReactJSXRuntime_namespaceObject.jsx)("h1", { className: "edit-site-welcome-guide__heading", children: heading }),
             /* @__PURE__ */ (0,external_ReactJSXRuntime_namespaceObject.jsx)("p", { className: "edit-site-welcome-guide__text", children: (0,external_wp_i18n_namespaceObject.__)(
-              // eslint-disable-next-line no-restricted-syntax -- 'sidebar' is a common web design term for layouts
+               
               "It\u2019s now possible to edit page content in the site editor. To customise other parts of the page like the header and footer switch to editing the template using the settings sidebar."
             ) })
           ] })
@@ -14211,7 +14211,7 @@ var inflate_default = /*#__PURE__*/__webpack_require__.n(inflate);
  */
 
 /* eslint eslint-comments/no-unlimited-disable: 0 */
-/* eslint-disable */
+ 
 // import pako from 'pako';
 
 
@@ -18040,7 +18040,7 @@ class LongVertMetric {
 }
 var vmtx$1 = Object.freeze( { __proto__: null, vmtx: vmtx } );
 
-/* eslint-enable */
+ 
 
 ;// ./node_modules/@wordpress/edit-site/build-module/components/global-styles/font-library-modal/utils/make-families-from-faces.js
 
@@ -45498,7 +45498,7 @@ function AddCustomGenericTemplateModalContent({ createTemplate, onBack }) {
         disabled: isBusy,
         ref: inputRef,
         help: (0,external_wp_i18n_namespaceObject.__)(
-          // eslint-disable-next-line no-restricted-syntax -- 'sidebar' is a common web design term for layouts
+           
           'Describe the template, e.g. "Post with sidebar". A custom template can be manually applied to any post or page.'
         )
       }

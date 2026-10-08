@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+ 
 /* global _novaDragDrop */
 
 ( function ( $ ) {

@@ -4,11 +4,11 @@
   (factory((global.WHATWGFetch = {})));
 }(this, (function (exports) { 'use strict';
 
-  /* eslint-disable no-prototype-builtins */
+   
   var g =
     (typeof globalThis !== 'undefined' && globalThis) ||
     (typeof self !== 'undefined' && self) ||
-    // eslint-disable-next-line no-undef
+     
     (typeof global !== 'undefined' && global) ||
     {};
 
@@ -239,7 +239,7 @@
         semantic of setting Request.bodyUsed in the constructor before
         _initBody is called.
       */
-      // eslint-disable-next-line no-self-assign
+       
       this.bodyUsed = this.bodyUsed;
       this._bodyInit = body;
       if (!body) {

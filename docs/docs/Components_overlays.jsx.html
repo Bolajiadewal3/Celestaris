@@ -48,10 +48,11 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @module Components
  * @category Utility
  * @description Various overlay rendering functions
  */
+
+
 import { useState, useRef, useEffect } from "react";
 import { useTrail, animated, useSpring } from "@react-spring/web";
 import { useNavigate } from "react-router-dom";
@@ -62,12 +63,13 @@ import ReactMarkdown from "react-markdown";
 /**
  * Shows asset-loading progress while a scene's suspended assets load.
  * @category Loading
- * @returns {JSX.Element} The loading screen and progress indicator.
+ * @returns The loading screen and progress indicator.
  */
 function Loader() {
+
+
   /**
    * Variable that tracks the current progress on asset loading on the page
-   * @type {useProgress}
    */
   const { progress } = useProgress();
 
@@ -125,7 +127,9 @@ function Loader() {
 
 /**
  * Allows for a custom start screen with a button to start the experience; assets load on click and the page is not revealed until assets fully loaded
- * @function
+ * @param root0 
+ * @param root0.onStart
+ * @param root0.visible
  * @category Loading
  * @deprecated use Loader() instead
  */
@@ -185,24 +189,26 @@ function StartScreen({ onStart, visible }) {
   );
 }
 
+
+
+
 /**
  * An entry displayed in the scene's project and content overlay.
- * @typedef {Object} OverlayItem
- * @property {string} title - The entry title.
- * @property {string} [abstract] - Short description shown in the list and as a detail fallback.
- * @property {string} [siteLink] - External destination opened from the list.
- * @property {string} [markdown] - Markdown file or URL loaded for the detail view.
- * @property {string} [iframeUrl] - Embedded page shown in the detail view.
- * @property {boolean} [WIP] - Whether the entry is marked as work in progress.
+ * title - The entry title.
+ * [abstract] - Short description shown in the list and as a detail fallback.
+ * [siteLink] - External destination opened from the list.
+ * [markdown] - Markdown file or URL loaded for the detail view.
+ * [iframeUrl] - Embedded page shown in the detail view.
+ * [WIP] - Whether the entry is marked as work in progress.
  */
 /**
  * Displays a selectable list of content and renders the selected Markdown or embedded page.
  * @category Overlay
- * @param {Object} props - Overlay state and content.
- * @param {boolean} props.isActive - Whether the overlay is visible and interactive.
- * @param {function():void} props.onClose - Called when the visitor exits the overlay.
- * @param {OverlayItem[]} [props.items=[]] - Entries available in the list view.
- * @returns {JSX.Element} The animated list or selected content view.
+ * @param props - Overlay state and content.
+ * @param props.isActive - Whether the overlay is visible and interactive.
+ * @param props.onClose - Called when the visitor exits the overlay.
+ * @param [props.items] - Entries available in the list view.
+ * @returns The animated list or selected content view.
  */
 function Overlay({ isActive, onClose, items = [] }) {
   const navigate = useNavigate();
@@ -239,12 +245,19 @@ function Overlay({ isActive, onClose, items = [] }) {
     config: { mass: 1, tension: 150, friction: 100, delay: 100 },
   });
 
+  /**
+   * Opens the markdown content for the selected item.
+   * @param item
+   */
   const handleOpenMarkdown = (item) => {
     playSFX("overlay_wipe", 0.3);
 
-    wipeApi.start({
+    const _anim = wipeApi.start({
       from: { transform: "translateX(100%)" },
       to: { transform: "translateX(0%)" },
+      /**
+       * Called when the animation completes.
+       */
       onRest: async () => {
         setSelectedItem(item);
         setViewMode("detail");
@@ -276,33 +289,48 @@ function Overlay({ isActive, onClose, items = [] }) {
 
         setIsLoadingContent(false);
 
-        wipeApi.start({
+        const _anim = wipeApi.start({
           to: { transform: "translateX(-100%)" },
+          /**
+           *
+           */
           onRest: () => wipeApi.set({ transform: "translateX(100%)" }),
         });
       },
     });
   };
 
+  /**
+   * Handles the back to list action.
+   */
   const handleBackToList = () => {
     playSFX("overlay_wipe", 0.3);
 
-    wipeApi.start({
+    const _anim = wipeApi.start({
       from: { transform: "translateX(100%)" },
       to: { transform: "translateX(0%)" },
+      /**
+       *
+       */
       onRest: () => {
         setViewMode("list");
         setSelectedItem(null);
         setMarkdownContent("");
 
-        wipeApi.start({
+        const _anim2 = wipeApi.start({
           to: { transform: "translateX(-100%)" },
+          /**
+           *
+           */
           onRest: () => wipeApi.set({ transform: "translateX(100%)" }),
         });
       },
     });
   };
 
+  /**
+   * Closes all overlays and resets the view.
+   */
   const handleCloseAll = () => {
     setViewMode("list");
     setSelectedItem(null);
@@ -310,8 +338,12 @@ function Overlay({ isActive, onClose, items = [] }) {
     onClose();
   };
 
-  // Compact, highly responsive typography mapping for markdown
   const markdownComponents = {
+    /**
+     * Renders an h1 heading.
+     * @param root0
+     * @param root0.children
+     */
     h1: ({ children }) => (
       &lt;h1
         style={{
@@ -324,6 +356,11 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       &lt;/h1>
     ),
+    /**
+     * Renders an h2 heading.
+     * @param root0
+     * @param root0.children
+     */
     h2: ({ children }) => (
       &lt;h2
         style={{
@@ -336,6 +373,11 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       &lt;/h2>
     ),
+    /**
+     * Renders an h3 heading.
+     * @param root0
+     * @param root0.children
+     */
     h3: ({ children }) => (
       &lt;h3
         style={{
@@ -348,6 +390,11 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       &lt;/h3>
     ),
+    /**
+     * Renders a paragraph.
+     * @param root0
+     * @param root0.children
+     */
     p: ({ children }) => (
       &lt;p
         style={{
@@ -360,6 +407,11 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       &lt;/p>
     ),
+    /**
+     * Renders a list item.
+     * @param root0
+     * @param root0.children
+     */
     li: ({ children }) => (
       &lt;li
         style={{
@@ -372,6 +424,11 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       &lt;/li>
     ),
+    /**
+     * Renders inline code.
+     * @param root0
+     * @param root0.children
+     */
     code: ({ children }) => (
       &lt;code
         style={{
@@ -602,9 +659,9 @@ function Overlay({ isActive, onClose, items = [] }) {
 /**
  * Toggles looping ambient audio for the current scene.
  * @category Button
- * @param {Object} props
- * @param {string} props.url - Audio file URL to play.
- * @returns {JSX.Element} The play or mute button.
+ * @param props
+ * @param props.url - Audio file URL to play.
+ * @returns The play or mute button.
  */
 function AudioButton({ url }) {
   const [playing, setPlaying] = useState(false);
@@ -621,6 +678,9 @@ function AudioButton({ url }) {
     };
   }, [url]);
 
+  /**
+   *
+   */
   const toggleAudio = () => {
     if (!audioRef.current) {
       audioRef.current = new Audio(url);
@@ -655,12 +715,15 @@ function AudioButton({ url }) {
 /**
  * Toggles visibility of the scene's large headings.
  * @category Button
- * @param {Object} props
- * @param {boolean} props.showHeadings - Whether headings are currently visible.
- * @param {Function} props.setShowHeadings - React state setter for heading visibility.
- * @returns {JSX.Element} The show/hide headings button.
+ * @param props
+ * @param props.showHeadings - Whether headings are currently visible.
+ * @param props.setShowHeadings - React state setter for heading visibility.
+ * @returns The show/hide headings button.
  */
 function HeadingsButton({ showHeadings, setShowHeadings }) {
+  /**
+   *
+   */
   const toggleHeadings = () => {
     // This toggles the boolean to its opposite value
     setShowHeadings((prev) => !prev);
@@ -705,9 +768,9 @@ function DocumentationButton() {
 /**
  * Opens the documentation content from the current scene.
  * @category Button
- * @param {Object} props
- * @param {Function} props.onClick - Callback that opens the documentation content.
- * @returns {JSX.Element} The documentation button.
+ * @param props
+ * @param props.onClick - Callback that opens the documentation content.
+ * @returns The documentation button.
  */
 function DocumentationButton({ onClick }) {
   return (
@@ -728,7 +791,7 @@ function DocumentationButton({ onClick }) {
 /**
  * Opens the resume PDF in a separate browser tab.
  * @category Button
- * @returns {JSX.Element} The resume link.
+ * @returns The resume link.
  */
 function ResumeButton() {
   return (
@@ -771,7 +834,7 @@ export {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Thu Oct 08 2026 16:06:28 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Thu Oct 08 2026 21:41:55 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

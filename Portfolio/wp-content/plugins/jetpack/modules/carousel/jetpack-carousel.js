@@ -1,5 +1,5 @@
 /* global wpcom, jetpackCarouselStrings, DocumentTouch */
-/* eslint-disable no-shadow */
+ 
 
 ( function () {
 	'use strict';
@@ -871,7 +871,7 @@
 			var urlObj;
 			try {
 				urlObj = new URL( url );
-				// eslint-disable-next-line no-unused-vars
+				 
 			} catch ( e ) {
 				return url;
 			}
