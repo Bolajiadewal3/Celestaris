@@ -10,7 +10,6 @@
    <p>
       <a href="https://bolajiadewal3.github.io/Celestaris/"><img alt="Live Demo" src="https://img.shields.io/badge/Live%20Demo-Visit%20Site-2ea44f?logo=githubpages&logoColor=white"></a>
       <a href="https://bolajiadewal3.github.io/Celestaris/"><img alt="Demo status" src="https://img.shields.io/website?url=https%3A%2F%2Fbolajiadewal3.github.io%2FCelestaris%2F&label=demo%20status"></a>
-      <img alt="License ISC" src="https://img.shields.io/badge/License-ISC-blue">
    </p>
 </div>
 
