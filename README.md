@@ -37,7 +37,7 @@ flowchart TD
    Browser[Browser] --> App[React application<br/>src/root.jsx]
    App --> Router[React Router]
 
-   Router --> City[City scene<br/>/city.jsx]
+   Router --> City[City scene<br/>/src/city.jsx]
 
    City --> Renderer[React Three Fiber + Three.js]
 
