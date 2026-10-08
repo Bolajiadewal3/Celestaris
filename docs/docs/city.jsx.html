@@ -64,10 +64,12 @@ import * as THREE from "three";
 import {
   Vignette,
   Bloom,
-  BrightnessContrast,
+  Noise, 
+  ChromaticAberration,
   EffectComposer,
   HueSaturation,
 } from "@react-three/postprocessing";
+import { BlendMode } from "postprocessing";
 
 import projectData from "./Data/Business Intelligence &amp; Analytics.json";
 import poetryData from "./Data/Poetry.json";
@@ -97,6 +99,17 @@ import {
 } from "./Components/cameraAnimations.jsx";
 
 import { degreesToRadians } from "./utils";
+
+import { AchievementTracker } from "./Components/achievementTracker";
+import { EnvironmentControls } from "./Components/environmentControls";
+import { RainSystem, WeatherManager } from "./Components/rainSystem";
+import { WetRoad } from "./Components/wetRoad";
+import { AchievementToast } from "./Components/achievementToast";
+
+import { useAchievementStore } from "./Store/useAchievementStore";
+import { useEnvironmentStore } from './Store/useEnvironmentStore'; 
+import { GrandUnlockModal } from "./Components/grandUnlockModal";
+import { applyCurvedWorld } from "./Shaders/curvedWorld";
 
 const IS_IOS =
   /iPad|iPhone|iPod/.test(navigator.userAgent) ||
@@ -218,19 +231,18 @@ function CityModel() {
     const isMobile = isMobileDevice();
 
     scene.traverse((child) => {
-      if (child.isMesh) {
+      if (child.isMesh &amp;&amp; child.material) {
+
+        /*const materials = Array.isArray(child.material) 
+          ? child.material 
+          : [child.material];
+
+        materials.forEach((mat) => {
+          applyCurvedWorld(mat, 0.0015); // Tune curvature strength here (e.g., 0.001 to 0.003)
+          mat.needsUpdate = true;
+        });*/
         const before = child.material;
-        console.log(`[BEFORE] ${child.name || "unnamed"}`, {
-          matName: before.name,
-          type: before.type,
-          color: before.color?.getHexString(),
-          vertexColors: before.vertexColors,
-          map: !!before.map,
-          emissive: before.emissive?.getHexString(),
-          emissiveIntensity: before.emissiveIntensity,
-          transparent: before.transparent,
-          opacity: before.opacity,
-        });
+        
 
         if (child.geometry?.attributes?.normal) {
           const arr = child.geometry.attributes.normal.array;
@@ -249,31 +261,10 @@ function CityModel() {
 
         // --- 1. MOBILE-SPECIFIC FIXES ---
         if (isMobile) {
-          // Tame Emissives
           if (child.material.emissiveIntensity > 1) {
             child.material.emissiveIntensity = 1;
           }
 
-          // Downgrade Materials
-          /*
-          if (
-            child.material.type === "MeshStandardMaterial" ||
-            child.material.type === "MeshPhysicalMaterial"
-          ) {
-            const simplifiedMaterial = new THREE.MeshLambertMaterial({
-              name: child.material.name, // CRITICAL: Keep name for the Window check below
-              color: child.material.color,
-              map: child.material.map,
-              emissive: child.material.emissive,
-              emissiveIntensity: child.material.emissiveIntensity,
-              transparent: child.material.transparent,
-              opacity: child.material.opacity,
-            });
-
-            child.material.dispose();
-            child.material = simplifiedMaterial;
-          }
-            */
 
           const isFoliageOrCar =
             child.name.includes("Tree") ||
@@ -287,27 +278,20 @@ function CityModel() {
           }
         }
 
-        // --- 2. YOUR EXISTING WINDOW LOGIC ---
-        // (Runs for both desktop and mobile, applying to whatever material is active)
         if (child.material.name.includes("Window")) {
           child.material.transparent = true;
           child.material.opacity = 0.9;
           child.material.depthWrite = false; // Fixes internal geometry clipping
 
-          // Lambert doesn't have roughness, so only apply it if it exists (i.e., on desktop)
           if (child.material.roughness !== undefined) {
-            child.material.roughness = 0.1;
+            child.material.roughness = 0.6;
+            child.material.metalness = 0.1;
+
           }
         }
 
         const after = child.material;
-        console.log(`[AFTER]  ${child.name || "unnamed"}`, {
-          matName: after.name,
-          type: after.type,
-          color: after.color?.getHexString(),
-          vertexColors: after.vertexColors,
-          map: !!after.map,
-        });
+ 
       }
     });
   }, [scene]);
@@ -341,11 +325,24 @@ function CityModel() {
 
 function DayNightCycle({ speed = 0.07 }) {
   const sunRef = useRef();
+  const { manualTime, isOverriding } = useEnvironmentStore();
+
 
   useFrame(({ clock, scene }) => {
-    const elapsed = clock.getElapsedTime() * speed;
-    // Values range from -1 (midnight) to 1 (noon)
-    const timeFactor = Math.sin(elapsed);
+    // Determine elapsed time factor: either manual slider override or automatic clock
+    let timeFactor;
+    let elapsed;
+
+    if (isOverriding &amp;&amp; manualTime !== null) {
+      // Map 0-24 hour slider to the -1 to 1 sinusoidal range used by your logic
+      // 6 AM = -1 (midnight-ish / dawn start), 12 PM = 1 (noon), etc.
+      elapsed = (manualTime / 24) * Math.PI * 2;
+      timeFactor = Math.sin(elapsed - Math.PI / 2); // Shifts peak to noon
+    } else {
+      elapsed = clock.getElapsedTime() * speed;
+      timeFactor = Math.sin(elapsed);
+    }
+
     const isNight = timeFactor &lt; 0;
 
     const daySky = new THREE.Color("#70a1ff");
@@ -361,7 +358,7 @@ function DayNightCycle({ speed = 0.07 }) {
       sunRef.current.position.y = timeFactor * 80;
       sunRef.current.position.z = Math.sin(elapsed) * 40;
 
-      // Keep sun light moderate (0.1 moon, 1.1 daylight max)
+      // Keep sun light moderate
       sunRef.current.intensity = THREE.MathUtils.clamp(
         timeFactor * 0.15,
         0.1,
@@ -409,7 +406,7 @@ function DayNightCycle({ speed = 0.07 }) {
         });
       }
     });
-  });
+});
 
   return (
     &lt;directionalLight
@@ -519,15 +516,15 @@ export default function City() {
 
   /**
    * Opens a specific overlay content section (projects, poetry, etc.).
-   * @function
-   * @param {string} type - The type of content to open in the overlay.
+   * @param {"dissertation"|"miscellaneous"|"poetry"|"business"|"hci"|"music"|"showcase"|"documentation"} type - The content section to show.
+   * @returns {void}
    */
   const openOverlay = (type) => {
     playSFX("open_overlay", 0.15);
 
     switch (type) {
       case "dissertation":
-        console.log(dissertationData.projects);
+        //console.log(dissertationData.projects);
         setOverlayContent(dissertationData.projects);
         break;
 
@@ -591,6 +588,16 @@ export default function City() {
     };
   }, []);
 
+  const isFullyUnlocked = useAchievementStore((state) => state.isFullyUnlocked);
+  console.log(isFullyUnlocked);
+
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (isFullyUnlocked) {
+      setShowModal(true);
+    }
+  }, [isFullyUnlocked]);
   /**
    * The entire landing page
    */
@@ -654,11 +661,35 @@ export default function City() {
           >&lt;/HeadingsButton>
         )}
 
+        {!isOverlayActive &amp;&amp; &lt;AchievementTracker />}
+
+        {!isOverlayActive &amp;&amp; !isFullyUnlocked &amp;&amp; (
+          &lt;div
+            style={{
+              position: "fixed",
+              bottom: "20px",
+              width: "100%",
+              textAlign: "center",
+              zIndex: 10,
+              color: "#00ffcc",
+              pointerEvents: "none",
+            }}
+          >
+            TASK:: FIND ALL THE DATA POINTS
+          &lt;/div>
+        )}
+
+        {!isOverlayActive &amp;&amp; &lt;EnvironmentControls />}
+
+        {!isOverlayActive &amp;&amp;&lt;AchievementToast />}
+
+        {!isOverlayActive &amp;&amp; (&lt;GrandUnlockModal isOpen={showModal} onClose={() => setShowModal(false)} />)}
+
         {/** The 3D scene with dark grey background */}
         &lt;Canvas
           frameloop="always"
           style={{
-            pointerEvents: isOverlayActive ? "none" : "auto",
+            pointerEvents: isOverlayActive || !cameraAnimationDone ? "none" : "auto",
           }}
           shadows
           camera={{ position: [0, 70, 500], fov: 50 }}
@@ -705,6 +736,7 @@ export default function City() {
           )}
           {/* Small Text UI Banner - ABOUT ME */}
           &lt;SmallTextBanner
+            id="node-about-me"
             title="About Me"
             text="25 Year Old Software &amp; Data Engineer, Creative &amp; National American Football Player"
             position={[-40, -8.5, 90]}
@@ -723,6 +755,7 @@ export default function City() {
 
           {/* Small Text UI Banner - AREAS OF EXPERTISE */}
           &lt;SmallTextBanner
+            id="node-areas-of-expertise"
             title="Areas of Expertise"
             text={
               "+ UI / UX\n" +
@@ -746,6 +779,7 @@ export default function City() {
 
           {/* Small Text UI Banner - EDUCATION */}
           &lt;SmallTextBanner
+            id="node-education"
             title="Education"
             text={
               "University of Nottingham - BSc (Hons) Computer Science [ 2019 - 2022 ]\n" +
@@ -768,6 +802,7 @@ export default function City() {
 
           {/* Small Text UI Banner - CONTACT ME */}
           &lt;SmallTextBanner
+            id="node-contact-me"
             title="Contact Me"
             text={"bolajidgs@gmail.com\nmadewale@arizona.edu\n@bolaji.ad"}
             position={[62.5, -8.5, -135]}
@@ -786,6 +821,7 @@ export default function City() {
 
           {/* Small Text UI Banner - WHAT AM I WORKING ON */}
           &lt;SmallTextBanner
+            id="node-what-am-i-working-on"
             title="What Am I working On ?"
             text={
               "(1) My Second Dissertation\n" +
@@ -885,6 +921,10 @@ export default function City() {
 
           {/* CAMERA, AMBIENT and DIRECTIONAL lighting */}
           &lt;DayNightCycle />
+          &lt;RainSystem />
+          &lt;WetRoad />
+          &lt;WeatherManager />
+
           &lt;CameraLight />
           &lt;ambientLight intensity={0.1} />
           &lt;directionalLight
@@ -924,6 +964,16 @@ export default function City() {
             />
             {/*&lt;DepthOfField focusDistance={5} focalLength={10} bokehScale={2} />*/}
             &lt;Vignette eskil={false} offset={0.1} darkness={0.7} />
+
+            &lt;Noise
+              opacity={0.035} // Keep it subtle so it looks like fine grain, not static
+              blendMode={BlendMode.OVERLAY}
+            />
+
+            &lt;ChromaticAberration
+              offset={new THREE.Vector2(0.0009, 0.0009)}
+              blendMode={BlendMode.NORMAL}
+            />
           &lt;/EffectComposer>
         &lt;/Canvas>
       &lt;/Suspense>
@@ -944,7 +994,7 @@ export default function City() {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sat Sep 26 2026 21:28:35 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Thu Oct 08 2026 16:06:28 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

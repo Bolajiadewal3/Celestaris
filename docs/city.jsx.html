@@ -64,20 +64,22 @@ import * as THREE from "three";
 import {
   Vignette,
   Bloom,
-  BrightnessContrast,
+  Noise, 
+  ChromaticAberration,
   EffectComposer,
   HueSaturation,
 } from "@react-three/postprocessing";
+import { BlendMode } from "postprocessing";
 
 import projectData from "./Data/Business Intelligence &amp; Analytics.json";
 import poetryData from "./Data/Poetry.json";
 import dissertationData from "./Data/Dissertation.json";
 import miscData from "./Data/Miscellaneous.json";
 import hciData from "./Data/HCI.json";
-import dissertationData2 from "./Data/Dissertation2.json";
 import musicData from "./Data/Music.json";
 import showcaseData from "./Data/Showcase.json";
-
+import documentationData from "./Data/Documentation.json"; // Your JSON containing documentation items
+import { playSFX } from "./audioManager.js";
 import {
   Overlay,
   Loader,
@@ -98,21 +100,203 @@ import {
 
 import { degreesToRadians } from "./utils";
 
-/**
- * CityModel manages the complex OBJ/MTL loading and asset disposal.
- * @component
- * @category 3D Assets
- * @returns {JSX.primitive}
- */
+import { AchievementTracker } from "./Components/achievementTracker";
+import { EnvironmentControls } from "./Components/environmentControls";
+import { RainSystem, WeatherManager } from "./Components/rainSystem";
+import { WetRoad } from "./Components/wetRoad";
+import { AchievementToast } from "./Components/achievementToast";
+
+import { useAchievementStore } from "./Store/useAchievementStore";
+import { useEnvironmentStore } from './Store/useEnvironmentStore'; 
+import { GrandUnlockModal } from "./Components/grandUnlockModal";
+import { applyCurvedWorld } from "./Shaders/curvedWorld";
+
+const IS_IOS =
+  /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+  (/Mac/.test(navigator.platform) &amp;&amp; navigator.maxTouchPoints > 1);
+
+if (IS_IOS &amp;&amp; typeof window !== "undefined") {
+  window.createImageBitmap = undefined;
+}
+
+function useFaunaSway(scene) {
+  const faunaMaterialRef = useRef(null);
+
+  useEffect(() => {
+    if (!scene) return;
+
+    let singleFaunaMaterial = null;
+
+    scene.traverse((child) => {
+      if (child.isMesh) {
+        const meshName = child.name.toLowerCase();
+        const matName = child.material?.name?.toLowerCase() || "";
+
+        const keywords = ["fauna", "bushes"];
+        const isFauna = keywords.some(
+          (key) => meshName.includes(key) || matName.includes(key),
+        );
+
+        if (isFauna) {
+          const geo = child.geometry;
+
+          // 1. Calculate relative height (0.0 at base to 1.0 at top) regardless of origin
+          if (!geo.attributes.aHeight) {
+            if (!geo.boundingBox) geo.computeBoundingBox();
+
+            const minY = geo.boundingBox.min.y;
+            const maxY = geo.boundingBox.max.y;
+            const heightRange = Math.max(0.001, maxY - minY); // Prevent division by zero
+
+            const posArray = geo.attributes.position.array;
+            const heights = new Float32Array(posArray.length / 3);
+
+            for (let i = 0; i &lt; posArray.length / 3; i++) {
+              const y = posArray[i * 3 + 1];
+              // Map vertex Y to a 0.0 -> 1.0 ratio
+              heights[i] = (y - minY) / heightRange;
+            }
+
+            geo.setAttribute("aHeight", new THREE.BufferAttribute(heights, 1));
+          }
+
+          // 2. Clone material once
+          if (!singleFaunaMaterial) {
+            const baseMaterial = Array.isArray(child.material)
+              ? child.material[0]
+              : child.material;
+
+            singleFaunaMaterial = baseMaterial.clone();
+            singleFaunaMaterial.name = "DedicatedFaunaMaterial";
+
+            singleFaunaMaterial.onBeforeCompile = (shader) => {
+              shader.uniforms.uTime = { value: 0 };
+              singleFaunaMaterial.userData.shader = shader;
+
+              shader.vertexShader = `
+                uniform float uTime;
+                attribute float aHeight;
+                ${shader.vertexShader}
+              `.replace(
+                "#include &lt;begin_vertex>",
+                `
+                #include &lt;begin_vertex>
+                
+                // 0.0 flex at ground, quadratic curve scaling up to top tip
+                float flex = pow(aHeight, 2.0) * 2.0;
+                float sway = sin(uTime * 2.5 + position.x * 0.5) * flex;
+                
+                transformed.x += sway * 2.0;
+                transformed.z += sway * 0.3;
+                `,
+              );
+            };
+
+            singleFaunaMaterial.needsUpdate = true;
+            faunaMaterialRef.current = singleFaunaMaterial;
+          }
+
+          child.material = singleFaunaMaterial;
+        }
+      }
+    });
+  }, [scene]);
+
+  useFrame(({ clock }) => {
+    if (faunaMaterialRef.current?.userData?.shader) {
+      faunaMaterialRef.current.userData.shader.uniforms.uTime.value =
+        clock.getElapsedTime();
+    }
+  });
+}
+
+// Add this helper function outside and above your component
+const isMobileDevice = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent,
+  );
+};
+
 function CityModel() {
   /**
    * The compressed scene model .GLB file
    * @type {useGLTF}
    */
   const { scene } = useGLTF(
-    `${import.meta.env.BASE_URL}City/city-v2.glb`,
+    `${import.meta.env.BASE_URL}City/City 5.glb`,
     "https://www.gstatic.com/draco/versioned/decoders/1.5.5/",
   );
+
+  useEffect(() => {
+    const isMobile = isMobileDevice();
+
+    scene.traverse((child) => {
+      if (child.isMesh &amp;&amp; child.material) {
+
+        /*const materials = Array.isArray(child.material) 
+          ? child.material 
+          : [child.material];
+
+        materials.forEach((mat) => {
+          applyCurvedWorld(mat, 0.0015); // Tune curvature strength here (e.g., 0.001 to 0.003)
+          mat.needsUpdate = true;
+        });*/
+        const before = child.material;
+        
+
+        if (child.geometry?.attributes?.normal) {
+          const arr = child.geometry.attributes.normal.array;
+          let bad = 0;
+          for (let i = 0; i &lt; arr.length; i += 3) {
+            const lenSq = arr[i] ** 2 + arr[i + 1] ** 2 + arr[i + 2] ** 2;
+            if (lenSq &lt; 0.01 || Number.isNaN(lenSq)) bad++;
+          }
+          if (bad > 0)
+            console.log(
+              `${child.name}: ${bad}/${arr.length / 3} degenerate normals`,
+            );
+        } else {
+          console.log(`${child.name}: MISSING normal attribute`);
+        }
+
+        // --- 1. MOBILE-SPECIFIC FIXES ---
+        if (isMobile) {
+          if (child.material.emissiveIntensity > 1) {
+            child.material.emissiveIntensity = 1;
+          }
+
+
+          const isFoliageOrCar =
+            child.name.includes("Tree") ||
+            child.name.includes("Fauna") ||
+            child.name.includes("Bushes") ||
+            child.material.name === "DedicatedFaunaMaterial" ||
+            child.name.includes("Car");
+
+          if (isFoliageOrCar) {
+            child.castShadow = false;
+          }
+        }
+
+        if (child.material.name.includes("Window")) {
+          child.material.transparent = true;
+          child.material.opacity = 0.9;
+          child.material.depthWrite = false; // Fixes internal geometry clipping
+
+          if (child.material.roughness !== undefined) {
+            child.material.roughness = 0.6;
+            child.material.metalness = 0.1;
+
+          }
+        }
+
+        const after = child.material;
+ 
+      }
+    });
+  }, [scene]);
+
+  useFaunaSway(scene);
 
   /** A traversal of the model's elements that clear geometries and materials from memory on cleanup */
   useEffect(() => {
@@ -129,11 +313,108 @@ function CityModel() {
   return (
     /** The scene object; it has shadows enabled */
     &lt;primitive
+      //onPointerDown={(e) => e.stopPropagation()}
       object={scene}
       scale={0.15}
       position={[70, 0, -65]}
       castShadow
       receiveShadow
+    />
+  );
+}
+
+function DayNightCycle({ speed = 0.07 }) {
+  const sunRef = useRef();
+  const { manualTime, isOverriding } = useEnvironmentStore();
+
+
+  useFrame(({ clock, scene }) => {
+    // Determine elapsed time factor: either manual slider override or automatic clock
+    let timeFactor;
+    let elapsed;
+
+    if (isOverriding &amp;&amp; manualTime !== null) {
+      // Map 0-24 hour slider to the -1 to 1 sinusoidal range used by your logic
+      // 6 AM = -1 (midnight-ish / dawn start), 12 PM = 1 (noon), etc.
+      elapsed = (manualTime / 24) * Math.PI * 2;
+      timeFactor = Math.sin(elapsed - Math.PI / 2); // Shifts peak to noon
+    } else {
+      elapsed = clock.getElapsedTime() * speed;
+      timeFactor = Math.sin(elapsed);
+    }
+
+    const isNight = timeFactor &lt; 0;
+
+    const daySky = new THREE.Color("#70a1ff");
+    const sunsetSky = new THREE.Color("#fd7d36");
+    const nightSky = new THREE.Color("#0a0c16");
+
+    const dayFog = new THREE.Color("#87ceeb");
+    const nightFog = new THREE.Color("#0a0c16");
+
+    // 1. Move Sun in a sky arc
+    if (sunRef.current) {
+      sunRef.current.position.x = Math.cos(elapsed) * 100;
+      sunRef.current.position.y = timeFactor * 80;
+      sunRef.current.position.z = Math.sin(elapsed) * 40;
+
+      // Keep sun light moderate
+      sunRef.current.intensity = THREE.MathUtils.clamp(
+        timeFactor * 0.15,
+        0.1,
+        1.1,
+      );
+    }
+
+    let targetSky = daySky;
+    if (timeFactor &lt; -0.2) {
+      targetSky = nightSky;
+    } else if (timeFactor >= -0.2 &amp;&amp; timeFactor &lt; 0.2) {
+      targetSky = sunsetSky;
+    }
+
+    if (!scene.background) scene.background = new THREE.Color();
+    scene.background.lerp(targetSky, 0.02);
+
+    if (scene.fog) {
+      scene.fog.color.lerp(isNight ? nightFog : dayFog, 0.1);
+    }
+
+    const targetEmissive = isNight ? Math.abs(timeFactor) * 4.0 : 0.6;
+
+    scene.traverse((child) => {
+      if (child.isMesh &amp;&amp; child.material) {
+        const materials = Array.isArray(child.material)
+          ? child.material
+          : [child.material];
+
+        materials.forEach((mat) => {
+          const matName = mat?.name || "";
+
+          if (
+            matName.includes("Lit") ||
+            matName.includes("Headlight") ||
+            matName.includes("Streetlamp") ||
+            matName.includes("Tailight")
+          ) {
+            mat.emissiveIntensity = THREE.MathUtils.lerp(
+              mat.emissiveIntensity,
+              targetEmissive,
+              0.05,
+            );
+          }
+        });
+      }
+    });
+});
+
+  return (
+    &lt;directionalLight
+      ref={sunRef}
+      castShadow
+      shadow-mapSize={[1024, 1024]}
+      shadow-bias={-0.0001}
+      color="#fff2e0"
     />
   );
 }
@@ -204,7 +485,7 @@ export default function City() {
   const [smallTextLookAt, setSmallTextLookAt] = useState([0, 0, 0]);
   const [showExitButton, setShowExitButton] = useState(false);
 
-  const [showBigHeadings, setShowBigHeadings] = useState(true);
+  const [showBigHeadings, setShowBigHeadings] = useState(false);
 
   /**
    * Returns camera to initial view and re-enables controls after interacting with banners.
@@ -235,17 +516,16 @@ export default function City() {
 
   /**
    * Opens a specific overlay content section (projects, poetry, etc.).
-   * @function
-   * @param {string} type - The type of content to open in the overlay.
+   * @param {"dissertation"|"miscellaneous"|"poetry"|"business"|"hci"|"music"|"showcase"|"documentation"} type - The content section to show.
+   * @returns {void}
    */
   const openOverlay = (type) => {
+    playSFX("open_overlay", 0.15);
+
     switch (type) {
       case "dissertation":
-        console.log(dissertationData.projects);
+        //console.log(dissertationData.projects);
         setOverlayContent(dissertationData.projects);
-        break;
-      case "dissertation2":
-        setOverlayContent(dissertationData2.projects);
         break;
 
       case "miscellaneous":
@@ -270,6 +550,10 @@ export default function City() {
 
       case "showcase":
         setOverlayContent(showcaseData.projects);
+        break;
+
+      case "documentation":
+        setOverlayContent(documentationData);
         break;
     }
 
@@ -304,6 +588,16 @@ export default function City() {
     };
   }, []);
 
+  const isFullyUnlocked = useAchievementStore((state) => state.isFullyUnlocked);
+  console.log(isFullyUnlocked);
+
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (isFullyUnlocked) {
+      setShowModal(true);
+    }
+  }, [isFullyUnlocked]);
   /**
    * The entire landing page
    */
@@ -311,24 +605,15 @@ export default function City() {
     &lt;div style={{ width: "100vw", height: "100vh", position: "relative" }}>
       {/** UI button to return to free roam after viewing a SMALLTEXTBANNER */}
       {showExitButton &amp;&amp; (
-        &lt;button className="smallTextButton" onClick={resetOrbit}>
+        &lt;button
+          className="smallTextButton"
+          onClick={() => {
+            playSFX("button_click", 0.35);
+            resetOrbit();
+          }}
+        >
           Return
         &lt;/button>
-      )}
-
-      {/** UI button start and stop AUDIO */}
-      &lt;AudioButton
-        url={`${import.meta.env.BASE_URL}City/cityAMBIENCE.mp3`}
-      >&lt;/AudioButton>
-
-      {!isOverlayActive &amp;&amp; &lt;ResumeButton>&lt;/ResumeButton>}
-      {!isOverlayActive &amp;&amp; &lt;DocumentationButton>&lt;/DocumentationButton>}
-
-      {!isOverlayActive &amp;&amp; (
-        &lt;HeadingsButton
-          showHeadings={showBigHeadings}
-          setShowHeadings={setShowBigHeadings}
-        >&lt;/HeadingsButton>
       )}
 
       {/** UI overlay that pulls JSON data to display */}
@@ -340,15 +625,84 @@ export default function City() {
 
       {/** The custom loading page screen from OVERLAYS */}
       &lt;Suspense fallback={&lt;Loader />}>
+        {/** UI button start and stop AUDIO */}
+        {!isOverlayActive &amp;&amp; (
+          &lt;AudioButton
+            onClick={() => {
+              playSFX("button_click", 0.35);
+            }}
+            url={`${import.meta.env.BASE_URL}City/cityAMBIENCE.mp3`}
+          >&lt;/AudioButton>
+        )}
+
+        {!isOverlayActive &amp;&amp; !showExitButton &amp;&amp; (
+          &lt;ResumeButton
+            onClick={() => {
+              playSFX("button_click", 0.35);
+            }}
+          >&lt;/ResumeButton>
+        )}
+        {!isOverlayActive &amp;&amp; !showExitButton &amp;&amp; (
+          &lt;DocumentationButton
+            onClick={() => {
+              playSFX("button_click", 0.35);
+              openOverlay("documentation");
+            }}
+          >&lt;/DocumentationButton>
+        )}
+
+        {!isOverlayActive &amp;&amp; (
+          &lt;HeadingsButton
+            onClick={() => {
+              playSFX("button_click", 0.35);
+            }}
+            showHeadings={showBigHeadings}
+            setShowHeadings={setShowBigHeadings}
+          >&lt;/HeadingsButton>
+        )}
+
+        {!isOverlayActive &amp;&amp; &lt;AchievementTracker />}
+
+        {!isOverlayActive &amp;&amp; !isFullyUnlocked &amp;&amp; (
+          &lt;div
+            style={{
+              position: "fixed",
+              bottom: "20px",
+              width: "100%",
+              textAlign: "center",
+              zIndex: 10,
+              color: "#00ffcc",
+              pointerEvents: "none",
+            }}
+          >
+            TASK:: FIND ALL THE DATA POINTS
+          &lt;/div>
+        )}
+
+        {!isOverlayActive &amp;&amp; &lt;EnvironmentControls />}
+
+        {!isOverlayActive &amp;&amp;&lt;AchievementToast />}
+
+        {!isOverlayActive &amp;&amp; (&lt;GrandUnlockModal isOpen={showModal} onClose={() => setShowModal(false)} />)}
+
         {/** The 3D scene with dark grey background */}
         &lt;Canvas
+          frameloop="always"
+          style={{
+            pointerEvents: isOverlayActive || !cameraAnimationDone ? "none" : "auto",
+          }}
           shadows
           camera={{ position: [0, 70, 500], fov: 50 }}
           onCreated={({ scene }) => {
             scene.fog = new THREE.Fog(new THREE.Color("#0a0a1a"), 200, 1200);
           }}
           dpr={[1, 1.5]}
-          gl={{ antialias: true }}
+          gl={{
+            outputColorSpace: THREE.SRGBColorSpace,
+            antialias: true,
+            toneMapping: THREE.ACESFilmicToneMapping,
+            toneMappingExposure: 0.9,
+          }}
           performance={{ min: 0.8 }}
         >
           {/* User controls */}
@@ -382,6 +736,7 @@ export default function City() {
           )}
           {/* Small Text UI Banner - ABOUT ME */}
           &lt;SmallTextBanner
+            id="node-about-me"
             title="About Me"
             text="25 Year Old Software &amp; Data Engineer, Creative &amp; National American Football Player"
             position={[-40, -8.5, 90]}
@@ -390,6 +745,7 @@ export default function City() {
             isOpen={openBannerId === "1"}
             onOpen={() => setOpenBannerId("1")}
             onClick={() => {
+              playSFX("button_click", 0.35);
               setSmallTextAnchor([-49, 3, 132]);
               setSmallTextLookAt([-40, -8.5, 90]);
               setGoToSmallText(true);
@@ -399,6 +755,7 @@ export default function City() {
 
           {/* Small Text UI Banner - AREAS OF EXPERTISE */}
           &lt;SmallTextBanner
+            id="node-areas-of-expertise"
             title="Areas of Expertise"
             text={
               "+ UI / UX\n" +
@@ -412,6 +769,7 @@ export default function City() {
             isOpen={openBannerId === "4"}
             onOpen={() => setOpenBannerId("4")}
             onClick={() => {
+              playSFX("button_click", 0.35);
               setSmallTextAnchor([-60, -7, 210]);
               setSmallTextLookAt([-60, -2, 170]);
               setGoToSmallText(true);
@@ -421,6 +779,7 @@ export default function City() {
 
           {/* Small Text UI Banner - EDUCATION */}
           &lt;SmallTextBanner
+            id="node-education"
             title="Education"
             text={
               "University of Nottingham - BSc (Hons) Computer Science [ 2019 - 2022 ]\n" +
@@ -433,6 +792,7 @@ export default function City() {
             isOpen={openBannerId === "2"}
             onOpen={() => setOpenBannerId("2")}
             onClick={() => {
+              playSFX("button_click", 0.35);
               setSmallTextAnchor([83, 2, 186]);
               setSmallTextLookAt([80, -8.5, 0]);
               setGoToSmallText(true);
@@ -442,6 +802,7 @@ export default function City() {
 
           {/* Small Text UI Banner - CONTACT ME */}
           &lt;SmallTextBanner
+            id="node-contact-me"
             title="Contact Me"
             text={"bolajidgs@gmail.com\nmadewale@arizona.edu\n@bolaji.ad"}
             position={[62.5, -8.5, -135]}
@@ -450,6 +811,7 @@ export default function City() {
             isOpen={openBannerId === "3"}
             onOpen={() => setOpenBannerId("3")}
             onClick={() => {
+              playSFX("button_click", 0.35);
               setSmallTextAnchor([65, 2, -176]);
               setSmallTextLookAt([62.5, -8.5, -135]);
               setGoToSmallText(true);
@@ -459,6 +821,7 @@ export default function City() {
 
           {/* Small Text UI Banner - WHAT AM I WORKING ON */}
           &lt;SmallTextBanner
+            id="node-what-am-i-working-on"
             title="What Am I working On ?"
             text={
               "(1) My Second Dissertation\n" +
@@ -472,6 +835,7 @@ export default function City() {
             isOpen={openBannerId === "5"}
             onOpen={() => setOpenBannerId("5")}
             onClick={() => {
+              playSFX("button_click", 0.35);
               setSmallTextAnchor([60, 49, -140]);
               setSmallTextLookAt([60, 49, -120]);
               setGoToSmallText(true);
@@ -483,55 +847,64 @@ export default function City() {
           &lt;GlowingTextBanner
             text="Business"
             position={[-70, 40, -30]}
-            onClick={() => openOverlay("business")}
+            onClick={() => {
+              playSFX("button_click", 0.35);
+              openOverlay("business");
+            }}
           />
 
           &lt;GlowingTextBanner
             text={"HCI"}
             position={[-70, 20, -30]}
-            onClick={() => openOverlay("hci")}
+            onClick={() => {
+              playSFX("button_click", 0.35);
+              openOverlay("hci");
+            }}
           />
           {/* Section Text - DISSERTATION */}
           &lt;GlowingTextBanner
             text="Dissertation I"
             position={[70, 40, -50]}
-            onClick={() => openOverlay("dissertation")}
+            onClick={() => {
+              playSFX("button_click", 0.35);
+              openOverlay("dissertation");
+            }}
           />
-          &lt;GlowingTextBanner
-            text="Dissertation II"
-            position={[70, 20, -50]}
-            onClick={() => openOverlay("dissertation2")}
-          />
+
           {/* Section Text - POETRY */}
           &lt;GlowingTextBanner
             text="Poetry"
             position={[50, 38, 60]}
             rotation={[0, Math.PI * 1.5, 0]}
-            onClick={() => openOverlay("poetry")}
+            onClick={() => {
+              playSFX("button_click", 0.35);
+              openOverlay("poetry");
+            }}
           />
           &lt;GlowingTextBanner
             text="Music"
             position={[50, 18, 60]}
             rotation={[0, Math.PI * 1.5, 0]}
-            onClick={() => openOverlay("music")}
+            onClick={() => {
+              playSFX("button_click", 0.35);
+              openOverlay("music");
+            }}
           />
           {/* Section Text - MISCELLANEOUS */}
-          &lt;GlowingTextBanner
-            text="Tech Showcase"
-            position={[-60, 20, 75]}
-            rotation={[0, Math.PI / 2, 0]}
-            onClick={() => openOverlay("showcase")}
-          />
+
           &lt;GlowingTextBanner
             text="Links"
             position={[-60, 0, 75]}
             rotation={[0, Math.PI / 2, 0]}
-            onClick={() => openOverlay("miscellaneous")}
+            onClick={() => {
+              playSFX("button_click", 0.35);
+              openOverlay("miscellaneous");
+            }}
           />
 
           {showBigHeadings &amp;&amp; (
             &lt;>
-              &lt;LargeGroupText text="RESEARCH" position={[-70, 60, -30]} />
+              &lt;LargeGroupText text="Research" position={[-70, 60, -30]} />
               &lt;LargeGroupText text="Academia" position={[70, 62, -50]} />
               &lt;LargeGroupText
                 text="Creative"
@@ -547,6 +920,11 @@ export default function City() {
           )}
 
           {/* CAMERA, AMBIENT and DIRECTIONAL lighting */}
+          &lt;DayNightCycle />
+          &lt;RainSystem />
+          &lt;WetRoad />
+          &lt;WeatherManager />
+
           &lt;CameraLight />
           &lt;ambientLight intensity={0.1} />
           &lt;directionalLight
@@ -573,16 +951,29 @@ export default function City() {
           {/* The imported .GLB CITY MODEL */}
           &lt;CityModel />
           {/* Visual Post-Processing */}
-          &lt;EffectComposer enabled={!isOverlayActive}>
+          &lt;EffectComposer
+            frameBufferType={
+              isMobileDevice() ? THREE.UnsignedByteType : THREE.HalfFloatType
+            }
+          >
             &lt;HueSaturation hue={0.1} saturation={0.2} />
-            &lt;BrightnessContrast brightness={0.05} contrast={0.2} />
             &lt;Bloom
-              intensity={3}
-              luminanceThreshold={0.05}
-              luminanceSmoothing={0.1}
+              intensity={!isMobileDevice() ? 4 : 3}
+              luminanceThreshold={0.15}
+              luminanceSmoothing={0.2}
             />
             {/*&lt;DepthOfField focusDistance={5} focalLength={10} bokehScale={2} />*/}
             &lt;Vignette eskil={false} offset={0.1} darkness={0.7} />
+
+            &lt;Noise
+              opacity={0.035} // Keep it subtle so it looks like fine grain, not static
+              blendMode={BlendMode.OVERLAY}
+            />
+
+            &lt;ChromaticAberration
+              offset={new THREE.Vector2(0.0009, 0.0009)}
+              blendMode={BlendMode.NORMAL}
+            />
           &lt;/EffectComposer>
         &lt;/Canvas>
       &lt;/Suspense>
@@ -603,7 +994,7 @@ export default function City() {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sat Feb 14 2026 20:33:53 GMT+0000 (Greenwich Mean Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Thu Oct 08 2026 16:04:55 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

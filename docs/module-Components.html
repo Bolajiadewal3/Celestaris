@@ -331,7 +331,7 @@
 
     
 
-    <h4 class="name" id="~AudioButton"><span class="type-signature type-signature-inner">(inner) </span>AudioButton<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~AudioButton"><span class="type-signature type-signature-inner">(inner) </span>AudioButton<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -341,13 +341,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays an audio toggle</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Toggles looping ambient audio for the current scene.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line255">line 255</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line560">line 560</a>
     </li></ul></dd>
     
 
@@ -394,6 +394,104 @@
 
 
 
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Audio file URL to play.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -408,6 +506,31 @@
 
 
 
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The play or mute button.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -416,7 +539,7 @@
 
     
 
-    <h4 class="name" id="~DocumentationButton"><span class="type-signature type-signature-inner">(inner) </span>DocumentationButton<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~DocumentationButton"><span class="type-signature type-signature-inner">(inner) </span>DocumentationButton<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -426,13 +549,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays a documentation navigation button</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Opens the documentation content from the current scene.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line332">line 332</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line663">line 663</a>
     </li></ul></dd>
     
 
@@ -479,6 +602,104 @@
 
 
 
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>onClick</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Callback that opens the documentation content.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -493,6 +714,31 @@
 
 
 
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The documentation button.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -586,7 +832,7 @@
 
     
 
-    <h4 class="name" id="~HeadingsButton"><span class="type-signature type-signature-inner">(inner) </span>HeadingsButton<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~HeadingsButton"><span class="type-signature type-signature-inner">(inner) </span>HeadingsButton<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -596,13 +842,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays a headings toggle</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Toggles visibility of the scene's large headings.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line306">line 306</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line614">line 614</a>
     </li></ul></dd>
     
 
@@ -649,6 +895,128 @@
 
 
 
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>showHeadings</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Whether headings are currently visible.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setShowHeadings</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React state setter for heading visibility.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -663,6 +1031,31 @@
 
 
 
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The show/hide headings button.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -841,7 +1234,7 @@
 
     
 
-    <h4 class="name" id="~Loader"><span class="type-signature type-signature-inner">(inner) </span>Loader<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~Loader"><span class="type-signature type-signature-inner">(inner) </span>Loader<span class="signature">()</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -851,13 +1244,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Allows for a loading screen at the start of a page that waits for the assets to load</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Shows asset-loading progress while a scene's suspended assets load.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line16">line 16</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -918,6 +1311,29 @@
 
 
 
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The loading screen and progress indicator.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -926,7 +1342,7 @@
 
     
 
-    <h4 class="name" id="~Overlay"><span class="type-signature type-signature-inner">(inner) </span>Overlay<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~Overlay"><span class="type-signature type-signature-inner">(inner) </span>Overlay<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -936,13 +1352,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays a html/css overlay over the 3D scene; that is populated with JSON data as text; includes a return to scene and internal navigation buttons</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Displays a selectable list of content and renders the selected Markdown or embedded page.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line140">line 140</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line158">line 158</a>
     </li></ul></dd>
     
 
@@ -989,6 +1405,196 @@
 
 
 
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Overlay state and content.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>isActive</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Whether the overlay is visible and interactive.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>onClose</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Called when the visitor exits the overlay.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>items</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;OverlayItem></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>[]</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>Entries available in the list view.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1003,6 +1609,31 @@
 
 
 
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The animated list or selected content view.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1011,7 +1642,7 @@
 
     
 
-    <h4 class="name" id="~ResumeButton"><span class="type-signature type-signature-inner">(inner) </span>ResumeButton<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~ResumeButton"><span class="type-signature type-signature-inner">(inner) </span>ResumeButton<span class="signature">()</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -1021,13 +1652,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays a resume navigation button</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Opens the resume PDF in a separate browser tab.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line357">line 357</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line684">line 684</a>
     </li></ul></dd>
     
 
@@ -1088,6 +1719,29 @@
 
 
 
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The resume link.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1282,7 +1936,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line79">line 79</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line83">line 83</a>
     </li></ul></dd>
     
 
@@ -1351,6 +2005,309 @@
         
     
 
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="~OverlayItem">OverlayItem</h4>
+
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>An entry displayed in the scene's project and content overlay.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line139">line 139</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The entry title.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>abstract</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Short description shown in the list and as a detail fallback.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>siteLink</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>External destination opened from the list.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>markdown</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Markdown file or URL loaded for the detail view.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>iframeUrl</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Embedded page shown in the detail view.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>WIP</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Whether the entry is marked as work in progress.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description usertext">
+    <p>An entry displayed in the scene's project and content overlay.</p>
+</div>
+
+
+
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
     
 
     
@@ -1650,7 +2607,7 @@
 
     
 
-    <h4 class="name" id="~AudioButton"><span class="type-signature type-signature-inner">(inner) </span>AudioButton<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~AudioButton"><span class="type-signature type-signature-inner">(inner) </span>AudioButton<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -1660,13 +2617,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays an audio toggle</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Toggles looping ambient audio for the current scene.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line255">line 255</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line560">line 560</a>
     </li></ul></dd>
     
 
@@ -1713,6 +2670,104 @@
 
 
 
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Audio file URL to play.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1727,6 +2782,31 @@
 
 
 
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The play or mute button.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1735,7 +2815,7 @@
 
     
 
-    <h4 class="name" id="~DocumentationButton"><span class="type-signature type-signature-inner">(inner) </span>DocumentationButton<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~DocumentationButton"><span class="type-signature type-signature-inner">(inner) </span>DocumentationButton<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -1745,13 +2825,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays a documentation navigation button</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Opens the documentation content from the current scene.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line332">line 332</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line663">line 663</a>
     </li></ul></dd>
     
 
@@ -1798,6 +2878,104 @@
 
 
 
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>onClick</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Callback that opens the documentation content.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1812,6 +2990,31 @@
 
 
 
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The documentation button.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1905,7 +3108,7 @@
 
     
 
-    <h4 class="name" id="~HeadingsButton"><span class="type-signature type-signature-inner">(inner) </span>HeadingsButton<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~HeadingsButton"><span class="type-signature type-signature-inner">(inner) </span>HeadingsButton<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -1915,13 +3118,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays a headings toggle</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Toggles visibility of the scene's large headings.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line306">line 306</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line614">line 614</a>
     </li></ul></dd>
     
 
@@ -1968,6 +3171,128 @@
 
 
 
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>showHeadings</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Whether headings are currently visible.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setShowHeadings</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React state setter for heading visibility.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1982,6 +3307,31 @@
 
 
 
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The show/hide headings button.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -2160,7 +3510,7 @@
 
     
 
-    <h4 class="name" id="~Loader"><span class="type-signature type-signature-inner">(inner) </span>Loader<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~Loader"><span class="type-signature type-signature-inner">(inner) </span>Loader<span class="signature">()</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -2170,13 +3520,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Allows for a loading screen at the start of a page that waits for the assets to load</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Shows asset-loading progress while a scene's suspended assets load.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line16">line 16</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -2237,6 +3587,29 @@
 
 
 
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The loading screen and progress indicator.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -2245,7 +3618,7 @@
 
     
 
-    <h4 class="name" id="~Overlay"><span class="type-signature type-signature-inner">(inner) </span>Overlay<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~Overlay"><span class="type-signature type-signature-inner">(inner) </span>Overlay<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -2255,13 +3628,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays a html/css overlay over the 3D scene; that is populated with JSON data as text; includes a return to scene and internal navigation buttons</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Displays a selectable list of content and renders the selected Markdown or embedded page.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line140">line 140</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line158">line 158</a>
     </li></ul></dd>
     
 
@@ -2308,6 +3681,196 @@
 
 
 
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Overlay state and content.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>isActive</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Whether the overlay is visible and interactive.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>onClose</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Called when the visitor exits the overlay.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>items</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;OverlayItem></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>[]</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>Entries available in the list view.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -2322,6 +3885,31 @@
 
 
 
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The animated list or selected content view.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -2330,7 +3918,7 @@
 
     
 
-    <h4 class="name" id="~ResumeButton"><span class="type-signature type-signature-inner">(inner) </span>ResumeButton<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~ResumeButton"><span class="type-signature type-signature-inner">(inner) </span>ResumeButton<span class="signature">()</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -2340,13 +3928,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays a resume navigation button</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Opens the resume PDF in a separate browser tab.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line357">line 357</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line684">line 684</a>
     </li></ul></dd>
     
 
@@ -2407,6 +3995,29 @@
 
 
 
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The resume link.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -2601,7 +4212,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line79">line 79</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line83">line 83</a>
     </li></ul></dd>
     
 
@@ -2670,6 +4281,309 @@
         
     
 
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="~OverlayItem">OverlayItem</h4>
+
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>An entry displayed in the scene's project and content overlay.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line139">line 139</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The entry title.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>abstract</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Short description shown in the list and as a detail fallback.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>siteLink</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>External destination opened from the list.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>markdown</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Markdown file or URL loaded for the detail view.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>iframeUrl</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Embedded page shown in the detail view.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>WIP</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Whether the entry is marked as work in progress.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description usertext">
+    <p>An entry displayed in the scene's project and content overlay.</p>
+</div>
+
+
+
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
     
 
     
@@ -2969,7 +4883,7 @@
 
     
 
-    <h4 class="name" id="~AudioButton"><span class="type-signature type-signature-inner">(inner) </span>AudioButton<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~AudioButton"><span class="type-signature type-signature-inner">(inner) </span>AudioButton<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -2979,13 +4893,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays an audio toggle</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Toggles looping ambient audio for the current scene.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line255">line 255</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line560">line 560</a>
     </li></ul></dd>
     
 
@@ -3032,6 +4946,104 @@
 
 
 
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Audio file URL to play.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -3046,6 +5058,31 @@
 
 
 
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The play or mute button.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -3054,7 +5091,7 @@
 
     
 
-    <h4 class="name" id="~DocumentationButton"><span class="type-signature type-signature-inner">(inner) </span>DocumentationButton<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~DocumentationButton"><span class="type-signature type-signature-inner">(inner) </span>DocumentationButton<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -3064,13 +5101,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays a documentation navigation button</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Opens the documentation content from the current scene.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line332">line 332</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line663">line 663</a>
     </li></ul></dd>
     
 
@@ -3117,6 +5154,104 @@
 
 
 
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>onClick</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Callback that opens the documentation content.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -3131,6 +5266,31 @@
 
 
 
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The documentation button.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -3224,7 +5384,7 @@
 
     
 
-    <h4 class="name" id="~HeadingsButton"><span class="type-signature type-signature-inner">(inner) </span>HeadingsButton<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~HeadingsButton"><span class="type-signature type-signature-inner">(inner) </span>HeadingsButton<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -3234,13 +5394,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays a headings toggle</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Toggles visibility of the scene's large headings.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line306">line 306</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line614">line 614</a>
     </li></ul></dd>
     
 
@@ -3287,6 +5447,128 @@
 
 
 
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>showHeadings</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Whether headings are currently visible.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setShowHeadings</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React state setter for heading visibility.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -3301,6 +5583,31 @@
 
 
 
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The show/hide headings button.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -3479,7 +5786,7 @@
 
     
 
-    <h4 class="name" id="~Loader"><span class="type-signature type-signature-inner">(inner) </span>Loader<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~Loader"><span class="type-signature type-signature-inner">(inner) </span>Loader<span class="signature">()</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -3489,13 +5796,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Allows for a loading screen at the start of a page that waits for the assets to load</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Shows asset-loading progress while a scene's suspended assets load.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line16">line 16</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -3556,6 +5863,29 @@
 
 
 
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The loading screen and progress indicator.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -3564,7 +5894,7 @@
 
     
 
-    <h4 class="name" id="~Overlay"><span class="type-signature type-signature-inner">(inner) </span>Overlay<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~Overlay"><span class="type-signature type-signature-inner">(inner) </span>Overlay<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -3574,13 +5904,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays a html/css overlay over the 3D scene; that is populated with JSON data as text; includes a return to scene and internal navigation buttons</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Displays a selectable list of content and renders the selected Markdown or embedded page.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line140">line 140</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line158">line 158</a>
     </li></ul></dd>
     
 
@@ -3627,6 +5957,196 @@
 
 
 
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Overlay state and content.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>isActive</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Whether the overlay is visible and interactive.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>onClose</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Called when the visitor exits the overlay.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>items</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;OverlayItem></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>[]</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>Entries available in the list view.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -3641,6 +6161,31 @@
 
 
 
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The animated list or selected content view.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -3649,7 +6194,7 @@
 
     
 
-    <h4 class="name" id="~ResumeButton"><span class="type-signature type-signature-inner">(inner) </span>ResumeButton<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~ResumeButton"><span class="type-signature type-signature-inner">(inner) </span>ResumeButton<span class="signature">()</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
 
     
 
@@ -3659,13 +6204,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>Displays a resume navigation button</p></li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>Opens the resume PDF in a separate browser tab.</p></li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line357">line 357</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line684">line 684</a>
     </li></ul></dd>
     
 
@@ -3726,6 +6271,29 @@
 
 
 
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The resume link.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -3920,7 +6488,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line79">line 79</a>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line83">line 83</a>
     </li></ul></dd>
     
 
@@ -3990,6 +6558,309 @@
     
 
     
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="~OverlayItem">OverlayItem</h4>
+
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>An entry displayed in the scene's project and content overlay.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Components_overlays.jsx.html">Components/overlays.jsx</a>, <a href="Components_overlays.jsx.html#line139">line 139</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The entry title.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>abstract</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Short description shown in the list and as a detail fallback.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>siteLink</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>External destination opened from the list.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>markdown</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Markdown file or URL loaded for the detail view.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>iframeUrl</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Embedded page shown in the detail view.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>WIP</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Whether the entry is marked as work in progress.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description usertext">
+    <p>An entry displayed in the scene's project and content overlay.</p>
+</div>
+
+
+
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+    
 
     
 </article>
@@ -4006,7 +6877,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sat Feb 14 2026 20:33:53 GMT+0000 (Greenwich Mean Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Thu Oct 08 2026 16:04:55 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
