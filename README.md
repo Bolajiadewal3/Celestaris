@@ -15,9 +15,9 @@
 
 ## Overview
 
-Celestaris is a browser-based portfolio and interactive showcase built with React and Three.js. Instead of presenting every project in a conventional grid, it connects portfolio content to immersive 3D environments: visitors can explore a stylized city, interact with scene controls, and open project and information panels.
+Celestaris is a browser-based portfolio and interactive showcase built with React and Three.js. Instead of presenting every project in a conventional grid, it connects portfolio content to immersive 3D environments: visitors can explore a stylised city, interact with scene controls, and open project and information panels.
 
-The experience also includes focused scenes for a 3D computer portfolio, technical documentation, a population globe, and an NHS data-visualization case study. Responsive interactions, camera transitions, ambient audio, and visual effects help make each section feel like part of one cohesive experience.
+The experience also includes responsive interactions, camera transitions, ambient audio, and visual effects help make each section feel like part of one cohesive experience.
 
 ![Celestaris 3D city preview](public/Images/City.png)
 
@@ -25,7 +25,6 @@ The experience also includes focused scenes for a 3D computer portfolio, technic
 
 - **Explorable 3D city:** Navigate the main scene and discover projects and other portfolio content through interactive 3D banners and overlays.
 - **Immersive portfolio view:** Explore a 3D computer with portfolio content presented on its screen.
-- **Data-led scenes:** View population information on an interactive globe and explore NHS-related geographic data visualization.
 - **Technical documentation:** Browse generated project documentation within a dedicated 3D tablet scene.
 - **Scene interactions:** Use camera animations, orbit controls, hover feedback, and contextual overlays to move through the experience.
 - **Environmental details:** The city scene includes weather and environment controls, rain and wet-road effects, ambient audio, and achievement feedback.
@@ -39,19 +38,11 @@ flowchart TD
    App --> Router[React Router]
 
    Router --> City[City scene<br/>/]
-   Router --> Portfolio[Computer portfolio<br/>/Computer]
-   Router --> Docs[Documentation tablet<br/>/Documentation]
-   Router --> Population[Population globe<br/>/Population]
-   Router --> NHS[NHS data visualization<br/>/NHS]
 
    City --> Renderer[React Three Fiber + Three.js]
-   Portfolio --> Renderer
-   Docs --> Renderer
-   Population --> Renderer
-   NHS --> Renderer
 
    Renderer --> Assets[3D models, textures, audio, and data<br/>public/]
-   Docs --> GeneratedDocs[Generated JSDoc site<br/>public/docs/]
+   City --> GeneratedDocs[Generated JSDoc site<br/>public/docs/]
 ```
 
 ## Tech Stack
@@ -114,7 +105,5 @@ To create a production build, run `npm run build`. The output is written to `dis
 ESLint is included and configured, but this repository does not currently define an npm lint script. To run it directly, use `npx eslint .`.
 
 ## License and Acknowledgments
-
-The package metadata declares the project license as **ISC**. See `package.json` for the current declaration.
 
 Celestaris is built with the React, Three.js, React Three Fiber, Drei, React Spring, D3, and Vite communities' open-source work. It also uses project-specific 3D models, textures, audio, and portfolio materials stored in `public/`.
