@@ -339,7 +339,7 @@ function DayNightCycle({ speed = 0.07 }) {
       sunRef.current.intensity = THREE.MathUtils.clamp(
         timeFactor * 0.15,
         0.1,
-        1.1,
+        0.9,
       );
     }
 
@@ -357,7 +357,7 @@ function DayNightCycle({ speed = 0.07 }) {
       scene.fog.color.lerp(isNight ? nightFog : dayFog, 0.1);
     }
 
-    const targetEmissive = isNight ? Math.abs(timeFactor) * 4.0 : 0.6;
+    const targetEmissive = isNight ? Math.abs(timeFactor) * 3.5 : 0.6;
 
     scene.traverse((child) => {
       if (child.isMesh && child.material) {
@@ -561,9 +561,17 @@ export default function City() {
 
   const [showModal, setShowModal] = useState(false);
 
+
   useEffect(() => {
     if (isFullyUnlocked) {
-      setShowModal(true);
+      // Check if the modal has already been shown in a previous session
+      const hasSeenModal = localStorage.getItem("hasSeenGrandUnlock");
+
+      if (!hasSeenModal) {
+        setShowModal(true);
+        // Set the flag so it never fires automatically on page load again
+        localStorage.setItem("hasSeenGrandUnlock", "true");
+      }
     }
   }, [isFullyUnlocked]);
 
@@ -633,7 +641,7 @@ export default function City() {
           ></HeadingsButton>
         )}
 
-        {!isOverlayActive && <AchievementTracker />}
+        {!isOverlayActive && <AchievementTracker onOpenModal={() => setShowModal(true)} />}
 
         {/** Task reminder */}
         {!isOverlayActive && !isFullyUnlocked && (
@@ -931,7 +939,7 @@ export default function City() {
           >
             <HueSaturation hue={0.1} saturation={0.2} />
             <Bloom
-              intensity={!isMobileDevice() ? 4 : 3}
+              intensity={!isMobileDevice() ? 3.5 : 3}
               luminanceThreshold={0.15}
               luminanceSmoothing={0.2}
             />
