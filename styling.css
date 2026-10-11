@@ -346,3 +346,35 @@ div > p {
   backdrop-filter: blur(10px);
   text-transform: uppercase;
 }
+
+
+.jsonOverlay img {
+  max-width: 75%;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: 8px;
+}
+
+/* Custom Purple Scrollbar for Overlay */
+.jsonOverlay-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #a855f7 transparent;
+}
+
+.jsonOverlay-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.jsonOverlay-scroll::-webkit-scrollbar-track {
+  background: rgba(15, 15, 15, 0.5);
+  border-radius: 4px;
+}
+
+.jsonOverlay-scroll::-webkit-scrollbar-thumb {
+  background: #a855f7; /* Tailwind purple-500 */
+  border-radius: 4px;
+}
+
+.jsonOverlay-scroll::-webkit-scrollbar-thumb:hover {
+  background: #c084fc; /* Tailwind purple-400 */
+}

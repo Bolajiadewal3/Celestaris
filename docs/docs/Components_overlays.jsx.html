@@ -60,6 +60,10 @@ import { useProgress } from "@react-three/drei";
 import { playSFX } from "../audioManager.js";
 
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from 'rehype-raw';
+
+
 /**
  * Shows asset-loading progress while a scene's suspended assets load.
  * @category Loading
@@ -339,11 +343,16 @@ function Overlay({ isActive, onClose, items = [] }) {
   };
 
   const markdownComponents = {
-    /**
-     * Renders an h1 heading.
-     * @param root0
-     * @param root0.children
-     */
+    hr: () => (
+      &lt;hr
+        style={{
+          border: "none",
+          borderTop: "2px dashed #a855f7", // Tailwind purple-500
+          margin: "2rem 0",
+          width: "100%",
+        }}
+      />
+    ),
     h1: ({ children }) => (
       &lt;h1
         style={{
@@ -356,11 +365,6 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       &lt;/h1>
     ),
-    /**
-     * Renders an h2 heading.
-     * @param root0
-     * @param root0.children
-     */
     h2: ({ children }) => (
       &lt;h2
         style={{
@@ -373,11 +377,6 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       &lt;/h2>
     ),
-    /**
-     * Renders an h3 heading.
-     * @param root0
-     * @param root0.children
-     */
     h3: ({ children }) => (
       &lt;h3
         style={{
@@ -390,15 +389,10 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       &lt;/h3>
     ),
-    /**
-     * Renders a paragraph.
-     * @param root0
-     * @param root0.children
-     */
     p: ({ children }) => (
       &lt;p
         style={{
-          fontSize: "clamp(0.75rem, 0.68rem + 0.35vw, 0.95rem)",
+          fontSize: "clamp(0.6rem, 0.5rem + 0.8vw, 0.95rem)",
           lineHeight: "1.55",
           color: "#e2e8f0",
           marginBottom: "0.8em",
@@ -407,15 +401,10 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       &lt;/p>
     ),
-    /**
-     * Renders a list item.
-     * @param root0
-     * @param root0.children
-     */
     li: ({ children }) => (
       &lt;li
         style={{
-          fontSize: "clamp(0.75rem, 0.68rem + 0.35vw, 0.95rem)",
+          fontSize: "clamp(0.75rem, 0.5rem + 0.8vw, 0.95rem)",
           lineHeight: "1.5",
           color: "#cbd5e1",
           marginBottom: "0.3em",
@@ -424,11 +413,6 @@ function Overlay({ isActive, onClose, items = [] }) {
         {children}
       &lt;/li>
     ),
-    /**
-     * Renders inline code.
-     * @param root0
-     * @param root0.children
-     */
     code: ({ children }) => (
       &lt;code
         style={{
@@ -440,6 +424,125 @@ function Overlay({ isActive, onClose, items = [] }) {
       >
         {children}
       &lt;/code>
+    ),
+
+    // 1. Strip out stray Pandoc anchor spans automatically
+    span: ({ children, className, id, ...props }) => {
+      if (className === "anchor" || (id &amp;&amp; !children)) {
+        return null;
+      }
+      return (
+        &lt;span className={className} id={id} {...props}>
+          {children}
+        &lt;/span>
+      );
+    },
+    // 2. Style blockquotes cleanly (e.g., callout style with a purple left border)
+    blockquote: ({ children }) => (
+      &lt;blockquote
+        style={{
+          borderLeft: "4px solid #a855f7",
+          backgroundColor: "rgba(168, 85, 247, 0.08)",
+          padding: "10px 16px",
+          margin: "1rem 0",
+          borderRadius: "0 6px 6px 0",
+          color: "#f3e8ff",
+        }}
+      >
+        {children}
+      &lt;/blockquote>
+    ),
+    // 3. Style tables so they don't break layout on mobile/desktop overlays
+    table: ({ children }) => (
+      &lt;div style={{ width: "100%", overflowX: "auto", margin: "1rem 0" }}>
+        &lt;table
+          style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            fontSize: "clamp(0.75rem, 0.68rem + 0.35vw, 0.9rem)",
+            color: "#e2e8f0",
+          }}
+        >
+          {children}
+        &lt;/table>
+      &lt;/div>
+    ),
+    th: ({ children }) => (
+      &lt;th
+        style={{
+          borderBottom: "2px solid #a855f7",
+          padding: "10px",
+          textAlign: "left",
+          color: "#d8b4fe",
+        }}
+      >
+        {children}
+      &lt;/th>
+    ),
+    td: ({ children }) => (
+      &lt;td
+        style={{
+          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+          padding: "10px",
+        }}
+      >
+        {children}
+      &lt;/td>
+    ),
+    figure: ({ children }) => (
+      &lt;figure
+        style={{
+          margin: "1.5rem auto",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textAlign: "center",
+          width: "100%",
+        }}
+      >
+        {children}
+      &lt;/figure>
+    ),
+    img: ({ src, alt, ...props }) => {
+      let fixedSrc = src;
+      if (src &amp;&amp; !src.startsWith("http") &amp;&amp; !src.startsWith("/")) {
+        const markdownPath = selectedItem?.markdown || "";
+        const lastSlash = markdownPath.lastIndexOf("/");
+        const folderDir =
+          lastSlash !== -1 ? markdownPath.substring(0, lastSlash + 1) : "/";
+        const cleanPath = `${folderDir}${src}`.replace(/^\/+/, "");
+        fixedSrc = `${import.meta.env.BASE_URL}${cleanPath}`;
+      }
+      return (
+        &lt;img
+          src={fixedSrc}
+          alt={alt}
+          style={{
+            maxWidth: "65%", // Prevents images from blowing up full-width
+            height: "auto",
+            display: "block",
+            margin: "0.5rem auto",
+            borderRadius: "8px",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
+          }}
+          {...props}
+        />
+      );
+    },
+    figcaption: ({ children }) => (
+      &lt;figcaption
+        style={{
+          fontSize: "clamp(0.7rem, 0.62rem + 0.3vw, 0.85rem)",
+          color: "#94a3b8",
+          marginTop: "0.5rem",
+          fontStyle: "italic",
+          lineHeight: "1.4",
+          maxWidth: "80%",
+        }}
+      >
+        {children}
+      &lt;/figcaption>
     ),
   };
 
@@ -505,6 +608,7 @@ function Overlay({ isActive, onClose, items = [] }) {
       {/* Inner Scroll Container */}
       &lt;div
         ref={scrollContainerRef}
+        className="jsonOverlay-scroll"
         style={{
           width: "100%",
           height: "100%",
@@ -608,7 +712,7 @@ function Overlay({ isActive, onClose, items = [] }) {
             style={{
               color: "white",
               width: "100%",
-              maxWidth: "1000px",
+              maxWidth: "1250px",
               margin: "0 auto",
               display: "flex",
               flexDirection: "column",
@@ -645,7 +749,11 @@ function Overlay({ isActive, onClose, items = [] }) {
                 Loading document...
               &lt;/p>
             ) : (
-              &lt;ReactMarkdown components={markdownComponents}>
+              &lt;ReactMarkdown
+                components={markdownComponents}
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeRaw]}
+              >
                 {markdownContent}
               &lt;/ReactMarkdown>
             )}
@@ -834,7 +942,7 @@ export {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Fri Oct 09 2026 21:35:48 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun Oct 11 2026 22:13:19 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
