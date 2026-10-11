@@ -336,15 +336,20 @@ div > p {
 .overlayButton {
   width: auto;
   z-index: 2000;
-  padding: 10px 20px;
+  /* Scales padding down smoothly on smaller viewports */
+  padding: clamp(6px, 1.5vw, 10px) clamp(10px, 3vw, 20px);
   background: rgba(0, 0, 0, 0.7);
   color: white;
   border: 1px solid #6a0dad;
   border-radius: 2px;
   cursor: pointer;
   font-family: monospace;
+  /* Fluid font size so text shrinks on mobile */
+  font-size: clamp(0.65rem, 1.8vw, 0.85rem); 
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For iOS Safari compatibility */
   text-transform: uppercase;
+  white-space: nowrap; /* Prevents awkward text wrapping */
 }
 
 

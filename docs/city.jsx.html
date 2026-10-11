@@ -110,6 +110,11 @@ import { useEnvironmentStore } from './Store/useEnvironmentStore';
 import { GrandUnlockModal } from "./Components/grandUnlockModal";
 //import { applyCurvedWorld } from "./Shaders/curvedWorld";
 
+const isPortrait = typeof window !== "undefined" &amp;&amp; window.innerWidth &lt; window.innerHeight;
+const initialCameraZ = isPortrait ? 650 : 500; // Pulls camera further back in portrait
+const initialCameraY = isPortrait ? 90 : 70;   // Raises camera height slightly
+const initialFov = isPortrait ? 60 : 50;       // Widens field of view
+
 const IS_IOS =
   /iPad|iPhone|iPod/.test(navigator.userAgent) ||
   (/Mac/.test(navigator.platform) &amp;&amp; navigator.maxTouchPoints > 1);
@@ -498,14 +503,13 @@ export default function City() {
   const [audioStarted, setAudioStarted] = useState(false);
   const [showBigHeadings, setShowBigHeadings] = useState(false);
 
-
   // Camera/interaction state
   const controlsRef = useRef();
   const [goToSmallText, setGoToSmallText] = useState(false);
   const [smallTextAnchor, setSmallTextAnchor] = useState([0, 0, 0]);
   const [smallTextLookAt, setSmallTextLookAt] = useState([0, 0, 0]);
   const [showExitButton, setShowExitButton] = useState(false);
-  
+
   /**
    * Returns camera to initial view and re-enables controls after interacting with banners.
    * @returns {void}
@@ -610,7 +614,6 @@ export default function City() {
 
   const [showModal, setShowModal] = useState(false);
 
-
   useEffect(() => {
     if (isFullyUnlocked) {
       // Check if the modal has already been shown in a previous session
@@ -624,6 +627,47 @@ export default function City() {
     }
   }, [isFullyUnlocked]);
 
+  /**
+   * Automatically adjusts camera position and FOV when the user rotates their phone.
+   */
+  function ResponsiveCamera({ controlsRef }) {
+    const { camera } = useThree();
+
+    useEffect(() => {
+      const handleResize = () => {
+        const isPortrait = window.innerWidth &lt; window.innerHeight;
+
+        // Dynamically adjust position and FOV on the fly
+        camera.position.set(
+          0,
+          isPortrait ? 80 : 70, // Height adjustment
+          isPortrait ? 220 : 200, // Distance adjustment
+        );
+        camera.fov = isPortrait ? 60 : 50;
+
+        // Crucial: tells Three.js to re-calculate projection after changing FOV
+        camera.updateProjectionMatrix();
+
+        if (controlsRef?.current) {
+          // Give users more zoom leeway in portrait mode if needed
+          controlsRef.current.maxDistance = isPortrait ? 300 : 220;
+          controlsRef.current.minDistance = isPortrait ? 5 : 10;
+          controlsRef.current.update();
+        }
+      };
+
+      
+
+      window.addEventListener("resize", handleResize);
+
+      // Run once on mount just in case
+      handleResize();
+
+      return () => window.removeEventListener("resize", handleResize);
+    }, [camera, controlsRef]);
+
+    return null;
+  }
 
   /**
    * The entire landing page
@@ -631,7 +675,7 @@ export default function City() {
    * @param root0.scene
    */
   return (
-    &lt;div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+    &lt;div style={{ width: "100dvw", height: "100dvh", position: "relative" }}>
       {/** UI button to return to free roam after viewing a SMALLTEXTBANNER */}
       {showExitButton &amp;&amp; (
         &lt;button
@@ -690,19 +734,22 @@ export default function City() {
           >&lt;/HeadingsButton>
         )}
 
-        {!isOverlayActive &amp;&amp; &lt;AchievementTracker onOpenModal={() => setShowModal(true)} />}
+        {!isOverlayActive &amp;&amp; (
+          &lt;AchievementTracker onOpenModal={() => setShowModal(true)} />
+        )}
 
         {/** Task reminder */}
         {!isOverlayActive &amp;&amp; !isFullyUnlocked &amp;&amp; (
           &lt;div
             style={{
               position: "fixed",
-              bottom: "20px",
+              bottom: "12px",
               width: "100%",
               textAlign: "center",
               zIndex: 10,
               color: "#00ffcc",
               pointerEvents: "none",
+              fontSize: "clamp(0.65rem, 2vw, 0.85rem)", // Responsive font size
             }}
           >
             TASK:: FIND ALL THE DATA POINTS
@@ -711,15 +758,21 @@ export default function City() {
 
         {!isOverlayActive &amp;&amp; &lt;EnvironmentControls />}
 
-        {!isOverlayActive &amp;&amp;&lt;AchievementToast />}
+        {!isOverlayActive &amp;&amp; &lt;AchievementToast />}
 
-        {!isOverlayActive &amp;&amp; (&lt;GrandUnlockModal isOpen={showModal} onClose={() => setShowModal(false)} />)}
+        {!isOverlayActive &amp;&amp; (
+          &lt;GrandUnlockModal
+            isOpen={showModal}
+            onClose={() => setShowModal(false)}
+          />
+        )}
 
         {/** The 3D scene with dark grey background */}
         &lt;Canvas
           frameloop="always"
           style={{
-            pointerEvents: isOverlayActive || !cameraAnimationDone ? "none" : "auto",
+            pointerEvents:
+              isOverlayActive || !cameraAnimationDone ? "none" : "auto",
           }}
           shadows
           camera={{ position: [0, 70, 500], fov: 50 }}
@@ -735,6 +788,7 @@ export default function City() {
           }}
           performance={{ min: 0.8 }}
         >
+          &lt;ResponsiveCamera controlsRef={controlsRef} />
           {/* User controls */}
           &lt;OrbitControls
             ref={controlsRef}
@@ -1024,7 +1078,7 @@ export default function City() {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun Oct 11 2026 22:12:06 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun Oct 11 2026 22:54:59 GMT+0100 (British Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
